@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cell formatting - Working with the rust_xlsxwriter library</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">5.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">5.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">5.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html" class="active"><strong aria-hidden="true">5.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">5.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">6.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">7.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">8.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">9.</strong> Author</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Working with the rust_xlsxwriter library</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="cell-formatting"><a class="header" href="#cell-formatting">Cell formatting</a></h1>
+<p>An example of the various cell formatting options that are available in the
+rust_xlsxwriter library. These are laid out on worksheets that correspond to the
+sections of the Excel &quot;Format Cells&quot; dialog.</p>
+<p><img src="../../images/formatting.png" alt="Image of output from app_formatting.rs" /></p>
+<pre><pre class="playground"><code class="language-rust">
+use rust_xlsxwriter::*;
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;cell_formats.xlsx&quot;);
+
+    // Add a general heading format.
+    let header_format = Format::new()
+        .set_bold()
+        .set_align(XlsxAlign::Top)
+        .set_border(XlsxBorder::Thin)
+        .set_background_color(XlsxColor::RGB(0xC6EFCE));
+
+    // -----------------------------------------------------------------------
+    // Create a worksheet that demonstrates number formatting.
+    // -----------------------------------------------------------------------
+    let worksheet = workbook.add_worksheet().set_name(&quot;Number&quot;)?;
+
+    // Make the header row and columns taller and wider for clarity.
+    worksheet.set_column_width(0, 18)?;
+    worksheet.set_column_width(1, 18)?;
+    worksheet.set_row_height(0, 25)?;
+
+    // Add some descriptive text and the formatted numbers.
+    worksheet.write_string(0, 0, &quot;Number Categories&quot;, &amp;header_format)?;
+    worksheet.write_string(0, 1, &quot;Formatted Numbers&quot;, &amp;header_format)?;
+
+    // Write an unformatted number with the default or &quot;General&quot; format.
+    worksheet.write_string_only(1, 0, &quot;General&quot;)?;
+    worksheet.write_number_only(1, 1, 1234.567)?;
+
+    // Write a number with a decimal format.
+    worksheet.write_string_only(2, 0, &quot;Number&quot;)?;
+    let decimal_format = Format::new().set_num_format(&quot;0.00&quot;);
+    worksheet.write_number(2, 1, 1234.567, &amp;decimal_format)?;
+
+    // Write a number with a currency format.
+    worksheet.write_string_only(3, 0, &quot;Currency&quot;)?;
+    let currency_format = Format::new().set_num_format(&quot;[$¥-ja-JP]#,##0.00&quot;);
+    worksheet.write_number(3, 1, 1234.567, &amp;currency_format)?;
+
+    // Write a number with an accountancy format.
+    worksheet.write_string_only(4, 0, &quot;Accountancy&quot;)?;
+    let accountancy_format = Format::new().set_num_format(&quot;_-[$¥-ja-JP]* #,##0.00_-&quot;);
+    worksheet.write_number(4, 1, 1234.567, &amp;accountancy_format)?;
+
+    // Write a number with a short date format.
+    worksheet.write_string_only(5, 0, &quot;Date&quot;)?;
+    let short_date_format = Format::new().set_num_format(&quot;yyyy-mm-dd;@&quot;);
+    worksheet.write_number(5, 1, 44927.23, &amp;short_date_format)?;
+
+    // Write a number with a long date format.
+    worksheet.write_string_only(6, 0, &quot;Date&quot;)?;
+    let long_date_format = Format::new().set_num_format(&quot;[$-x-sysdate]dddd, mmmm dd, yyyy&quot;);
+    worksheet.write_number(6, 1, 44927.23, &amp;long_date_format)?;
+
+    // Write a number with a percentage format.
+    worksheet.write_string_only(7, 0, &quot;Percentage&quot;)?;
+    let percentage_format = Format::new().set_num_format(&quot;0.00%&quot;);
+    worksheet.write_number(7, 1, 72.5 / 100.0, &amp;percentage_format)?;
+
+    // Write a number with a fraction format.
+    worksheet.write_string_only(8, 0, &quot;Fraction&quot;)?;
+    let fraction_format = Format::new().set_num_format(&quot;# ??/??&quot;);
+    worksheet.write_number(8, 1, 5.0 / 16.0, &amp;fraction_format)?;
+
+    // Write a number with a percentage format.
+    worksheet.write_string_only(9, 0, &quot;Scientific&quot;)?;
+    let scientific_format = Format::new().set_num_format(&quot;0.00E+00&quot;);
+    worksheet.write_number(9, 1, 1234.567, &amp;scientific_format)?;
+
+    // Write a number with a text format.
+    worksheet.write_string_only(10, 0, &quot;Text&quot;)?;
+    let text_format = Format::new().set_num_format(&quot;@&quot;);
+    worksheet.write_number(10, 1, 1234.567, &amp;text_format)?;
+
+    // -----------------------------------------------------------------------
+    // Create a worksheet that demonstrates number formatting.
+    // -----------------------------------------------------------------------
+    let worksheet = workbook.add_worksheet().set_name(&quot;Alignment&quot;)?;
+
+    // Make some rows and columns taller and wider for clarity.
+    worksheet.set_column_width(0, 18)?;
+    for row_num in 0..5 {
+        worksheet.set_row_height(row_num, 30)?;
+    }
+
+    // Add some descriptive text at the top of the worksheet.
+    worksheet.write_string(0, 0, &quot;Alignment formats&quot;, &amp;header_format)?;
+
+    // Some examples of positional alignment formats.
+    let center_format = Format::new().set_align(XlsxAlign::Center);
+    worksheet.write_string(1, 0, &quot;Center&quot;, &amp;center_format)?;
+
+    let top_left_format = Format::new()
+        .set_align(XlsxAlign::Top)
+        .set_align(XlsxAlign::Left);
+    worksheet.write_string(2, 0, &quot;Top - Left&quot;, &amp;top_left_format)?;
+
+    let center_center_format = Format::new()
+        .set_align(XlsxAlign::VerticalCenter)
+        .set_align(XlsxAlign::Center);
+    worksheet.write_string(3, 0, &quot;Center - Center&quot;, &amp;center_center_format)?;
+
+    let bottom_right_format = Format::new()
+        .set_align(XlsxAlign::Bottom)
+        .set_align(XlsxAlign::Right);
+    worksheet.write_string(4, 0, &quot;Bottom - Right&quot;, &amp;bottom_right_format)?;
+
+    // Some indentation formats.
+    let indent1_format = Format::new().set_indent(1);
+    worksheet.write_string(5, 0, &quot;Indent 1&quot;, &amp;indent1_format)?;
+
+    let indent2_format = Format::new().set_indent(2);
+    worksheet.write_string(6, 0, &quot;Indent 2&quot;, &amp;indent2_format)?;
+
+    // Text wrap format.
+    let text_wrap_format = Format::new().set_text_wrap();
+    worksheet.write_string(7, 0, &quot;Some text that is wrapped&quot;, &amp;text_wrap_format)?;
+    worksheet.write_string(8, 0, &quot;Text\nwrapped\nat newlines&quot;, &amp;text_wrap_format)?;
+
+    // Shrink text format.
+    let shrink_format = Format::new().set_shrink();
+    worksheet.write_string(9, 0, &quot;Shrink wide text to fit cell&quot;, &amp;shrink_format)?;
+
+    // Text rotation formats.
+    let rotate_format1 = Format::new().set_rotation(30);
+    worksheet.write_string(10, 0, &quot;Rotate&quot;, &amp;rotate_format1)?;
+
+    let rotate_format2 = Format::new().set_rotation(-30);
+    worksheet.write_string(11, 0, &quot;Rotate&quot;, &amp;rotate_format2)?;
+
+    let rotate_format3 = Format::new().set_rotation(270);
+    worksheet.write_string(12, 0, &quot;Rotate&quot;, &amp;rotate_format3)?;
+
+    // -----------------------------------------------------------------------
+    // Create a worksheet that demonstrates font formatting.
+    // -----------------------------------------------------------------------
+    let worksheet = workbook.add_worksheet().set_name(&quot;Font&quot;)?;
+
+    // Make the header row and columns taller and wider for clarity.
+    worksheet.set_column_width(0, 18)?;
+    worksheet.set_column_width(1, 18)?;
+    worksheet.set_row_height(0, 25)?;
+
+    // Add some descriptive text at the top of the worksheet.
+    worksheet.write_string(0, 0, &quot;Font formatting&quot;, &amp;header_format)?;
+
+    // Different fonts.
+    worksheet.write_string_only(1, 0, &quot;Calibri 11 (default font)&quot;)?;
+
+    let algerian_format = Format::new().set_font_name(&quot;Algerian&quot;);
+    worksheet.write_string(2, 0, &quot;Algerian&quot;, &amp;algerian_format)?;
+
+    let consolas_format = Format::new().set_font_name(&quot;Consolas&quot;);
+    worksheet.write_string(3, 0, &quot;Consolas&quot;, &amp;consolas_format)?;
+
+    let comic_sans_format = Format::new().set_font_name(&quot;Comic Sans MS&quot;);
+    worksheet.write_string(4, 0, &quot;Comic Sans MS&quot;, &amp;comic_sans_format)?;
+
+    // Font styles.
+    let bold = Format::new().set_bold();
+    worksheet.write_string(5, 0, &quot;Bold&quot;, &amp;bold)?;
+
+    let italic = Format::new().set_italic();
+    worksheet.write_string(6, 0, &quot;Italic&quot;, &amp;italic)?;
+
+    let bold_italic = Format::new().set_bold().set_italic();
+    worksheet.write_string(7, 0, &quot;Bold/Italic&quot;, &amp;bold_italic)?;
+
+    // Font size.
+    let size_format = Format::new().set_font_size(18);
+    worksheet.write_string(8, 0, &quot;Font size 18&quot;, &amp;size_format)?;
+
+    // Font color.
+    let font_color_format = Format::new().set_font_color(XlsxColor::Red);
+    worksheet.write_string(9, 0, &quot;Font color&quot;, &amp;font_color_format)?;
+
+    // Font underline.
+    let underline_format = Format::new().set_underline(XlsxUnderline::Single);
+    worksheet.write_string(10, 0, &quot;Underline&quot;, &amp;underline_format)?;
+
+    // Font strike-though.
+    let strikethrough_format = Format::new().set_font_strikethrough();
+    worksheet.write_string(11, 0, &quot;Strikethrough&quot;, &amp;strikethrough_format)?;
+
+    // -----------------------------------------------------------------------
+    // Create a worksheet that demonstrates border formatting.
+    // -----------------------------------------------------------------------
+    let worksheet = workbook.add_worksheet().set_name(&quot;Border&quot;)?;
+
+    // Make the header row and columns taller and wider for clarity.
+    worksheet.set_column_width(2, 18)?;
+    worksheet.set_row_height(0, 25)?;
+
+    // Add some descriptive text at the top of the worksheet.
+    worksheet.write_string(0, 2, &quot;Border formats&quot;, &amp;header_format)?;
+
+    // Add some borders to cells.
+    let border_format1 = Format::new().set_border(XlsxBorder::Thin);
+    worksheet.write_string(2, 2, &quot;Thin Border&quot;, &amp;border_format1)?;
+
+    let border_format2 = Format::new().set_border(XlsxBorder::Dotted);
+    worksheet.write_string(4, 2, &quot;Dotted Border&quot;, &amp;border_format2)?;
+
+    let border_format3 = Format::new().set_border(XlsxBorder::Double);
+    worksheet.write_string(6, 2, &quot;Double Border&quot;, &amp;border_format3)?;
+
+    let border_format4 = Format::new()
+        .set_border(XlsxBorder::Thin)
+        .set_border_color(XlsxColor::Red);
+    worksheet.write_string(8, 2, &quot;Color Border&quot;, &amp;border_format4)?;
+
+    // -----------------------------------------------------------------------
+    // Create a worksheet that demonstrates fill/pattern formatting.
+    // -----------------------------------------------------------------------
+    let worksheet = workbook.add_worksheet().set_name(&quot;Fill&quot;)?;
+
+    // Make the header row and columns taller and wider for clarity.
+    worksheet.set_column_width(1, 18)?;
+    worksheet.set_row_height(0, 25)?;
+
+    // Add some descriptive text at the top of the worksheet.
+    worksheet.write_string(0, 1, &quot;Fill formats&quot;, &amp;header_format)?;
+
+    // Write some cells with pattern fills.
+    let fill_format1 = Format::new()
+        .set_background_color(XlsxColor::Yellow)
+        .set_pattern(XlsxPattern::Solid);
+    worksheet.write_string(2, 1, &quot;Solid fill&quot;, &amp;fill_format1)?;
+
+    let fill_format2 = Format::new()
+        .set_background_color(XlsxColor::Yellow)
+        .set_foreground_color(XlsxColor::Orange)
+        .set_pattern(XlsxPattern::Gray0625);
+    worksheet.write_string(4, 1, &quot;Pattern fill&quot;, &amp;fill_format2)?;
+
+    // Close and save the file.
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../examples/demo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../examples/colors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../examples/demo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../examples/colors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
