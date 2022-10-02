@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Hello World - Working with the rust_xlsxwriter library</title>
+        <title>The Format struct - Working with the rust_xlsxwriter library</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">6.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html" class="active"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">6.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">6.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">6.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">6.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">7.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">8.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">9.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">10.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="../format/intro.html" class="active"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">6.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">6.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">6.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">6.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">6.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">7.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">8.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">9.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">10.</strong> Author</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,42 +142,70 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
-<p>Program to create a simple Hello World style Excel spreadsheet using the
-rust_xlsxwriter library.</p>
-<p><img src="../../images/hello.png" alt="Image of output from app_hello_world.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Workbook, XlsxError};
+                        <h1 id="the-format-struct"><a class="header" href="#the-format-struct">The Format struct</a></h1>
+<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> struct is used to define cell formatting for data in a worksheet.</p>
+<p>The properties of a cell that can be formatted include: fonts, colors, patterns,
+borders, alignment and number formatting.</p>
+<p><img src="../../images/format_intro.png" alt="Image of output from doc_format_intro.rs" /></p>
+<p>The output file above was created with the following code:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;hello.xlsx&quot;);
+    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
 
-    // Add a worksheet to the workbook.
+    // Add a worksheet.
     let worksheet = workbook.add_worksheet();
 
-    // Write a string to cell (0, 0) = A1.
-    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+    // Make the first column wider for clarity.
+    worksheet.set_column_width(0, 14)?;
 
-    // Write a number to cell (1, 0) = A2.
-    worksheet.write_number_only(1, 0, 12345)?;
+    // Create some sample formats to display
+    let format1 = Format::new().set_font_name(&quot;Arial&quot;);
+    worksheet.write_string(0, 0, &quot;Fonts&quot;, &amp;format1)?;
 
-    // Close the file.
+    let format2 = Format::new().set_font_name(&quot;Algerian&quot;).set_font_size(14);
+    worksheet.write_string(1, 0, &quot;Fonts&quot;, &amp;format2)?;
+
+    let format3 = Format::new().set_font_name(&quot;Comic Sans MS&quot;);
+    worksheet.write_string(2, 0, &quot;Fonts&quot;, &amp;format3)?;
+
+    let format4 = Format::new().set_font_name(&quot;Edwardian Script ITC&quot;);
+    worksheet.write_string(3, 0, &quot;Fonts&quot;, &amp;format4)?;
+
+    let format5 = Format::new().set_font_color(XlsxColor::Red);
+    worksheet.write_string(4, 0, &quot;Font color&quot;, &amp;format5)?;
+
+    let format6 = Format::new().set_background_color(XlsxColor::RGB(0xDAA520));
+    worksheet.write_string(5, 0, &quot;Fills&quot;, &amp;format6)?;
+
+    let format7 = Format::new().set_border(XlsxBorder::Thin);
+    worksheet.write_string(6, 0, &quot;Borders&quot;, &amp;format7)?;
+
+    let format8 = Format::new().set_bold();
+    worksheet.write_string(7, 0, &quot;Bold&quot;, &amp;format8)?;
+
+    let format9 = Format::new().set_italic();
+    worksheet.write_string(8, 0, &quot;Italic&quot;, &amp;format9)?;
+
+    let format10 = Format::new().set_bold().set_italic();
+    worksheet.write_string(9, 0, &quot;Bold and Italic&quot;, &amp;format10)?;
+
     workbook.close()?;
 
     Ok(())
 }
-
 </code></pre></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../examples/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../worksheet/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../examples/demo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../format/creating.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -187,11 +215,11 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../examples/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../worksheet/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../examples/demo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../format/creating.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

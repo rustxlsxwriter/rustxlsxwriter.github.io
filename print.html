@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">5.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">5.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">5.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">5.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">5.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">6.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">7.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html"><strong aria-hidden="true">8.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">9.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">6.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">6.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">6.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">6.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">6.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">7.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">8.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html"><strong aria-hidden="true">9.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">10.</strong> Author</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -508,6 +508,324 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 }
 </code></pre></pre>
 <p>For more details on the Worksheet APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-format-struct"><a class="header" href="#the-format-struct">The Format struct</a></h1>
+<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> struct is used to define cell formatting for data in a worksheet.</p>
+<p>The properties of a cell that can be formatted include: fonts, colors, patterns,
+borders, alignment and number formatting.</p>
+<p><img src="format/../../images/format_intro.png" alt="Image of output from doc_format_intro.rs" /></p>
+<p>The output file above was created with the following code:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Make the first column wider for clarity.
+    worksheet.set_column_width(0, 14)?;
+
+    // Create some sample formats to display
+    let format1 = Format::new().set_font_name(&quot;Arial&quot;);
+    worksheet.write_string(0, 0, &quot;Fonts&quot;, &amp;format1)?;
+
+    let format2 = Format::new().set_font_name(&quot;Algerian&quot;).set_font_size(14);
+    worksheet.write_string(1, 0, &quot;Fonts&quot;, &amp;format2)?;
+
+    let format3 = Format::new().set_font_name(&quot;Comic Sans MS&quot;);
+    worksheet.write_string(2, 0, &quot;Fonts&quot;, &amp;format3)?;
+
+    let format4 = Format::new().set_font_name(&quot;Edwardian Script ITC&quot;);
+    worksheet.write_string(3, 0, &quot;Fonts&quot;, &amp;format4)?;
+
+    let format5 = Format::new().set_font_color(XlsxColor::Red);
+    worksheet.write_string(4, 0, &quot;Font color&quot;, &amp;format5)?;
+
+    let format6 = Format::new().set_background_color(XlsxColor::RGB(0xDAA520));
+    worksheet.write_string(5, 0, &quot;Fills&quot;, &amp;format6)?;
+
+    let format7 = Format::new().set_border(XlsxBorder::Thin);
+    worksheet.write_string(6, 0, &quot;Borders&quot;, &amp;format7)?;
+
+    let format8 = Format::new().set_bold();
+    worksheet.write_string(7, 0, &quot;Bold&quot;, &amp;format8)?;
+
+    let format9 = Format::new().set_italic();
+    worksheet.write_string(8, 0, &quot;Italic&quot;, &amp;format9)?;
+
+    let format10 = Format::new().set_bold().set_italic();
+    worksheet.write_string(9, 0, &quot;Bold and Italic&quot;, &amp;format10)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-and-using-a-format-object"><a class="header" href="#creating-and-using-a-format-object">Creating and using a Format object</a></h1>
+<p>Formats are created by calling the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.new"><code>Format::new()</code></a> method and properties as
+set using the various methods shown is this section of the document. Once
+the Format has been created it can be passed to one of the worksheet
+<code>write_*()</code> methods. Multiple properties can be set by chaining them
+together:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a new format and set some properties.
+    let format = Format::new()
+        .set_bold()
+        .set_italic()
+        .set_font_color(XlsxColor::Red);
+
+    worksheet.write_string(0, 0, &quot;Hello&quot;, &amp;format)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>Output:</p>
+<p><img src="format/../../images/format_create.png" alt="Image of output from doc_format_create.rs" /></p>
+<p>Formats can be cloned in the usual way:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a new format and set some properties.
+    let format1 = Format::new().set_bold();
+
+    // Clone a new format and set some properties.
+    let format2 = format1.clone().set_font_color(XlsxColor::Blue);
+
+    worksheet.write_string(0, 0, &quot;Hello&quot;, &amp;format1)?;
+    worksheet.write_string(1, 0, &quot;Hello&quot;, &amp;format2)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>Output:</p>
+<p><img src="format/../../images/format_clone.png" alt="Image of output from doc_format_clone.rs" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="format-defaults"><a class="header" href="#format-defaults">Format defaults</a></h1>
+<p>The default Excel cell format is a font setting of Calibri size 11 with all
+other properties turned off.</p>
+<p>It is occasionally useful to use a default format with a method that requires a
+format but where you don't actually want to change the formatting.</p>
+<pre><pre class="playground"><code class="language-rust">
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a new default format.
+    let format = Format::default();
+
+    // These methods calls are equivalent.
+    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet.write_string(1, 0, &quot;Hello&quot;, &amp;format)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>Output showing that both strings have the same format:</p>
+<p><img src="format/../../images/format_default.png" alt="Image of output from doc_format_default.rs" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="format-methods"><a class="header" href="#format-methods">Format methods</a></h1>
+<p>The following table shows the Excel format categories, in the order shown in the
+Excel “Format Cell” dialog, and the equivalent <code>rust_xlsxwriter</code> Format method.
+The links will take you to the API docs:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Category</th><th style="text-align: left">Description</th><th style="text-align: left">Method Name</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Number</strong></td><td style="text-align: left">Numeric format</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_num_format"><code>set_num_format()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Alignment</strong></td><td style="text-align: left">Horizontal align</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_align"><code>set_align()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Vertical align</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_align"><code>set_align()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Rotation</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_rotation"><code>set_rotation()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Text wrap</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_text_wrap"><code>set_text_wrap()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Indentation</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_indent"><code>set_indent()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Reading direction</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_reading_direction"><code>set_reading_direction()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Shrink to fit</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_shrink"><code>set_shrink()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Font</strong></td><td style="text-align: left">Font type</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_name"><code>set_font_name()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Font size</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_size"><code>set_font_size()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Font color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_color"><code>set_font_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Bold</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_bold"><code>set_bold()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Italic</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_italic"><code>set_italic()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Underline</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_underline"><code>set_underline()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Strikethrough</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_strikethrough"><code>set_font_strikethrough()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Super/Subscript</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_script"><code>set_font_script()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Border</strong></td><td style="text-align: left">Cell border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border"><code>set_border()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Bottom border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_bottom"><code>set_border_bottom()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Top border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_top"><code>set_border_top()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Left border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_left"><code>set_border_left()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Super/Subscript</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_font_script"><code>set_font_script()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Border</strong></td><td style="text-align: left">Cell border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border"><code>set_border()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Bottom border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_bottom"><code>set_border_bottom()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Top border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_top"><code>set_border_top()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Left border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_left"><code>set_border_left()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Right border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_right"><code>set_border_right()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Border color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_color"><code>set_border_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Bottom color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_bottom_color"><code>set_border_bottom_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Top color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_top_color"><code>set_border_top_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Left color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_left_color"><code>set_border_left_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Right color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_right_color"><code>set_border_right_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Diagonal border</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_diagonal"><code>set_border_diagonal()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Diagonal border color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_diagonal_color"><code>set_border_diagonal_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Diagonal border type</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_border_diagonal_type"><code>set_border_diagonal_type()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Fill</strong></td><td style="text-align: left">Cell pattern</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_pattern"><code>set_pattern()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Background color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_background_color"><code>set_background_color()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Foreground color</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_foreground_color"><code>set_foreground_color()</code></a></td></tr>
+<tr><td style="text-align: left"><strong>Protection</strong></td><td style="text-align: left">Unlock cells</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_unlocked"><code>set_unlocked()</code></a></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">Hide formulas</td><td style="text-align: left"><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_hidden"><code>set_hidden()</code></a></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors"><a class="header" href="#format-colors">Format colors</a></h1>
+<p>Format property colors are specified by using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a> enum with a Html
+style RGB integer value or a limited number of defined colors, for example:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;colors.xlsx&quot;);
+
+    let format1 = Format::new().set_font_color(XlsxColor::Red);
+    let format2 = Format::new().set_font_color(XlsxColor::Green);
+    let format3 = Format::new().set_font_color(XlsxColor::RGB(0x4F026A));
+    let format4 = Format::new().set_font_color(XlsxColor::RGB(0x73CC5F));
+    let format5 = Format::new().set_font_color(XlsxColor::RGB(0xFFACFF));
+    let format6 = Format::new().set_font_color(XlsxColor::RGB(0xCC7E16));
+
+    let worksheet = workbook.add_worksheet();
+    worksheet.write_string(0, 0, &quot;Red&quot;, &amp;format1)?;
+    worksheet.write_string(1, 0, &quot;Green&quot;, &amp;format2)?;
+    worksheet.write_string(2, 0, &quot;#4F026A&quot;, &amp;format3)?;
+    worksheet.write_string(3, 0, &quot;#73CC5F&quot;, &amp;format4)?;
+    worksheet.write_string(4, 0, &quot;#FFACFF&quot;, &amp;format5)?;
+    worksheet.write_string(5, 0, &quot;#CC7E16&quot;, &amp;format6)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>Output:</p>
+<p><img src="format/../../images/enum_xlsxcolor.png" alt="Image of output from doc_enum_xlsxcolor.rs" /></p>
+<p>See also the longer example in <a href="format/../examples/colors.html">Format colors example</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="number-format-categories"><a class="header" href="#number-format-categories">Number Format Categories</a></h1>
+<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_num_format"><code>set_num_format()</code></a> method is used to set the number format for numbers
+used with <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a>. For example the following formats a
+number with the Excel number format <code>&quot;$#,##0.00&quot;</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+use rust_xlsxwriter::{Format, Workbook, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;currency_format.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Add a format.
+    let currency_format = Format::new().set_num_format(&quot;$#,##0.00&quot;);
+
+    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>Which give the following output with the category displayed:</p>
+<p><img src="format/../../images/format_currency1.png" alt="Image of output from doc_format_currency1.rs" /></p>
+<p>The number category is shown as &quot;Number&quot; but it is also possible to have it
+correspond to one of the other number categories such as &quot;Currency&quot; (which we
+might have expected in this case).</p>
+<p>The Excel number categories are:</p>
+<ul>
+<li>General</li>
+<li>Number</li>
+<li>Currency</li>
+<li>Accounting</li>
+<li>Date</li>
+<li>Time</li>
+<li>Percentage</li>
+<li>Fraction</li>
+<li>Scientific</li>
+<li>Text</li>
+<li>Custom</li>
+</ul>
+<p>If we wanted to have the number format display as a different category, such as
+&quot;Currency&quot;, then would need to match the number format string used by Excel with
+the number format used by in our code. The easiest way to do this is to open the
+Number Formatting dialog in Excel and set the required format:</p>
+<p><img src="format/../../images/format_currency2.png" alt="Image of Excel dialog to set number formats" /></p>
+<p>Then, while still in the dialog, change to Custom. The format displayed is the
+format used by Excel.</p>
+<p><img src="format/../../images/format_currency3.png" alt="Image of Excel dialog to set number formats" /></p>
+<p>If we put the format that we found (<code>&quot;[$$-409]#,##0.00&quot;</code>) into our previous
+example and rerun it we will get a number format in the Currency category:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
+
+    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>That give us the following updated output. Note that the number category is
+now shown as Currency:</p>
+<p><img src="format/../../images/format_currency4.png" alt="Image of output from doc_format_currency2.rs" /></p>
+<p>The same process can be used to find format strings for &quot;Date&quot; or
+&quot;Accountancy&quot; formats.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="number-formats-in-different-locales"><a class="header" href="#number-formats-in-different-locales">Number Formats in different Locales</a></h1>
+<p>As shown in the previous section the <code>format.set_num_format()</code> method is used to
+set the number format for <code>rust_xlsxwriter</code> formats. A common use case is to set
+a number format with a &quot;grouping/thousands&quot; separator and a &quot;decimal&quot; point:</p>
+<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;number_format.xlsx&quot;);
+
+    // Add a worksheet.
+    let worksheet = workbook.add_worksheet();
+
+    // Add a format.
+    let currency_format = Format::new().set_num_format(&quot;#,##0.00&quot;);
+
+    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>In the US locale (and some others) where the number &quot;grouping/thousands&quot;
+separator is <code>&quot;,&quot;</code> and the &quot;decimal&quot; point is <code>&quot;.&quot;</code> which would be shown in
+Excel as:</p>
+<p><img src="format/../../images/format_currency5.png" alt="Image of output from doc_format_locale.rs" /></p>
+<p>In other locales these values may be reversed or different. They are generally
+set in the &quot;Region&quot; settings of Windows or Mac OS.  Excel handles this by
+storing the number format in the file format in the US locale, in this case
+<code>&quot;#,##0.00&quot;</code>, but renders it according to the regional settings of the host OS.
+For example, here is the same, unmodified, output file shown above in a German
+locale:</p>
+<p><img src="format/../../images/format_currency6.png" alt="Image of output from doc_format_locale.rs" /></p>
+<p>And here is the same file in a Russian locale. Note the use of a space as the
+&quot;grouping/thousands&quot; separator:</p>
+<p><img src="format/../../images/format_currency7.png" alt="Image of output from doc_format_locale.rs" /></p>
+<p>In order to replicate Excel's behavior all XlsxWriter programs should use US
+locale formatting which will then be rendered in the settings of your host OS.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook-examples"><a class="header" href="#cookbook-examples">Cookbook Examples</a></h1>
 <p>This section contains sample applications that demonstrate different features of
 the rust_xlsxwriter library.</p>
@@ -834,7 +1152,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     Ok(())
 }
 </code></pre></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors"><a class="header" href="#format-colors">Format colors</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors-1"><a class="header" href="#format-colors-1">Format colors</a></h1>
 <p>A sample palette of the the defined colors and user defined RGB colors available
 in the rust_xlsxwriter library.</p>
 <p><img src="examples/../../images/colors.png" alt="Image of output from app_colors.rs" /></p>
