@@ -567,7 +567,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 set using the various methods shown is this section of the document. Once
 the Format has been created it can be passed to one of the worksheet
 <code>write_*()</code> methods. Multiple properties can be set by chaining them
-together:</p>
+together, for example:</p>
 <pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -1345,8 +1345,6 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     }
     workbook.close()?;
 
-    println!(&quot;row = {}, col = {}&quot;, row_max, col_max);
-
     Ok(())
 }
 </code></pre></pre>
@@ -1637,7 +1635,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="author"><a class="header" href="#author">Author</a></h1>
-<p>XlsxWriter was written by John McNamara, who also wrote:</p>
+<p><code>rust_xlsxwriter</code> was written by John McNamara, who also wrote:</p>
 <ul>
 <li>
 <p><a href="https://xlsxwriter.readthedocs.io">XlsxWriter (Python)</a></p>
