@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js rust">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -36,7 +36,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -62,7 +62,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('rust')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html" class="active"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">6.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">6.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">6.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">6.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">6.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">7.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">8.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">9.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">10.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html" class="active"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">6.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">6.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">6.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">6.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">6.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">6.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">7.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">7.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">7.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">7.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">7.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">7.5.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">7.6.</strong> Dynamic array formulas</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">8.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">9.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">10.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">11.</strong> Author</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -99,8 +99,8 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -148,7 +148,13 @@ set using the various methods shown is this section of the document. Once
 the Format has been created it can be passed to one of the worksheet
 <code>write_*()</code> methods. Multiple properties can be set by chaining them
 together, for example:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates create a new format and setting the
+</span><span class="boring">//! properties.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -169,11 +175,17 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output:</p>
 <p><img src="../../images/format_create.png" alt="Image of output from doc_format_create.rs" /></p>
 <p>Formats can be cloned in the usual way:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates cloning a format and setting the
+</span><span class="boring">//! properties.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -195,7 +207,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output:</p>
 <p><img src="../../images/format_clone.png" alt="Image of output from doc_format_clone.rs" /></p>
 

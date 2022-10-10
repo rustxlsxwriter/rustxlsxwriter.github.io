@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js rust">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -37,7 +37,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -63,7 +63,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('rust')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">6.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">6.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">6.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">6.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">6.5.</strong> Right to left display</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">7.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">8.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html"><strong aria-hidden="true">9.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">10.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li class="chapter-item expanded "><a href="format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="formulas/intro.html"><strong aria-hidden="true">6.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="formulas/results.html"><strong aria-hidden="true">6.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="formulas/syntax.html"><strong aria-hidden="true">6.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="formulas/dynamic_arrays.html"><strong aria-hidden="true">6.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="formulas/future_functions.html"><strong aria-hidden="true">6.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="formulas/errors.html"><strong aria-hidden="true">6.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">7.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">7.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">7.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">7.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">7.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">7.5.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="examples/dynamic_arrays.html"><strong aria-hidden="true">7.6.</strong> Dynamic array formulas</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">8.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">9.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html"><strong aria-hidden="true">10.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">11.</strong> Author</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -100,8 +100,8 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -187,7 +187,13 @@ edition = &quot;2021&quot;
 rust_xlsxwriter = &quot;0.2.1&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Create a simple Hello World style Excel spreadsheet using the
+</span><span class="boring">//! rust_xlsxwriter library.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -207,7 +213,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>The run the application as follows:</p>
 <pre><code class="language-bash">cargo run
 </code></pre>
@@ -218,19 +224,81 @@ something like this:</p>
 <p>Once you have the &quot;hello world&quot; application from the previous section working
 you can try something more ambitious such as creating a spreadsheet to summarize
 some monthly expenses like the following:</p>
-<pre><code class="language-rust ignore">    let expenses = vec![
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use chrono::NaiveDate;
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
     ];
-</code></pre>
+<span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial3.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a bold format to use to highlight cells.
+</span><span class="boring">    let bold = Format::new().set_bold();
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with money values.
+</span><span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with dates.
+</span><span class="boring">    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write some column headers.
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Date&quot;, &amp;bold)?;
+</span><span class="boring">
+</span><span class="boring">    // Adjust the date column width for clarity.
+</span><span class="boring">    worksheet.set_column_width(2, 15)?;
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">        let date = NaiveDate::parse_from_str(expense.2, &quot;%Y-%m-%d&quot;).unwrap();
+</span><span class="boring">        worksheet.write_date(row, 2, date, &amp;date_format)?;
+</span><span class="boring">
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>And convert it to a worksheet like this:</p>
 <p><img src="tutorial/../images/tutorial3.png" alt="Image of first tutorial 3" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-data-to-a-worksheet"><a class="header" href="#adding-data-to-a-worksheet">Adding data to a worksheet</a></h1>
 <p>To add some sample expense data to a worksheet we could start with a simple
 program like the following:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -260,7 +328,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     Ok(())
 }
 
-</code></pre></pre>
+</code></pre>
 <p>If we run this program we should get a spreadsheet that looks like this:</p>
 <p><img src="tutorial/../images/tutorial1.png" alt="Image of first tutorial 1" /></p>
 <p>This is a simple program but it demonstrates some of the steps that would
@@ -268,34 +336,200 @@ apply to any rust_xlsxwriter program.</p>
 <p>The first step is to create a new workbook object using the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html"><code>Workbook</code></a> constructor. <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.new"><code>Workbook::new</code></a> takes one argument which is the
 filename that we want to create:</p>
-<pre><code class="language-rust ignore">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
-</code></pre>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span>    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+<span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 0;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p><strong>Note</strong>, <code>rust_xlsxwriter</code> can only create new files. It cannot read or modify
 existing files.</p>
 <p>The workbook object is then used to add a new worksheet via the
 [<code>add_worksheet</code>] method:</p>
-<pre><code class="language-rust ignore">    let worksheet = workbook.add_worksheet();
-</code></pre>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span>    let worksheet = workbook.add_worksheet();
+<span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 0;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>The worksheet will have a standard Excel name, in this case &quot;Sheet1&quot;. You can
 specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_name"><code>worksheet.set_name()</code></a> method.</p>
 <p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string_only"><code>worksheet.write_string_only()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number_only"><code>worksheet.write_number_only()</code></a> methods to write each row of our data:</p>
-<pre><code class="language-rust ignore">    for expense in expenses.iter() {
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 0;
+</span>    for expense in expenses.iter() {
         worksheet.write_string_only(row, 0, expense.0)?;
         worksheet.write_number_only(row, 1, expense.1)?;
         row += 1;
     }
-</code></pre>
+<span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>The <code>_only</code> part of the method names refers to the fact that the data type is
 written without any formatting. We will see how to add formatting shortly.</p>
 <p>Throughout rust_xlsxwriter rows and columns are zero indexed. So, for example,
 the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 <p>We then add a formula to calculate the total of the items in the second column:</p>
-<pre><code class="language-rust ignore">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
-</code></pre>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 0;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span>    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>Finally, we close the Excel file via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.close"><code>workbook.close()</code></a> method:</p>
-<pre><code class="language-rust ignore">    workbook.close()?;
-</code></pre>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 0;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span>    workbook.close()?;
+<span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>This will give us the spreadsheet shown in the image above.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-some-formatting"><a class="header" href="#adding-some-formatting">Adding some formatting</a></h1>
 <p>The previous program converted the required data into an Excel file but it
@@ -306,7 +540,13 @@ simple formatting, like this:</p>
 a bold font, we have formatted the currency in the second column and we have
 made the &quot;Total&quot; string bold.</p>
 <p>To do this programmatically we can extend our code as follows:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 2 of a tutorial.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -345,7 +585,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>The main difference between this and the previous program is that we have added
 two <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html">Format</a> objects that we can use to format cells in the spreadsheet.</p>
 <p>Format objects represent all of the formatting properties that can be applied to
@@ -353,30 +593,132 @@ a cell in Excel such as fonts, number formatting, colors and borders. This is
 explained in more detail in the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html">Format</a> struct documentation.</p>
 <p>For now we will avoid getting into the details of Format and just use a limited
 amount of the its functionality to add some simple formatting:</p>
-<pre><code class="language-rust ignore">    // Add a bold format to use to highlight cells.
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 2 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial2.xlsx&quot;);
+</span><span class="boring">
+</span>    // Add a bold format to use to highlight cells.
     let bold = Format::new().set_bold();
 
     // Add a number format for cells with money values.
     let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
-</code></pre>
+<span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write some column headers.
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>We can use these formats in worksheet methods that support formatting such as
 the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a> methods which
 can write data and formatting together.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-dates-and-more-formatting"><a class="header" href="#adding-dates-and-more-formatting">Adding dates and more formatting</a></h1>
 <p>Let's extend the program a little bit more to add some dates to the data:</p>
-<pre><code class="language-rust ignore">    let expenses = vec![
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use chrono::NaiveDate;
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
     ];
-</code></pre>
+<span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial3.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a bold format to use to highlight cells.
+</span><span class="boring">    let bold = Format::new().set_bold();
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with money values.
+</span><span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with dates.
+</span><span class="boring">    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write some column headers.
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Date&quot;, &amp;bold)?;
+</span><span class="boring">
+</span><span class="boring">    // Adjust the date column width for clarity.
+</span><span class="boring">    worksheet.set_column_width(2, 15)?;
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">        let date = NaiveDate::parse_from_str(expense.2, &quot;%Y-%m-%d&quot;).unwrap();
+</span><span class="boring">        worksheet.write_date(row, 2, date, &amp;date_format)?;
+</span><span class="boring">
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>The corresponding spreadsheet will look like this:</p>
 <p><img src="tutorial/../images/tutorial3.png" alt="Image of first tutorial 3" /></p>
 <p>The differences here are that we have added a &quot;Date&quot; column with formatting and
 made that column a little wider to accommodate the dates.</p>
 <p>To do this we can extend our program as follows:</p>
-<pre><pre class="playground"><code class="language-rust">use chrono::NaiveDate;
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -432,7 +774,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Dates and times in Excel are floating point numbers that have a number format
 applied to display them in the correct format. In order to handle dates and
 times with <code>rust_xlsxwriter</code> we create them as <a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDateTime.html"><code>chrono::NaiveDateTime</code></a>,
@@ -440,14 +782,81 @@ times with <code>rust_xlsxwriter</code> we create them as <a href="https://docs.
 Excel number format.</p>
 <p>In the example above we create the NaiveDates from the date strings in our
 input data and then format it, in Excel, with a number format.</p>
-<pre><code class="language-rust ignore">    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
-</code></pre>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
+</span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
+</span><span class="boring">
+</span><span class="boring">use chrono::NaiveDate;
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span><span class="boring">    let expenses = vec![
+</span><span class="boring">        (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
+</span><span class="boring">        (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
+</span><span class="boring">        (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
+</span><span class="boring">        (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial3.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a bold format to use to highlight cells.
+</span><span class="boring">    let bold = Format::new().set_bold();
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with money values.
+</span><span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with dates.
+</span>    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
+<span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write some column headers.
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Date&quot;, &amp;bold)?;
+</span><span class="boring">
+</span><span class="boring">    // Adjust the date column width for clarity.
+</span><span class="boring">    worksheet.set_column_width(2, 15)?;
+</span><span class="boring">
+</span><span class="boring">    // Iterate over the data and write it out row by row.
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for expense in expenses.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">        let date = NaiveDate::parse_from_str(expense.2, &quot;%Y-%m-%d&quot;).unwrap();
+</span><span class="boring">        worksheet.write_date(row, 2, date, &amp;date_format)?;
+</span><span class="boring">
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Write a total using a formula.
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Close the file.
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>The final addition to our program is the make the &quot;Date&quot; column wider for
 clarity using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> method.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-workbook-struct"><a class="header" href="#the-workbook-struct">The Workbook struct</a></h1>
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html"><code>Workbook</code></a> struct represents an Excel file in it's entirety. It is the
 starting point for creating a new Excel xlsx file.</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates creating a simple workbook, with one
+</span><span class="boring">//! unused worksheet.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new(&quot;workbook.xlsx&quot;);
@@ -458,13 +867,19 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p><img src="workbook/../../images/workbook_new.png" alt="Image of output from doc_workbook_new.rs" /></p>
 <p>For more details on the Workbook APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html"><code>Workbook</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-worksheet-struct"><a class="header" href="#the-worksheet-struct">The Worksheet struct</a></h1>
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a> struct struct represents an Excel worksheet. It handles operations such as writing data to cells or formatting worksheet layout.</p>
 <p><img src="worksheet/../../images/demo.png" alt="Image of output from app_demo.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">use chrono::NaiveDate;
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple, getting started, example of some of the features of the
+</span><span class="boring">//! rust_xlsxwriter library.
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -506,7 +921,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>For more details on the Worksheet APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-format-struct"><a class="header" href="#the-format-struct">The Format struct</a></h1>
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> struct is used to define cell formatting for data in a worksheet.</p>
@@ -514,7 +929,13 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 borders, alignment and number formatting.</p>
 <p><img src="format/../../images/format_intro.png" alt="Image of output from doc_format_intro.rs" /></p>
 <p>The output file above was created with the following code:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates some of the available formatting
+</span><span class="boring">//! properties.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -561,14 +982,20 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-and-using-a-format-object"><a class="header" href="#creating-and-using-a-format-object">Creating and using a Format object</a></h1>
 <p>Formats are created by calling the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.new"><code>Format::new()</code></a> method and properties as
 set using the various methods shown is this section of the document. Once
 the Format has been created it can be passed to one of the worksheet
 <code>write_*()</code> methods. Multiple properties can be set by chaining them
 together, for example:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates create a new format and setting the
+</span><span class="boring">//! properties.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -589,11 +1016,17 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output:</p>
 <p><img src="format/../../images/format_create.png" alt="Image of output from doc_format_create.rs" /></p>
 <p>Formats can be cloned in the usual way:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates cloning a format and setting the
+</span><span class="boring">//! properties.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -615,7 +1048,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output:</p>
 <p><img src="format/../../images/format_clone.png" alt="Image of output from doc_format_clone.rs" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-defaults"><a class="header" href="#format-defaults">Format defaults</a></h1>
@@ -623,7 +1056,13 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 other properties turned off.</p>
 <p>It is occasionally useful to use a default format with a method that requires a
 format but where you don't actually want to change the formatting.</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates creating a default format.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span>
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
     let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
@@ -642,7 +1081,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output showing that both strings have the same format:</p>
 <p><img src="format/../../images/format_default.png" alt="Image of output from doc_format_default.rs" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-methods"><a class="header" href="#format-methods">Format methods</a></h1>
@@ -693,7 +1132,13 @@ The links will take you to the API docs:</p>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors"><a class="header" href="#format-colors">Format colors</a></h1>
 <p>Format property colors are specified by using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a> enum with a Html
 style RGB integer value or a limited number of defined colors, for example:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates using different XlsxColor enum values to
+</span><span class="boring">//! set the color of some text in a worksheet.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -718,7 +1163,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Output:</p>
 <p><img src="format/../../images/enum_xlsxcolor.png" alt="Image of output from doc_enum_xlsxcolor.rs" /></p>
 <p>See also the longer example in <a href="format/../examples/colors.html">Format colors example</a>.</p>
@@ -726,7 +1171,13 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_num_format"><code>set_num_format()</code></a> method is used to set the number format for numbers
 used with <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a>. For example the following formats a
 number with the Excel number format <code>&quot;$#,##0.00&quot;</code>.</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates setting a currency format for a worksheet
+</span><span class="boring">//! cell. This example doesn't actually set a currency format, for that see the
+</span><span class="boring">//! followup example in doc_format_currency2.rs.
+</span>
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -745,7 +1196,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>Which give the following output with the category displayed:</p>
 <p><img src="format/../../images/format_currency1.png" alt="Image of output from doc_format_currency1.rs" /></p>
 <p>The number category is shown as &quot;Number&quot; but it is also possible to have it
@@ -775,13 +1226,31 @@ format used by Excel.</p>
 <p><img src="format/../../images/format_currency3.png" alt="Image of Excel dialog to set number formats" /></p>
 <p>If we put the format that we found (<code>&quot;[$$-409]#,##0.00&quot;</code>) into our previous
 example and rerun it we will get a number format in the Currency category:</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates setting a currency format for a worksheet
+</span><span class="boring">//! cell.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;currency_format.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Add a format.
 </span>    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
 
     worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
 <p>That give us the following updated output. Note that the number category is
 now shown as Currency:</p>
 <p><img src="format/../../images/format_currency4.png" alt="Image of output from doc_format_currency2.rs" /></p>
@@ -791,7 +1260,13 @@ now shown as Currency:</p>
 <p>As shown in the previous section the <code>format.set_num_format()</code> method is used to
 set the number format for <code>rust_xlsxwriter</code> formats. A common use case is to set
 a number format with a &quot;grouping/thousands&quot; separator and a &quot;decimal&quot; point:</p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Format, Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates setting a number format that appears
+</span><span class="boring">//! differently in different locales.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -809,7 +1284,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <p>In the US locale (and some others) where the number &quot;grouping/thousands&quot;
 separator is <code>&quot;,&quot;</code> and the &quot;decimal&quot; point is <code>&quot;.&quot;</code> which would be shown in
 Excel as:</p>
@@ -826,6 +1301,1337 @@ locale:</p>
 <p><img src="format/../../images/format_currency7.png" alt="Image of output from doc_format_locale.rs" /></p>
 <p>In order to replicate Excel's behavior all XlsxWriter programs should use US
 locale formatting which will then be rendered in the settings of your host OS.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-formulas"><a class="header" href="#working-with-formulas">Working with Formulas</a></h1>
+<p>In general any Excel formula can be used directly in <code>rust_xlsxwriter</code>:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates a simple formula.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;formula.xlsx&quot;);
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span>
+    worksheet.write_formula_only(0, 0, &quot;=10*B1 + C1&quot;)?;
+
+    worksheet.write_number_only(0, 1, 5)?;
+    worksheet.write_number_only(0, 2, 1)?;
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>The formula will then be displayed as expected in Excel:</p>
+<p><img src="formulas/../../images/working_with_formulas1.png" alt="Image of output from doc_working_with_formulas_intro.rs" /></p>
+<p>However, there are a few potential issues and differences that the user of
+<code>rust_xlsxwriter</code> should be aware of. These are explained in the following
+sections.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="formula-results"><a class="header" href="#formula-results">Formula Results</a></h1>
+<p>The <code>rust_xlsxwriter</code> library doesn't calculate the result of a formula and
+instead stores the value &quot;0&quot; as the formula result. It then sets a global flag
+in the XLSX file to say that all formulas and functions should be recalculated
+when the file is opened.</p>
+<p>This works fine with the majority of spreadsheet applications. However,
+applications that don't have a facility to calculate formulas will only display
+the 0 results. Examples of such applications are Excel viewers, PDF converters,
+and some mobile device applications.</p>
+<p>If required, it is also possible to specify the calculated result of the
+formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result"><code>worksheet.set_formula_result()</code></a> method:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates manually setting the result of a formula.
+</span><span class="boring">//! Note, this is only required for non-Excel applications that don't calculate
+</span><span class="boring">//! formula results.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;formulas.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    worksheet
+        .write_formula_only(0, 0, &quot;1+1&quot;)?
+        .set_formula_result(0, 0, &quot;2&quot;);
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>One common spreadsheet application where the formula recalculation doesn't work
+is LibreOffice (see the following <a href="https://bugs.documentfoundation.org/show_bug.cgi?id=144819">issue report</a>). If you wish to force
+recalculation in LibreOffice you can use the
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result_default"><code>worksheet.set_formula_result_default()</code></a> method to set the default result to
+an empty string:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates manually setting the default result for
+</span><span class="boring">//! all non-calculated formulas in a worksheet.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;formulas.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    worksheet.set_formula_result_default(&quot;&quot;);
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="non-us-excel-functions-and-syntax"><a class="header" href="#non-us-excel-functions-and-syntax">Non US Excel functions and syntax</a></h1>
+<p>Excel stores formulas in the format of the US English version, regardless of the
+language or locale of the end-user's version of Excel. Therefore all formula
+function names written using <code>rust_xlsxwriter</code> must be in English. In addition,
+formulas must be written with the US style separator/range operator which is a
+comma (not semi-colon).</p>
+<p>Some examples of how formulas should and shouldn't be written are shown below:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates some common formula syntax errors.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;formula.xlsx&quot;);
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // OK.
+    worksheet.write_formula_only(0, 0, &quot;=SUM(1, 2, 3)&quot;)?;
+
+    // Semi-colon separator. Causes Excel error on file opening.
+    worksheet.write_formula_only(1, 0, &quot;=SUM(1; 2; 3)&quot;)?;
+
+    // French function name. Causes Excel error on file opening.
+    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>If you have a non-English version of Excel you can use the following
+multi-lingual <a href="http://en.excel-translator.de/language/">Formula Translator</a> to
+help you convert the formula. It can also replace semi-colons with commas.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-array-support"><a class="header" href="#dynamic-array-support">Dynamic Array support</a></h1>
+<p>In Office 365 Excel introduced the concept of &quot;Dynamic Arrays&quot; and new functions
+that use them. The new functions are:</p>
+<ul>
+<li><code>FILTER</code></li>
+<li><code>RANDARRAY</code></li>
+<li><code>SEQUENCE</code></li>
+<li><code>SORTBY</code></li>
+<li><code>SORT</code></li>
+<li><code>UNIQUE</code></li>
+<li><code>XLOOKUP</code></li>
+<li><code>XMATCH</code></li>
+</ul>
+<p>The following special case functions were also added with Dynamic Arrays:</p>
+<ul>
+<li><code>SINGLE</code>: Explained below in <strong>The Implicit Intersection Operator &quot;@&quot;</strong></li>
+<li><code>ANCHORARRAY</code>:  Explained below in <strong>The Spilled Range Operator &quot;#&quot;</strong></li>
+</ul>
+<h2 id="dynamic-arrays---an-introduction"><a class="header" href="#dynamic-arrays---an-introduction">Dynamic Arrays - An introduction</a></h2>
+<p>Dynamic arrays in Excel are ranges of return values that can change size based
+on the results. For example, a function such as <code>FILTER()</code> returns an array of
+values that can vary in size depending on the the filter results:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
+</span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
+</span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
+</span><span class="boring">//! functions.
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Create some header formats to use in the worksheets.
+</span><span class="boring">    let header1 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    let header2 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the FILTER() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
+</span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(9, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the UNIQUE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and UNIQUE.
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORT() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A simple SORT example.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and FILTER.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORTBY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XLOOKUP() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
+</span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XMATCH() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the RANDARRAY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SEQUENCE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the Spill range operator.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(6, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(8, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using dynamic ranges with older Excel functions.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// A simple function and data structure to populate some of the worksheets.
+</span><span class="boring">fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let worksheet_data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Apple&quot;, 6380),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Grape&quot;, 5619),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Pear&quot;, 4565),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Banana&quot;, 5323),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Apple&quot;, 4394),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Grape&quot;, 7195),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Pear&quot;, 5231),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Banana&quot;, 2427),
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Banana&quot;, 4213),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Pear&quot;, 3239),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Grape&quot;, 6520),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Apple&quot;, 1310),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Banana&quot;, 6274),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Pear&quot;, 4894),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Grape&quot;, 7580),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for data in worksheet_data.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>This formula gives the results shown in the image below. The dynamic range
+here is &quot;F2:I5&quot; but it can vary based on the filter criteria.</p>
+<p><img src="formulas/../../images/dynamic_arrays02.png" alt="Image 2 of output from app_dynamic_arrays.rs" /></p>
+<p>It is also possible to get dynamic array behavior with older Excel functions.
+For example, the Excel function <code>&quot;=LEN(A1)&quot;</code> applies to a single cell and
+returns a single value but it can also apply to a range of cells and return a
+range of values using an array formula like <code>&quot;{=LEN(A1:A3)}&quot;</code>. This type of
+&quot;static&quot; array behavior is referred to as a CSE (Ctrl+Shift+Enter) formula and
+has existed in Excel since early versions. In Office 365 Excel updated and
+extended this behavior to create the concept of dynamic arrays. In Excel 365 you
+can now write the previous LEN function as <code>&quot;=LEN(A1:A3)&quot;</code> and get a dynamic
+range of return values:</p>
+<p><img src="formulas/../../images/intersection03.png" alt="Image of output from doc_working_with_formulas_dynamic_len.rs" /></p>
+<p>The difference between the two types of array functions is explained in the
+Microsoft documentation on <a href="https://support.microsoft.com/en-us/office/dynamic-array-formulas-vs-legacy-cse-array-formulas-ca421f1b-fbb2-4c99-9924-df571bd4f1b4">Dynamic array formulas vs. legacy CSE array
+formulas</a>.</p>
+<p>In <code>rust_xlsxwriter</code> you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a>
+function to get a static/CSE range and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_array_formula"><code>worksheet.write_dynamic_array_formula()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_formula"><code>worksheet.write_dynamic_formula()</code></a> to get a dynamic range.</p>
+<p>The <code>worksheet.write_dynamic_array_formula()</code> function takes a <code>(first_row, first_col, last_row, last_col)</code> cell range to define the area that the formula
+applies to. However, since the range is dynamic this generally won't be known in
+advance in which case you can specify the range with the same start and end
+cell. The following range is &quot;F2:F2&quot;:</p>
+<pre><code class="language-rust">    worksheet1.write_dynamic_array_formula_only(1, 5, 1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+</code></pre>
+<p>As a syntactic shortcut you can use the <code>worksheet.write_dynamic_formula()</code>
+function which only requires the start cell:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
+</span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
+</span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
+</span><span class="boring">//! functions.
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Create some header formats to use in the worksheets.
+</span><span class="boring">    let header1 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    let header2 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the FILTER() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
+</span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(9, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the UNIQUE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and UNIQUE.
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORT() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A simple SORT example.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and FILTER.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORTBY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XLOOKUP() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
+</span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XMATCH() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the RANDARRAY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SEQUENCE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the Spill range operator.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(6, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(8, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using dynamic ranges with older Excel functions.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// A simple function and data structure to populate some of the worksheets.
+</span><span class="boring">fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let worksheet_data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Apple&quot;, 6380),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Grape&quot;, 5619),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Pear&quot;, 4565),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Banana&quot;, 5323),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Apple&quot;, 4394),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Grape&quot;, 7195),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Pear&quot;, 5231),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Banana&quot;, 2427),
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Banana&quot;, 4213),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Pear&quot;, 3239),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Grape&quot;, 6520),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Apple&quot;, 1310),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Banana&quot;, 6274),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Pear&quot;, 4894),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Grape&quot;, 7580),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for data in worksheet_data.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>For a wider and more general introduction to dynamic arrays see the following:
+<a href="https://exceljet.net/dynamic-array-formulas-in-excel">Dynamic array formulas in Excel</a>.</p>
+<h2 id="the-implicit-intersection-operator-"><a class="header" href="#the-implicit-intersection-operator-">The Implicit Intersection Operator &quot;@&quot;</a></h2>
+<p>The Implicit Intersection Operator, &quot;@&quot;, is used by Excel 365 to indicate a
+position in a formula that is implicitly returning a single value when a range
+or an array could be returned.</p>
+<p>We can see how this operator works in practice by considering the formula we
+used in the last section: <code>=LEN(A1:A3)</code>. In Excel versions without support for
+dynamic arrays, i.e. prior to Excel 365, this formula would operate on a single
+value from the input range and return a single value, like the following in
+Excel 2011:</p>
+<p><img src="formulas/../../images/intersection01.png" alt="Image of output from doc_working_with_formulas_static_len.rs in older Excel versions" /></p>
+<p>There is an implicit conversion here of the range of input values, &quot;A1:A3&quot;, to a
+single value &quot;A1&quot;. Since this was the default behavior of older versions of
+Excel this conversion isn't highlighted in any way. But if you open the same
+file in Excel 365 it will appear as follows:</p>
+<p><img src="formulas/../../images/intersection02.png" alt="Image of output from doc_working_with_formulas_static_len.rs" /></p>
+<p>The result of the formula is the same (this is important to note) and it still
+operates on, and returns, a single value. However the formula now contains a &quot;@&quot;
+operator to show that it is implicitly using a single value from the given
+range.</p>
+<p>In Excel 365, and with <code>worksheet.write_dynamic_formula()</code> in <code>rust_xlsxwriter</code>,
+it would operate on the entire range and return an array of values:</p>
+<p><img src="formulas/../../images/intersection03.png" alt="Image of output from doc_working_with_formulas_dynamic_len.rs" /></p>
+<p>If you are encountering the Implicit Intersection Operator &quot;@&quot; for the first
+time then it is probably from a point of view of &quot;why is Excel/rust_xlsxwriter
+putting @s in my formulas&quot;. In practical terms if you encounter this operator,
+and you don't intend it to be there, then you should probably write the formula
+as a CSE or dynamic array function using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_array_formula"><code>worksheet.write_dynamic_array_formula()</code></a></p>
+<p>A full explanation of this operator is given in the Microsoft documentation on
+the <a href="https://support.microsoft.com/en-us/office/implicit-intersection-operator-ce3be07b-0101-4450-a24e-c1c999be2b34?ui=en-us&amp;rs=en-us&amp;ad=us%3E">Implicit intersection operator: @</a>.</p>
+<p>One important thing to note is that the &quot;@&quot; operator isn't stored with the
+formula. It is just displayed by Excel 365 when reading &quot;legacy&quot; formulas.
+However, it is possible to write it to a formula, if necessary, using
+<code>SINGLE()</code>. The rare cases where this may be necessary are shown in the linked
+document in the previous paragraph.</p>
+<h2 id="the-spilled-range-operator-"><a class="header" href="#the-spilled-range-operator-">The Spilled Range Operator &quot;#&quot;</a></h2>
+<p>In the sections above we saw that dynamic array formulas can return variable
+sized ranges of results. The Excel documentation refers to this as a &quot;Spilled&quot;
+range/array from the idea that the results spill into the required number of
+cells. This is explained in the Microsoft documentation on <a href="https://support.microsoft.com/en-us/office/dynamic-array-formulas-and-spilled-array-behavior-205c6b06-03ba-4151-89a1-87a7eb36e531">Dynamic array
+formulas and spilled array behavior</a>.</p>
+<p>Since a spilled range is variable in size a new operator is required to refer to
+the range. This operator is the <a href="https://support.microsoft.com/en-us/office/spilled-range-operator-3dd5899f-bca2-4b9d-a172-3eae9ac22efd">Spilled range operator</a> and it is represented
+by &quot;#&quot;. For example, the range <code>F2#</code> in the image below is used to refer to a
+dynamic array returned by <code>UNIQUE()</code> in the cell <code>F2</code>:</p>
+<p><img src="formulas/../../images/spill01.png" alt="Image of spill output from app_dynamic_arrays.rs" /></p>
+<p>Unfortunately, Excel doesn't store the operator in the formula like this and in
+<code>rust_xlsxwriter</code> you need to use the explicit function <code>ANCHORARRAY()</code> to refer
+to a spilled range. The example in the image above was generated using the
+following formula:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
+</span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
+</span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
+</span><span class="boring">//! functions.
+</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file.
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Create some header formats to use in the worksheets.
+</span><span class="boring">    let header1 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    let header2 = Format::new()
+</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the FILTER() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet1.set_column_width_pixels(9, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the UNIQUE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and UNIQUE.
+</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet2.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORT() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A simple SORT example.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // A more complex example combining SORT and FILTER.
+</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet3.set_column_width_pixels(6, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SORTBY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XLOOKUP() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
+</span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the XMATCH() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the function will work on.
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the RANDARRAY() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the SEQUENCE() function.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using the Spill range operator.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">
+</span>    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">
+</span><span class="boring">    // Add sample worksheet data to work on.
+</span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(4, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(6, 20)?;
+</span><span class="boring">    worksheet9.set_column_width_pixels(8, 20)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // Example of using dynamic ranges with older Excel functions.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the data the to work on.
+</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// A simple function and data structure to populate some of the worksheets.
+</span><span class="boring">fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let worksheet_data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Apple&quot;, 6380),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Grape&quot;, 5619),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Pear&quot;, 4565),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Banana&quot;, 5323),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Apple&quot;, 4394),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Grape&quot;, 7195),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Pear&quot;, 5231),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Banana&quot;, 2427),
+</span><span class="boring">        (&quot;East&quot;, &quot;Tom&quot;, &quot;Banana&quot;, 4213),
+</span><span class="boring">        (&quot;West&quot;, &quot;Fred&quot;, &quot;Pear&quot;, 3239),
+</span><span class="boring">        (&quot;North&quot;, &quot;Amy&quot;, &quot;Grape&quot;, 6520),
+</span><span class="boring">        (&quot;South&quot;, &quot;Sal&quot;, &quot;Apple&quot;, 1310),
+</span><span class="boring">        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Banana&quot;, 6274),
+</span><span class="boring">        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Pear&quot;, 4894),
+</span><span class="boring">        (&quot;North&quot;, &quot;Xi&quot;, &quot;Grape&quot;, 7580),
+</span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">
+</span><span class="boring">    let mut row = 1;
+</span><span class="boring">    for data in worksheet_data.iter() {
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        row += 1;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="formulas-added-in-excel-2010-and-later"><a class="header" href="#formulas-added-in-excel-2010-and-later">Formulas added in Excel 2010 and later</a></h1>
+<p>Excel 2010 and later versions added functions which weren't defined in the
+original file specification. These functions are referred to by Microsoft as
+&quot;Future Functions&quot;. Examples of these functions are <code>ACOT</code>, <code>CHISQ.DIST.RT</code> ,
+<code>CONFIDENCE.NORM</code>, <code>STDEV.P</code>, <code>STDEV.S</code> and <code>WORKDAY.INTL</code>.</p>
+<p>When written using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_formula"><code>worksheet.write_formula()</code></a> these functions need to be
+fully qualified with a prefix such as <code>_xlfn.</code>, as shown the table in the next
+section below.</p>
+<p>If the prefix isn't included you will get an Excel function name error. For example:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates writing an Excel &quot;Future Function&quot; without
+</span><span class="boring">//! an explicit prefix, which results in an Excel error.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;future_function.xlsx&quot;);
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write a future function without prefix. This gives an Excel error.
+</span>    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write some data for the function to operate on.
+</span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
+</span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
+</span><span class="boring">    worksheet.write_number_only(2, 1, 1.20)?;
+</span><span class="boring">    worksheet.write_number_only(3, 1, 1.15)?;
+</span><span class="boring">    worksheet.write_number_only(4, 1, 1.22)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p><img src="formulas/../../images/working_with_formulas3.png" alt="Image of output from doc_working_with_formulas_future1.rs" /></p>
+<p>If the <code>_xlfn.</code> prefix is included you will get the correct result:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates writing an Excel &quot;Future Function&quot; with
+</span><span class="boring">//! an explicit prefix.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;future_function.xlsx&quot;);
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write a future function with explicit prefix.
+</span>    worksheet.write_formula_only(0, 0, &quot;=_xlfn.STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write some data for the function to operate on.
+</span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
+</span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
+</span><span class="boring">    worksheet.write_number_only(2, 1, 1.20)?;
+</span><span class="boring">    worksheet.write_number_only(3, 1, 1.15)?;
+</span><span class="boring">    worksheet.write_number_only(4, 1, 1.22)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p><img src="formulas/../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
+<p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
+<p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.use_future_functions"><code>worksheet.use_future_functions()</code></a> function to
+have <code>rust_xlsxwriter</code> automatically handle future functions for your:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates writing an Excel &quot;Future Function&quot; with
+</span><span class="boring">//! an implicit prefix and the use_future_functions() method.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;future_function.xlsx&quot;);
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write a future function and automatically add the required prefix.
+</span>    worksheet.use_future_functions(true);
+    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
+</span><span class="boring">    // Write some data for the function to operate on.
+</span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
+</span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
+</span><span class="boring">    worksheet.write_number_only(2, 1, 1.20)?;
+</span><span class="boring">    worksheet.write_number_only(3, 1, 1.15)?;
+</span><span class="boring">    worksheet.write_number_only(4, 1, 1.22)?;
+</span><span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>This will give the same correct result as the image above.</p>
+<h2 id="list-of-future-functions"><a class="header" href="#list-of-future-functions">List of Future Functions</a></h2>
+<p>The following list is taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX extensions documentation on future
+functions</a>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Future Functions</th></tr></thead><tbody>
+<tr><td><code>_xlfn.ACOT</code></td></tr>
+<tr><td><code>_xlfn.ACOTH</code></td></tr>
+<tr><td><code>_xlfn.AGGREGATE</code></td></tr>
+<tr><td><code>_xlfn.ARABIC</code></td></tr>
+<tr><td><code>_xlfn.BASE</code></td></tr>
+<tr><td><code>_xlfn.BETA.DIST</code></td></tr>
+<tr><td><code>_xlfn.BETA.INV</code></td></tr>
+<tr><td><code>_xlfn.BINOM.DIST</code></td></tr>
+<tr><td><code>_xlfn.BINOM.DIST.RANGE</code></td></tr>
+<tr><td><code>_xlfn.BINOM.INV</code></td></tr>
+<tr><td><code>_xlfn.BITAND</code></td></tr>
+<tr><td><code>_xlfn.BITLSHIFT</code></td></tr>
+<tr><td><code>_xlfn.BITOR</code></td></tr>
+<tr><td><code>_xlfn.BITRSHIFT</code></td></tr>
+<tr><td><code>_xlfn.BITXOR</code></td></tr>
+<tr><td><code>_xlfn.CEILING.MATH</code></td></tr>
+<tr><td><code>_xlfn.CEILING.PRECISE</code></td></tr>
+<tr><td><code>_xlfn.CHISQ.DIST</code></td></tr>
+<tr><td><code>_xlfn.CHISQ.DIST.RT</code></td></tr>
+<tr><td><code>_xlfn.CHISQ.INV</code></td></tr>
+<tr><td><code>_xlfn.CHISQ.INV.RT</code></td></tr>
+<tr><td><code>_xlfn.CHISQ.TEST</code></td></tr>
+<tr><td><code>_xlfn.COMBINA</code></td></tr>
+<tr><td><code>_xlfn.CONCAT</code></td></tr>
+<tr><td><code>_xlfn.CONFIDENCE.NORM</code></td></tr>
+<tr><td><code>_xlfn.CONFIDENCE.T</code></td></tr>
+<tr><td><code>_xlfn.COT</code></td></tr>
+<tr><td><code>_xlfn.COTH</code></td></tr>
+<tr><td><code>_xlfn.COVARIANCE.P</code></td></tr>
+<tr><td><code>_xlfn.COVARIANCE.S</code></td></tr>
+<tr><td><code>_xlfn.CSC</code></td></tr>
+<tr><td><code>_xlfn.CSCH</code></td></tr>
+<tr><td><code>_xlfn.DAYS</code></td></tr>
+<tr><td><code>_xlfn.DECIMAL</code></td></tr>
+<tr><td><code>ECMA.CEILING</code></td></tr>
+<tr><td><code>_xlfn.ERF.PRECISE</code></td></tr>
+<tr><td><code>_xlfn.ERFC.PRECISE</code></td></tr>
+<tr><td><code>_xlfn.EXPON.DIST</code></td></tr>
+<tr><td><code>_xlfn.F.DIST</code></td></tr>
+<tr><td><code>_xlfn.F.DIST.RT</code></td></tr>
+<tr><td><code>_xlfn.F.INV</code></td></tr>
+<tr><td><code>_xlfn.F.INV.RT</code></td></tr>
+<tr><td><code>_xlfn.F.TEST</code></td></tr>
+<tr><td><code>_xlfn.FILTERXML</code></td></tr>
+<tr><td><code>_xlfn.FLOOR.MATH</code></td></tr>
+<tr><td><code>_xlfn.FLOOR.PRECISE</code></td></tr>
+<tr><td><code>_xlfn.FORECAST.ETS</code></td></tr>
+<tr><td><code>_xlfn.FORECAST.ETS.CONFINT</code></td></tr>
+<tr><td><code>_xlfn.FORECAST.ETS.SEASONALITY</code></td></tr>
+<tr><td><code>_xlfn.FORECAST.ETS.STAT</code></td></tr>
+<tr><td><code>_xlfn.FORECAST.LINEAR</code></td></tr>
+<tr><td><code>_xlfn.FORMULATEXT</code></td></tr>
+<tr><td><code>_xlfn.GAMMA</code></td></tr>
+<tr><td><code>_xlfn.GAMMA.DIST</code></td></tr>
+<tr><td><code>_xlfn.GAMMA.INV</code></td></tr>
+<tr><td><code>_xlfn.GAMMALN.PRECISE</code></td></tr>
+<tr><td><code>_xlfn.GAUSS</code></td></tr>
+<tr><td><code>_xlfn.HYPGEOM.DIST</code></td></tr>
+<tr><td><code>_xlfn.IFNA</code></td></tr>
+<tr><td><code>_xlfn.IFS</code></td></tr>
+<tr><td><code>_xlfn.IMCOSH</code></td></tr>
+<tr><td><code>_xlfn.IMCOT</code></td></tr>
+<tr><td><code>_xlfn.IMCSC</code></td></tr>
+<tr><td><code>_xlfn.IMCSCH</code></td></tr>
+<tr><td><code>_xlfn.IMSEC</code></td></tr>
+<tr><td><code>_xlfn.IMSECH</code></td></tr>
+<tr><td><code>_xlfn.IMSINH</code></td></tr>
+<tr><td><code>_xlfn.IMTAN</code></td></tr>
+<tr><td><code>_xlfn.ISFORMULA</code></td></tr>
+<tr><td><code>ISO.CEILING</code></td></tr>
+<tr><td><code>_xlfn.ISOWEEKNUM</code></td></tr>
+<tr><td><code>_xlfn.LOGNORM.DIST</code></td></tr>
+<tr><td><code>_xlfn.LOGNORM.INV</code></td></tr>
+<tr><td><code>_xlfn.MAXIFS</code></td></tr>
+<tr><td><code>_xlfn.MINIFS</code></td></tr>
+<tr><td><code>_xlfn.MODE.MULT</code></td></tr>
+<tr><td><code>_xlfn.MODE.SNGL</code></td></tr>
+<tr><td><code>_xlfn.MUNIT</code></td></tr>
+<tr><td><code>_xlfn.NEGBINOM.DIST</code></td></tr>
+<tr><td><code>NETWORKDAYS.INTL</code></td></tr>
+<tr><td><code>_xlfn.NORM.DIST</code></td></tr>
+<tr><td><code>_xlfn.NORM.INV</code></td></tr>
+<tr><td><code>_xlfn.NORM.S.DIST</code></td></tr>
+<tr><td><code>_xlfn.NORM.S.INV</code></td></tr>
+<tr><td><code>_xlfn.NUMBERVALUE</code></td></tr>
+<tr><td><code>_xlfn.PDURATION</code></td></tr>
+<tr><td><code>_xlfn.PERCENTILE.EXC</code></td></tr>
+<tr><td><code>_xlfn.PERCENTILE.INC</code></td></tr>
+<tr><td><code>_xlfn.PERCENTRANK.EXC</code></td></tr>
+<tr><td><code>_xlfn.PERCENTRANK.INC</code></td></tr>
+<tr><td><code>_xlfn.PERMUTATIONA</code></td></tr>
+<tr><td><code>_xlfn.PHI</code></td></tr>
+<tr><td><code>_xlfn.POISSON.DIST</code></td></tr>
+<tr><td><code>_xlfn.QUARTILE.EXC</code></td></tr>
+<tr><td><code>_xlfn.QUARTILE.INC</code></td></tr>
+<tr><td><code>_xlfn.QUERYSTRING</code></td></tr>
+<tr><td><code>_xlfn.RANK.AVG</code></td></tr>
+<tr><td><code>_xlfn.RANK.EQ</code></td></tr>
+<tr><td><code>_xlfn.RRI</code></td></tr>
+<tr><td><code>_xlfn.SEC</code></td></tr>
+<tr><td><code>_xlfn.SECH</code></td></tr>
+<tr><td><code>_xlfn.SHEET</code></td></tr>
+<tr><td><code>_xlfn.SHEETS</code></td></tr>
+<tr><td><code>_xlfn.SKEW.P</code></td></tr>
+<tr><td><code>_xlfn.STDEV.P</code></td></tr>
+<tr><td><code>_xlfn.STDEV.S</code></td></tr>
+<tr><td><code>_xlfn.SWITCH</code></td></tr>
+<tr><td><code>_xlfn.T.DIST</code></td></tr>
+<tr><td><code>_xlfn.T.DIST.2T</code></td></tr>
+<tr><td><code>_xlfn.T.DIST.RT</code></td></tr>
+<tr><td><code>_xlfn.T.INV</code></td></tr>
+<tr><td><code>_xlfn.T.INV.2T</code></td></tr>
+<tr><td><code>_xlfn.T.TEST</code></td></tr>
+<tr><td><code>_xlfn.TEXTJOIN</code></td></tr>
+<tr><td><code>_xlfn.UNICHAR</code></td></tr>
+<tr><td><code>_xlfn.UNICODE</code></td></tr>
+<tr><td><code>_xlfn.VAR.P</code></td></tr>
+<tr><td><code>_xlfn.VAR.S</code></td></tr>
+<tr><td><code>_xlfn.WEBSERVICE</code></td></tr>
+<tr><td><code>_xlfn.WEIBULL.DIST</code></td></tr>
+<tr><td><code>WORKDAY.INTL</code></td></tr>
+<tr><td><code>_xlfn.XOR</code></td></tr>
+<tr><td><code>_xlfn.Z.TEST</code></td></tr>
+</tbody></table>
+</div>
+<p>The dynamic array functions shown in the <a href="formulas/dynamic_arrays.html">Dynamic Array
+support</a> section are also future functions, however the
+<code>rust_xlsxwriter</code> library automatically adds the required prefixes on the fly so
+you don't have to add them explicitly.</p>
+<div class="table-wrapper"><table><thead><tr><th>Dynamic Array Functions</th></tr></thead><tbody>
+<tr><td><code>_xlfn.ANCHORARRAY</code></td></tr>
+<tr><td><code>_xlfn.LAMBDA</code></td></tr>
+<tr><td><code>_xlfn.RANDARRAY</code></td></tr>
+<tr><td><code>_xlfn.SEQUENCE</code></td></tr>
+<tr><td><code>_xlfn.SINGLE</code></td></tr>
+<tr><td><code>_xlfn.SORTBY</code></td></tr>
+<tr><td><code>_xlfn.UNIQUE</code></td></tr>
+<tr><td><code>_xlfn.XLOOKUP</code></td></tr>
+<tr><td><code>_xlfn.XMATCH</code></td></tr>
+<tr><td><code>_xlfn._xlws.FILTER</code></td></tr>
+<tr><td><code>_xlfn._xlws.SORT</code></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="dealing-with-formula-errors"><a class="header" href="#dealing-with-formula-errors">Dealing with formula errors</a></h1>
+<p>If there is an error in the syntax of a formula it is usually displayed in Excel
+as <code>#NAME?</code>. Alternatively you may get a warning from Excel when the file is
+loaded. If you encounter an error like this you can debug it using the following
+steps:</p>
+<ol>
+<li>
+<p>Ensure the formula is valid in Excel by copying and pasting it into a cell.
+Note, this should be done in Excel and <strong>not</strong> other applications such as
+OpenOffice or LibreOffice since they may have slightly different syntax.</p>
+</li>
+<li>
+<p>Ensure the formula is using comma separators instead of semi-colons, see <a href="formulas/syntax.html">Non
+US Excel functions and syntax</a>.</p>
+</li>
+<li>
+<p>Ensure the formula is in English, see <a href="formulas/syntax.html">Non US Excel functions and
+syntax</a>.</p>
+</li>
+<li>
+<p>Ensure that the formula doesn't contain an Excel 2010+ future function, see
+<a href="formulas/future_functions.html">Formulas added in Excel 2010 and later</a>. If it does
+then ensure that the correct prefix is used.</p>
+</li>
+<li>
+<p>If the function loads in Excel but appears with one or more <code>@</code> symbols added
+then it is probably an array function and should be written using
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_array_formula"><code>worksheet.write_dynamic_array_formula()</code></a> (see also <a href="formulas/dynamic_arrays.html">Dynamic Array
+support</a>).</p>
+</li>
+</ol>
+<p>Finally if you have completed all the previous steps and still get a <code>#NAME?</code>
+error you can examine a valid Excel file to see what the correct syntax should
+be. To do this you should create a valid formula in Excel and save the file. You
+can then examine the XML in the unzipped file.</p>
+<p>The following shows how to do that using Linux <code>unzip</code> and libxml's
+<a href="http://xmlsoft.org/xmllint.html">xmllint</a> to format the XML for clarity:</p>
+<pre><code class="language-bash">    $ unzip myfile.xlsx -d myfile
+    $ xmllint --format myfile/xl/worksheets/sheet1.xml | grep '&lt;/f&gt;'
+
+            &lt;f&gt;SUM(1, 2, 3)&lt;/f&gt;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook-examples"><a class="header" href="#cookbook-examples">Cookbook Examples</a></h1>
 <p>This section contains sample applications that demonstrate different features of
 the rust_xlsxwriter library.</p>
@@ -833,7 +2639,13 @@ the rust_xlsxwriter library.</p>
 <p>Program to create a simple Hello World style Excel spreadsheet using the
 rust_xlsxwriter library.</p>
 <p><img src="examples/../../images/hello.png" alt="Image of output from app_hello_world.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::{Workbook, XlsxError};
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Create a simple Hello World style Excel spreadsheet using the
+</span><span class="boring">//! rust_xlsxwriter library.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -854,13 +2666,19 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     Ok(())
 }
 
-</code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="feature-demo"><a class="header" href="#feature-demo">Feature demo</a></h1>
 <p>A simple getting started example of some of the features of the rust_xlsxwriter
 library. It shows some examples of writing different data types, including
 dates.</p>
 <p><img src="examples/../../images/demo.png" alt="Image of output from app_demo.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">use chrono::NaiveDate;
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A simple, getting started, example of some of the features of the
+</span><span class="boring">//! rust_xlsxwriter library.
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -902,13 +2720,19 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cell-formatting"><a class="header" href="#cell-formatting">Cell formatting</a></h1>
 <p>An example of the various cell formatting options that are available in the
 rust_xlsxwriter library. These are laid out on worksheets that correspond to the
 sections of the Excel &quot;Format Cells&quot; dialog.</p>
 <p><img src="examples/../../images/formatting.png" alt="Image of output from app_formatting.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of the various cell formatting options that are available in the
+</span><span class="boring">//! rust_xlsxwriter library. These are laid out on worksheets that correspond to
+</span><span class="boring">//! the sections of the Excel &quot;Format Cells&quot; dialog.
+</span>
 use rust_xlsxwriter::*;
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -1151,12 +2975,18 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors-1"><a class="header" href="#format-colors-1">Format colors</a></h1>
 <p>A sample palette of the the defined colors and user defined RGB colors available
 in the rust_xlsxwriter library.</p>
 <p><img src="examples/../../images/colors.png" alt="Image of output from app_colors.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">use rust_xlsxwriter::*;
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! A sample palette of the the defined colors and user defined RGB colors
+</span><span class="boring">//! available in the rust_xlsxwriter library.
+</span><span class="boring">
+</span>use rust_xlsxwriter::*;
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file.
@@ -1252,13 +3082,19 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="right-to-left-display"><a class="header" href="#right-to-left-display">Right to left display</a></h1>
 <p>Example of using rust_xlsxwriter to create a workbook with the default worksheet
 and cell text direction changed from left-to-right to right-to-left, as required
 by some middle eastern versions of Excel.</p>
 <p><img src="examples/../../images/worksheet_set_right_to_left.png" alt="Image of output from app_right_to_left.rs" /></p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Example of using rust_xlsxwriter to create a workbook with the default
+</span><span class="boring">//! worksheet and cell text direction changed from left-to-right to
+</span><span class="boring">//! right-to-left, as required by some middle eastern versions of Excel.
+</span>
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -1296,7 +3132,288 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-array-formulas"><a class="header" href="#dynamic-array-formulas">Dynamic array formulas</a></h1>
+<p>An example of how to use the rust_xlsxwriter library to write formulas and
+functions that create dynamic arrays. These functions are new to Excel
+365. The examples mirror the examples in the Excel documentation for these
+functions.</p>
+<p>Sample output:</p>
+<p><img src="examples/../../images/dynamic_arrays01.png" alt="Image 1 of output from app_dynamic_arrays.rs" /></p>
+<p>And:</p>
+<p><img src="examples/../../images/dynamic_arrays02.png" alt="Image 2 of output from app_dynamic_arrays.rs" /></p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
+</span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
+</span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
+</span><span class="boring">//! functions.
+</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file.
+    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+
+    // Create some header formats to use in the worksheets.
+    let header1 = Format::new()
+        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
+        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+
+    let header2 = Format::new()
+        .set_foreground_color(XlsxColor::RGB(0x528FD3))
+        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+
+    // -----------------------------------------------------------------------
+    // Example of using the FILTER() function.
+    // -----------------------------------------------------------------------
+    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
+
+    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+
+    // Write the data the function will work on.
+    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
+    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
+    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
+    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+
+    // Add sample worksheet data to work on.
+    write_worksheet_data(worksheet1, &amp;header1)?;
+    worksheet1.set_column_width_pixels(4, 20)?;
+    worksheet1.set_column_width_pixels(9, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the UNIQUE() function.
+    // -----------------------------------------------------------------------
+    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
+
+    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+
+    // A more complex example combining SORT and UNIQUE.
+    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+
+    // Write the data the function will work on.
+    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+
+    // Add sample worksheet data to work on.
+    write_worksheet_data(worksheet2, &amp;header1)?;
+    worksheet2.set_column_width_pixels(4, 20)?;
+    worksheet2.set_column_width_pixels(6, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the SORT() function.
+    // -----------------------------------------------------------------------
+    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
+
+    // A simple SORT example.
+    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+
+    // A more complex example combining SORT and FILTER.
+    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+
+    // Write the data the function will work on.
+    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
+    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+
+    // Add sample worksheet data to work on.
+    write_worksheet_data(worksheet3, &amp;header1)?;
+    worksheet3.set_column_width_pixels(4, 20)?;
+    worksheet3.set_column_width_pixels(6, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the SORTBY() function.
+    // -----------------------------------------------------------------------
+    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
+
+    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+
+    // Write the data the function will work on.
+    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
+    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+
+    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
+    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
+    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
+    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
+    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
+    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
+    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
+    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+
+    worksheet4.write_number_only(1, 1, 52)?;
+    worksheet4.write_number_only(2, 1, 65)?;
+    worksheet4.write_number_only(3, 1, 22)?;
+    worksheet4.write_number_only(4, 1, 73)?;
+    worksheet4.write_number_only(5, 1, 19)?;
+    worksheet4.write_number_only(6, 1, 39)?;
+    worksheet4.write_number_only(7, 1, 19)?;
+    worksheet4.write_number_only(8, 1, 66)?;
+
+    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
+    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+
+    worksheet4.set_column_width_pixels(2, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the XLOOKUP() function.
+    // -----------------------------------------------------------------------
+    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
+
+    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+
+    // Write the data the function will work on.
+    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
+    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
+    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+
+    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
+    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
+    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
+    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
+    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
+    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
+    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
+    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+
+    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
+    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
+    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
+    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
+    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
+    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
+    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
+    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+
+    worksheet5.write_number_only(1, 2, 86)?;
+    worksheet5.write_number_only(2, 2, 91)?;
+    worksheet5.write_number_only(3, 2, 1)?;
+    worksheet5.write_number_only(4, 2, 62)?;
+    worksheet5.write_number_only(5, 2, 55)?;
+    worksheet5.write_number_only(6, 2, 92)?;
+    worksheet5.write_number_only(7, 2, 234)?;
+    worksheet5.write_number_only(8, 2, 880)?;
+
+    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+
+    worksheet5.set_column_width_pixels(0, 100)?;
+    worksheet5.set_column_width_pixels(3, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the XMATCH() function.
+    // -----------------------------------------------------------------------
+    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
+
+    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+
+    // Write the data the function will work on.
+    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+
+    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
+    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
+    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
+    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
+    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+
+    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
+    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
+    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+
+    worksheet6.set_column_width_pixels(1, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the RANDARRAY() function.
+    // -----------------------------------------------------------------------
+    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
+
+    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the SEQUENCE() function.
+    // -----------------------------------------------------------------------
+    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
+
+    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using the Spill range operator.
+    // -----------------------------------------------------------------------
+    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
+
+    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+
+    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+
+    // Write the data the to work on.
+    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
+    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
+    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+
+    // Add sample worksheet data to work on.
+    write_worksheet_data(worksheet9, &amp;header1)?;
+    worksheet9.set_column_width_pixels(4, 20)?;
+    worksheet9.set_column_width_pixels(6, 20)?;
+    worksheet9.set_column_width_pixels(8, 20)?;
+
+    // -----------------------------------------------------------------------
+    // Example of using dynamic ranges with older Excel functions.
+    // -----------------------------------------------------------------------
+    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
+
+    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+
+    // Write the data the to work on.
+    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
+    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
+    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+
+    workbook.close()?;
+
+    Ok(())
+}
+
+// A simple function and data structure to populate some of the worksheets.
+fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt; Result&lt;(), XlsxError&gt; {
+    let worksheet_data = vec![
+        (&quot;East&quot;, &quot;Tom&quot;, &quot;Apple&quot;, 6380),
+        (&quot;West&quot;, &quot;Fred&quot;, &quot;Grape&quot;, 5619),
+        (&quot;North&quot;, &quot;Amy&quot;, &quot;Pear&quot;, 4565),
+        (&quot;South&quot;, &quot;Sal&quot;, &quot;Banana&quot;, 5323),
+        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Apple&quot;, 4394),
+        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Grape&quot;, 7195),
+        (&quot;North&quot;, &quot;Xi&quot;, &quot;Pear&quot;, 5231),
+        (&quot;South&quot;, &quot;Hector&quot;, &quot;Banana&quot;, 2427),
+        (&quot;East&quot;, &quot;Tom&quot;, &quot;Banana&quot;, 4213),
+        (&quot;West&quot;, &quot;Fred&quot;, &quot;Pear&quot;, 3239),
+        (&quot;North&quot;, &quot;Amy&quot;, &quot;Grape&quot;, 6520),
+        (&quot;South&quot;, &quot;Sal&quot;, &quot;Apple&quot;, 1310),
+        (&quot;East&quot;, &quot;Fritz&quot;, &quot;Banana&quot;, 6274),
+        (&quot;West&quot;, &quot;Sravan&quot;, &quot;Pear&quot;, 4894),
+        (&quot;North&quot;, &quot;Xi&quot;, &quot;Grape&quot;, 7580),
+        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
+    ];
+
+    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
+    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
+    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+
+    let mut row = 1;
+    for data in worksheet_data.iter() {
+        worksheet.write_string_only(row, 0, data.0)?;
+        worksheet.write_string_only(row, 1, data.1)?;
+        worksheet.write_string_only(row, 2, data.2)?;
+        worksheet.write_number_only(row, 3, data.3)?;
+        row += 1;
+    }
+
+    Ok(())
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="performance"><a class="header" href="#performance">Performance</a></h1>
 <p>The <code>rust_xlsxwriter</code> library has sister libraries written in C
 (<a href="https://libxlsxwriter.github.io">libxlsxwriter</a>), Python (<a href="https://xlsxwriter.readthedocs.io/index.html">XlsxWriter</a>) and Perl (<a href="https://metacpan.org/dist/Excel-Writer-XLSX/view/lib/Excel/Writer/XLSX.pm">Excel::Writer::XLSX</a>).</p>
@@ -1326,7 +3443,13 @@ the rust version is 1.2x (or 20%) slower and the Python version is 8x slower.</p
 results, however these results are indicative of the relative performance.</p>
 <p>The programs used to generate these results are shown below.</p>
 <h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
-<pre><pre class="playground"><code class="language-rust">
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Simple performance test for rust_xlsxwriter.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span>
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new(&quot;rust_perf_test.xlsx&quot;);
     let worksheet = workbook.add_worksheet();
@@ -1347,7 +3470,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     Ok(())
 }
-</code></pre></pre>
+</code></pre>
 <h2 id="c"><a class="header" href="#c">C</a></h2>
 <pre><code class="language-C">#include &quot;xlsxwriter.h&quot;
 
