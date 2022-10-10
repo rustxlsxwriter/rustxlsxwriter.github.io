@@ -21,3 +21,4 @@ release: all
 	$(Q)git add .
 	$(Q)git commit -m "updated docs"
 	$(Q)git push origin
+    $(Q)open https://rustxlsxwriter.github.io
