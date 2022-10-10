@@ -210,7 +210,7 @@ section below.</p>
 <p><img src="../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
 <p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
 <p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.use_future_functions"><code>worksheet.use_future_functions()</code></a> function to
-have <code>rust_xlsxwriter</code> automatically handle future functions for your:</p>
+have <code>rust_xlsxwriter</code> automatically handle future functions for you:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
 </span><span class="boring">
@@ -416,22 +416,6 @@ you don't have to add them explicitly.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
