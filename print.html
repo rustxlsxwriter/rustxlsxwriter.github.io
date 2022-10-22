@@ -924,6 +924,83 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </code></pre>
 <p>For more details on the Worksheet APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="page-setup"><a class="header" href="#page-setup">Page Setup</a></h1>
+<p>The sections below look at the sections of the Excel Page Setup dialog and the
+equivalent rust_xlsxwriter methods.</p>
+<h2 id="page-setup---page"><a class="header" href="#page-setup---page">Page Setup - Page</a></h2>
+<p>The page Setup &quot;Page&quot; dialog looks like this:</p>
+<p><img src="worksheet/../images/page_setup01.png" alt="Image of Page Setup Dialog Page section" /></p>
+<p>The equivalent rust_xlsxwriter methods are:</p>
+<ol>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_portrait"><code>worksheet.set_portrait()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_landscape"><code>worksheet.set_landscape()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_scale"><code>worksheet.set_print_scale()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_fit_to_pages"><code>worksheet.set_print_fit_to_pages()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_first_page_number"><code>worksheet.set_print_first_page_number()</code></a></li>
+</ol>
+<p>Note, for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_fit_to_pages"><code>worksheet.set_print_fit_to_pages()</code></a> a common requirement is to fit
+the printed output to <code>n</code> pages wide but have the height be as long as
+necessary. To achieve this set the <code>height</code> to 0:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates setting the scale of the worksheet to fit
+</span><span class="boring">//! a defined number of pages vertically and horizontally. This example shows a
+</span><span class="boring">//! common use case which is to fit the printed output to 1 page wide but have
+</span><span class="boring">//! the height be as long as necessary.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new(&quot;worksheet.xlsx&quot;);
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Set the printed output to fit 1 page wide and as long as necessary.
+    worksheet.set_print_fit_to_pages(1, 0);
+<span class="boring">
+</span><span class="boring">    workbook.close()?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<h2 id="page-setup---margins"><a class="header" href="#page-setup---margins">Page Setup - Margins</a></h2>
+<p>The page Setup &quot;Margins&quot; dialog looks like this:</p>
+<p><img src="worksheet/../images/page_setup02.png" alt="Image of Page Setup Dialog Margins section" /></p>
+<p>The equivalent rust_xlsxwriter methods are:</p>
+<ol>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_margins"><code>worksheet.set_margins()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_center_horizontally"><code>worksheet.set_print_center_horizontally()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_center_vertically"><code>worksheet.set_print_center_vertically()</code></a></li>
+</ol>
+<h2 id="page-setup---headerfooter"><a class="header" href="#page-setup---headerfooter">Page Setup - Header/Footer</a></h2>
+<p>The page Setup &quot;Header/Footer&quot; dialog looks like this:</p>
+<p><img src="worksheet/../images/page_setup03.png" alt="Image of Page Setup Dialog Header/Footer section" /></p>
+<p>The equivalent rust_xlsxwriter methods are:</p>
+<ol>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header"><code>worksheet.set_header()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_footer"><code>worksheet.set_footer()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header_footer_scale_with_doc"><code>worksheet.set_header_footer_scale_with_doc()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header_footer_align_with_page"><code>worksheet.set_header_footer_align_with_page()</code></a></li>
+</ol>
+<p>Headers and footers are explained in more detail in the next section on <a href="worksheet/headers.html">Adding
+Headers and Footers</a>.</p>
+<p>Note, the options for different first, odd and even pages are not supported in
+rust_xlsxwriter.</p>
+<h1 id="page-setup---sheet"><a class="header" href="#page-setup---sheet">Page Setup - Sheet</a></h1>
+<p>The page Setup &quot;Sheet&quot; dialog looks like this:</p>
+<p><img src="worksheet/../images/page_setup04.png" alt="Image of Page Setup Dialog Sheet section" /></p>
+<p>The equivalent rust_xlsxwriter methods are:</p>
+<ol>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_area"><code>worksheet.set_print_area()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_repeat_rows"><code>worksheet.set_repeat_rows()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_repeat_columns"><code>worksheet.set_repeat_columns()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_gridlines"><code>worksheet.set_print_gridlines()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_black_and_white"><code>worksheet.set_print_black_and_white()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_draft"><code>worksheet.set_print_draft()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_headings"><code>worksheet.set_print_headings()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_order"><code>worksheet.set_page_order()</code></a></li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-headers-and-footers"><a class="header" href="#adding-headers-and-footers">Adding Headers and Footers</a></h1>
 <p>Headers and footers can be added to worksheets using the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header"><code>worksheet.set_header()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_footer"><code>worksheet.set_footer()</code></a> methods.</p>
@@ -4038,8 +4115,66 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
-<h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
+<h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
+<ul>
+<li>
+<p>Added an almost the complete set of Page Setup methods:</p>
+</li>
+<li>
+<p>Page Setup - Page</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_portrait"><code>worksheet.set_portrait()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_landscape"><code>worksheet.set_landscape()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_scale"><code>worksheet.set_print_scale()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_fit_to_pages"><code>worksheet.set_print_fit_to_pages()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_first_page_number"><code>worksheet.set_print_first_page_number()</code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Page Setup - Margins</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_margins"><code>worksheet.set_margins()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_center_horizontally"><code>worksheet.set_print_center_horizontally()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_center_vertically"><code>worksheet.set_print_center_vertically()</code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Page Setup - Header/Footer</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header"><code>worksheet.set_header()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_footer"><code>worksheet.set_footer()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header_footer_scale_with_doc"><code>worksheet.set_header_footer_scale_with_doc()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_header_footer_align_with_page"><code>worksheet.set_header_footer_align_with_page()</code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Page Setup - Sheet</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_area"><code>worksheet.set_print_area()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_repeat_rows"><code>worksheet.set_repeat_rows()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_repeat_columns"><code>worksheet.set_repeat_columns()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_gridlines"><code>worksheet.set_print_gridlines()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_black_and_white"><code>worksheet.set_print_black_and_white()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_draft"><code>worksheet.set_print_draft()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_print_headings"><code>worksheet.set_print_headings()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_order"><code>worksheet.set_page_order()</code></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="fixes"><a class="header" href="#fixes">Fixes</a></h3>
+<ul>
+<li>Fix for cargo issue where chrono dependency had a RUSTSEC warning. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/6">GitHub
+Issue #6</a>.</li>
+</ul>
+<h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -4053,7 +4188,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -4068,7 +4203,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> and
@@ -4081,7 +4216,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean()</code></a> method to support writing Excel boolean
 values.</li>
@@ -4092,12 +4227,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>
@@ -4355,22 +4490,6 @@ SOFTWARE.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
