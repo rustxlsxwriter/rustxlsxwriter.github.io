@@ -157,8 +157,8 @@ together, for example:</p>
 </span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add a worksheet.
     let worksheet = workbook.add_worksheet();
@@ -171,7 +171,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     worksheet.write_string(0, 0, &quot;Hello&quot;, &amp;format)?;
 
-    workbook.close()?;
+    workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
 }
@@ -188,8 +188,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;formats.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add a worksheet.
     let worksheet = workbook.add_worksheet();
@@ -203,7 +203,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_string(0, 0, &quot;Hello&quot;, &amp;format1)?;
     worksheet.write_string(1, 0, &quot;Hello&quot;, &amp;format2)?;
 
-    workbook.close()?;
+    workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
 }

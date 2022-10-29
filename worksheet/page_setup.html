@@ -171,7 +171,7 @@ necessary. To achieve this set the <code>height</code> to 0:</p>
 </span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;worksheet.xlsx&quot;);
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -179,7 +179,7 @@ necessary. To achieve this set the <code>height</code> to 0:</p>
 </span>    // Set the printed output to fit 1 page wide and as long as necessary.
     worksheet.set_print_fit_to_pages(1, 0);
 <span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

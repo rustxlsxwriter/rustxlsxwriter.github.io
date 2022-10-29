@@ -164,8 +164,8 @@ some monthly expenses like the following:</p>
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
     ];
 <span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial3.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a bold format to use to highlight cells.
 </span><span class="boring">    let bold = Format::new().set_bold();
@@ -203,8 +203,8 @@ some monthly expenses like the following:</p>
 </span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
 </span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial3.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

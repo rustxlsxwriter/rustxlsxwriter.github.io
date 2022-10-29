@@ -157,7 +157,7 @@ comma (not semi-colon).</p>
 </span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;formula.xlsx&quot;);
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span>    // OK.
@@ -169,7 +169,7 @@ comma (not semi-colon).</p>
     // French function name. Causes Excel error on file opening.
     worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
 <span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

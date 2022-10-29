@@ -161,8 +161,8 @@ functions.</p>
 </span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Create some header formats to use in the worksheets.
     let header1 = Format::new()
@@ -380,7 +380,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
     worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
 
-    workbook.close()?;
+    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 
     Ok(())
 }

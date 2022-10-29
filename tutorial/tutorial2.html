@@ -163,8 +163,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
     let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;tutorial2.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add a bold format to use to highlight cells.
     let bold = Format::new().set_bold();
@@ -191,8 +191,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
     worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 
-    // Close the file.
-    workbook.close()?;
+    // Save the file to disk.
+    workbook.save(&quot;tutorial2.xlsx&quot;)?;
 
     Ok(())
 }
@@ -216,8 +216,8 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial2.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span>    // Add a bold format to use to highlight cells.
     let bold = Format::new().set_bold();
@@ -244,8 +244,8 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
 </span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial2.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

@@ -157,8 +157,8 @@ by some middle eastern versions of Excel.</p>
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;right_to_left.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add the cell formats.
     let format_left_to_right = Format::new().set_reading_direction(1);
@@ -187,7 +187,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet2.write_string(1, 0, &quot;نص عربي / English text&quot;, &amp;format_left_to_right)?;
     worksheet2.write_string(2, 0, &quot;نص عربي / English text&quot;, &amp;format_right_to_left)?;
 
-    workbook.close()?;
+    workbook.save(&quot;right_to_left.xlsx&quot;)?;
 
     Ok(())
 }

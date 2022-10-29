@@ -154,11 +154,11 @@ starting point for creating a new Excel xlsx file.</p>
 </span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    let mut workbook = Workbook::new(&quot;workbook.xlsx&quot;);
+    let mut workbook = Workbook::new();
 
     _ = workbook.add_worksheet();
 
-    workbook.close()?;
+    workbook.save(&quot;workbook.xlsx&quot;)?;
 
     Ok(())
 }

@@ -157,8 +157,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
     let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add a worksheet to the workbook.
     let worksheet = workbook.add_worksheet();
@@ -175,8 +175,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
     worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 
-    // Close the file.
-    workbook.close()?;
+    // Save the file to disk.
+    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 
     Ok(())
 }
@@ -201,8 +201,8 @@ filename that we want to create:</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span>    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span>    let mut workbook = Workbook::new();
 <span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -219,8 +219,8 @@ filename that we want to create:</p>
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -241,8 +241,8 @@ existing files.</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span>    let worksheet = workbook.add_worksheet();
@@ -259,8 +259,8 @@ existing files.</p>
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -281,8 +281,8 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -299,8 +299,8 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -322,8 +322,8 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -340,8 +340,8 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span>    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 <span class="boring">
-</span><span class="boring">    // Close the file.
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -359,8 +359,8 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;tutorial1.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -377,8 +377,8 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    // Close the file.
-</span>    workbook.close()?;
+</span><span class="boring">    // Save the file to disk.
+</span>    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 <span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

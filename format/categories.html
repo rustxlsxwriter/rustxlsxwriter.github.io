@@ -156,8 +156,8 @@ number with the Excel number format <code>&quot;$#,##0.00&quot;</code>.</p>
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new Excel file.
-    let mut workbook = Workbook::new(&quot;currency_format.xlsx&quot;);
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
 
     // Add a worksheet.
     let worksheet = workbook.add_worksheet();
@@ -167,7 +167,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
 
-    workbook.close()?;
+    workbook.save(&quot;currency_format.xlsx&quot;)?;
 
     Ok(())
 }
@@ -210,8 +210,8 @@ example and rerun it we will get a number format in the Currency category:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;currency_format.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
@@ -221,7 +221,7 @@ example and rerun it we will get a number format in the Currency category:</p>
 
     worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
 <span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;currency_format.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}

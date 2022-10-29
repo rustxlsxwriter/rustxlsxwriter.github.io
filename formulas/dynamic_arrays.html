@@ -174,8 +174,8 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
@@ -393,7 +393,7 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
 </span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -474,8 +474,8 @@ function which only requires the start cell:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
@@ -693,7 +693,7 @@ function which only requires the start cell:</p>
 </span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
 </span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -798,8 +798,8 @@ following formula:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    // Create a new Excel file.
-</span><span class="boring">    let mut workbook = Workbook::new(&quot;dynamic_arrays.xlsx&quot;);
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
@@ -1017,7 +1017,7 @@ following formula:</p>
 </span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
 </span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    workbook.close()?;
+</span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
