@@ -1016,7 +1016,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 <p>For more details on the Worksheet APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-worksheets"><a class="header" href="#creating-worksheets">Creating worksheets</a></h1>
 <p>There are two way of creating a worksheet object with rust_xlsxwriter: via the
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet"><code>workbook.add_worksheet()</code></a> method and via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet::new.html#method."><code>Worksheet::new()</code></a> constructor.</p>
+[<code>workbook.add_worksheet()</code>] method and via the [<code>Worksheet::new()</code>] constructor.</p>
 <p>The first method ties the worksheet to the workbook object that will
 automatically write it when the file is saved, whereas the second method
 creates a worksheet that is independent of a workbook. The second method has
@@ -1024,14 +1024,14 @@ certain advantages in keeping the worksheet free of the workbook borrow checking
 until needed, as explained below.</p>
 <h2 id="working-with-add_worksheet-and-the-borrow-checker"><a class="header" href="#working-with-add_worksheet-and-the-borrow-checker">Working with <code>add_worksheet()</code> and the borrow checker</a></h2>
 <p>Due to borrow checking rules you can only have one active reference to a
-worksheet object created by <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet"><code>workbook.add_worksheet()</code></a> since that method
+worksheet object created by [<code>workbook.add_worksheet()</code>] since that method
 always returns a mutable reference to an element of an internal vector.</p>
 <p>For a workbook with multiple worksheets this restriction is generally workable
 if you can create and use the worksheets sequentially since you will only need
 to have one reference at any one time.</p>
 <p>However, if you can’t structure your code to work sequentially then you get a
 reference to a previously created worksheet using
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_index"><code>workbook.worksheet_from_index()</code></a>. The standard borrow checking rules still
+[<code>workbook.worksheet_from_index()</code>]. The standard borrow checking rules still
 apply so you will have to give up ownership of any other worksheet reference
 prior to calling this method.</p>
 <p>For example:</p>
@@ -1067,7 +1067,7 @@ prior to calling this method.</p>
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
 </span></code></pre>
-<p>You can also use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_name"><code>workbook.worksheet_from_name()</code></a> to do something similar
+<p>You can also use [<code>workbook.worksheet_from_name()</code>] to do something similar
 using the worksheet names:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
@@ -1103,7 +1103,7 @@ using the worksheet names:</p>
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
 </span></code></pre>
-<p>Additionally can use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheets_mut"><code>workbook.worksheets_mut()</code></a> to get a reference to the the
+<p>Additionally can use [<code>workbook.worksheets_mut()</code>] to get a reference to the the
 vector that holds the worksheets. This can be used, for instance, to iterate
 over all the worksheets in a workbook:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -1174,11 +1174,11 @@ following:</p>
 <code>Sheet1</code> have swapped position, as can be seen from the image.</p>
 <h2 id="working-with-worksheetnew-and-the-borrow-checker"><a class="header" href="#working-with-worksheetnew-and-the-borrow-checker">Working with <code>Worksheet::new()</code> and the borrow checker</a></h2>
 <p>As outlined in the introduction to this section it is also possible to create a
-Worksheet object via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet::new.html#method."><code>Worksheet::new()</code></a>, as you would expect. Since this type
+Worksheet object via [<code>Worksheet::new()</code>], as you would expect. Since this type
 of Worksheet instance isn't tied to a Workbook it isn't subject to the
 additional borrow checking rules that entails.</p>
 <p>As such you can create and work with several Worksheet instances and then add
-them to the Workbook when you are finished via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.push_worksheet"><code>workbook.push_worksheet()</code></a>
+them to the Workbook when you are finished via the [<code>workbook.push_worksheet()</code>]
 method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
@@ -1226,6 +1226,13 @@ in order for them to work. However, there aren't currently any features like
 that, and the author will seek to avoid them as much as possible. So if the
 <code>Worksheet::new()</code> and <code>workbook.push_worksheet()</code> methodology seems more
 natural to you then you should use it.</p>
+<pre><code>[`Worksheet::new()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet::new.html#method.
+[`workbook.add_worksheet()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet
+[`workbook.worksheets_mut()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheets_mut
+[`workbook.push_worksheet()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.push_worksheet
+[`workbook.worksheet_from_name()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_name
+[`workbook.worksheet_from_index()`]: https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_index
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="page-setup"><a class="header" href="#page-setup">Page Setup</a></h1>
 <p>The sections below look at the sections of the Excel Page Setup dialog and the
 equivalent rust_xlsxwriter methods.</p>
