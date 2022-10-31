@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Creating worksheets - Working with the rust_xlsxwriter library</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_stared.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html" class="active"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/colors.html"><strong aria-hidden="true">5.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.5.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.6.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">6.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">6.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">6.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">6.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">6.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">6.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">7.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">7.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">7.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">7.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">7.4.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">7.5.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">7.6.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">7.7.</strong> Headers and Footers</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">8.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">9.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">10.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">11.</strong> Author</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Working with the rust_xlsxwriter library</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="creating-worksheets"><a class="header" href="#creating-worksheets">Creating worksheets</a></h1>
+<p>There are two way of creating a worksheet object with rust_xlsxwriter: via the
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet"><code>workbook.add_worksheet()</code></a> method and via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet::new.html#method."><code>Worksheet::new()</code></a> constructor.</p>
+<p>The first method ties the worksheet to the workbook object that will
+automatically write it when the file is saved, whereas the second method
+creates a worksheet that is independent of a workbook. The second method has
+certain advantages in keeping the worksheet free of the workbook borrow checking
+until needed, as explained below.</p>
+<h2 id="working-with-add_worksheet-and-the-borrow-checker"><a class="header" href="#working-with-add_worksheet-and-the-borrow-checker">Working with <code>add_worksheet()</code> and the borrow checker</a></h2>
+<p>Due to borrow checking rules you can only have one active reference to a
+worksheet object created by <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet"><code>workbook.add_worksheet()</code></a> since that method
+always returns a mutable reference to an element of an internal vector.</p>
+<p>For a workbook with multiple worksheets this restriction is generally workable
+if you can create and use the worksheets sequentially since you will only need
+to have one reference at any one time.</p>
+<p>However, if you can’t structure your code to work sequentially then you get a
+reference to a previously created worksheet using
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_index"><code>workbook.worksheet_from_index()</code></a>. The standard borrow checking rules still
+apply so you will have to give up ownership of any other worksheet reference
+prior to calling this method.</p>
+<p>For example:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates getting worksheet reference by index.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span>    // Start with a reference to worksheet1.
+    let mut worksheet1 = workbook.add_worksheet();
+    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
+
+    // If we don't try to use the workbook1 reference again we can switch to
+    // using a reference to worksheet2.
+    let mut worksheet2 = workbook.add_worksheet();
+    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
+
+    // Stop using worksheet2 and move back to worksheet1.
+    worksheet1 = workbook.worksheet_from_index(0)?;
+    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+
+    // Stop using worksheet1 and move back to worksheet2.
+    worksheet2 = workbook.worksheet_from_index(1)?;
+    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+<span class="boring">
+</span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>You can also use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_name"><code>workbook.worksheet_from_name()</code></a> to do something similar
+using the worksheet names:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates getting worksheet reference by name.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span>    // Start with a reference to worksheet1.
+    let mut worksheet1 = workbook.add_worksheet();
+    let name1 = worksheet1.name(); // &quot;Sheet1&quot;
+    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
+
+    // If we don't try to use the workbook1 reference again we can switch to
+    // using a reference to worksheet2.
+    let mut worksheet2 = workbook.add_worksheet().set_name(&quot;Data&quot;)?;
+    let name2 = worksheet2.name();
+    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
+
+    // Stop using worksheet2 and move back to worksheet1.
+    worksheet1 = workbook.worksheet_from_name(&amp;name1)?;
+    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+
+    // Stop using worksheet1 and move back to worksheet2.
+    worksheet2 = workbook.worksheet_from_name(&amp;name2)?;
+    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+<span class="boring">
+</span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>Additionally can use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheets_mut"><code>workbook.worksheets_mut()</code></a> to get a reference to the the
+vector that holds the worksheets. This can be used, for instance, to iterate
+over all the worksheets in a workbook:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates operating on the vector of all the
+</span><span class="boring">//! worksheets in a workbook.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span>    // Add three worksheets to the workbook.
+    let _ = workbook.add_worksheet();
+    let _ = workbook.add_worksheet();
+    let _ = workbook.add_worksheet();
+
+    // Write the same data to all three worksheets.
+    for worksheet in workbook.worksheets_mut() {
+        worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+        worksheet.write_number_only(1, 0, 12345)?;
+    }
+<span class="boring">
+</span><span class="boring">    // If you are careful you can use standard slice operations.
+</span><span class="boring">    workbook.worksheets_mut().swap(0, 1);
+</span><span class="boring">
+</span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>If you are careful you can use standard <a href="https://doc.rust-lang.org/1.64.0/std/primitive.slice.html">slice</a> operations.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates operating on the vector of all the
+</span><span class="boring">//! worksheets in a workbook.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add three worksheets to the workbook.
+</span><span class="boring">    let _ = workbook.add_worksheet();
+</span><span class="boring">    let _ = workbook.add_worksheet();
+</span><span class="boring">    let _ = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Write the same data to all three worksheets.
+</span><span class="boring">    for worksheet in workbook.worksheets_mut() {
+</span><span class="boring">        worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+</span><span class="boring">        worksheet.write_number_only(1, 0, 12345)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // If you are careful you can use standard slice operations.
+</span>    workbook.worksheets_mut().swap(0, 1);
+<span class="boring">
+</span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>Combining the two previous examples would give an output file like the
+following:</p>
+<p><img src="../images/workbook_worksheets_mut.png" alt="Image of first tutorial 1" /></p>
+<p>All three worksheets in the output file have the same data and <code>Sheet2</code> and
+<code>Sheet1</code> have swapped position, as can be seen from the image.</p>
+<h2 id="working-with-worksheetnew-and-the-borrow-checker"><a class="header" href="#working-with-worksheetnew-and-the-borrow-checker">Working with <code>Worksheet::new()</code> and the borrow checker</a></h2>
+<p>As outlined in the introduction to this section it is also possible to create a
+Worksheet object via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet::new.html#method."><code>Worksheet::new()</code></a>, as you would expect. Since this type
+of Worksheet instance isn't tied to a Workbook it isn't subject to the
+additional borrow checking rules that entails.</p>
+<p>As such you can create and work with several Worksheet instances and then add
+them to the Workbook when you are finished via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.push_worksheet"><code>workbook.push_worksheet()</code></a>
+method:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates creating new worksheet objects and then
+</span><span class="boring">//! adding them to a workbook.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span>    // Create a new workbook.
+    let mut workbook = Workbook::new();
+
+    // Create new worksheets.
+    let mut worksheet1 = Worksheet::new();
+    let mut worksheet2 = Worksheet::new();
+
+    // Use the first workbook.
+    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+
+    // Use the second workbook.
+    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+
+    // Add the worksheets to the workbook.
+    workbook.push_worksheet(worksheet1);
+    workbook.push_worksheet(worksheet2);
+<span class="boring">
+</span><span class="boring">    // Save the workbook.
+</span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<h2 id="using-add_worksheet-versus--worksheetnew"><a class="header" href="#using-add_worksheet-versus--worksheetnew">Using <code>add_worksheet()</code> versus  <code>Worksheet::new()</code></a></h2>
+<p>Since there are two ways of doing, effectively, the same thing you will probably
+wonder which is best.</p>
+<p>The author mainly uses <code>add_worksheet()</code> and most of the library and
+documentation examples are structured to work with that method. In addition, the
+Excel xlsx file format has very tight coupling between it's sub-components and
+it is possible that some future rust_xlsxwriter functionality will require
+Worksheets and other Workbook objects to be <code>registered</code> with a parent Workbook
+in order for them to work. However, there aren't currently any features like
+that, and the author will seek to avoid them as much as possible. So if the
+<code>Worksheet::new()</code> and <code>workbook.push_worksheet()</code> methodology seems more
+natural to you then you should use it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../worksheet/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../worksheet/page_setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../worksheet/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../worksheet/page_setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
