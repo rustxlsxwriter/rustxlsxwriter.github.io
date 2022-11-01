@@ -17,7 +17,7 @@ all:
 	$(Q)mdbook build ../mdbook_rust_xlsxwriter
 	$(Q)cp -r ../mdbook_rust_xlsxwriter/book/* .
 
-images:
+update_images:
 	$(Q)cp ../mdbook_rust_xlsxwriter/src/images/* images
 	$(Q)git commit -m "updated images"
 	$(Q)git push origin
