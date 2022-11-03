@@ -1397,6 +1397,25 @@ $ xmllint --format `find myfile -name &quot;*.xml&quot; | xargs` | \
 characters, including the control characters. Strings longer than this
 will not be written, and a warning will be output.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="autofitting-column-widths"><a class="header" href="#autofitting-column-widths">Autofitting column widths</a></h1>
+<p>Column widths in a <code>rust_xlsxwriter</code> worksheet can be adjusted automatically
+using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> method.</p>
+<p>There is no option available in the xlsx file format that <code>rust_xlsxwriter</code> can
+use to say &quot;autofit columns on loading&quot;. Auto-fitting of columns is something
+that Excel does at runtime when it has access to all of the worksheet
+information as well as the Windows functions for calculating display areas based
+on fonts and formatting.</p>
+<p>As such the autofit widths that are calculated by <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a>
+are based on simple heuristics. This isn't perfect but for most cases it should
+be sufficient and if not you can set your own widths, see below.</p>
+<p>The <code>worksheet.set_autofit()</code> method ignores columns that already have an
+explicit column width set via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width_pixels"><code>worksheet.set_column_width_pixels()</code></a>. You can use these methods if you wish
+to override the <code>worksheet.set_autofit()</code> values.</p>
+<p>It is intended that the <code>worksheet.set_autofit()</code> fitting algorithm will be
+improved in upcoming releases.</p>
+<p><strong>Note</strong>, <code>worksheet.set_autofit()</code> iterates through all the cells in a
+worksheet that have been populated with data and performs a length calculation
+on each one, so it can have a performance overhead for bigger worksheets.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-format-struct"><a class="header" href="#the-format-struct">The Format struct</a></h1>
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> struct is used to define cell formatting for data in a worksheet.</p>
 <p>The properties of a cell that can be formatted include: fonts, colors, patterns,
@@ -3118,6 +3137,7 @@ the rust_xlsxwriter library.</p>
 <li><a href="examples/./dynamic_arrays.html">Dynamic array formulas</a>: Examples of dynamic arrays and formulas.</li>
 <li><a href="examples/./headers.html">Headers and Footers</a>: Shows how to set headers and footers.</li>
 <li><a href="examples/./panes.html">Freeze Panes</a>: Example of setting freeze panes in worksheets.</li>
+<li><a href="examples/./autofit.html">Autofitting Columns</a>: Example of autofitting column widths.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
 <p>Program to create a simple Hello World style Excel spreadsheet using the
@@ -4458,6 +4478,56 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="autofitting-columns"><a class="header" href="#autofitting-columns">Autofitting columns</a></h1>
+<p>An example of using the simulated autofit option to automatically set worksheet
+column widths based on the data in the column.</p>
+<p><img src="examples/../../images/autofit.png" alt="Image of output from app_colors.rs" /></p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of using a simulated Column Autofit using the rust_xlsxwriter
+</span><span class="boring">//! library.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Write some data to the worksheet.
+
+    // Columns with explicitly defined widths aren't auto-fitted.
+    worksheet.set_column_width(0, 18)?;
+    worksheet.write_string_only(0, 0, &quot;User set widths&quot;)?;
+    worksheet.write_string_only(1, 0, &quot;aren't changed&quot;)?;
+
+    // Columns without explicitly defined widths are auto-fitted.
+    worksheet.write_string_only(0, 1, &quot;Implicit widths&quot;)?;
+    worksheet.write_string_only(1, 1, &quot;are changed&quot;)?;
+
+    // Add some similar words of different lengths.
+    worksheet.write_string_only(0, 2, &quot;Fo&quot;)?;
+    worksheet.write_string_only(1, 2, &quot;Foo&quot;)?;
+    worksheet.write_string_only(2, 2, &quot;Food&quot;)?;
+    worksheet.write_string_only(3, 2, &quot;Frood&quot;)?;
+    worksheet.write_string_only(4, 2, &quot;Froody&quot;)?;
+
+    // Add some numbers.
+    worksheet.write_number_only(0, 3, 123)?;
+    worksheet.write_number_only(0, 4, 1234)?;
+    worksheet.write_number_only(0, 5, 12345)?;
+
+    // Run autofit after the data have been added to the worksheet.
+    worksheet.set_autofit();
+
+    // Save the file to disk.
+    workbook.save(&quot;autofit.xlsx&quot;)?;
+
+    Ok(())
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="performance"><a class="header" href="#performance">Performance</a></h1>
 <p>The <code>rust_xlsxwriter</code> library has sister libraries written in C
 (<a href="https://libxlsxwriter.github.io">libxlsxwriter</a>), Python (<a href="https://xlsxwriter.readthedocs.io/index.html">XlsxWriter</a>) and Perl (<a href="https://metacpan.org/dist/Excel-Writer-XLSX/view/lib/Excel/Writer/XLSX.pm">Excel::Writer::XLSX</a>).</p>

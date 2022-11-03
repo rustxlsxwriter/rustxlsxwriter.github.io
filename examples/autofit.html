@@ -143,6 +143,56 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="autofitting-columns"><a class="header" href="#autofitting-columns">Autofitting columns</a></h1>
+<p>An example of using the simulated autofit option to automatically set worksheet
+column widths based on the data in the column.</p>
+<p><img src="../../images/autofit.png" alt="Image of output from app_colors.rs" /></p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of using a simulated Column Autofit using the rust_xlsxwriter
+</span><span class="boring">//! library.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    // Create a new Excel file object.
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Write some data to the worksheet.
+
+    // Columns with explicitly defined widths aren't auto-fitted.
+    worksheet.set_column_width(0, 18)?;
+    worksheet.write_string_only(0, 0, &quot;User set widths&quot;)?;
+    worksheet.write_string_only(1, 0, &quot;aren't changed&quot;)?;
+
+    // Columns without explicitly defined widths are auto-fitted.
+    worksheet.write_string_only(0, 1, &quot;Implicit widths&quot;)?;
+    worksheet.write_string_only(1, 1, &quot;are changed&quot;)?;
+
+    // Add some similar words of different lengths.
+    worksheet.write_string_only(0, 2, &quot;Fo&quot;)?;
+    worksheet.write_string_only(1, 2, &quot;Foo&quot;)?;
+    worksheet.write_string_only(2, 2, &quot;Food&quot;)?;
+    worksheet.write_string_only(3, 2, &quot;Frood&quot;)?;
+    worksheet.write_string_only(4, 2, &quot;Froody&quot;)?;
+
+    // Add some numbers.
+    worksheet.write_number_only(0, 3, 123)?;
+    worksheet.write_number_only(0, 4, 1234)?;
+    worksheet.write_number_only(0, 5, 12345)?;
+
+    // Run autofit after the data have been added to the worksheet.
+    worksheet.set_autofit();
+
+    // Save the file to disk.
+    workbook.save(&quot;autofit.xlsx&quot;)?;
+
+    Ok(())
+}
+</code></pre>
 
                     </main>
 
