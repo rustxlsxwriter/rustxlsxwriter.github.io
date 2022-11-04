@@ -227,7 +227,7 @@ the default is to have the first one active, like in Excel.</p>
 <p>If you have a lot of worksheets then they may not all fit on the screen at the
 same time. In cases like that the active worksheet will still be visible but its
 tab may not be. In those, rare, cases you can use the
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_first_sheet"><code>worksheet.set_first_sheet()</code></a> method to set the first visible tab (not
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_first_tab"><code>worksheet.set_first_tab()</code></a> method to set the first visible tab (not
 worksheet) in a group of worksheets.</p>
 <h2 id="setting-worksheet-tab-colors"><a class="header" href="#setting-worksheet-tab-colors">Setting worksheet tab colors</a></h2>
 <p>Another way of highlighting one or more worksheets in Excel is to set the tab
@@ -270,7 +270,7 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
 <h2 id="hiding-worksheets"><a class="header" href="#hiding-worksheets">Hiding worksheets</a></h2>
 <p>Sometimes it is desirable to hide worksheets if they contain a lot of
 intermediate data or calculations that end user doesn't need to see. With
-<code>rust_xlsxwriter</code> this is achieved with the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.worksheet_set_hidden"><code>worksheet.set_hidden()</code></a>
+<code>rust_xlsxwriter</code> this is achieved with the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_hidden"><code>worksheet.set_hidden()</code></a>
 method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
@@ -308,7 +308,7 @@ without activating another sheet.</p>
 <p>A selected worksheet has its tab highlighted. Selecting worksheets is a way of
 grouping them together so that, for example, several worksheets could be printed
 in one go.</p>
-<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.worksheet_set_selected"><code>worksheet.worksheet_set_selected()</code></a> method is used to indicate that a
+<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_selected"><code>worksheet.set_selected()</code></a> method is used to indicate that a
 worksheet is selected in a multi-sheet workbook.</p>
 <p>A worksheet that has been activated via the <code>worksheet.set_active()</code> method will
 also appear as selected.</p>
