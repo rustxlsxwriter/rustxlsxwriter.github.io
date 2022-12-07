@@ -184,29 +184,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </code></pre>
 <p>This will you a simple output file like the following.</p>
 <p><img src="../../images/workbook_new.png" alt="Image of output from doc_workbook_new.rs" /></p>
-<p>The file/path string passed to <code>save()</code> is converted to a to a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code>std::path</code></a>
-internally but you may prefer to work with a Path reference directly in which
-case you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> method:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates creating a simple workbook using a rust
-</span><span class="boring">//! Path reference.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let path = std::path::Path::new(&quot;workbook.xlsx&quot;);
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">
-</span><span class="boring">    _ = workbook.add_worksheet();
-</span><span class="boring">
-</span>    workbook.save(&amp;path)?;
-<span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
-<p>You can also save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
+<p>The  <code>save()</code> method takes a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code>std::path</code></a> or path/filename string. You can also
+save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">// Copyright 2022, John McNamara, jmcnamara@cpan.org
