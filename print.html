@@ -183,7 +183,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.17.0&quot;
+rust_xlsxwriter = &quot;0.17.1&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5293,6 +5293,12 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0171---2022-12-18"><a class="header" href="#0171---2022-12-18">[0.17.1] - 2022-12-18</a></h2>
+<h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
+<ul>
+<li>Fixes issue where header image files became corrupt during incremental saves.
+Also fixes similar issues in some formatting code.</li>
+</ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
 <ul>
@@ -5530,7 +5536,7 @@ Footers</a>.</p>
 </ul>
 <p>See also the rust_xlsxwriter user documentation on <a href="https://rustxlsxwriter.github.io/formulas/dynamic_arrays.html">Dynamic Array support</a>.</p>
 <h2 id="031---2022-10-01"><a class="header" href="#031---2022-10-01">[0.3.1] - 2022-10-01</a></h2>
-<h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
+<h3 id="fixed-1"><a class="header" href="#fixed-1">Fixed</a></h3>
 <ul>
 <li>Fixed minor crate issue.</li>
 </ul>
@@ -5541,7 +5547,7 @@ Footers</a>.</p>
 values.</li>
 </ul>
 <h2 id="021---2022-09-22"><a class="header" href="#021---2022-09-22">[0.2.1] - 2022-09-22</a></h2>
-<h3 id="fixed-1"><a class="header" href="#fixed-1">Fixed</a></h3>
+<h3 id="fixed-2"><a class="header" href="#fixed-2">Fixed</a></h3>
 <ul>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
