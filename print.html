@@ -183,7 +183,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.17.1&quot;
+rust_xlsxwriter = &quot;0.18.0&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -3348,6 +3348,7 @@ the rust_xlsxwriter library.</p>
 <li><a href="examples/./demo.html">Feature demo</a>: Demonstrates more features of the library.</li>
 <li><a href="examples/./formatting.html">Cell formatting</a>: Demonstrates various formatting options.</li>
 <li><a href="examples/./merge_range.html">Merging cells</a>: An example of merge cell ranges.</li>
+<li><a href="examples/./rich_strings.html">Rich strings</a>: Add multi-font &quot;rich&quot; strings to a worksheet.</li>
 <li><a href="examples/./colors.html">Format colors</a>: Creates a palette of the available colors.</li>
 <li><a href="examples/./hyperlinks.html">Hyperlinks</a>: Add hyperlinks to a worksheet.</li>
 <li><a href="examples/./images.html">Insert images</a>: Add images to a worksheet.</li>
@@ -5367,6 +5368,16 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0180---2022-12-19"><a class="header" href="#0180---2022-12-19">[0.18.0] - 2022-12-19</a></h2>
+<h3 id="added"><a class="header" href="#added">Added</a></h3>
+<ul>
+<li>
+<p>Added support for &quot;rich&quot; strings with multiple font formats via
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string_only"><code>worksheet.write_rich_string_only()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string"><code>worksheet.write_rich_string()</code></a>.
+For example strings like &quot;This is <strong>bold</strong> and this is <em>italic</em>&quot;.</p>
+<p>See also the <a href="https://rustxlsxwriter.github.io/examples/rich_strings.html">Rich strings example</a> in the user guide.</p>
+</li>
+</ul>
 <h2 id="0171---2022-12-18"><a class="header" href="#0171---2022-12-18">[0.17.1] - 2022-12-18</a></h2>
 <h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
 <ul>
@@ -5374,7 +5385,7 @@ workbook.close()
 Also fixes similar issues in some formatting code.</li>
 </ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
-<h3 id="added"><a class="header" href="#added">Added</a></h3>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in headers/footers via the
@@ -5383,13 +5394,13 @@ Also fixes similar issues in some formatting code.</li>
 </li>
 </ul>
 <h2 id="0160---2022-12-09"><a class="header" href="#0160---2022-12-09">[0.16.0] - 2022-12-09</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>Replicate the optimization used by Excel where it only stores one copy of a
 repeated/duplicate image in a workbook.</li>
 </ul>
 <h2 id="0150---2022-12-08"><a class="header" href="#0150---2022-12-08">[0.15.0] - 2022-12-08</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in buffers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Image.html#method.new_from_buffer"><code>image.new_from_buffer()</code></a>.</p>
@@ -5399,7 +5410,7 @@ repeated/duplicate image in a workbook.</li>
 </li>
 </ul>
 <h2 id="0140---2022-12-05"><a class="header" href="#0140---2022-12-05">[0.14.0] - 2022-12-05</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>
 <p>Added support for inserting images into worksheets with
@@ -5417,7 +5428,7 @@ in images and images in headers/footers.</p>
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>
 </ul>
 <h2 id="0130---2022-11-21"><a class="header" href="#0130---2022-11-21">[0.13.0] - 2022-11-21</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <ul>
 <li>
 <p>Added support for writing hyperlinks in worksheets via the following methods:</p>
@@ -5442,14 +5453,14 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </li>
 </ul>
 <h2 id="0120---2022-11-06"><a class="header" href="#0120---2022-11-06">[0.12.0] - 2022-11-06</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
 <li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
-<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
+<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
 <ul>
 <li>
 <p>Added several worksheet methods for working with worksheet tabs:</p>
@@ -5464,7 +5475,7 @@ Colors</a> in the user guide.</li>
 </li>
 </ul>
 <h2 id="0100---2022-11-03"><a class="header" href="#0100---2022-11-03">[0.10.0] - 2022-11-03</a></h2>
-<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
+<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
 <ul>
 <li>
 <p>Added a simulated <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> method to automatically adjust
@@ -5487,7 +5498,7 @@ of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_x
 <li>There are now supporting <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> methods.</li>
 </ul>
-<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
+<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
 <ul>
 <li>
 <p>Added new methods to get references to worksheet objects used by the workbook:</p>
@@ -5505,7 +5516,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="080---2022-10-28"><a class="header" href="#080---2022-10-28">[0.8.0] - 2022-10-28</a></h2>
-<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
+<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
 <ul>
 <li>
 <p>Added support for creating files from paths via <code>workbook.new_from_path()</code>.</p>
@@ -5515,7 +5526,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
-<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
+<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
 <ul>
 <li>
 <p>Added an almost the complete set of Page Setup methods:</p>
@@ -5573,7 +5584,7 @@ with the borrow checker.</p>
 Issue #6</a>.</li>
 </ul>
 <h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
-<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
+<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -5587,7 +5598,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
+<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -5602,7 +5613,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
+<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> and
@@ -5615,7 +5626,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
+<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean()</code></a> method to support writing Excel boolean
 values.</li>
@@ -5626,12 +5637,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
+<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
+<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>
