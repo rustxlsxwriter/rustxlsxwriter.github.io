@@ -159,8 +159,8 @@ functions.</p>
 </span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
-</span>//! functions.
-use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">//! functions.
+</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.

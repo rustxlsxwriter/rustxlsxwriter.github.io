@@ -157,14 +157,14 @@ some monthly expenses like the following:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    // Some sample data we want to write to a spreadsheet.
-    let expenses = vec![
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
-<span class="boring">    ];
-</span><span class="boring">
+    ];
+<span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">

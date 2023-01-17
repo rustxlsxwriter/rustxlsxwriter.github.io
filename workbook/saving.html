@@ -154,9 +154,9 @@ via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">
 </span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
 </span><span class="boring">
-</span>fn main() -&gt; Result&lt;(), XlsxError&gt; {
-<span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span>    let mut workbook = Workbook::new();
+<span class="boring">
 </span><span class="boring">    let _worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
@@ -171,8 +171,8 @@ via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates creating a simple workbook, with one
 </span><span class="boring">//! unused worksheet.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
@@ -203,9 +203,9 @@ save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
 </span><span class="boring">
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
-</span>
-<span class="boring">    let buf = workbook.save_to_buffer()?;
 </span><span class="boring">
+</span>    let buf = workbook.save_to_buffer()?;
+<span class="boring">
 </span><span class="boring">    println!(&quot;File size: {}&quot;, buf.len());
 </span><span class="boring">
 </span><span class="boring">    Ok(())

@@ -157,8 +157,8 @@ made the &quot;Total&quot; string bold.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 2 of a tutorial.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -220,13 +220,13 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    // Add a bold format to use to highlight cells.
+</span><span class="boring">
+</span>    // Add a bold format to use to highlight cells.
     let bold = Format::new().set_bold();
 
     // Add a number format for cells with money values.
-<span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
-</span><span class="boring">
+    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">

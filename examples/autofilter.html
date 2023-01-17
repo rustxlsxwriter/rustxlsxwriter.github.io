@@ -165,8 +165,8 @@ upcoming version.</p>
 </span><span class="boring">//! Note, adding filter criteria isn't currently supported. That will be added
 </span><span class="boring">//! in an upcoming version.
 </span><span class="boring">//!
-</span>
-use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -185,8 +185,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;autofilter.xlsx&quot;)?;
 
     Ok(())
-<span class="boring">}
-</span><span class="boring">
+}
+<span class="boring">
 </span><span class="boring">// Generate worksheet data to filter on.
 </span><span class="boring">pub fn populate_autofilter_data(worksheet: &amp;mut Worksheet) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.

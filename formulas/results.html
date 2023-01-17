@@ -169,11 +169,11 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    worksheet
-        .write_formula_only(0, 0, &quot;1+1&quot;)?
-<span class="boring">        .set_formula_result(0, 0, &quot;2&quot;);
 </span><span class="boring">
+</span>    worksheet
+        .write_formula_only(0, 0, &quot;1+1&quot;)?
+        .set_formula_result(0, 0, &quot;2&quot;);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -199,9 +199,9 @@ an empty string:</p>
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-<span class="boring">    worksheet.set_formula_result_default(&quot;&quot;);
 </span><span class="boring">
+</span>    worksheet.set_formula_result_default(&quot;&quot;);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())

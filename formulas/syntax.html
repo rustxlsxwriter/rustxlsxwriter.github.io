@@ -160,16 +160,16 @@ comma (not semi-colon).</p>
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    // OK.
+</span><span class="boring">
+</span>    // OK.
     worksheet.write_formula_only(0, 0, &quot;=SUM(1, 2, 3)&quot;)?;
 
     // Semi-colon separator. Causes Excel error on file opening.
     worksheet.write_formula_only(1, 0, &quot;=SUM(1; 2; 3)&quot;)?;
 
     // French function name. Causes Excel error on file opening.
-<span class="boring">    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
-</span><span class="boring">
+    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())

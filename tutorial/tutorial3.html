@@ -155,14 +155,14 @@
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    // Some sample data we want to write to a spreadsheet.
-    let expenses = vec![
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
-<span class="boring">    ];
-</span><span class="boring">
+    ];
+<span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
@@ -219,8 +219,8 @@ made that column a little wider to accommodate the dates.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
-</span>
-use chrono::NaiveDate;
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -312,9 +312,9 @@ input data and then format it, in Excel, with a number format.</p>
 </span><span class="boring">    // Add a number format for cells with money values.
 </span><span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
 </span><span class="boring">
-</span>    // Add a number format for cells with dates.
-<span class="boring">    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
-</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with dates.
+</span>    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">

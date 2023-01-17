@@ -192,8 +192,8 @@ rust_xlsxwriter = &quot;0.23.0&quot;
 </span><span class="boring">
 </span><span class="boring">//! Create a simple Hello World style Excel spreadsheet using the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -235,14 +235,14 @@ some monthly expenses like the following:</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    // Some sample data we want to write to a spreadsheet.
-    let expenses = vec![
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
-<span class="boring">    ];
-</span><span class="boring">
+    ];
+<span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
@@ -299,8 +299,8 @@ program like the following:</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -349,9 +349,9 @@ apply to any rust_xlsxwriter program.</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span>    // Create a new Excel file object.
-<span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file object.
+</span>    let mut workbook = Workbook::new();
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
@@ -393,9 +393,9 @@ existing files.</p>
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
-</span>    // Add a worksheet to the workbook.
-<span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span>    let worksheet = workbook.add_worksheet();
+<span class="boring">
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
@@ -438,13 +438,13 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    // Iterate over the data and write it out row by row.
-</span>    let mut row = 0;
-    for expense in expenses.iter() {
+</span><span class="boring">    let mut row = 0;
+</span>    for expense in expenses.iter() {
         worksheet.write_string_only(row, 0, expense.0)?;
         worksheet.write_number_only(row, 1, expense.1)?;
         row += 1;
-<span class="boring">    }
-</span><span class="boring">
+    }
+<span class="boring">
 </span><span class="boring">    // Write a total using a formula.
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
@@ -488,9 +488,9 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span>    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-<span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span>    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
@@ -530,9 +530,9 @@ which take a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span>    // Save the file to disk.
-<span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span>    workbook.save(&quot;tutorial1.xlsx&quot;)?;
+<span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
 </span></code></pre>
@@ -555,8 +555,8 @@ made the &quot;Total&quot; string bold.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 2 of a tutorial.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -618,13 +618,13 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    // Add a bold format to use to highlight cells.
+</span><span class="boring">
+</span>    // Add a bold format to use to highlight cells.
     let bold = Format::new().set_bold();
 
     // Add a number format for cells with money values.
-<span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
-</span><span class="boring">
+    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
@@ -666,14 +666,14 @@ can write data and formatting together.</p>
 </span><span class="boring">use rust_xlsxwriter::{Format, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    // Some sample data we want to write to a spreadsheet.
-    let expenses = vec![
+</span><span class="boring">    // Some sample data we want to write to a spreadsheet.
+</span>    let expenses = vec![
         (&quot;Rent&quot;, 2000, &quot;2022-09-01&quot;),
         (&quot;Gas&quot;, 200, &quot;2022-09-05&quot;),
         (&quot;Food&quot;, 500, &quot;2022-09-21&quot;),
         (&quot;Gym&quot;, 100, &quot;2022-09-28&quot;),
-<span class="boring">    ];
-</span><span class="boring">
+    ];
+<span class="boring">
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
@@ -730,8 +730,8 @@ made that column a little wider to accommodate the dates.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 3 of a tutorial.
-</span>
-use chrono::NaiveDate;
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -823,9 +823,9 @@ input data and then format it, in Excel, with a number format.</p>
 </span><span class="boring">    // Add a number format for cells with money values.
 </span><span class="boring">    let money_format = Format::new().set_num_format(&quot;$#,##0&quot;);
 </span><span class="boring">
-</span>    // Add a number format for cells with dates.
-<span class="boring">    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
-</span><span class="boring">
+</span><span class="boring">    // Add a number format for cells with dates.
+</span>    let date_format = Format::new().set_num_format(&quot;d mmm yyyy&quot;);
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
@@ -870,8 +870,8 @@ starting point for creating a new Excel xlsx file.</p>
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates creating a simple workbook, with one
 </span><span class="boring">//! unused worksheet.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
@@ -897,9 +897,9 @@ via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">
 </span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
 </span><span class="boring">
-</span>fn main() -&gt; Result&lt;(), XlsxError&gt; {
-<span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span>    let mut workbook = Workbook::new();
+<span class="boring">
 </span><span class="boring">    let _worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
@@ -914,8 +914,8 @@ via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates creating a simple workbook, with one
 </span><span class="boring">//! unused worksheet.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
@@ -946,9 +946,9 @@ save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
 </span><span class="boring">
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
-</span>
-<span class="boring">    let buf = workbook.save_to_buffer()?;
 </span><span class="boring">
+</span>    let buf = workbook.save_to_buffer()?;
+<span class="boring">
 </span><span class="boring">    println!(&quot;File size: {}&quot;, buf.len());
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1059,8 +1059,8 @@ $ sum properties.xlsx
 </span><span class="boring">
 </span><span class="boring">//! A simple, getting started, example of some of the features of the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use chrono::NaiveDate;
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Image, Workbook, XlsxAlign, XlsxBorder, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -1150,8 +1150,8 @@ prior to calling this method.</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    // Start with a reference to worksheet1.
+</span><span class="boring">
+</span>    // Start with a reference to worksheet1.
     let mut worksheet1 = workbook.add_worksheet();
     worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
 
@@ -1166,8 +1166,8 @@ prior to calling this method.</p>
 
     // Stop using worksheet1 and move back to worksheet2.
     worksheet2 = workbook.worksheet_from_index(1)?;
-<span class="boring">    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
-</span><span class="boring">
+    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1185,8 +1185,8 @@ using the worksheet names:</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    // Start with a reference to worksheet1.
+</span><span class="boring">
+</span>    // Start with a reference to worksheet1.
     let mut worksheet1 = workbook.add_worksheet();
     let name1 = worksheet1.name(); // &quot;Sheet1&quot;
     worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
@@ -1203,8 +1203,8 @@ using the worksheet names:</p>
 
     // Stop using worksheet1 and move back to worksheet2.
     worksheet2 = workbook.worksheet_from_name(&amp;name2)?;
-<span class="boring">    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
-</span><span class="boring">
+    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1224,8 +1224,8 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    // Add three worksheets to the workbook.
+</span><span class="boring">
+</span>    // Add three worksheets to the workbook.
     let _worksheet1 = workbook.add_worksheet();
     let _worksheet2 = workbook.add_worksheet();
     let _worksheet3 = workbook.add_worksheet();
@@ -1234,8 +1234,8 @@ over all the worksheets in a workbook:</p>
     for worksheet in workbook.worksheets_mut() {
         worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
         worksheet.write_number_only(1, 0, 12345)?;
-<span class="boring">    }
-</span><span class="boring">
+    }
+<span class="boring">
 </span><span class="boring">    // If you are careful you can use standard slice operations.
 </span><span class="boring">    workbook.worksheets_mut().swap(0, 1);
 </span><span class="boring">
@@ -1268,9 +1268,9 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">        worksheet.write_number_only(1, 0, 12345)?;
 </span><span class="boring">    }
 </span><span class="boring">
-</span>    // If you are careful you can use standard slice operations.
-<span class="boring">    workbook.worksheets_mut().swap(0, 1);
-</span><span class="boring">
+</span><span class="boring">    // If you are careful you can use standard slice operations.
+</span>    workbook.worksheets_mut().swap(0, 1);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1298,8 +1298,8 @@ method:</p>
 </span><span class="boring">
 </span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxError};
 </span><span class="boring">
-</span>fn main() -&gt; Result&lt;(), XlsxError&gt; {
-    // Create a new workbook.
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span>    // Create a new workbook.
     let mut workbook = Workbook::new();
 
     // Create new worksheets.
@@ -1316,8 +1316,8 @@ method:</p>
 
     // Add the worksheets to the workbook.
     workbook.push_worksheet(worksheet1);
-<span class="boring">    workbook.push_worksheet(worksheet2);
-</span><span class="boring">
+    workbook.push_worksheet(worksheet2);
+<span class="boring">
 </span><span class="boring">    // Save the workbook.
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
@@ -1370,10 +1370,10 @@ necessary. To achieve this set the <code>height</code> to 0:</p>
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    // Set the printed output to fit 1 page wide and as long as necessary.
-<span class="boring">    worksheet.set_print_fit_to_pages(1, 0);
 </span><span class="boring">
+</span>    // Set the printed output to fit 1 page wide and as long as necessary.
+    worksheet.set_print_fit_to_pages(1, 0);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1558,12 +1558,12 @@ emulate this functionality.</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let _worksheet1 = workbook.add_worksheet(); // Defaults to Sheet1
+</span><span class="boring">
+</span>    let _worksheet1 = workbook.add_worksheet(); // Defaults to Sheet1
     let _worksheet2 = workbook.add_worksheet().set_name(&quot;Foglio2&quot;);
     let _worksheet3 = workbook.add_worksheet().set_name(&quot;Data&quot;);
-<span class="boring">    let _worksheet4 = workbook.add_worksheet(); // Defaults to Sheet4
-</span><span class="boring">
+    let _worksheet4 = workbook.add_worksheet(); // Defaults to Sheet4
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -1607,9 +1607,9 @@ the default is to have the first one active, like in Excel.</p>
 </span><span class="boring">    let worksheet1 = Worksheet::new();
 </span><span class="boring">    let worksheet3 = Worksheet::new();
 </span><span class="boring">    let mut worksheet2 = Worksheet::new();
-</span>
-<span class="boring">    worksheet2.set_active(true);
 </span><span class="boring">
+</span>    worksheet2.set_active(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -1640,8 +1640,8 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let mut worksheet1 = Worksheet::new();
+</span><span class="boring">
+</span>    let mut worksheet1 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
     let mut worksheet3 = Worksheet::new();
     let mut worksheet4 = Worksheet::new();
@@ -1651,8 +1651,8 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
     worksheet3.set_tab_color(XlsxColor::RGB(0xFF9900));
 
     // worksheet4 will have the default color.
-<span class="boring">    worksheet4.set_active(true);
-</span><span class="boring">
+    worksheet4.set_active(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -1680,13 +1680,13 @@ method:</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let worksheet1 = Worksheet::new();
+</span><span class="boring">
+</span>    let worksheet1 = Worksheet::new();
     let worksheet3 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
 
-<span class="boring">    worksheet2.set_hidden(true);
-</span><span class="boring">
+    worksheet2.set_hidden(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -1722,14 +1722,14 @@ also appear as selected.</p>
 </span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    let mut workbook = Workbook::new();
-
-    let worksheet1 = Worksheet::new();
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span>    let worksheet1 = Worksheet::new();
     let worksheet3 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
 
-<span class="boring">    worksheet2.set_selected(true);
-</span><span class="boring">
+    worksheet2.set_selected(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -1977,8 +1977,8 @@ borders, alignment and number formatting.</p>
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates some of the available formatting
 </span><span class="boring">//! properties.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxBorder, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2038,8 +2038,8 @@ together, for example:</p>
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates create a new format and setting the
 </span><span class="boring">//! properties.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2070,8 +2070,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates cloning a format and setting the
 </span><span class="boring">//! properties.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2185,9 +2185,9 @@ number with the Excel number format <code>&quot;$#,##0.00&quot;</code>.</p>
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates setting a currency format for a worksheet
 </span><span class="boring">//! cell. This example doesn't actually set a currency format, for that see the
-</span>//! followup example in doc_format_currency2.rs.
-
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">//! followup example in doc_format_currency2.rs.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2251,11 +2251,11 @@ example and rerun it we will get a number format in the Currency category:</p>
 </span><span class="boring">    // Add a worksheet.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Add a format.
-    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
+</span><span class="boring">    // Add a format.
+</span>    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
 
-<span class="boring">    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
-</span><span class="boring">
+    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;currency_format.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -2276,8 +2276,8 @@ a number format with a &quot;grouping/thousands&quot; separator and a &quot;deci
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates setting a number format that appears
 </span><span class="boring">//! differently in different locales.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2375,13 +2375,13 @@ associated column from 0-5. For example &quot;White, background 1&quot; in the t
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>    let worksheet = workbook.add_worksheet();
-
-    worksheet.write_formula_only(0, 0, &quot;=10*B1 + C1&quot;)?;
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    worksheet.write_formula_only(0, 0, &quot;=10*B1 + C1&quot;)?;
 
     worksheet.write_number_only(0, 1, 5)?;
-<span class="boring">    worksheet.write_number_only(0, 2, 1)?;
-</span><span class="boring">
+    worksheet.write_number_only(0, 2, 1)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -2419,11 +2419,11 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    worksheet
-        .write_formula_only(0, 0, &quot;1+1&quot;)?
-<span class="boring">        .set_formula_result(0, 0, &quot;2&quot;);
 </span><span class="boring">
+</span>    worksheet
+        .write_formula_only(0, 0, &quot;1+1&quot;)?
+        .set_formula_result(0, 0, &quot;2&quot;);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -2449,9 +2449,9 @@ an empty string:</p>
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-<span class="boring">    worksheet.set_formula_result_default(&quot;&quot;);
 </span><span class="boring">
+</span>    worksheet.set_formula_result_default(&quot;&quot;);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -2475,16 +2475,16 @@ comma (not semi-colon).</p>
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    // OK.
+</span><span class="boring">
+</span>    // OK.
     worksheet.write_formula_only(0, 0, &quot;=SUM(1, 2, 3)&quot;)?;
 
     // Semi-colon separator. Causes Excel error on file opening.
     worksheet.write_formula_only(1, 0, &quot;=SUM(1; 2; 3)&quot;)?;
 
     // French function name. Causes Excel error on file opening.
-<span class="boring">    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
-</span><span class="boring">
+    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -2542,9 +2542,9 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // Example of using the FILTER() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
-</span>
-<span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 </span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
 </span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
 </span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
@@ -2843,9 +2843,9 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // Example of using the FILTER() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
-</span>
-<span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 </span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
 </span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
 </span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
@@ -3344,9 +3344,9 @@ following formula:</p>
 </span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
-</span>
-<span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 </span><span class="boring">
+</span>    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the to work on.
 </span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 </span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
@@ -3438,8 +3438,8 @@ shown below:</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of using the new Excel LAMBDA() function with the rust_xlsxwriter
 </span><span class="boring">//! library.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -3506,9 +3506,9 @@ section below.</p>
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function without prefix. This gives an Excel error.
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function without prefix. This gives an Excel error.
+</span>    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
@@ -3536,9 +3536,9 @@ section below.</p>
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function with explicit prefix.
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=_xlfn.STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function with explicit prefix.
+</span>    worksheet.write_formula_only(0, 0, &quot;=_xlfn.STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
@@ -3568,10 +3568,10 @@ have <code>rust_xlsxwriter</code> automatically handle future functions for you:
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function and automatically add the required prefix.
-    worksheet.use_future_functions(true);
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function and automatically add the required prefix.
+</span>    worksheet.use_future_functions(true);
+    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
@@ -3809,8 +3809,8 @@ rust_xlsxwriter library.</p>
 </span><span class="boring">
 </span><span class="boring">//! Create a simple Hello World style Excel spreadsheet using the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -3844,8 +3844,8 @@ dates.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple, getting started, example of some of the features of the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use chrono::NaiveDate;
+</span><span class="boring">
+</span>use chrono::NaiveDate;
 use rust_xlsxwriter::{Format, Image, Workbook, XlsxAlign, XlsxBorder, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
@@ -3917,8 +3917,8 @@ sections of the Excel &quot;Format Cells&quot; dialog.</p>
 </span><span class="boring">//! An example of the various cell formatting options that are available in the
 </span><span class="boring">//! rust_xlsxwriter library. These are laid out on worksheets that correspond to
 </span><span class="boring">//! the sections of the Excel &quot;Format Cells&quot; dialog.
-</span>
-use rust_xlsxwriter::*;
+</span><span class="boring">
+</span>use rust_xlsxwriter::*;
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4175,8 +4175,8 @@ types, such as number, as shown below.</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of creating merged ranges in a worksheet using the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxBorder, XlsxColor, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxBorder, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4238,8 +4238,8 @@ upcoming version.</p>
 </span><span class="boring">//! Note, adding filter criteria isn't currently supported. That will be added
 </span><span class="boring">//! in an upcoming version.
 </span><span class="boring">//!
-</span>
-use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4258,8 +4258,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;autofilter.xlsx&quot;)?;
 
     Ok(())
-<span class="boring">}
-</span><span class="boring">
+}
+<span class="boring">
 </span><span class="boring">// Generate worksheet data to filter on.
 </span><span class="boring">pub fn populate_autofilter_data(worksheet: &amp;mut Worksheet) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
@@ -4353,8 +4353,8 @@ worksheet column widths based on the data in the column.</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of using simulated autofit to automatically adjust the width of
 </span><span class="boring">//! worksheet columns based on the data in the cells.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4398,8 +4398,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">
 </span><span class="boring">//! An example of using the rust_xlsxwriter library to write &quot;rich&quot; multi-format
 </span><span class="boring">//! strings in worksheet cells.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxColor, XlsxError, XlsxScript};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxColor, XlsxError, XlsxScript};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4477,8 +4477,8 @@ library.</p>
 </span><span class="boring">
 </span><span class="boring">//! A demonstration of the RGB and Theme colors palettes available in the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::*;
+</span><span class="boring">
+</span>use rust_xlsxwriter::*;
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4614,8 +4614,8 @@ the workbook.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple, getting started, example of some of the features of the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError, XlsxUnderline};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError, XlsxUnderline};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4668,8 +4668,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">//! An example of inserting images into a worksheet using rust_xlsxwriter.
 </span><span class="boring">
 </span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError};
-</span>
-fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">
+</span>fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
     let mut workbook = Workbook::new();
 
@@ -4715,8 +4715,8 @@ right-to-left, as required by some middle eastern versions of Excel.</p>
 </span><span class="boring">//! Example of using rust_xlsxwriter to create a workbook with the default
 </span><span class="boring">//! worksheet and cell text direction changed from left-to-right to
 </span><span class="boring">//! right-to-left, as required by some middle eastern versions of Excel.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4772,8 +4772,8 @@ Global/Workbook &quot;Sales&quot; variable name and a Local/Worksheet version.</
 </span><span class="boring">//!
 </span><span class="boring">//! This functionality is used to define user friendly variable names to
 </span><span class="boring">//! represent a value, a single cell,  or a range of cells in a workbook.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -4823,8 +4823,8 @@ functions.</p>
 </span><span class="boring">//! An example of how to use the rust_xlsxwriter library to write formulas and
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
-</span>//! functions.
-use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">//! functions.
+</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -5102,8 +5102,8 @@ library.</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of using the new Excel LAMBDA() function with the rust_xlsxwriter
 </span><span class="boring">//! library.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -5167,9 +5167,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
 </span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
-</span>
-<span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
-</span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
+</span><span class="boring">
+</span>    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
+<span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // This is an example of some of the header/footer variables.
@@ -5268,9 +5268,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    worksheet2.set_view_page_layout();
 </span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
-</span>    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
-<span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
-</span><span class="boring">    worksheet2.set_footer(&quot;&amp;LCurrent date: &amp;D&amp;RCurrent time: &amp;T&quot;);
+</span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
+</span>    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
+<span class="boring">    worksheet2.set_footer(&quot;&amp;LCurrent date: &amp;D&amp;RCurrent time: &amp;T&quot;);
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // This is an example of setting a header image.
@@ -5372,10 +5372,10 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
-</span>
-    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-<span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
 </span><span class="boring">
+</span>    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
+    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+<span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
 </span><span class="boring">
@@ -5475,9 +5475,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
 </span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
-</span>
-<span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
-</span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
+</span><span class="boring">
+</span>    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
+<span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of line wrapping.
@@ -5575,9 +5575,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
 </span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
-</span>
-<span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
+</span>    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
+<span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of inserting a literal ampersand &amp;.
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -5674,9 +5674,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
 </span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
-</span>
-<span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
+</span>    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -5690,8 +5690,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -5784,8 +5784,8 @@ rust_xlsxwriter library.</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of setting workbook document properties for a file created using
 </span><span class="boring">//! the rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Properties, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Properties, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
@@ -5825,9 +5825,9 @@ documentation</a>.</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of adding a worksheet watermark image using the rust_xlsxwriter
 </span><span class="boring">//! library. This is based on the method of putting an image in the worksheet
-</span>//! header as suggested in the Microsoft documentation.
-
-use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">//! header as suggested in the Microsoft documentation.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -5865,8 +5865,8 @@ when a user scrolls.</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple example of setting some &quot;freeze&quot; panes in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxBorder, XlsxColor, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxBorder, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -5996,8 +5996,8 @@ protection.</p>
 </span><span class="boring">
 </span><span class="boring">//! Example of cell locking and formula hiding in an Excel worksheet
 </span><span class="boring">//! rust_xlsxwriter library.
-</span>
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -6069,8 +6069,8 @@ results, however these results are indicative of the relative performance.</p>
 </span><span class="boring">
 </span><span class="boring">//! Simple performance test for rust_xlsxwriter.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Workbook, XlsxError};
-
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span>
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
     let worksheet = workbook.add_worksheet();

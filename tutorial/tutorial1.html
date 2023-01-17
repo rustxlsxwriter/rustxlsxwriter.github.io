@@ -151,8 +151,8 @@ program like the following:</p>
 </span><span class="boring">
 </span><span class="boring">//! A simple program to write some data to an Excel spreadsheet using
 </span><span class="boring">//! rust_xlsxwriter. Part 1 of a tutorial.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Some sample data we want to write to a spreadsheet.
@@ -201,9 +201,9 @@ apply to any rust_xlsxwriter program.</p>
 </span><span class="boring">    // Some sample data we want to write to a spreadsheet.
 </span><span class="boring">    let expenses = vec![(&quot;Rent&quot;, 2000), (&quot;Gas&quot;, 200), (&quot;Food&quot;, 500), (&quot;Gym&quot;, 100)];
 </span><span class="boring">
-</span>    // Create a new Excel file object.
-<span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">
+</span><span class="boring">    // Create a new Excel file object.
+</span>    let mut workbook = Workbook::new();
+<span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
@@ -245,9 +245,9 @@ existing files.</p>
 </span><span class="boring">    // Create a new Excel file object.
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
-</span>    // Add a worksheet to the workbook.
-<span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span>    let worksheet = workbook.add_worksheet();
+<span class="boring">
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
@@ -290,13 +290,13 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    // Iterate over the data and write it out row by row.
-</span>    let mut row = 0;
-    for expense in expenses.iter() {
+</span><span class="boring">    let mut row = 0;
+</span>    for expense in expenses.iter() {
         worksheet.write_string_only(row, 0, expense.0)?;
         worksheet.write_number_only(row, 1, expense.1)?;
         row += 1;
-<span class="boring">    }
-</span><span class="boring">
+    }
+<span class="boring">
 </span><span class="boring">    // Write a total using a formula.
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
@@ -340,9 +340,9 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span>    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-<span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
+</span>    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
@@ -382,9 +382,9 @@ which take a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code
 </span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
 </span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
-</span>    // Save the file to disk.
-<span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span>    workbook.save(&quot;tutorial1.xlsx&quot;)?;
+<span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
 </span></code></pre>

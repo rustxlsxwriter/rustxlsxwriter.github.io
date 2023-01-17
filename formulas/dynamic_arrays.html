@@ -191,9 +191,9 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // Example of using the FILTER() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
-</span>
-<span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 </span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
 </span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
 </span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
@@ -492,9 +492,9 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // Example of using the FILTER() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
-</span>
-<span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 </span><span class="boring">
+</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
 </span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
 </span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
@@ -993,9 +993,9 @@ following formula:</p>
 </span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
-</span>
-<span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 </span><span class="boring">
+</span>    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write the data the to work on.
 </span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 </span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
@@ -1087,8 +1087,8 @@ shown below:</p>
 </span><span class="boring">
 </span><span class="boring">//! An example of using the new Excel LAMBDA() function with the rust_xlsxwriter
 </span><span class="boring">//! library.
-</span>
-use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.

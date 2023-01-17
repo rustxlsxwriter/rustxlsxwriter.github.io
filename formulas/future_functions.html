@@ -164,9 +164,9 @@ section below.</p>
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function without prefix. This gives an Excel error.
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function without prefix. This gives an Excel error.
+</span>    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
@@ -194,9 +194,9 @@ section below.</p>
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function with explicit prefix.
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=_xlfn.STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function with explicit prefix.
+</span>    worksheet.write_formula_only(0, 0, &quot;=_xlfn.STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;
@@ -226,10 +226,10 @@ have <code>rust_xlsxwriter</code> automatically handle future functions for you:
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Write a future function and automatically add the required prefix.
-    worksheet.use_future_functions(true);
-<span class="boring">    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
-</span><span class="boring">
+</span><span class="boring">    // Write a future function and automatically add the required prefix.
+</span>    worksheet.use_future_functions(true);
+    worksheet.write_formula_only(0, 0, &quot;=STDEV.S(B1:B5)&quot;)?;
+<span class="boring">
 </span><span class="boring">    // Write some data for the function to operate on.
 </span><span class="boring">    worksheet.write_number_only(0, 1, 1.23)?;
 </span><span class="boring">    worksheet.write_number_only(1, 1, 1.03)?;

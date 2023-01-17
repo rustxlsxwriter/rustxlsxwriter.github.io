@@ -163,12 +163,12 @@ emulate this functionality.</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let _worksheet1 = workbook.add_worksheet(); // Defaults to Sheet1
+</span><span class="boring">
+</span>    let _worksheet1 = workbook.add_worksheet(); // Defaults to Sheet1
     let _worksheet2 = workbook.add_worksheet().set_name(&quot;Foglio2&quot;);
     let _worksheet3 = workbook.add_worksheet().set_name(&quot;Data&quot;);
-<span class="boring">    let _worksheet4 = workbook.add_worksheet(); // Defaults to Sheet4
-</span><span class="boring">
+    let _worksheet4 = workbook.add_worksheet(); // Defaults to Sheet4
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
@@ -212,9 +212,9 @@ the default is to have the first one active, like in Excel.</p>
 </span><span class="boring">    let worksheet1 = Worksheet::new();
 </span><span class="boring">    let worksheet3 = Worksheet::new();
 </span><span class="boring">    let mut worksheet2 = Worksheet::new();
-</span>
-<span class="boring">    worksheet2.set_active(true);
 </span><span class="boring">
+</span>    worksheet2.set_active(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -245,8 +245,8 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let mut worksheet1 = Worksheet::new();
+</span><span class="boring">
+</span>    let mut worksheet1 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
     let mut worksheet3 = Worksheet::new();
     let mut worksheet4 = Worksheet::new();
@@ -256,8 +256,8 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
     worksheet3.set_tab_color(XlsxColor::RGB(0xFF9900));
 
     // worksheet4 will have the default color.
-<span class="boring">    worksheet4.set_active(true);
-</span><span class="boring">
+    worksheet4.set_active(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -285,13 +285,13 @@ method:</p>
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
-</span>
-    let worksheet1 = Worksheet::new();
+</span><span class="boring">
+</span>    let worksheet1 = Worksheet::new();
     let worksheet3 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
 
-<span class="boring">    worksheet2.set_hidden(true);
-</span><span class="boring">
+    worksheet2.set_hidden(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);
@@ -327,14 +327,14 @@ also appear as selected.</p>
 </span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span>    let mut workbook = Workbook::new();
-
-    let worksheet1 = Worksheet::new();
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span>    let worksheet1 = Worksheet::new();
     let worksheet3 = Worksheet::new();
     let mut worksheet2 = Worksheet::new();
 
-<span class="boring">    worksheet2.set_selected(true);
-</span><span class="boring">
+    worksheet2.set_selected(true);
+<span class="boring">
 </span><span class="boring">    workbook.push_worksheet(worksheet1);
 </span><span class="boring">    workbook.push_worksheet(worksheet2);
 </span><span class="boring">    workbook.push_worksheet(worksheet3);

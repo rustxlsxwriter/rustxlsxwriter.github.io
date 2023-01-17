@@ -176,10 +176,10 @@ necessary. To achieve this set the <code>height</code> to 0:</p>
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span>
-    // Set the printed output to fit 1 page wide and as long as necessary.
-<span class="boring">    worksheet.set_print_fit_to_pages(1, 0);
 </span><span class="boring">
+</span>    // Set the printed output to fit 1 page wide and as long as necessary.
+    worksheet.set_print_fit_to_pages(1, 0);
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())

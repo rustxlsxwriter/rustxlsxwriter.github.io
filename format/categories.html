@@ -152,9 +152,9 @@ number with the Excel number format <code>&quot;$#,##0.00&quot;</code>.</p>
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates setting a currency format for a worksheet
 </span><span class="boring">//! cell. This example doesn't actually set a currency format, for that see the
-</span>//! followup example in doc_format_currency2.rs.
-
-use rust_xlsxwriter::{Format, Workbook, XlsxError};
+</span><span class="boring">//! followup example in doc_format_currency2.rs.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -218,11 +218,11 @@ example and rerun it we will get a number format in the Currency category:</p>
 </span><span class="boring">    // Add a worksheet.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    // Add a format.
-    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
+</span><span class="boring">    // Add a format.
+</span>    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
 
-<span class="boring">    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
-</span><span class="boring">
+    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+<span class="boring">
 </span><span class="boring">    workbook.save(&quot;currency_format.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
