@@ -9,7 +9,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -35,13 +34,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -57,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -69,7 +68,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -101,7 +100,7 @@
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -133,7 +132,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -183,7 +182,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.23.0&quot;
+rust_xlsxwriter = &quot;0.24.0&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -212,8 +211,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;hello.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>The run the application as follows:</p>
 <pre><code class="language-bash">cargo run
 </code></pre>
@@ -286,8 +284,7 @@ some monthly expenses like the following:</p>
 </span><span class="boring">    workbook.save(&quot;tutorial3.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>And convert it to a worksheet like this:</p>
 <p><img src="tutorial/../images/tutorial3.png" alt="Image of first tutorial 3" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-data-to-a-worksheet"><a class="header" href="#adding-data-to-a-worksheet">Adding data to a worksheet</a></h1>
@@ -328,8 +325,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;tutorial1.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>If we run this program we should get a spreadsheet that looks like this:</p>
 <p><img src="tutorial/../images/tutorial1.png" alt="Image of first tutorial 1" /></p>
 <p>This is a simple program but it demonstrates some of the steps that would
@@ -371,8 +367,7 @@ apply to any rust_xlsxwriter program.</p>
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><strong>Note</strong>, <code>rust_xlsxwriter</code> can only create new files. It cannot read or modify
 existing files.</p>
 <p>The workbook object is then used to add a new worksheet via the
@@ -412,8 +407,7 @@ existing files.</p>
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>The worksheet will have a standard Excel name, in this case &quot;Sheet1&quot;. You can
 specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_name"><code>worksheet.set_name()</code></a> method.</p>
 <p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string_only"><code>worksheet.write_string_only()</code></a> and
@@ -453,8 +447,7 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>The <code>_only</code> part of the method names refers to the fact that the data type is
 written without any formatting. We will see how to add formatting shortly.</p>
 <p>Throughout rust_xlsxwriter rows and columns are zero indexed. So, for example,
@@ -495,8 +488,7 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Finally, we save and close the Excel file via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save"><code>workbook.save()</code></a> method
 which take a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code>std::path</code></a> Path or filename string as an argument:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -534,8 +526,7 @@ which take a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code
 </span>    workbook.save(&quot;tutorial1.xlsx&quot;)?;
 <span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This will give us the spreadsheet shown in the image above.</p>
 <p>It is also possible to save to a byte vector using
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a>.</p>
@@ -594,8 +585,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;tutorial2.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>The main difference between this and the previous program is that we have added
 two <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html">Format</a> objects that we can use to format cells in the spreadsheet.</p>
 <p>Format objects represent all of the formatting properties that can be applied to
@@ -648,8 +638,7 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">    workbook.save(&quot;tutorial2.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>We can use these formats in worksheet methods that support formatting such as
 the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a> methods which
 can write data and formatting together.</p>
@@ -717,8 +706,7 @@ can write data and formatting together.</p>
 </span><span class="boring">    workbook.save(&quot;tutorial3.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>The corresponding spreadsheet will look like this:</p>
 <p><img src="tutorial/../images/tutorial3.png" alt="Image of first tutorial 3" /></p>
 <p>The differences here are that we have added a &quot;Date&quot; column with formatting and
@@ -786,8 +774,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;tutorial3.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Dates and times in Excel are floating point numbers that have a number format
 applied to display them in the correct format. In order to handle dates and
 times with <code>rust_xlsxwriter</code> we create them as <a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDateTime.html"><code>chrono::NaiveDateTime</code></a>,
@@ -857,8 +844,7 @@ input data and then format it, in Excel, with a number format.</p>
 </span><span class="boring">    workbook.save(&quot;tutorial3.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>The final addition to our program is the make the &quot;Date&quot; column wider for
 clarity using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> method.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-workbook-struct"><a class="header" href="#the-workbook-struct">The Workbook struct</a></h1>
@@ -881,8 +867,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;workbook.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p><img src="workbook/../../images/workbook_new.png" alt="Image of output from doc_workbook_new.rs" /></p>
 <p>For more details on the Workbook APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html"><code>Workbook</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-and-saving-an-xlsx-file"><a class="header" href="#creating-and-saving-an-xlsx-file">Creating and saving an xlsx file</a></h1>
@@ -905,8 +890,7 @@ via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Once you are finished writing data via a worksheet you can save it with the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save"><code>workbook.save()</code></a> method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -925,8 +909,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;workbook.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>This will you a simple output file like the following.</p>
 <p><img src="workbook/../../images/workbook_new.png" alt="Image of output from doc_workbook_new.rs" /></p>
 <p>The  <code>save()</code> method takes a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code>std::path</code></a> or path/filename string. You can also
@@ -952,8 +935,7 @@ save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
 </span><span class="boring">    println!(&quot;File size: {}&quot;, buf.len());
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This can be useful if you intend to stream the data.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="checksum-of-a-saved-file"><a class="header" href="#checksum-of-a-saved-file">Checksum of a saved file</a></h1>
 <p>A common issue that occurs with <code>rust_xlsxwriter</code>, but also with Excel, is that
@@ -979,8 +961,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;properties.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>If we run this several times, with a small delay, we will get different checksums as shown below:</p>
 <pre><code class="language-bash">$ cargo run --example doc_properties_checksum1
 
@@ -1034,8 +1015,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;properties.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Then we will get the same checksum for the same output every time:</p>
 <pre><code class="language-bash">$ cargo run --example doc_properties_checksum2
 
@@ -1116,8 +1096,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;demo.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>For more details on the Worksheet APIs see the docs.rs docs for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-worksheets"><a class="header" href="#creating-worksheets">Creating worksheets</a></h1>
 <p>There are two way of creating a worksheet object with rust_xlsxwriter: via the
@@ -1171,8 +1150,7 @@ prior to calling this method.</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>You can also use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_name"><code>workbook.worksheet_from_name()</code></a> to do something similar
 using the worksheet names:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -1208,8 +1186,7 @@ using the worksheet names:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Additionally can use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheets_mut"><code>workbook.worksheets_mut()</code></a> to get a reference to the the
 vector that holds the worksheets. This can be used, for instance, to iterate
 over all the worksheets in a workbook:</p>
@@ -1242,8 +1219,7 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>If you are careful you can use standard <a href="https://doc.rust-lang.org/1.64.0/std/primitive.slice.html">slice</a> operations.</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -1274,8 +1250,7 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Combining the two previous examples would give an output file like the
 following:</p>
 <p><img src="worksheet/../images/workbook_worksheets_mut.png" alt="Image of first tutorial 1" /></p>
@@ -1322,8 +1297,7 @@ method:</p>
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <h2 id="using-add_worksheet-versus--worksheetnew"><a class="header" href="#using-add_worksheet-versus--worksheetnew">Using <code>add_worksheet()</code> versus  <code>Worksheet::new()</code></a></h2>
 <p>Since there are two ways of doing, effectively, the same thing you will probably
 wonder which is best.</p>
@@ -1377,8 +1351,7 @@ necessary. To achieve this set the <code>height</code> to 0:</p>
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <h2 id="page-setup---margins"><a class="header" href="#page-setup---margins">Page Setup - Margins</a></h2>
 <p>The page Setup &quot;Margins&quot; dialog looks like this:</p>
 <p><img src="worksheet/../images/page_setup02.png" alt="Image of Page Setup Dialog Margins section" /></p>
@@ -1452,53 +1425,43 @@ version is okay since <code>rust_xlsxwriter</code> will translate as required.</
 aligned to these areas by prefixing the text with the control characters <code>&amp;L</code>,
 <code>&amp;C</code> and <code>&amp;R</code>.</p>
 <p>For example:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LHello&quot;);</code></pre>
 <p><img src="worksheet/../images/header01.png" alt="Image of worksheet header" /></p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CHello&quot;);</code></pre>
 <p><img src="worksheet/../images/header02.png" alt="Image of worksheet header" /></p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;RHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;RHello&quot;);</code></pre>
 <p><img src="worksheet/../images/header03.png" alt="Image of worksheet header" /></p>
 <p>You can also have text in each of the alignment areas:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LCiao&amp;CBello&amp;RCielo&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LCiao&amp;CBello&amp;RCielo&quot;);</code></pre>
 <p><img src="worksheet/../images/header04.png" alt="Image of worksheet header" /></p>
 <p>The information control characters act as variables/templates that Excel will
 update/expand as the workbook or worksheet changes.</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CPage &amp;[Page] of &amp;[Pages]&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CPage &amp;[Page] of &amp;[Pages]&quot;);</code></pre>
 <p><img src="worksheet/../images/header05.png" alt="Image of worksheet header" /></p>
 <p>Times and dates are in the user's default format:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CUpdated at &amp;[Time]&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CUpdated at &amp;[Time]&quot;);</code></pre>
 <p><img src="worksheet/../images/header06.png" alt="Image of worksheet header" /></p>
 <p>To insert an image in use <code>&amp;[Picture]</code> or <code>&amp;G</code>. You will also need to use
 <code>set_header_image()</code> to set the corresponding image:</p>
 <pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;[Picture]&quot;);
 
 let image = Image::new(&quot;examples/watermark.png&quot;)?;
-worksheet.set_header_image(&amp;image, XlsxImagePosition::Center);
-</code></pre>
+worksheet.set_header_image(&amp;image, XlsxImagePosition::Center);</code></pre>
 <p><img src="worksheet/../images/header10.png" alt="Image of worksheet header" /></p>
 <p>To include a single literal ampersand <code>&amp;</code> in a header or footer you
 should use a double ampersand <code>&amp;&amp;</code>:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);</code></pre>
 <p><img src="worksheet/../images/header07.png" alt="Image of worksheet header" /></p>
 <p>You can specify the font size of a section of the text by prefixing it with the
 control character <code>&amp;n</code> where <code>n</code> is the font size:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;20Big Hello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;20Big Hello&quot;);</code></pre>
 <p><img src="worksheet/../images/header08.png" alt="Image of worksheet header" /></p>
 <p>You can specify the font of a section of the text by prefixing it with the
 control sequence <code>&amp;&quot;font,style&quot;</code> where <code>fontname</code> is a font name such as Windows
 font descriptions: &quot;Regular&quot;, &quot;Italic&quot;, &quot;Bold&quot; or &quot;Bold Italic&quot;: &quot;Courier New&quot;
 or &quot;Times New Roman&quot; and <code>style</code> is one of the standard Windows font
 descriptions like “Regular”, “Italic”, “Bold” or “Bold Italic”:</p>
-<pre><code class="language-rust">worksheet.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold Italic&quot;Hello&quot;#);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold Italic&quot;Hello&quot;#);</code></pre>
 <p><img src="worksheet/../images/header09.png" alt="Image of worksheet header" /></p>
 <p>It is possible to combine all of these features together to create complex
 headers and footers. If you set up a complex header in Excel you can transfer it
@@ -1519,14 +1482,14 @@ will not be written, and a warning will be output.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="autofitting-column-widths"><a class="header" href="#autofitting-column-widths">Autofitting column widths</a></h1>
 <p>Column widths in a <code>rust_xlsxwriter</code> worksheet can be adjusted automatically
 using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> method.</p>
-<p>There is no option available in the xlsx file format that <code>rust_xlsxwriter</code> can
-use to say &quot;autofit columns on loading&quot;. Auto-fitting of columns is something
-that Excel does at runtime when it has access to all of the worksheet
-information as well as the Windows functions for calculating display areas based
-on fonts and formatting.</p>
-<p>As such the autofit widths that are calculated by <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a>
-are based on simple heuristics. This isn't perfect but for most cases it should
-be sufficient and if not you can set your own widths, see below.</p>
+<p>There is no option in the xlsx file format that <code>rust_xlsxwriter</code> can be used to
+say &quot;autofit columns on loading&quot;. Auto-fitting of columns is something that
+Excel does at runtime when it has access to all of the worksheet information as
+well as the Windows functions for calculating display areas based on fonts and
+formatting.</p>
+<p>As such <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> simulates this behavior by calculating string
+widths using metrics taken from Excel. This isn't perfect but for most cases it
+should be sufficient and if not you can set your own widths, see below.</p>
 <p>The <code>worksheet.set_autofit()</code> method ignores columns that already have an
 explicit column width set via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> or
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width_pixels"><code>worksheet.set_column_width_pixels()</code></a>. You can use these methods if you wish
@@ -1567,8 +1530,7 @@ emulate this functionality.</p>
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Which gives the following output:</p>
 <p><img src="worksheet/../../images/worksheet_set_name.png" alt="Image of output from doc_worksheet_set_name.rs" /></p>
 <p>Excel applies various rules to worksheet names such as:</p>
@@ -1617,8 +1579,7 @@ the default is to have the first one active, like in Excel.</p>
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Which gives the following output:</p>
 <p><img src="worksheet/../../images/worksheet_set_active.png" alt="Image of output from doc_worksheet_set_active.rs" /></p>
 <p>If you have a lot of worksheets then they may not all fit on the screen at the
@@ -1661,8 +1622,7 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Which gives the following output:</p>
 <p><img src="worksheet/../../images/worksheet_set_tab_color.png" alt="Image of output from doc_worksheet_set_tab_color.rs" /></p>
 <h2 id="hiding-worksheets"><a class="header" href="#hiding-worksheets">Hiding worksheets</a></h2>
@@ -1694,8 +1654,7 @@ method:</p>
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Which gives the following output:</p>
 <p><img src="worksheet/../../images/worksheet_set_hidden.png" alt="Image of output from doc_worksheet_set_hidden.rs" /></p>
 <p>In Excel a hidden worksheet can not be activated or selected so
@@ -1737,8 +1696,7 @@ also appear as selected.</p>
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Which gives the following output. Note that Sheet 1 and Sheet2 are selected but
 Sheet3 isn't:</p>
 <p><img src="worksheet/../../images/worksheet_set_selected.png" alt="Image of output from doc_worksheet_set_selected.rs" /></p>
@@ -1791,8 +1749,7 @@ want modified.</p>
 </span><span class="boring">    workbook.save(&quot;worksheet_protection.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Here is a more complete example:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -1836,8 +1793,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;worksheet_protection.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>The key parts of this example are:</p>
 <ul>
 <li>In Excel all cells have a default &quot;locked&quot; format so once a worksheet is
@@ -1876,8 +1832,7 @@ level password using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xl
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This gives the following dialog when the user tries to unprotect the worksheet.</p>
 <p><img src="worksheet/../images/worksheet_protect_with_password.png" alt="Image of a worksheet with a password dialog" /></p>
 <p><strong>Note</strong>: Worksheet level passwords in Excel offer <strong>very weak protection</strong>.
@@ -1924,8 +1879,7 @@ method. For example:</p>
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This changes the allowed options to:</p>
 <p><img src="worksheet/../images/worksheet_protect_with_options2.png" alt="Excel worksheet protection options" /></p>
 <h2 id="workbook-protection"><a class="header" href="#workbook-protection">Workbook protection</a></h2>
@@ -1958,8 +1912,7 @@ use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.W
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This presents the user of the file with an option to open it in &quot;read-only&quot;
 mode. This means that any changes to the file can’t be saved back to the same
 file and must be saved to a new file.</p>
@@ -2024,8 +1977,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-and-using-a-format-object"><a class="header" href="#creating-and-using-a-format-object">Creating and using a Format object</a></h1>
 <p>Formats are created by calling the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.new"><code>Format::new()</code></a> method and properties as
 set using the various methods shown is this section of the document. Once
@@ -2059,8 +2011,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Output:</p>
 <p><img src="format/../../images/format_create.png" alt="Image of output from doc_format_create.rs" /></p>
 <p>Formats can be cloned in the usual way:</p>
@@ -2092,8 +2043,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Output:</p>
 <p><img src="format/../../images/format_clone.png" alt="Image of output from doc_format_clone.rs" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-defaults"><a class="header" href="#format-defaults">Format defaults</a></h1>
@@ -2126,8 +2076,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;formats.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Output showing that both strings have the same format:</p>
 <p><img src="format/../../images/format_default.png" alt="Image of output from doc_format_default.rs" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-methods"><a class="header" href="#format-methods">Format methods</a></h1>
@@ -2204,8 +2153,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;currency_format.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Which give the following output with the category displayed:</p>
 <p><img src="format/../../images/format_currency1.png" alt="Image of output from doc_format_currency1.rs" /></p>
 <p>The number category is shown as &quot;Number&quot; but it is also possible to have it
@@ -2259,8 +2207,7 @@ example and rerun it we will get a number format in the Currency category:</p>
 </span><span class="boring">    workbook.save(&quot;currency_format.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>That give us the following updated output. Note that the number category is
 now shown as Currency:</p>
 <p><img src="format/../../images/format_currency4.png" alt="Image of output from doc_format_currency2.rs" /></p>
@@ -2294,8 +2241,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;number_format.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>In the US locale (and some others) where the number &quot;grouping/thousands&quot;
 separator is <code>&quot;,&quot;</code> and the &quot;decimal&quot; point is <code>&quot;.&quot;</code> which would be shown in
 Excel as:</p>
@@ -2385,8 +2331,7 @@ associated column from 0-5. For example &quot;White, background 1&quot; in the t
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>The formula will then be displayed as expected in Excel:</p>
 <p><img src="formulas/../../images/working_with_formulas1.png" alt="Image of output from doc_working_with_formulas_intro.rs" /></p>
 <p>However, there are a few potential issues and differences that the user of
@@ -2427,8 +2372,7 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>One common spreadsheet application where the formula recalculation doesn't work
 is LibreOffice (see the following <a href="https://bugs.documentfoundation.org/show_bug.cgi?id=144819">issue report</a>). If you wish to force
 recalculation in LibreOffice you can use the
@@ -2455,8 +2399,7 @@ an empty string:</p>
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="non-us-excel-functions-and-syntax"><a class="header" href="#non-us-excel-functions-and-syntax">Non US Excel functions and syntax</a></h1>
 <p>Excel stores formulas in the format of the US English version, regardless of the
 language or locale of the end-user's version of Excel. Therefore all formula
@@ -2488,8 +2431,7 @@ comma (not semi-colon).</p>
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>If you have a non-English version of Excel you can use the following
 multi-lingual <a href="http://en.excel-translator.de/language/">Formula Translator</a> to
 help you convert the formula. It can also replace semi-colons with commas.</p>
@@ -2786,8 +2728,7 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This formula gives the results shown in the image below. The dynamic range
 here is &quot;F2:I5&quot; but it can vary based on the filter criteria.</p>
 <p><img src="formulas/../../images/dynamic_arrays02.png" alt="Image 2 of output from app_dynamic_arrays.rs" /></p>
@@ -2812,8 +2753,7 @@ function to get a static/CSE range and
 applies to. However, since the range is dynamic this generally won't be known in
 advance in which case you can specify the range with the same start and end
 cell. The following range is &quot;F2:F2&quot;:</p>
-<pre><code class="language-rust">    worksheet1.write_dynamic_array_formula_only(1, 5, 1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
-</code></pre>
+<pre><code class="language-rust">    worksheet1.write_dynamic_array_formula_only(1, 5, 1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;</code></pre>
 <p>As a syntactic shortcut you can use the <code>worksheet.write_dynamic_formula()</code>
 function which only requires the start cell:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -3087,8 +3027,7 @@ function which only requires the start cell:</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>For a wider and more general introduction to dynamic arrays see the following:
 <a href="https://exceljet.net/dynamic-array-formulas-in-excel">Dynamic array formulas in Excel</a>.</p>
 <h2 id="the-implicit-intersection-operator-"><a class="header" href="#the-implicit-intersection-operator-">The Implicit Intersection Operator &quot;@&quot;</a></h2>
@@ -3412,8 +3351,7 @@ following formula:</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <h2 id="the-excel-365-lambda-function"><a class="header" href="#the-excel-365-lambda-function">The Excel 365 LAMBDA() function</a></h2>
 <p>Recent versions of Excel 365 have introduced a powerful new function/feature
 called <code>LAMBDA()</code>. This is similar to closure expressions in Rust or [lambda
@@ -3474,8 +3412,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;lambda.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <p>Note, that the formula name must have a &quot;_xlfn.&quot; prefix and the parameters in
 the <code>LAMBDA()</code> function must have a &quot;_xlpm.&quot;  prefix for compatibility with how
 the formulas are stored in Excel. These prefixes won't show up in the formula,
@@ -3519,8 +3456,7 @@ section below.</p>
 </span><span class="boring">    workbook.save(&quot;future_function.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="formulas/../../images/working_with_formulas3.png" alt="Image of output from doc_working_with_formulas_future1.rs" /></p>
 <p>If the <code>_xlfn.</code> prefix is included you will get the correct result:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -3549,8 +3485,7 @@ section below.</p>
 </span><span class="boring">    workbook.save(&quot;future_function.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="formulas/../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
 <p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
 <p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.use_future_functions"><code>worksheet.use_future_functions()</code></a> function to
@@ -3582,8 +3517,7 @@ have <code>rust_xlsxwriter</code> automatically handle future functions for you:
 </span><span class="boring">    workbook.save(&quot;future_function.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>This will give the same correct result as the image above.</p>
 <h2 id="list-of-future-functions"><a class="header" href="#list-of-future-functions">List of Future Functions</a></h2>
 <p>The following list is taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX extensions documentation on future
@@ -3829,8 +3763,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;hello.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="feature-demo"><a class="header" href="#feature-demo">Feature demo</a></h1>
 <p>A simple getting started example of some of the features of the rust_xlsxwriter
 library. It shows some examples of writing different data types, including
@@ -3901,8 +3834,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;demo.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cell-formatting"><a class="header" href="#cell-formatting">Cell formatting</a></h1>
 <p>An example of the various cell formatting options that are available in the
 rust_xlsxwriter library. These are laid out on worksheets that correspond to the
@@ -4159,8 +4091,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;cell_formats.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="merging-cells"><a class="header" href="#merging-cells">Merging cells</a></h1>
 <p>This is an example of creating merged cells ranges in Excel using
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a>.</p>
@@ -4213,8 +4144,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;merge_range.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-autofilters"><a class="header" href="#adding-autofilters">Adding Autofilters</a></h1>
 <p>An example of how to create autofilters with the rust_xlsxwriter library..</p>
 <p>An autofilter is a way of adding drop down lists to the headers of a 2D range of
@@ -4339,8 +4269,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="autofitting-columns"><a class="header" href="#autofitting-columns">Autofitting columns</a></h1>
 <p>This is an example of using the simulated autofit option to automatically set
 worksheet column widths based on the data in the column.</p>
@@ -4385,8 +4314,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;autofit.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rich-strings"><a class="header" href="#rich-strings">Rich strings</a></h1>
 <p>An example of writing &quot;rich&quot; multi-format strings to worksheet cells.</p>
 <p><strong>Image of the output file:</strong></p>
@@ -4460,8 +4388,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;rich_strings.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format-colors"><a class="header" href="#format-colors">Format colors</a></h1>
 <p>This example create a sample palette of the the defined colors, some user
 defined RGB colors, and the theme palette color available in the rust_xlsxwriter
@@ -4598,8 +4525,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;colors.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hyperlinks"><a class="header" href="#hyperlinks">Hyperlinks</a></h1>
 <p>This is an example of a program to create demonstrate creating links in a
 worksheet using the rust_xlsxwriter library.</p>
@@ -4654,8 +4580,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;hyperlinks.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inserting-images"><a class="header" href="#inserting-images">Inserting images</a></h1>
 <p>This is an example of a program to insert images into a worksheet.</p>
 <p><strong>Image of the output file:</strong></p>
@@ -4699,8 +4624,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;images.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="right-to-left-display"><a class="header" href="#right-to-left-display">Right to left display</a></h1>
 <p>This is an example of using rust_xlsxwriter to create a workbook with the
 default worksheet and cell text direction changed from left-to-right to
@@ -4752,8 +4676,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;right_to_left.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="using-defined-names"><a class="header" href="#using-defined-names">Using defined names</a></h1>
 <p>Example of how to create defined names using the <code>rust_xlsxwriter</code> library.</p>
 <p>This functionality is used to define user friendly variable names to represent a
@@ -4804,8 +4727,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;defined_name.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-array-formulas"><a class="header" href="#dynamic-array-formulas">Dynamic array formulas</a></h1>
 <p>An example of how to use the rust_xlsxwriter library to write formulas and
 functions that create dynamic arrays. These functions are new to Excel
@@ -5087,8 +5009,7 @@ fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt
     }
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="excel-lambda-function"><a class="header" href="#excel-lambda-function">Excel LAMBDA() function</a></h1>
 <p>An example of using the new Excel <code>LAMBDA()</code> function with the rust_xlsxwriter
 library.</p>
@@ -5138,8 +5059,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;lambda.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="headers-and-footers"><a class="header" href="#headers-and-footers">Headers and Footers</a></h1>
 <p>This program shows several examples of how to set up worksheet headers and footers.</p>
 <p>Here are some examples from the code and the relevant Excel output.</p>
@@ -5230,8 +5150,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example1.png" alt="Image 1 of output from app_headers_footers.rs" /></p>
 <p>An example with variables:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5320,8 +5239,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example2.png" alt="Image 2 of output from app_headers_footers.rs" /></p>
 <p>An example of setting a header image:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5410,8 +5328,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example3.png" alt="Image 3 of output from app_headers_footers.rs" /></p>
 <p>An example of how to use more than one font:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5500,8 +5417,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example4.png" alt="Image 4 of output from app_headers_footers.rs" /></p>
 <p>An example of line wrapping:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5590,8 +5506,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example5.png" alt="Image 5 of output from app_headers_footers.rs" /></p>
 <p>An example of inserting a literal ampersand &amp;:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5680,8 +5595,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    workbook.save(&quot;headers_footers.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p><img src="examples/../../images/app_header_example6.png" alt="Image 6 of output from app_headers_footers.rs" /></p>
 <p>And here is the full code for the example:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -5770,8 +5684,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;headers_footers.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setting-document-properties"><a class="header" href="#setting-document-properties">Setting document properties</a></h1>
 <p>An example of setting workbook document properties for a file created using the
 rust_xlsxwriter library.</p>
@@ -5810,8 +5723,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;doc_properties.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-a-watermark"><a class="header" href="#adding-a-watermark">Adding a watermark</a></h1>
 <p>An example of adding a worksheet watermark image. This is based on the method of
 putting an image in the worksheet header as suggested in the <a href="https://support.microsoft.com/en-us/office/add-a-watermark-in-excel-a372182a-d733-484e-825c-18ddf3edf009">Microsoft
@@ -5849,8 +5761,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;watermark.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="freeze-panes"><a class="header" href="#freeze-panes">Freeze Panes</a></h1>
 <p>An example of setting some &quot;freeze&quot; panes in worksheets to split the worksheet
 into scrolling and non-scrolling areas. This is generally used to have one or
@@ -5982,8 +5893,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;panes.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="worksheet-protection-1"><a class="header" href="#worksheet-protection-1">Worksheet protection</a></h1>
 <p>Example of cell locking and formula hiding in an Excel worksheet using worksheet
 protection.</p>
@@ -6032,8 +5942,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;worksheet_protection.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="performance"><a class="header" href="#performance">Performance</a></h1>
 <p>The <code>rust_xlsxwriter</code> library has sister libraries written in C
 (<a href="https://libxlsxwriter.github.io">libxlsxwriter</a>), Python (<a href="https://xlsxwriter.readthedocs.io/index.html">XlsxWriter</a>) and Perl (<a href="https://metacpan.org/dist/Excel-Writer-XLSX/view/lib/Excel/Writer/XLSX.pm">Excel::Writer::XLSX</a>).</p>
@@ -6090,8 +5999,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     workbook.save(&quot;rust_perf_test.xlsx&quot;)?;
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <h2 id="c"><a class="header" href="#c">C</a></h2>
 <pre><code class="language-C">#include &quot;xlsxwriter.h&quot;
 
@@ -6138,8 +6046,17 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
-<h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
+<h2 id="0240---2023-01-18"><a class="header" href="#0240---2023-01-18">[0.24.0] - 2023-01-18</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
+<ul>
+<li>Added support for hiding rows and columns (to hide intermediate calculations)
+via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_hidden"><code>worksheet.set_column_hidden()</code></a> and<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>
+method. This is also a required precursor to adding autofilter conditions.</li>
+<li>Added the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxImagePosition.html">XlsxObjectMovement</a> enum to control how a worksheet object, such a
+an image, moves when the cells underneath it are moved, resized or deleted.</li>
+</ul>
+<h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <p>Added more page setup methods.</p>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_selection"><code>worksheet.set_selection()</code></a> method to select a cell or range of cells in a worksheet.</li>
@@ -6147,7 +6064,7 @@ workbook.close()
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_breaks"><code>worksheet.set_page_breaks()</code></a> method to add page breaks to a worksheet.</li>
 </ul>
 <h2 id="0220---2023-01-13"><a class="header" href="#0220---2023-01-13">[0.22.0] - 2023-01-13</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>
 <p>Added support for worksheet protection via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect"><code>worksheet.protect()</code></a>,
@@ -6160,7 +6077,7 @@ workbook.close()
 </li>
 </ul>
 <h2 id="0210---2023-01-09"><a class="header" href="#0210---2023-01-09">[0.21.0] - 2023-01-09</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>Added support for setting document metadata properties such as Author and
 Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Properties.html"><code>Properties</code></a> and
@@ -6172,7 +6089,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_date"><code>worksheet.write_date()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_time"><code>worksheet.write_time()</code></a> for consistency.</li>
 </ul>
 <h2 id="0200---2023-01-06"><a class="header" href="#0200---2023-01-06">[0.20.0] - 2023-01-06</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>Improved fitting algorithm for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a>. See also the
 <a href="https://rustxlsxwriter.github.io/examples/autofit.html">app_autofit</a> sample application.</li>
@@ -6183,7 +6100,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 for consistency with the other language versions of this library.</li>
 </ul>
 <h2 id="0190---2022-12-27"><a class="header" href="#0190---2022-12-27">[0.19.0] - 2022-12-27</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <ul>
 <li>
 <p>Added support for created defined variable names at a workbook and worksheet
@@ -6197,7 +6114,7 @@ an upcoming version. See also <a href="https://rustxlsxwriter.github.io/examples
 </li>
 </ul>
 <h2 id="0180---2022-12-19"><a class="header" href="#0180---2022-12-19">[0.18.0] - 2022-12-19</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>
 <p>Added support for &quot;rich&quot; strings with multiple font formats via
@@ -6213,7 +6130,7 @@ For example strings like &quot;This is <strong>bold</strong> and this is <em>ita
 Also fixes similar issues in some formatting code.</li>
 </ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
-<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
+<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in headers/footers via the
@@ -6222,13 +6139,13 @@ Also fixes similar issues in some formatting code.</li>
 </li>
 </ul>
 <h2 id="0160---2022-12-09"><a class="header" href="#0160---2022-12-09">[0.16.0] - 2022-12-09</a></h2>
-<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
+<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
 <ul>
 <li>Replicate the optimization used by Excel where it only stores one copy of a
 repeated/duplicate image in a workbook.</li>
 </ul>
 <h2 id="0150---2022-12-08"><a class="header" href="#0150---2022-12-08">[0.15.0] - 2022-12-08</a></h2>
-<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
+<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in buffers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Image.html#method.new_from_buffer"><code>image.new_from_buffer()</code></a>.</p>
@@ -6238,7 +6155,7 @@ repeated/duplicate image in a workbook.</li>
 </li>
 </ul>
 <h2 id="0140---2022-12-05"><a class="header" href="#0140---2022-12-05">[0.14.0] - 2022-12-05</a></h2>
-<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
+<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
 <ul>
 <li>
 <p>Added support for inserting images into worksheets with
@@ -6256,7 +6173,7 @@ in images and images in headers/footers.</p>
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>
 </ul>
 <h2 id="0130---2022-11-21"><a class="header" href="#0130---2022-11-21">[0.13.0] - 2022-11-21</a></h2>
-<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
+<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
 <ul>
 <li>
 <p>Added support for writing hyperlinks in worksheets via the following methods:</p>
@@ -6281,14 +6198,14 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </li>
 </ul>
 <h2 id="0120---2022-11-06"><a class="header" href="#0120---2022-11-06">[0.12.0] - 2022-11-06</a></h2>
-<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
+<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
 <li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
-<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
+<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
 <ul>
 <li>
 <p>Added several worksheet methods for working with worksheet tabs:</p>
@@ -6303,7 +6220,7 @@ Colors</a> in the user guide.</li>
 </li>
 </ul>
 <h2 id="0100---2022-11-03"><a class="header" href="#0100---2022-11-03">[0.10.0] - 2022-11-03</a></h2>
-<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
+<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
 <ul>
 <li>
 <p>Added a simulated <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method to automatically adjust
@@ -6326,7 +6243,7 @@ of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_x
 <li>There are now supporting <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> methods.</li>
 </ul>
-<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
+<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
 <ul>
 <li>
 <p>Added new methods to get references to worksheet objects used by the workbook:</p>
@@ -6344,7 +6261,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="080---2022-10-28"><a class="header" href="#080---2022-10-28">[0.8.0] - 2022-10-28</a></h2>
-<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
+<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
 <ul>
 <li>
 <p>Added support for creating files from paths via <code>workbook.new_from_path()</code>.</p>
@@ -6354,7 +6271,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
-<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
+<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>
 <p>Added an almost the complete set of Page Setup methods:</p>
@@ -6412,7 +6329,7 @@ with the borrow checker.</p>
 Issue #6</a>.</li>
 </ul>
 <h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
-<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
+<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -6426,7 +6343,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
+<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -6441,7 +6358,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
+<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> and
@@ -6454,7 +6371,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
+<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean()</code></a> method to support writing Excel boolean
 values.</li>
@@ -6465,12 +6382,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
+<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
+<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>
@@ -6731,22 +6648,22 @@ SOFTWARE.</p>
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });

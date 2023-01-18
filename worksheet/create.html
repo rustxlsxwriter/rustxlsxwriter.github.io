@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -34,13 +33,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,7 +55,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -68,7 +67,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -100,7 +99,7 @@
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -132,7 +131,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -194,8 +193,7 @@ prior to calling this method.</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>You can also use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_name"><code>workbook.worksheet_from_name()</code></a> to do something similar
 using the worksheet names:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -231,8 +229,7 @@ using the worksheet names:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Additionally can use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheets_mut"><code>workbook.worksheets_mut()</code></a> to get a reference to the the
 vector that holds the worksheets. This can be used, for instance, to iterate
 over all the worksheets in a workbook:</p>
@@ -265,8 +262,7 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>If you are careful you can use standard <a href="https://doc.rust-lang.org/1.64.0/std/primitive.slice.html">slice</a> operations.</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -297,8 +293,7 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Combining the two previous examples would give an output file like the
 following:</p>
 <p><img src="../images/workbook_worksheets_mut.png" alt="Image of first tutorial 1" /></p>
@@ -345,8 +340,7 @@ method:</p>
 </span><span class="boring">    workbook.save(&quot;worksheets.xlsx&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <h2 id="using-add_worksheet-versus--worksheetnew"><a class="header" href="#using-add_worksheet-versus--worksheetnew">Using <code>add_worksheet()</code> versus  <code>Worksheet::new()</code></a></h2>
 <p>Since there are two ways of doing, effectively, the same thing you will probably
 wonder which is best.</p>
@@ -392,18 +386,18 @@ natural to you then you should use it.</p>
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 

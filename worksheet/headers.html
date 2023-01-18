@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -34,13 +33,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,7 +55,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -68,7 +67,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -100,7 +99,7 @@
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -132,7 +131,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -178,53 +177,43 @@ version is okay since <code>rust_xlsxwriter</code> will translate as required.</
 aligned to these areas by prefixing the text with the control characters <code>&amp;L</code>,
 <code>&amp;C</code> and <code>&amp;R</code>.</p>
 <p>For example:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LHello&quot;);</code></pre>
 <p><img src="../images/header01.png" alt="Image of worksheet header" /></p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CHello&quot;);</code></pre>
 <p><img src="../images/header02.png" alt="Image of worksheet header" /></p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;RHello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;RHello&quot;);</code></pre>
 <p><img src="../images/header03.png" alt="Image of worksheet header" /></p>
 <p>You can also have text in each of the alignment areas:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LCiao&amp;CBello&amp;RCielo&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;LCiao&amp;CBello&amp;RCielo&quot;);</code></pre>
 <p><img src="../images/header04.png" alt="Image of worksheet header" /></p>
 <p>The information control characters act as variables/templates that Excel will
 update/expand as the workbook or worksheet changes.</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CPage &amp;[Page] of &amp;[Pages]&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CPage &amp;[Page] of &amp;[Pages]&quot;);</code></pre>
 <p><img src="../images/header05.png" alt="Image of worksheet header" /></p>
 <p>Times and dates are in the user's default format:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CUpdated at &amp;[Time]&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CUpdated at &amp;[Time]&quot;);</code></pre>
 <p><img src="../images/header06.png" alt="Image of worksheet header" /></p>
 <p>To insert an image in use <code>&amp;[Picture]</code> or <code>&amp;G</code>. You will also need to use
 <code>set_header_image()</code> to set the corresponding image:</p>
 <pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;[Picture]&quot;);
 
 let image = Image::new(&quot;examples/watermark.png&quot;)?;
-worksheet.set_header_image(&amp;image, XlsxImagePosition::Center);
-</code></pre>
+worksheet.set_header_image(&amp;image, XlsxImagePosition::Center);</code></pre>
 <p><img src="../images/header10.png" alt="Image of worksheet header" /></p>
 <p>To include a single literal ampersand <code>&amp;</code> in a header or footer you
 should use a double ampersand <code>&amp;&amp;</code>:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);</code></pre>
 <p><img src="../images/header07.png" alt="Image of worksheet header" /></p>
 <p>You can specify the font size of a section of the text by prefixing it with the
 control character <code>&amp;n</code> where <code>n</code> is the font size:</p>
-<pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;20Big Hello&quot;);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(&quot;&amp;C&amp;20Big Hello&quot;);</code></pre>
 <p><img src="../images/header08.png" alt="Image of worksheet header" /></p>
 <p>You can specify the font of a section of the text by prefixing it with the
 control sequence <code>&amp;&quot;font,style&quot;</code> where <code>fontname</code> is a font name such as Windows
 font descriptions: &quot;Regular&quot;, &quot;Italic&quot;, &quot;Bold&quot; or &quot;Bold Italic&quot;: &quot;Courier New&quot;
 or &quot;Times New Roman&quot; and <code>style</code> is one of the standard Windows font
 descriptions like “Regular”, “Italic”, “Bold” or “Bold Italic”:</p>
-<pre><code class="language-rust">worksheet.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold Italic&quot;Hello&quot;#);
-</code></pre>
+<pre><code class="language-rust">worksheet.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold Italic&quot;Hello&quot;#);</code></pre>
 <p><img src="../images/header09.png" alt="Image of worksheet header" /></p>
 <p>It is possible to combine all of these features together to create complex
 headers and footers. If you set up a complex header in Excel you can transfer it
@@ -275,18 +264,18 @@ will not be written, and a warning will be output.</p>
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
