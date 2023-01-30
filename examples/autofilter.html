@@ -215,7 +215,7 @@ upcoming version.</p>
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 4. Add an autofilter with a list filter condition with blanks.
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -225,10 +225,8 @@ upcoming version.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; or blanks.
-</span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_blanks_filter();
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -283,7 +281,7 @@ upcoming version.</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 8. Add an autofilter for non blanks. This is done using a custom filter.
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -292,6 +290,17 @@ upcoming version.</p>
 </span><span class="boring">
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
 </span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
 </span><span class="boring">    let filter_condition =

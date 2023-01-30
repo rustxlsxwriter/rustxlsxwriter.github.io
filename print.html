@@ -3709,6 +3709,2363 @@ can then examine the XML in the unzipped file.</p>
             &lt;f&gt;SUM(1, 2, 3)&lt;/f&gt;
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-autofilters"><a class="header" href="#working-with-autofilters">Working with Autofilters</a></h1>
+<p>An autofilter is a way of adding drop down lists to the headers of a 2D range of
+worksheet data. This allows users to filter the data based on simple criteria so
+that some data is shown and some is hidden.</p>
+<p><img src="formulas/../../images/app_autofilter1.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>In rust_xlsxwriter this is set using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span>    worksheet.autofilter(0, 0, 50, 3)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<h2 id="filter-types"><a class="header" href="#filter-types">Filter types</a></h2>
+<p>Excel supports two main types of filter conditions. The first, and most common,
+is a list filter where the user selects the items to filter from a list of all
+the values in the the column range:</p>
+<p><img src="formulas/../../images/autofilter_list.png" alt="Excel autofilter dialog" /></p>
+<p>The other main type of filter is a custom filter where the user can specify 1 or
+2 conditions like &quot;&gt;= 4000&quot; and &quot;&lt;= 6000&quot;:</p>
+<p><img src="formulas/../../images/autofilter_custom.png" alt="Excel autofilter dialog" /></p>
+<p>In Excel these are mutually exclusive and you will need to choose one or the
+other depending on your needs.</p>
+<p>In rust_xlsxwriter you can set these filters using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html"><code>FilterCondition</code></a> struct and
+the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_list_filter"><code>FilterCondition.add_list_filter()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_custom_filter"><code>FilterCondition.add_custom_filter()</code></a> methods. Some examples of these are shown in the next section.</p>
+<h2 id="filter-examples"><a class="header" href="#filter-examples">Filter examples</a></h2>
+<p>Using the autofilter data and range shown above we will look at some examples of
+setting filters to highlight certain rows.</p>
+<p>The first example is a list filter to show only rows that are in the &quot;East&quot;
+region in the first column:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span>    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+    worksheet.filter_column(0, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output. Note that the filtered column shows a funnel symbol as part of
+the dropdown arrow and the non matching rows are filtered out:</p>
+<p><img src="formulas/../../images/app_autofilter2.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>Multiple list conditions can be set by repeating <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_list_filter"><code>FilterCondition.add_list_filter()</code></a>:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span>    let filter_condition = FilterCondition::new()
+        .add_list_filter(&quot;East&quot;)
+        .add_list_filter(&quot;West&quot;)
+        .add_list_filter(&quot;South&quot;);
+    worksheet.filter_column(0, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output:</p>
+<p><img src="formulas/../../images/app_autofilter3.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>If the data contains blanks you can filter those cells as part of a list filter
+or on their own:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span>    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+    worksheet.filter_column(0, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output:</p>
+<p><img src="formulas/../../images/app_autofilter4.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>Filters can be added to more than one autofilter column to show specific data
+only:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span>    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+    worksheet.filter_column(0, &amp;filter_condition1)?;
+
+    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+    worksheet.filter_column(3, &amp;filter_condition2)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output, note the filters on columns A and D:</p>
+<p><img src="formulas/../../images/app_autofilter5.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>For finer grained control of the filtered data Excel allows 1 or 2 &quot;custom&quot;
+filters for conditions like <code>&gt;=</code> or <code>begins with</code> (for strings):</p>
+<p><img src="formulas/../../images/autofilter_custom_menu.png" alt="Excel autofilter dialog" /></p>
+<p>In rust_xlsxwriter you can set custom filters using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html"><code>FilterCondition</code></a>
+struct and the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_custom_filter"><code>FilterCondition.add_custom_filter()</code></a> method. The criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCriteria.html"><code>FilterCriteria</code></a> struct:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span>    let filter_condition =
+        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+    worksheet.filter_column(2, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output:</p>
+<p><img src="formulas/../../images/app_autofilter6.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>Using both custom filter conditions you can create conditions like &quot;between&quot;:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span>    let filter_condition = FilterCondition::new()
+        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+    worksheet.filter_column(2, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Example output:</p>
+<p><img src="formulas/../../images/app_autofilter7.png" alt="Image of output from app_autofilter.rs" /></p>
+<p>Note, Excel defaults to using an &quot;And&quot; operator for 2 custom filters but you can
+set an &quot;Or&quot; operator using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_custom_boolean_or"><code>FilterCondition.add_custom_boolean_or()</code></a>
+method.</p>
+<h2 id="filtering-non-blanks"><a class="header" href="#filtering-non-blanks">Filtering Non-blanks</a></h2>
+<p>Excel supports, and uses, two different way to filter on non-blanks. The first
+is to filter all the unique non-blank strings/numbers in the column.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span>    let filter_condition = FilterCondition::new()
+        .add_list_filter(&quot;East&quot;)
+        .add_list_filter(&quot;West&quot;)
+        .add_list_filter(&quot;North&quot;)
+        .add_list_filter(&quot;South&quot;);
+    worksheet.filter_column(0, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>However, if this is programmatically difficult to set up  you can add a simpler
+custom filter to get the same result:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! An example of how to create autofilters with the rust_xlsxwriter library.
+</span><span class="boring">//!
+</span><span class="boring">//! An autofilter is a way of adding drop down lists to the headers of a 2D
+</span><span class="boring">//! range of worksheet data. This allows users to filter the data based on
+</span><span class="boring">//! simple criteria so that some data is shown and some is hidden.
+</span><span class="boring">//!
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{FilterCondition, FilterCriteria, Format, Workbook, Worksheet, XlsxError};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // Create a new Excel file object.
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 1. Add an autofilter to a data range.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area, including the header/filter row.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 2. Add an autofilter with a list filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // column.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 3. Add an autofilter with a list filter condition on multiple items.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
+</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 5. Add an autofilter with list filters in multiple columns.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a filter condition for 2 separate columns.
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
+</span><span class="boring">
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 6. Add an autofilter with custom filter condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area for numbers greater than 8000.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter.
+</span><span class="boring">    let filter_condition =
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::GreaterThan, 8000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, false)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
+</span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
+</span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
+</span><span class="boring">    // -----------------------------------------------------------------------
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet  with some sample data to filter.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">    populate_autofilter_data(worksheet, true)?;
+</span><span class="boring">
+</span><span class="boring">    // Set the autofilter area.
+</span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
+</span><span class="boring">
+</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span>    let filter_condition =
+        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+    worksheet.filter_column(0, &amp;filter_condition)?;
+<span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">// Generate worksheet data to filter on.
+</span><span class="boring">pub fn populate_autofilter_data(
+</span><span class="boring">    worksheet: &amp;mut Worksheet,
+</span><span class="boring">    add_blanks: bool,
+</span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    // The sample data to add to the worksheet.
+</span><span class="boring">    let mut data = vec![
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
+</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
+</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
+</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
+</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Introduce blanks cells for some of the examples.
+</span><span class="boring">    if add_blanks {
+</span><span class="boring">        data[5].0 = &quot;&quot;;
+</span><span class="boring">        data[18].0 = &quot;&quot;;
+</span><span class="boring">        data[30].0 = &quot;&quot;;
+</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Widen the columns for clarity.
+</span><span class="boring">    worksheet.set_column_width(0, 12)?;
+</span><span class="boring">    worksheet.set_column_width(1, 12)?;
+</span><span class="boring">    worksheet.set_column_width(2, 12)?;
+</span><span class="boring">    worksheet.set_column_width(3, 12)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the header titles.
+</span><span class="boring">    let header_format = Format::new().set_bold();
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 1, &quot;Item&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 2, &quot;Volume&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">
+</span><span class="boring">    // Write the other worksheet data.
+</span><span class="boring">    for (row, data) in data.iter().enumerate() {
+</span><span class="boring">        let row = 1 + row as u32;
+</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_number_only(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_string_only(row, 3, data.3)?;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Excel uses both these methods depending on context. Example output from either
+method:</p>
+<p><img src="formulas/../../images/app_autofilter8.png" alt="Image of output from app_autofilter.rs" /></p>
+<h2 id="auto-hiding-filtered-rows"><a class="header" href="#auto-hiding-filtered-rows">Auto-hiding filtered rows</a></h2>
+<p>When you add a filter condition to an autofilter in Excel it automatically hides
+all the rows that don't match the filter. This is something that happens at
+runtime and isn't part of the file format.</p>
+<p>In order to simulate this behavior the rust_xlsxwriter library iterates through
+the worksheet data in the autofilter range and hides any rows that don't match.
+This is an additional feature that the other language ports of &quot;xlsxwriter&quot;
+don't have. In those versions the programmer has to iterate through the input
+data and hide the rows manually.</p>
+<p>In general the auto-hiding in rust_xlsxwriter works as expected, as can be seen
+in the examples above. However, there are some limitations such as:</p>
+<ul>
+<li>Only String, Number and Blank cells are currently handled.</li>
+<li>The return values from formulas are generally unknown and unhandled.</li>
+<li>Excel supports some simple regex matching of strings with <code>?</code> and <code>*</code> when
+used with <code>FilterCriteria::Contains</code> and <code>DoesNotContain</code>. These are not
+currently supported.</li>
+</ul>
+<p>If you have some filter criteria that isn't handled correctly you can add to the
+filtered rows by using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>.</p>
+<p>If the auto-hiding is incorrect you can also turn it off and handle it manually
+using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.filter_automatic_off"><code>worksheet.filter_automatic_off()</code></a> or <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_unhidden"><code>worksheet.set_row_unhidden()</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook-examples"><a class="header" href="#cookbook-examples">Cookbook Examples</a></h1>
 <p>This section contains sample applications that demonstrate different features of
 the rust_xlsxwriter library.</p>
@@ -4220,7 +6577,7 @@ upcoming version.</p>
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 4. Add an autofilter with a list filter condition with blanks.
+</span><span class="boring">    // 4. Add an autofilter with a list filter condition to match blank cells.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -4230,10 +6587,8 @@ upcoming version.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; or blanks.
-</span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_blanks_filter();
+</span><span class="boring">    // Set a filter condition to only show cells matching blanks.
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_blanks_filter();
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -4288,7 +6643,7 @@ upcoming version.</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 8. Add an autofilter for non blanks. This is done using a custom filter.
+</span><span class="boring">    // 8. Add an autofilter for non blanks.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -4297,6 +6652,17 @@ upcoming version.</p>
 </span><span class="boring">
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
+</span><span class="boring">
+</span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
+</span><span class="boring">    // strings/numbers in the column.
+</span><span class="boring">    let filter_condition = FilterCondition::new()
+</span><span class="boring">        .add_list_filter(&quot;East&quot;)
+</span><span class="boring">        .add_list_filter(&quot;West&quot;)
+</span><span class="boring">        .add_list_filter(&quot;North&quot;)
+</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
+</span><span class="boring">
+</span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
 </span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
 </span><span class="boring">    let filter_condition =
@@ -6199,7 +8565,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 <li>
 <p>Added support for worksheet protection via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect"><code>worksheet.protect()</code></a>,
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect_with_password"><code>worksheet.protect_with_password()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect_with_options"><code>worksheet.protect_with_options()</code></a>.</p>
-<p>See also the section on <a href="https://rustxlsxwriter.github.io/worksheet/create.html">Worksheet protection</a> in the user guide.</p>
+<p>See also the section on <a href="https://rustxlsxwriter.github.io/worksheet/protection.html">Worksheet protection</a> in the user guide.</p>
 </li>
 <li>
 <p>Add option to make the xlsx file read-only when opened by Excel via the
