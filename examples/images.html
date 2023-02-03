@@ -168,15 +168,15 @@
     let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 
     // Insert the image.
-    worksheet.write_string_only(0, 0, &quot;Insert an image in a cell:&quot;)?;
+    worksheet.write_string(0, 0, &quot;Insert an image in a cell:&quot;)?;
     worksheet.insert_image(0, 1, &amp;image)?;
 
     // Insert an image offset in the cell.
-    worksheet.write_string_only(7, 0, &quot;Insert an image with an offset:&quot;)?;
+    worksheet.write_string(7, 0, &quot;Insert an image with an offset:&quot;)?;
     worksheet.insert_image_with_offset(7, 1, &amp;image, 5, 5)?;
 
     // Insert an image with scaling.
-    worksheet.write_string_only(15, 0, &quot;Insert a scaled image:&quot;)?;
+    worksheet.write_string(15, 0, &quot;Insert a scaled image:&quot;)?;
     image.set_scale_width(0.75).set_scale_height(0.75);
     worksheet.insert_image(15, 1, &amp;image)?;
 

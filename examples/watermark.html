@@ -156,7 +156,7 @@ documentation</a>.</p>
 </span><span class="boring">//! library. This is based on the method of putting an image in the worksheet
 </span><span class="boring">//! header as suggested in the Microsoft documentation.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span>use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -169,7 +169,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Insert the watermark image in the header.
     worksheet.set_header(&quot;&amp;C&amp;[Picture]&quot;);
-    worksheet.set_header_image(&amp;image, XlsxImagePosition::Center)?;
+    worksheet.set_header_image(&amp;image, HeaderImagePosition::Center)?;
 
     // Set Page View mode so the watermark is visible.
     worksheet.set_view_page_layout();

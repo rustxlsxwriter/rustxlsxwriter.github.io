@@ -172,17 +172,17 @@ want modified.</p>
 </span>    worksheet.protect();
 <span class="boring">
 </span><span class="boring">    // Examples of cell locking and hiding.
-</span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
-</span><span class="boring">    worksheet.write_formula_only(0, 1, &quot;=1+2&quot;)?; // Locked by default.
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
+</span><span class="boring">    worksheet.write_formula(0, 1, &quot;=1+2&quot;)?; // Locked by default.
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_only(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
-</span><span class="boring">    worksheet.write_formula(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
+</span><span class="boring">    worksheet.write_string(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
+</span><span class="boring">    worksheet.write_formula_with_format(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_only(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
-</span><span class="boring">    worksheet.write_formula(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
+</span><span class="boring">    worksheet.write_string(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
+</span><span class="boring">    worksheet.write_formula_with_format(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_only(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
-</span><span class="boring">    worksheet.write_string_only(5, 0, &quot;to remove the worksheet protection.&quot;)?;
+</span><span class="boring">    worksheet.write_string(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
+</span><span class="boring">    worksheet.write_string(5, 0, &quot;to remove the worksheet protection.&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet.autofit();
 </span><span class="boring">
@@ -216,17 +216,17 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.protect();
 
     // Examples of cell locking and hiding.
-    worksheet.write_string_only(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
-    worksheet.write_formula_only(0, 1, &quot;=1+2&quot;)?; // Locked by default.
+    worksheet.write_string(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
+    worksheet.write_formula(0, 1, &quot;=1+2&quot;)?; // Locked by default.
 
-    worksheet.write_string_only(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
-    worksheet.write_formula(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
+    worksheet.write_string(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
+    worksheet.write_formula_with_format(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
 
-    worksheet.write_string_only(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
-    worksheet.write_formula(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
+    worksheet.write_string(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
+    worksheet.write_formula_with_format(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
 
-    worksheet.write_string_only(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
-    worksheet.write_string_only(5, 0, &quot;to remove the worksheet protection.&quot;)?;
+    worksheet.write_string(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
+    worksheet.write_string(5, 0, &quot;to remove the worksheet protection.&quot;)?;
 
     worksheet.autofit();
 
@@ -268,7 +268,7 @@ level password using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xl
 </span>    // Protect the worksheet from modification.
     worksheet.protect_with_password(&quot;abc123&quot;);
 <span class="boring">
-</span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Unlock the worksheet to edit the cell&quot;)?;
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Unlock the worksheet to edit the cell&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">
@@ -297,7 +297,7 @@ method. For example:</p>
 </span><span class="boring">//! protected in a protected worksheet. In this case we protect the overall
 </span><span class="boring">//! worksheet but allow columns and rows to be inserted.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{ProtectWorksheetOptions, Workbook, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{ProtectionOptions, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
@@ -306,16 +306,16 @@ method. For example:</p>
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span>    // Set some of the options and use the defaults for everything else.
-    let options = ProtectWorksheetOptions {
+    let options = ProtectionOptions {
         insert_columns: true,
         insert_rows: true,
-        ..ProtectWorksheetOptions::default()
+        ..ProtectionOptions::default()
     };
 
     // Set the protection options.
     worksheet.protect_with_options(&amp;options);
 <span class="boring">
-</span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Unlock the worksheet to edit the cell&quot;)?;
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Unlock the worksheet to edit the cell&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;worksheet.xlsx&quot;)?;
 </span><span class="boring">

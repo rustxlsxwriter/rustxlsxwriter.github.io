@@ -171,17 +171,17 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.protect();
 
     // Examples of cell locking and hiding.
-    worksheet.write_string_only(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
-    worksheet.write_formula_only(0, 1, &quot;=1+2&quot;)?; // Locked by default.
+    worksheet.write_string(0, 0, &quot;Cell B1 is locked. It cannot be edited.&quot;)?;
+    worksheet.write_formula(0, 1, &quot;=1+2&quot;)?; // Locked by default.
 
-    worksheet.write_string_only(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
-    worksheet.write_formula(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
+    worksheet.write_string(1, 0, &quot;Cell B2 is unlocked. It can be edited.&quot;)?;
+    worksheet.write_formula_with_format(1, 1, &quot;=1+2&quot;, &amp;unlocked)?;
 
-    worksheet.write_string_only(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
-    worksheet.write_formula(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
+    worksheet.write_string(2, 0, &quot;Cell B3 is hidden. The formula isn't visible.&quot;)?;
+    worksheet.write_formula_with_format(2, 1, &quot;=1+2&quot;, &amp;hidden)?;
 
-    worksheet.write_string_only(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
-    worksheet.write_string_only(5, 0, &quot;to remove the worksheet protection.&quot;)?;
+    worksheet.write_string(4, 0, &quot;Use Menu -&gt; Review -&gt; Unprotect Sheet&quot;)?;
+    worksheet.write_string(5, 0, &quot;to remove the worksheet protection.&quot;)?;
 
     worksheet.autofit();
 

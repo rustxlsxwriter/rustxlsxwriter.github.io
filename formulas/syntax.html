@@ -161,13 +161,13 @@ comma (not semi-colon).</p>
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span>    // OK.
-    worksheet.write_formula_only(0, 0, &quot;=SUM(1, 2, 3)&quot;)?;
+    worksheet.write_formula(0, 0, &quot;=SUM(1, 2, 3)&quot;)?;
 
     // Semi-colon separator. Causes Excel error on file opening.
-    worksheet.write_formula_only(1, 0, &quot;=SUM(1; 2; 3)&quot;)?;
+    worksheet.write_formula(1, 0, &quot;=SUM(1; 2; 3)&quot;)?;
 
     // French function name. Causes Excel error on file opening.
-    worksheet.write_formula_only(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
+    worksheet.write_formula(2, 0, &quot;=SOMME(1, 2, 3)&quot;)?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;formula.xlsx&quot;)?;
 </span><span class="boring">

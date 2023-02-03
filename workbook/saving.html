@@ -199,7 +199,7 @@ save the xlsx file data to a <code>Vec&lt;u8&gt;</code> buffer via the
 </span><span class="boring">    let mut workbook = Workbook::new();
 </span><span class="boring">
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+</span><span class="boring">    worksheet.write_string(0, 0, &quot;Hello&quot;)?;
 </span><span class="boring">
 </span>    let buf = workbook.save_to_buffer()?;
 <span class="boring">

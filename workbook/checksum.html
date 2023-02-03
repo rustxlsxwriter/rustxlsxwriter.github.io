@@ -160,7 +160,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
     let worksheet = workbook.add_worksheet();
 
-    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet.write_string(0, 0, &quot;Hello&quot;)?;
 
     workbook.save(&quot;properties.xlsx&quot;)?;
 
@@ -201,7 +201,7 @@ document properties metadata:</p>
 </span><span class="boring">//! constant creation date.
 </span><span class="boring">
 </span>use chrono::{TimeZone, Utc};
-use rust_xlsxwriter::{Properties, Workbook, XlsxError};
+use rust_xlsxwriter::{DocProperties, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let mut workbook = Workbook::new();
@@ -210,11 +210,11 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let date = Utc.with_ymd_and_hms(2023, 1, 1, 0, 0, 0).unwrap();
 
     // Add it to the document metadata.
-    let properties = Properties::new().set_creation_datetime(&amp;date);
+    let properties = DocProperties::new().set_creation_datetime(&amp;date);
     workbook.set_properties(&amp;properties);
 
     let worksheet = workbook.add_worksheet();
-    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet.write_string(0, 0, &quot;Hello&quot;)?;
 
     workbook.save(&quot;properties.xlsx&quot;)?;
 

@@ -175,20 +175,20 @@ prior to calling this method.</p>
 </span><span class="boring">
 </span>    // Start with a reference to worksheet1.
     let mut worksheet1 = workbook.add_worksheet();
-    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet1.write_string(0, 0, &quot;Hello&quot;)?;
 
     // If we don't try to use the workbook1 reference again we can switch to
     // using a reference to worksheet2.
     let mut worksheet2 = workbook.add_worksheet();
-    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet2.write_string(0, 0, &quot;Hello&quot;)?;
 
     // Stop using worksheet2 and move back to worksheet1.
     worksheet1 = workbook.worksheet_from_index(0)?;
-    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+    worksheet1.write_string(1, 0, &quot;Sheet1&quot;)?;
 
     // Stop using worksheet1 and move back to worksheet2.
     worksheet2 = workbook.worksheet_from_index(1)?;
-    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+    worksheet2.write_string(1, 0, &quot;Sheet2&quot;)?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
@@ -210,21 +210,21 @@ using the worksheet names:</p>
 </span>    // Start with a reference to worksheet1.
     let mut worksheet1 = workbook.add_worksheet();
     let name1 = worksheet1.name(); // &quot;Sheet1&quot;
-    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet1.write_string(0, 0, &quot;Hello&quot;)?;
 
     // If we don't try to use the workbook1 reference again we can switch to
     // using a reference to worksheet2.
     let mut worksheet2 = workbook.add_worksheet().set_name(&quot;Data&quot;)?;
     let name2 = worksheet2.name();
-    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
+    worksheet2.write_string(0, 0, &quot;Hello&quot;)?;
 
     // Stop using worksheet2 and move back to worksheet1.
     worksheet1 = workbook.worksheet_from_name(&amp;name1)?;
-    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+    worksheet1.write_string(1, 0, &quot;Sheet1&quot;)?;
 
     // Stop using worksheet1 and move back to worksheet2.
     worksheet2 = workbook.worksheet_from_name(&amp;name2)?;
-    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+    worksheet2.write_string(1, 0, &quot;Sheet2&quot;)?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;workbook.xlsx&quot;)?;
 </span><span class="boring">
@@ -252,8 +252,8 @@ over all the worksheets in a workbook:</p>
 
     // Write the same data to all three worksheets.
     for worksheet in workbook.worksheets_mut() {
-        worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
-        worksheet.write_number_only(1, 0, 12345)?;
+        worksheet.write_string(0, 0, &quot;Hello&quot;)?;
+        worksheet.write_number(1, 0, 12345)?;
     }
 <span class="boring">
 </span><span class="boring">    // If you are careful you can use standard slice operations.
@@ -283,8 +283,8 @@ over all the worksheets in a workbook:</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the same data to all three worksheets.
 </span><span class="boring">    for worksheet in workbook.worksheets_mut() {
-</span><span class="boring">        worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
-</span><span class="boring">        worksheet.write_number_only(1, 0, 12345)?;
+</span><span class="boring">        worksheet.write_string(0, 0, &quot;Hello&quot;)?;
+</span><span class="boring">        worksheet.write_number(1, 0, 12345)?;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // If you are careful you can use standard slice operations.
@@ -325,12 +325,12 @@ method:</p>
     let mut worksheet2 = Worksheet::new();
 
     // Use the first workbook.
-    worksheet1.write_string_only(0, 0, &quot;Hello&quot;)?;
-    worksheet1.write_string_only(1, 0, &quot;Sheet1&quot;)?;
+    worksheet1.write_string(0, 0, &quot;Hello&quot;)?;
+    worksheet1.write_string(1, 0, &quot;Sheet1&quot;)?;
 
     // Use the second workbook.
-    worksheet2.write_string_only(0, 0, &quot;Hello&quot;)?;
-    worksheet2.write_string_only(1, 0, &quot;Sheet2&quot;)?;
+    worksheet2.write_string(0, 0, &quot;Hello&quot;)?;
+    worksheet2.write_string(1, 0, &quot;Sheet2&quot;)?;
 
     // Add the worksheets to the workbook.
     workbook.push_worksheet(worksheet1);

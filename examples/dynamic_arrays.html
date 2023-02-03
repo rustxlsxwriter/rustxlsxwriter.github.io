@@ -179,15 +179,15 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
 
-    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+    worksheet1.write_dynamic_formula(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 
     // Write the data the function will work on.
-    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
-    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
-    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
-    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
-    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+    worksheet1.write_string_with_format(0, 10, &quot;Product&quot;, &amp;header2)?;
+    worksheet1.write_string(1, 10, &quot;Apple&quot;)?;
+    worksheet1.write_string_with_format(0, 5, &quot;Region&quot;, &amp;header2)?;
+    worksheet1.write_string_with_format(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet1.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+    worksheet1.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 
     // Add sample worksheet data to work on.
     write_worksheet_data(worksheet1, &amp;header1)?;
@@ -199,14 +199,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
 
-    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+    worksheet2.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 
     // A more complex example combining SORT and UNIQUE.
-    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+    worksheet2.write_dynamic_formula(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
 
     // Write the data the function will work on.
-    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet2.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet2.write_string_with_format(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
 
     // Add sample worksheet data to work on.
     write_worksheet_data(worksheet2, &amp;header1)?;
@@ -219,15 +219,15 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
 
     // A simple SORT example.
-    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+    worksheet3.write_dynamic_formula(1, 5, &quot;=SORT(B2:B17)&quot;)?;
 
     // A more complex example combining SORT and FILTER.
-    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+    worksheet3.write_dynamic_formula(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
 
     // Write the data the function will work on.
-    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+    worksheet3.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+    worksheet3.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+    worksheet3.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 
     // Add sample worksheet data to work on.
     write_worksheet_data(worksheet3, &amp;header1)?;
@@ -239,32 +239,32 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
 
-    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+    worksheet4.write_dynamic_formula(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
 
     // Write the data the function will work on.
-    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
-    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+    worksheet4.write_string_with_format(0, 0, &quot;Name&quot;, &amp;header1)?;
+    worksheet4.write_string_with_format(0, 1, &quot;Age&quot;, &amp;header1)?;
 
-    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
-    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
-    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
-    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
-    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
-    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
-    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
-    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+    worksheet4.write_string(1, 0, &quot;Tom&quot;)?;
+    worksheet4.write_string(2, 0, &quot;Fred&quot;)?;
+    worksheet4.write_string(3, 0, &quot;Amy&quot;)?;
+    worksheet4.write_string(4, 0, &quot;Sal&quot;)?;
+    worksheet4.write_string(5, 0, &quot;Fritz&quot;)?;
+    worksheet4.write_string(6, 0, &quot;Srivan&quot;)?;
+    worksheet4.write_string(7, 0, &quot;Xi&quot;)?;
+    worksheet4.write_string(8, 0, &quot;Hector&quot;)?;
 
-    worksheet4.write_number_only(1, 1, 52)?;
-    worksheet4.write_number_only(2, 1, 65)?;
-    worksheet4.write_number_only(3, 1, 22)?;
-    worksheet4.write_number_only(4, 1, 73)?;
-    worksheet4.write_number_only(5, 1, 19)?;
-    worksheet4.write_number_only(6, 1, 39)?;
-    worksheet4.write_number_only(7, 1, 19)?;
-    worksheet4.write_number_only(8, 1, 66)?;
+    worksheet4.write_number(1, 1, 52)?;
+    worksheet4.write_number(2, 1, 65)?;
+    worksheet4.write_number(3, 1, 22)?;
+    worksheet4.write_number(4, 1, 73)?;
+    worksheet4.write_number(5, 1, 19)?;
+    worksheet4.write_number(6, 1, 39)?;
+    worksheet4.write_number(7, 1, 19)?;
+    worksheet4.write_number(8, 1, 66)?;
 
-    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
-    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+    worksheet4.write_string_with_format(0, 3, &quot;Name&quot;, &amp;header2)?;
+    worksheet4.write_string_with_format(0, 4, &quot;Age&quot;, &amp;header2)?;
 
     worksheet4.set_column_width_pixels(2, 20)?;
 
@@ -273,41 +273,41 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
 
-    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+    worksheet5.write_dynamic_formula(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
 
     // Write the data the function will work on.
-    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
-    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
-    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+    worksheet5.write_string_with_format(0, 0, &quot;Country&quot;, &amp;header1)?;
+    worksheet5.write_string_with_format(0, 1, &quot;Abr&quot;, &amp;header1)?;
+    worksheet5.write_string_with_format(0, 2, &quot;Prefix&quot;, &amp;header1)?;
 
-    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
-    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
-    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
-    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
-    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
-    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
-    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
-    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+    worksheet5.write_string(1, 0, &quot;China&quot;)?;
+    worksheet5.write_string(2, 0, &quot;India&quot;)?;
+    worksheet5.write_string(3, 0, &quot;United States&quot;)?;
+    worksheet5.write_string(4, 0, &quot;Indonesia&quot;)?;
+    worksheet5.write_string(5, 0, &quot;Brazil&quot;)?;
+    worksheet5.write_string(6, 0, &quot;Pakistan&quot;)?;
+    worksheet5.write_string(7, 0, &quot;Nigeria&quot;)?;
+    worksheet5.write_string(8, 0, &quot;Bangladesh&quot;)?;
 
-    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
-    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
-    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
-    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
-    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
-    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
-    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
-    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+    worksheet5.write_string(1, 1, &quot;CN&quot;)?;
+    worksheet5.write_string(2, 1, &quot;IN&quot;)?;
+    worksheet5.write_string(3, 1, &quot;US&quot;)?;
+    worksheet5.write_string(4, 1, &quot;ID&quot;)?;
+    worksheet5.write_string(5, 1, &quot;BR&quot;)?;
+    worksheet5.write_string(6, 1, &quot;PK&quot;)?;
+    worksheet5.write_string(7, 1, &quot;NG&quot;)?;
+    worksheet5.write_string(8, 1, &quot;BD&quot;)?;
 
-    worksheet5.write_number_only(1, 2, 86)?;
-    worksheet5.write_number_only(2, 2, 91)?;
-    worksheet5.write_number_only(3, 2, 1)?;
-    worksheet5.write_number_only(4, 2, 62)?;
-    worksheet5.write_number_only(5, 2, 55)?;
-    worksheet5.write_number_only(6, 2, 92)?;
-    worksheet5.write_number_only(7, 2, 234)?;
-    worksheet5.write_number_only(8, 2, 880)?;
+    worksheet5.write_number(1, 2, 86)?;
+    worksheet5.write_number(2, 2, 91)?;
+    worksheet5.write_number(3, 2, 1)?;
+    worksheet5.write_number(4, 2, 62)?;
+    worksheet5.write_number(5, 2, 55)?;
+    worksheet5.write_number(6, 2, 92)?;
+    worksheet5.write_number(7, 2, 234)?;
+    worksheet5.write_number(8, 2, 880)?;
 
-    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+    worksheet5.write_string_with_format(0, 4, &quot;Brazil&quot;, &amp;header2)?;
 
     worksheet5.set_column_width_pixels(0, 100)?;
     worksheet5.set_column_width_pixels(3, 20)?;
@@ -317,20 +317,20 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
 
-    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+    worksheet6.write_dynamic_formula(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
 
     // Write the data the function will work on.
-    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+    worksheet6.write_string_with_format(0, 0, &quot;Product&quot;, &amp;header1)?;
 
-    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
-    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
-    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
-    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
-    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+    worksheet6.write_string(1, 0, &quot;Apple&quot;)?;
+    worksheet6.write_string(2, 0, &quot;Grape&quot;)?;
+    worksheet6.write_string(3, 0, &quot;Pear&quot;)?;
+    worksheet6.write_string(4, 0, &quot;Banana&quot;)?;
+    worksheet6.write_string(5, 0, &quot;Cherry&quot;)?;
 
-    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
-    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
-    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+    worksheet6.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header2)?;
+    worksheet6.write_string_with_format(0, 3, &quot;Position&quot;, &amp;header2)?;
+    worksheet6.write_string(1, 2, &quot;Grape&quot;)?;
 
     worksheet6.set_column_width_pixels(1, 20)?;
 
@@ -339,29 +339,29 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
 
-    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+    worksheet7.write_dynamic_formula(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
 
     // -----------------------------------------------------------------------
     // Example of using the SEQUENCE() function.
     // -----------------------------------------------------------------------
     let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
 
-    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+    worksheet8.write_dynamic_formula(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
 
     // -----------------------------------------------------------------------
     // Example of using the Spill range operator.
     // -----------------------------------------------------------------------
     let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 
-    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+    worksheet9.write_dynamic_formula(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
 
-    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+    worksheet9.write_dynamic_formula(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 
     // Write the data the to work on.
-    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
-    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
-    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
-    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+    worksheet9.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+    worksheet9.write_string_with_format(0, 5, &quot;Unique&quot;, &amp;header2)?;
+    worksheet9.write_string_with_format(0, 7, &quot;Spill&quot;, &amp;header2)?;
+    worksheet9.write_string_with_format(0, 9, &quot;Spill&quot;, &amp;header2)?;
 
     // Add sample worksheet data to work on.
     write_worksheet_data(worksheet9, &amp;header1)?;
@@ -374,12 +374,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
 
-    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+    worksheet10.write_dynamic_array_formula(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
 
     // Write the data the to work on.
-    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
-    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
-    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+    worksheet10.write_string(0, 0, &quot;Foo&quot;)?;
+    worksheet10.write_string(1, 0, &quot;Food&quot;)?;
+    worksheet10.write_string(2, 0, &quot;Frood&quot;)?;
 
     workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 
@@ -407,17 +407,17 @@ fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt
         (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
     ];
 
-    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
-    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
-    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
 
     let mut row = 1;
     for data in worksheet_data.iter() {
-        worksheet.write_string_only(row, 0, data.0)?;
-        worksheet.write_string_only(row, 1, data.1)?;
-        worksheet.write_string_only(row, 2, data.2)?;
-        worksheet.write_number_only(row, 3, data.3)?;
+        worksheet.write_string(row, 0, data.0)?;
+        worksheet.write_string(row, 1, data.1)?;
+        worksheet.write_string(row, 2, data.2)?;
+        worksheet.write_number(row, 3, data.3)?;
         row += 1;
     }
 

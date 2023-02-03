@@ -165,8 +165,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format = Format::default();
 
     // These methods calls are equivalent.
-    worksheet.write_string_only(0, 0, &quot;Hello&quot;)?;
-    worksheet.write_string(1, 0, &quot;Hello&quot;, &amp;format)?;
+    worksheet.write_string(0, 0, &quot;Hello&quot;)?;
+    worksheet.write_string_with_format(1, 0, &quot;Hello&quot;, &amp;format)?;
 
     workbook.save(&quot;formats.xlsx&quot;)?;
 

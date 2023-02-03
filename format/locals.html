@@ -164,7 +164,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add a format.
     let currency_format = Format::new().set_num_format(&quot;#,##0.00&quot;);
 
-    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+    worksheet.write_number_with_format(0, 0, 1234.56, &amp;currency_format)?;
 
     workbook.save(&quot;number_format.xlsx&quot;)?;
 

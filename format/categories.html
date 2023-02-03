@@ -165,7 +165,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add a format.
     let currency_format = Format::new().set_num_format(&quot;$#,##0.00&quot;);
 
-    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+    worksheet.write_number_with_format(0, 0, 1234.56, &amp;currency_format)?;
 
     workbook.save(&quot;currency_format.xlsx&quot;)?;
 
@@ -219,7 +219,7 @@ example and rerun it we will get a number format in the Currency category:</p>
 </span><span class="boring">    // Add a format.
 </span>    let currency_format = Format::new().set_num_format(&quot;[$$-409]#,##0.00&quot;);
 
-    worksheet.write_number(0, 0, 1234.56, &amp;currency_format)?;
+    worksheet.write_number_with_format(0, 0, 1234.56, &amp;currency_format)?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;currency_format.xlsx&quot;)?;
 </span><span class="boring">

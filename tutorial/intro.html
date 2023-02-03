@@ -180,9 +180,9 @@ some monthly expenses like the following:</p>
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    // Write some column headers.
-</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
-</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
-</span><span class="boring">    worksheet.write_string(0, 2, &quot;Date&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Date&quot;, &amp;bold)?;
 </span><span class="boring">
 </span><span class="boring">    // Adjust the date column width for clarity.
 </span><span class="boring">    worksheet.set_column_width(2, 15)?;
@@ -190,8 +190,8 @@ some monthly expenses like the following:</p>
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_with_format(row, 1, expense.1, &amp;money_format)?;
 </span><span class="boring">
 </span><span class="boring">        let date = NaiveDate::parse_from_str(expense.2, &quot;%Y-%m-%d&quot;).unwrap();
 </span><span class="boring">        worksheet.write_date(row, 2, &amp;date, &amp;date_format)?;
@@ -200,8 +200,8 @@ some monthly expenses like the following:</p>
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
-</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula_with_format(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial3.xlsx&quot;)?;

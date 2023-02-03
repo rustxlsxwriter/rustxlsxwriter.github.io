@@ -180,11 +180,11 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Write some text in the file and one of the defined names in a formula.
     for worksheet in workbook.worksheets_mut() {
         worksheet.set_column_width(0, 45)?;
-        worksheet.write_string_only(0, 0, &quot;This worksheet contains some defined names.&quot;)?;
-        worksheet.write_string_only(1, 0, &quot;See Formulas -&gt; Name Manager above.&quot;)?;
-        worksheet.write_string_only(2, 0, &quot;Example formula in cell B3 -&gt;&quot;)?;
+        worksheet.write_string(0, 0, &quot;This worksheet contains some defined names.&quot;)?;
+        worksheet.write_string(1, 0, &quot;See Formulas -&gt; Name Manager above.&quot;)?;
+        worksheet.write_string(2, 0, &quot;Example formula in cell B3 -&gt;&quot;)?;
 
-        worksheet.write_formula_only(2, 1, &quot;=Exchange_rate&quot;)?;
+        worksheet.write_formula(2, 1, &quot;=Exchange_rate&quot;)?;
     }
 
     // Save the file to disk.

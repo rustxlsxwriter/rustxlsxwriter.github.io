@@ -176,20 +176,20 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let worksheet = workbook.add_worksheet();
 
     // Write some column headers.
-    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
-    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+    worksheet.write_string_with_format(0, 0, &quot;Item&quot;, &amp;bold)?;
+    worksheet.write_string_with_format(0, 1, &quot;Cost&quot;, &amp;bold)?;
 
     // Iterate over the data and write it out row by row.
     let mut row = 1;
     for expense in expenses.iter() {
-        worksheet.write_string_only(row, 0, expense.0)?;
-        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+        worksheet.write_string(row, 0, expense.0)?;
+        worksheet.write_number_with_format(row, 1, expense.1, &amp;money_format)?;
         row += 1;
     }
 
     // Write a total using a formula.
-    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
-    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+    worksheet.write_string_with_format(row, 0, &quot;Total&quot;, &amp;bold)?;
+    worksheet.write_formula_with_format(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 
     // Save the file to disk.
     workbook.save(&quot;tutorial2.xlsx&quot;)?;
@@ -229,20 +229,20 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span><span class="boring">    // Write some column headers.
-</span><span class="boring">    worksheet.write_string(0, 0, &quot;Item&quot;, &amp;bold)?;
-</span><span class="boring">    worksheet.write_string(0, 1, &quot;Cost&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Item&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Cost&quot;, &amp;bold)?;
 </span><span class="boring">
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number(row, 1, expense.1, &amp;money_format)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number_with_format(row, 1, expense.1, &amp;money_format)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;, &amp;bold)?;
-</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(row, 0, &quot;Total&quot;, &amp;bold)?;
+</span><span class="boring">    worksheet.write_formula_with_format(row, 1, &quot;=SUM(B2:B5)&quot;, &amp;money_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial2.xlsx&quot;)?;

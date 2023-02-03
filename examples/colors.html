@@ -168,84 +168,84 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Write some enum defined colors to cells.
     let color_format = Format::new().set_background_color(XlsxColor::Black);
-    worksheet.write_string_only(0, 0, &quot;Black&quot;)?;
+    worksheet.write_string(0, 0, &quot;Black&quot;)?;
     worksheet.write_blank(0, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Blue);
-    worksheet.write_string_only(1, 0, &quot;Blue&quot;)?;
+    worksheet.write_string(1, 0, &quot;Blue&quot;)?;
     worksheet.write_blank(1, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Brown);
-    worksheet.write_string_only(2, 0, &quot;Brown&quot;)?;
+    worksheet.write_string(2, 0, &quot;Brown&quot;)?;
     worksheet.write_blank(2, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Cyan);
-    worksheet.write_string_only(3, 0, &quot;Cyan&quot;)?;
+    worksheet.write_string(3, 0, &quot;Cyan&quot;)?;
     worksheet.write_blank(3, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Gray);
-    worksheet.write_string_only(4, 0, &quot;Gray&quot;)?;
+    worksheet.write_string(4, 0, &quot;Gray&quot;)?;
     worksheet.write_blank(4, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Green);
-    worksheet.write_string_only(5, 0, &quot;Green&quot;)?;
+    worksheet.write_string(5, 0, &quot;Green&quot;)?;
     worksheet.write_blank(5, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Lime);
-    worksheet.write_string_only(6, 0, &quot;Lime&quot;)?;
+    worksheet.write_string(6, 0, &quot;Lime&quot;)?;
     worksheet.write_blank(6, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Magenta);
-    worksheet.write_string_only(7, 0, &quot;Magenta&quot;)?;
+    worksheet.write_string(7, 0, &quot;Magenta&quot;)?;
     worksheet.write_blank(7, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Navy);
-    worksheet.write_string_only(8, 0, &quot;Navy&quot;)?;
+    worksheet.write_string(8, 0, &quot;Navy&quot;)?;
     worksheet.write_blank(8, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Orange);
-    worksheet.write_string_only(9, 0, &quot;Orange&quot;)?;
+    worksheet.write_string(9, 0, &quot;Orange&quot;)?;
     worksheet.write_blank(9, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Pink);
-    worksheet.write_string_only(10, 0, &quot;Pink&quot;)?;
+    worksheet.write_string(10, 0, &quot;Pink&quot;)?;
     worksheet.write_blank(10, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Purple);
-    worksheet.write_string_only(11, 0, &quot;Purple&quot;)?;
+    worksheet.write_string(11, 0, &quot;Purple&quot;)?;
     worksheet.write_blank(11, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Red);
-    worksheet.write_string_only(12, 0, &quot;Red&quot;)?;
+    worksheet.write_string(12, 0, &quot;Red&quot;)?;
     worksheet.write_blank(12, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Silver);
-    worksheet.write_string_only(13, 0, &quot;Silver&quot;)?;
+    worksheet.write_string(13, 0, &quot;Silver&quot;)?;
     worksheet.write_blank(13, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::White);
-    worksheet.write_string_only(14, 0, &quot;White&quot;)?;
+    worksheet.write_string(14, 0, &quot;White&quot;)?;
     worksheet.write_blank(14, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::Yellow);
-    worksheet.write_string_only(15, 0, &quot;Yellow&quot;)?;
+    worksheet.write_string(15, 0, &quot;Yellow&quot;)?;
     worksheet.write_blank(15, 1, &amp;color_format)?;
 
     // Write some user defined RGB colors to cells.
     let color_format = Format::new().set_background_color(XlsxColor::RGB(0xFF7F50));
-    worksheet.write_string_only(16, 0, &quot;#FF7F50&quot;)?;
+    worksheet.write_string(16, 0, &quot;#FF7F50&quot;)?;
     worksheet.write_blank(16, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::RGB(0xDCDCDC));
-    worksheet.write_string_only(17, 0, &quot;#DCDCDC&quot;)?;
+    worksheet.write_string(17, 0, &quot;#DCDCDC&quot;)?;
     worksheet.write_blank(17, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::RGB(0x6495ED));
-    worksheet.write_string_only(18, 0, &quot;#6495ED&quot;)?;
+    worksheet.write_string(18, 0, &quot;#6495ED&quot;)?;
     worksheet.write_blank(18, 1, &amp;color_format)?;
 
     let color_format = Format::new().set_background_color(XlsxColor::RGB(0xDAA520));
-    worksheet.write_string_only(19, 0, &quot;#DAA520&quot;)?;
+    worksheet.write_string(19, 0, &quot;#DAA520&quot;)?;
     worksheet.write_blank(19, 1, &amp;color_format)?;
 
     // Add a worksheet for the Theme colors.
@@ -267,9 +267,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
             let color_format = Format::new()
                 .set_background_color(theme_color)
                 .set_font_color(font_color)
-                .set_align(XlsxAlign::Center);
+                .set_align(FormatAlign::Center);
 
-            worksheet.write_string(row, col, &amp;text, &amp;color_format)?;
+            worksheet.write_string_with_format(row, col, &amp;text, &amp;color_format)?;
         }
     }
 

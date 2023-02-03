@@ -180,11 +180,11 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     //
     // Note that the lambda function parameters must be prefixed with &quot;_xlpm.&quot;.
     // These prefixes won't show up in Excel.
-    worksheet.write_formula_only(0, 0, &quot;=LAMBDA(_xlpm.temp, (5/9) * (_xlpm.temp-32))(32)&quot;)?;
+    worksheet.write_formula(0, 0, &quot;=LAMBDA(_xlpm.temp, (5/9) * (_xlpm.temp-32))(32)&quot;)?;
 
     // The user defined name needs to be written explicitly as a dynamic array
     // formula.
-    worksheet.write_dynamic_formula_only(1, 0, &quot;=ToCelsius(212)&quot;)?;
+    worksheet.write_dynamic_formula(1, 0, &quot;=ToCelsius(212)&quot;)?;
 
     // Save the file to disk.
     workbook.save(&quot;lambda.xlsx&quot;)?;

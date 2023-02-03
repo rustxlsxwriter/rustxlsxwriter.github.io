@@ -153,7 +153,7 @@
 </span><span class="boring">//! An example of using the rust_xlsxwriter library to write &quot;rich&quot; multi-format
 </span><span class="boring">//! strings in worksheet cells.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxColor, XlsxError, XlsxScript};
+</span>use rust_xlsxwriter::{Format, FormatAlign, FormatScript, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -170,8 +170,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let blue = Format::new().set_font_color(XlsxColor::Blue);
     let bold = Format::new().set_bold();
     let italic = Format::new().set_italic();
-    let center = Format::new().set_align(XlsxAlign::Center);
-    let superscript = Format::new().set_font_script(XlsxScript::Superscript);
+    let center = Format::new().set_align(FormatAlign::Center);
+    let superscript = Format::new().set_font_script(FormatScript::Superscript);
 
     // Write some rich strings with multiple formats.
     let segments = [
@@ -180,7 +180,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         (&amp;default, &quot; and this is &quot;),
         (&amp;italic, &quot;italic&quot;),
     ];
-    worksheet.write_rich_string_only(0, 0, &amp;segments)?;
+    worksheet.write_rich_string(0, 0, &amp;segments)?;
 
     let segments = [
         (&amp;default, &quot;This is &quot;),
@@ -188,17 +188,17 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         (&amp;default, &quot; and this is &quot;),
         (&amp;blue, &quot;blue&quot;),
     ];
-    worksheet.write_rich_string_only(2, 0, &amp;segments)?;
+    worksheet.write_rich_string(2, 0, &amp;segments)?;
 
     let segments = [
         (&amp;default, &quot;Some &quot;),
         (&amp;bold, &quot;bold text&quot;),
         (&amp;default, &quot; centered&quot;),
     ];
-    worksheet.write_rich_string(4, 0, &amp;segments, &amp;center)?;
+    worksheet.write_rich_string_with_format(4, 0, &amp;segments, &amp;center)?;
 
     let segments = [(&amp;italic, &quot;j = k&quot;), (&amp;superscript, &quot;(n-1)&quot;)];
-    worksheet.write_rich_string(6, 0, &amp;segments, &amp;center)?;
+    worksheet.write_rich_string_with_format(6, 0, &amp;segments, &amp;center)?;
 
     // It is possible, and idiomatic, to use slices as the string segments.
     let text = &quot;This is blue and this is red&quot;;
@@ -208,7 +208,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         (&amp;default, &amp;text[12..25]),
         (&amp;red, &amp;text[25..]),
     ];
-    worksheet.write_rich_string_only(8, 0, &amp;segments)?;
+    worksheet.write_rich_string(8, 0, &amp;segments)?;
 
     // Save the file to disk.
     workbook.save(&quot;rich_strings.xlsx&quot;)?;

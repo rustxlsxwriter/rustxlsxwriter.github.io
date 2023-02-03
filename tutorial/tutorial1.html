@@ -166,14 +166,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Iterate over the data and write it out row by row.
     let mut row = 0;
     for expense in expenses.iter() {
-        worksheet.write_string_only(row, 0, expense.0)?;
-        worksheet.write_number_only(row, 1, expense.1)?;
+        worksheet.write_string(row, 0, expense.0)?;
+        worksheet.write_number(row, 1, expense.1)?;
         row += 1;
     }
 
     // Write a total using a formula.
-    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 
     // Save the file to disk.
     workbook.save(&quot;tutorial1.xlsx&quot;)?;
@@ -208,14 +208,14 @@ apply to any rust_xlsxwriter program.</p>
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
@@ -248,14 +248,14 @@ existing files.</p>
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
@@ -288,14 +288,14 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span>    for expense in expenses.iter() {
-        worksheet.write_string_only(row, 0, expense.0)?;
-        worksheet.write_number_only(row, 1, expense.1)?;
+        worksheet.write_string(row, 0, expense.0)?;
+        worksheet.write_number(row, 1, expense.1)?;
         row += 1;
     }
 <span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
@@ -329,14 +329,14 @@ the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-</span>    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+</span>    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 <span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span><span class="boring">    workbook.save(&quot;tutorial1.xlsx&quot;)?;
@@ -367,14 +367,14 @@ which take a <a href="https://doc.rust-lang.org/std/path/struct.Path.html"><code
 </span><span class="boring">    // Iterate over the data and write it out row by row.
 </span><span class="boring">    let mut row = 0;
 </span><span class="boring">    for expense in expenses.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, expense.0)?;
-</span><span class="boring">        worksheet.write_number_only(row, 1, expense.1)?;
+</span><span class="boring">        worksheet.write_string(row, 0, expense.0)?;
+</span><span class="boring">        worksheet.write_number(row, 1, expense.1)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Write a total using a formula.
-</span><span class="boring">    worksheet.write_string_only(row, 0, &quot;Total&quot;)?;
-</span><span class="boring">    worksheet.write_formula_only(row, 1, &quot;=SUM(B1:B4)&quot;)?;
+</span><span class="boring">    worksheet.write_string(row, 0, &quot;Total&quot;)?;
+</span><span class="boring">    worksheet.write_formula(row, 1, &quot;=SUM(B1:B4)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
 </span>    workbook.save(&quot;tutorial1.xlsx&quot;)?;

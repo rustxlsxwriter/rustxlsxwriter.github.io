@@ -191,15 +191,15 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
 </span><span class="boring">
-</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+</span>    worksheet1.write_dynamic_formula(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 <span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
@@ -211,14 +211,14 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and UNIQUE.
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
@@ -231,15 +231,15 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A simple SORT example.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 5, &quot;=SORT(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and FILTER.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
@@ -251,32 +251,32 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">    worksheet4.write_dynamic_formula(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 1, &quot;Age&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">    worksheet4.write_string(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string(8, 0, &quot;Hector&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
-</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
-</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
-</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
-</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
-</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">    worksheet4.write_number(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(8, 1, 66)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 4, &quot;Age&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
 </span><span class="boring">
@@ -285,41 +285,41 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">    worksheet5.write_dynamic_formula(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 2, &quot;Prefix&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 0, &quot;Bangladesh&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 1, &quot;BD&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
-</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
-</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
-</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
-</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
-</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
-</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
-</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">    worksheet5.write_number(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number(8, 2, 880)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 4, &quot;Brazil&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
 </span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
@@ -329,20 +329,20 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">    worksheet6.write_dynamic_formula(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 0, &quot;Product&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">    worksheet6.write_string(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string(5, 0, &quot;Cherry&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(1, 2, &quot;Grape&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
 </span><span class="boring">
@@ -351,29 +351,29 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">    worksheet7.write_dynamic_formula(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the SEQUENCE() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">    worksheet8.write_dynamic_formula(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the Spill range operator.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
-</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 9, &quot;Spill&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
@@ -386,12 +386,12 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">    worksheet10.write_dynamic_array_formula(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">    worksheet10.write_string(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
@@ -419,17 +419,17 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
-</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
-</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
-</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        worksheet.write_string(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number(row, 3, data.3)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
@@ -490,15 +490,15 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
 </span><span class="boring">
-</span>    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+</span>    worksheet1.write_dynamic_formula(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 <span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
@@ -510,14 +510,14 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and UNIQUE.
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
@@ -530,15 +530,15 @@ function which only requires the start cell:</p>
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A simple SORT example.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 5, &quot;=SORT(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and FILTER.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
@@ -550,32 +550,32 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">    worksheet4.write_dynamic_formula(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 1, &quot;Age&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">    worksheet4.write_string(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string(8, 0, &quot;Hector&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
-</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
-</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
-</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
-</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
-</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">    worksheet4.write_number(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(8, 1, 66)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 4, &quot;Age&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
 </span><span class="boring">
@@ -584,41 +584,41 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">    worksheet5.write_dynamic_formula(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 2, &quot;Prefix&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 0, &quot;Bangladesh&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 1, &quot;BD&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
-</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
-</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
-</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
-</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
-</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
-</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
-</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">    worksheet5.write_number(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number(8, 2, 880)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 4, &quot;Brazil&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
 </span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
@@ -628,20 +628,20 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">    worksheet6.write_dynamic_formula(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 0, &quot;Product&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">    worksheet6.write_string(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string(5, 0, &quot;Cherry&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(1, 2, &quot;Grape&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
 </span><span class="boring">
@@ -650,29 +650,29 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">    worksheet7.write_dynamic_formula(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the SEQUENCE() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">    worksheet8.write_dynamic_formula(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the Spill range operator.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
-</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 9, &quot;Spill&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
@@ -685,12 +685,12 @@ function which only requires the start cell:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">    worksheet10.write_dynamic_array_formula(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">    worksheet10.write_string(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
@@ -718,17 +718,17 @@ function which only requires the start cell:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
-</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
-</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
-</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        worksheet.write_string(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number(row, 3, data.3)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
@@ -814,15 +814,15 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet1 = workbook.add_worksheet().set_name(&quot;Filter&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet1.write_dynamic_formula_only(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
+</span><span class="boring">    worksheet1.write_dynamic_formula(1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet1.write_string(0, 10, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string_only(1, 10, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet1.write_string(0, 5, &quot;Region&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet1.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 10, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string(1, 10, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 5, &quot;Region&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 6, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet1.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet1, &amp;header1)?;
@@ -834,14 +834,14 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Unique&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and UNIQUE.
-</span><span class="boring">    worksheet2.write_dynamic_formula_only(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
+</span><span class="boring">    worksheet2.write_dynamic_formula(1, 7, &quot;SORT(UNIQUE(B2:B17))&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet2.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet2.write_string(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet2.write_string_with_format(0, 7, &quot;Sales Rep&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet2, &amp;header1)?;
@@ -854,15 +854,15 @@ following formula:</p>
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Sort&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A simple SORT example.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 5, &quot;=SORT(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 5, &quot;=SORT(B2:B17)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // A more complex example combining SORT and FILTER.
-</span><span class="boring">    worksheet3.write_dynamic_formula_only(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
+</span><span class="boring">    worksheet3.write_dynamic_formula(1, 7, r#&quot;=SORT(FILTER(C2:D17,D2:D17&gt;5000,&quot;&quot;),2,1)&quot;#)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet3.write_string(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 7, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet3.write_string(0, 8, &quot;Units&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 5, &quot;Sales Rep&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 7, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet3.write_string_with_format(0, 8, &quot;Units&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet3, &amp;header1)?;
@@ -874,32 +874,32 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Sortby&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_dynamic_formula_only(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
+</span><span class="boring">    worksheet4.write_dynamic_formula(1, 3, &quot;=SORTBY(A2:B9,B2:B9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Name&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet4.write_string(0, 1, &quot;Age&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 0, &quot;Name&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 1, &quot;Age&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string_only(1, 0, &quot;Tom&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(2, 0, &quot;Fred&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(3, 0, &quot;Amy&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(4, 0, &quot;Sal&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(5, 0, &quot;Fritz&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(6, 0, &quot;Srivan&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(7, 0, &quot;Xi&quot;)?;
-</span><span class="boring">    worksheet4.write_string_only(8, 0, &quot;Hector&quot;)?;
+</span><span class="boring">    worksheet4.write_string(1, 0, &quot;Tom&quot;)?;
+</span><span class="boring">    worksheet4.write_string(2, 0, &quot;Fred&quot;)?;
+</span><span class="boring">    worksheet4.write_string(3, 0, &quot;Amy&quot;)?;
+</span><span class="boring">    worksheet4.write_string(4, 0, &quot;Sal&quot;)?;
+</span><span class="boring">    worksheet4.write_string(5, 0, &quot;Fritz&quot;)?;
+</span><span class="boring">    worksheet4.write_string(6, 0, &quot;Srivan&quot;)?;
+</span><span class="boring">    worksheet4.write_string(7, 0, &quot;Xi&quot;)?;
+</span><span class="boring">    worksheet4.write_string(8, 0, &quot;Hector&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_number_only(1, 1, 52)?;
-</span><span class="boring">    worksheet4.write_number_only(2, 1, 65)?;
-</span><span class="boring">    worksheet4.write_number_only(3, 1, 22)?;
-</span><span class="boring">    worksheet4.write_number_only(4, 1, 73)?;
-</span><span class="boring">    worksheet4.write_number_only(5, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(6, 1, 39)?;
-</span><span class="boring">    worksheet4.write_number_only(7, 1, 19)?;
-</span><span class="boring">    worksheet4.write_number_only(8, 1, 66)?;
+</span><span class="boring">    worksheet4.write_number(1, 1, 52)?;
+</span><span class="boring">    worksheet4.write_number(2, 1, 65)?;
+</span><span class="boring">    worksheet4.write_number(3, 1, 22)?;
+</span><span class="boring">    worksheet4.write_number(4, 1, 73)?;
+</span><span class="boring">    worksheet4.write_number(5, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(6, 1, 39)?;
+</span><span class="boring">    worksheet4.write_number(7, 1, 19)?;
+</span><span class="boring">    worksheet4.write_number(8, 1, 66)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet4.write_string(0, 3, &quot;Name&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet4.write_string(0, 4, &quot;Age&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 3, &quot;Name&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet4.write_string_with_format(0, 4, &quot;Age&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_column_width_pixels(2, 20)?;
 </span><span class="boring">
@@ -908,41 +908,41 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Xlookup&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_dynamic_formula_only(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
+</span><span class="boring">    worksheet5.write_dynamic_formula(0, 5, &quot;=XLOOKUP(E1,A2:A9,C2:C9)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Country&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 1, &quot;Abr&quot;, &amp;header1)?;
-</span><span class="boring">    worksheet5.write_string(0, 2, &quot;Prefix&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 0, &quot;Country&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 1, &quot;Abr&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 2, &quot;Prefix&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 0, &quot;China&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 0, &quot;India&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 0, &quot;United States&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 0, &quot;Indonesia&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 0, &quot;Brazil&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 0, &quot;Pakistan&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 0, &quot;Nigeria&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 0, &quot;Bangladesh&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 0, &quot;China&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 0, &quot;India&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 0, &quot;United States&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 0, &quot;Indonesia&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 0, &quot;Brazil&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 0, &quot;Pakistan&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 0, &quot;Nigeria&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 0, &quot;Bangladesh&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string_only(1, 1, &quot;CN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(2, 1, &quot;IN&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(3, 1, &quot;US&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(4, 1, &quot;ID&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(5, 1, &quot;BR&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(6, 1, &quot;PK&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(7, 1, &quot;NG&quot;)?;
-</span><span class="boring">    worksheet5.write_string_only(8, 1, &quot;BD&quot;)?;
+</span><span class="boring">    worksheet5.write_string(1, 1, &quot;CN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(2, 1, &quot;IN&quot;)?;
+</span><span class="boring">    worksheet5.write_string(3, 1, &quot;US&quot;)?;
+</span><span class="boring">    worksheet5.write_string(4, 1, &quot;ID&quot;)?;
+</span><span class="boring">    worksheet5.write_string(5, 1, &quot;BR&quot;)?;
+</span><span class="boring">    worksheet5.write_string(6, 1, &quot;PK&quot;)?;
+</span><span class="boring">    worksheet5.write_string(7, 1, &quot;NG&quot;)?;
+</span><span class="boring">    worksheet5.write_string(8, 1, &quot;BD&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_number_only(1, 2, 86)?;
-</span><span class="boring">    worksheet5.write_number_only(2, 2, 91)?;
-</span><span class="boring">    worksheet5.write_number_only(3, 2, 1)?;
-</span><span class="boring">    worksheet5.write_number_only(4, 2, 62)?;
-</span><span class="boring">    worksheet5.write_number_only(5, 2, 55)?;
-</span><span class="boring">    worksheet5.write_number_only(6, 2, 92)?;
-</span><span class="boring">    worksheet5.write_number_only(7, 2, 234)?;
-</span><span class="boring">    worksheet5.write_number_only(8, 2, 880)?;
+</span><span class="boring">    worksheet5.write_number(1, 2, 86)?;
+</span><span class="boring">    worksheet5.write_number(2, 2, 91)?;
+</span><span class="boring">    worksheet5.write_number(3, 2, 1)?;
+</span><span class="boring">    worksheet5.write_number(4, 2, 62)?;
+</span><span class="boring">    worksheet5.write_number(5, 2, 55)?;
+</span><span class="boring">    worksheet5.write_number(6, 2, 92)?;
+</span><span class="boring">    worksheet5.write_number(7, 2, 234)?;
+</span><span class="boring">    worksheet5.write_number(8, 2, 880)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet5.write_string(0, 4, &quot;Brazil&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet5.write_string_with_format(0, 4, &quot;Brazil&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_column_width_pixels(0, 100)?;
 </span><span class="boring">    worksheet5.set_column_width_pixels(3, 20)?;
@@ -952,20 +952,20 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Xmatch&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_dynamic_formula_only(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
+</span><span class="boring">    worksheet6.write_dynamic_formula(1, 3, &quot;=XMATCH(C2,A2:A6)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the function will work on.
-</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Product&quot;, &amp;header1)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 0, &quot;Product&quot;, &amp;header1)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string_only(1, 0, &quot;Apple&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(2, 0, &quot;Grape&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(3, 0, &quot;Pear&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(4, 0, &quot;Banana&quot;)?;
-</span><span class="boring">    worksheet6.write_string_only(5, 0, &quot;Cherry&quot;)?;
+</span><span class="boring">    worksheet6.write_string(1, 0, &quot;Apple&quot;)?;
+</span><span class="boring">    worksheet6.write_string(2, 0, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string(3, 0, &quot;Pear&quot;)?;
+</span><span class="boring">    worksheet6.write_string(4, 0, &quot;Banana&quot;)?;
+</span><span class="boring">    worksheet6.write_string(5, 0, &quot;Cherry&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet6.write_string(0, 2, &quot;Product&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string(0, 3, &quot;Position&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet6.write_string_only(1, 2, &quot;Grape&quot;)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string_with_format(0, 3, &quot;Position&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet6.write_string(1, 2, &quot;Grape&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_column_width_pixels(1, 20)?;
 </span><span class="boring">
@@ -974,29 +974,29 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet7 = workbook.add_worksheet().set_name(&quot;Randarray&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet7.write_dynamic_formula_only(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
+</span><span class="boring">    worksheet7.write_dynamic_formula(0, 0, &quot;=RANDARRAY(5,3,1,100, TRUE)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the SEQUENCE() function.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet8 = workbook.add_worksheet().set_name(&quot;Sequence&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet8.write_dynamic_formula_only(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
+</span><span class="boring">    worksheet8.write_dynamic_formula(0, 0, &quot;=SEQUENCE(4,5)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the Spill range operator.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet9 = workbook.add_worksheet().set_name(&quot;Spill ranges&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 7, &quot;=ANCHORARRAY(F2)&quot;)?;
 </span><span class="boring">
-</span>    worksheet9.write_dynamic_formula_only(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
+</span>    worksheet9.write_dynamic_formula(1, 9, &quot;=COUNTA(ANCHORARRAY(F2))&quot;)?;
 <span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet9.write_dynamic_formula_only(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
-</span><span class="boring">    worksheet9.write_string(0, 5, &quot;Unique&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 7, &quot;Spill&quot;, &amp;header2)?;
-</span><span class="boring">    worksheet9.write_string(0, 9, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_dynamic_formula(1, 5, &quot;=UNIQUE(B2:B17)&quot;)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 5, &quot;Unique&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 7, &quot;Spill&quot;, &amp;header2)?;
+</span><span class="boring">    worksheet9.write_string_with_format(0, 9, &quot;Spill&quot;, &amp;header2)?;
 </span><span class="boring">
 </span><span class="boring">    // Add sample worksheet data to work on.
 </span><span class="boring">    write_worksheet_data(worksheet9, &amp;header1)?;
@@ -1009,12 +1009,12 @@ following formula:</p>
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet10 = workbook.add_worksheet().set_name(&quot;Older functions&quot;)?;
 </span><span class="boring">
-</span><span class="boring">    worksheet10.write_dynamic_array_formula_only(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
+</span><span class="boring">    worksheet10.write_dynamic_array_formula(0, 1, 2, 1, &quot;=LEN(A1:A3)&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the data the to work on.
-</span><span class="boring">    worksheet10.write_string_only(0, 0, &quot;Foo&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(1, 0, &quot;Food&quot;)?;
-</span><span class="boring">    worksheet10.write_string_only(2, 0, &quot;Frood&quot;)?;
+</span><span class="boring">    worksheet10.write_string(0, 0, &quot;Foo&quot;)?;
+</span><span class="boring">    worksheet10.write_string(1, 0, &quot;Food&quot;)?;
+</span><span class="boring">    worksheet10.write_string(2, 0, &quot;Frood&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    workbook.save(&quot;dynamic_arrays.xlsx&quot;)?;
 </span><span class="boring">
@@ -1042,17 +1042,17 @@ following formula:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
-</span><span class="boring">        worksheet.write_string_only(row, 0, data.0)?;
-</span><span class="boring">        worksheet.write_string_only(row, 1, data.1)?;
-</span><span class="boring">        worksheet.write_string_only(row, 2, data.2)?;
-</span><span class="boring">        worksheet.write_number_only(row, 3, data.3)?;
+</span><span class="boring">        worksheet.write_string(row, 0, data.0)?;
+</span><span class="boring">        worksheet.write_string(row, 1, data.1)?;
+</span><span class="boring">        worksheet.write_string(row, 2, data.2)?;
+</span><span class="boring">        worksheet.write_number(row, 3, data.3)?;
 </span><span class="boring">        row += 1;
 </span><span class="boring">    }
 </span><span class="boring">
@@ -1108,11 +1108,11 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     //
     // Note that the lambda function parameters must be prefixed with &quot;_xlpm.&quot;.
     // These prefixes won't show up in Excel.
-    worksheet.write_formula_only(0, 0, &quot;=LAMBDA(_xlpm.temp, (5/9) * (_xlpm.temp-32))(32)&quot;)?;
+    worksheet.write_formula(0, 0, &quot;=LAMBDA(_xlpm.temp, (5/9) * (_xlpm.temp-32))(32)&quot;)?;
 
     // The user defined name needs to be written explicitly as a dynamic array
     // formula.
-    worksheet.write_dynamic_formula_only(1, 0, &quot;=ToCelsius(212)&quot;)?;
+    worksheet.write_dynamic_formula(1, 0, &quot;=ToCelsius(212)&quot;)?;
 
     // Save the file to disk.
     workbook.save(&quot;lambda.xlsx&quot;)?;

@@ -173,9 +173,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet1.set_column_width(0, 25)?;
 
     // Standard direction:         | A1 | B1 | C1 | ...
-    worksheet1.write_string_only(0, 0, &quot;نص عربي / English text&quot;)?;
-    worksheet1.write_string(1, 0, &quot;نص عربي / English text&quot;, &amp;format_left_to_right)?;
-    worksheet1.write_string(2, 0, &quot;نص عربي / English text&quot;, &amp;format_right_to_left)?;
+    worksheet1.write_string(0, 0, &quot;نص عربي / English text&quot;)?;
+    worksheet1.write_string_with_format(1, 0, &quot;نص عربي / English text&quot;, &amp;format_left_to_right)?;
+    worksheet1.write_string_with_format(2, 0, &quot;نص عربي / English text&quot;, &amp;format_right_to_left)?;
 
     // Add a worksheet and change it to right to left direction.
     let worksheet2 = workbook.add_worksheet();
@@ -185,9 +185,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet2.set_column_width(0, 25)?;
 
     // Right to left direction:    ... | C1 | B1 | A1 |
-    worksheet2.write_string_only(0, 0, &quot;نص عربي / English text&quot;)?;
-    worksheet2.write_string(1, 0, &quot;نص عربي / English text&quot;, &amp;format_left_to_right)?;
-    worksheet2.write_string(2, 0, &quot;نص عربي / English text&quot;, &amp;format_right_to_left)?;
+    worksheet2.write_string(0, 0, &quot;نص عربي / English text&quot;)?;
+    worksheet2.write_string_with_format(1, 0, &quot;نص عربي / English text&quot;, &amp;format_left_to_right)?;
+    worksheet2.write_string_with_format(2, 0, &quot;نص عربي / English text&quot;, &amp;format_right_to_left)?;
 
     workbook.save(&quot;right_to_left.xlsx&quot;)?;
 

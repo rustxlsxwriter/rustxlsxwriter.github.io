@@ -156,7 +156,7 @@ when a user scrolls.</p>
 </span><span class="boring">//! A simple example of setting some &quot;freeze&quot; panes in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxAlign, XlsxBorder, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Workbook, XlsxColor, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -165,12 +165,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create some formats to use in the worksheet.
     let header_format = Format::new()
         .set_bold()
-        .set_align(XlsxAlign::Center)
-        .set_align(XlsxAlign::VerticalCenter)
+        .set_align(FormatAlign::Center)
+        .set_align(FormatAlign::VerticalCenter)
         .set_foreground_color(XlsxColor::RGB(0xD7E4BC))
-        .set_border(XlsxBorder::Thin);
+        .set_border(FormatBorder::Thin);
 
-    let center_format = Format::new().set_align(XlsxAlign::Center);
+    let center_format = Format::new().set_align(FormatAlign::Center);
 
     // Some range limits to use in this example.
     let max_row = 50;
@@ -187,12 +187,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add some data and formatting to the worksheet.
     worksheet1.set_row_height(0, 20)?;
     for col in 0..max_col {
-        worksheet1.write_string(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
+        worksheet1.write_string_with_format(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
         worksheet1.set_column_width(col, 16)?;
     }
     for row in 1..max_row {
         for col in 0..max_col {
-            worksheet1.write_number(row, col, row + 1, &amp;center_format)?;
+            worksheet1.write_number_with_format(row, col, row + 1, &amp;center_format)?;
         }
     }
 
@@ -207,10 +207,10 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add some data and formatting to the worksheet.
     worksheet2.set_column_width(0, 16)?;
     for row in 0..max_row {
-        worksheet2.write_string(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
+        worksheet2.write_string_with_format(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
 
         for col in 1..max_col {
-            worksheet2.write_number(row, col, col, &amp;center_format)?;
+            worksheet2.write_number_with_format(row, col, col, &amp;center_format)?;
         }
     }
 
@@ -228,14 +228,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet3.write_blank(0, 0, &amp;header_format)?;
 
     for col in 1..max_col {
-        worksheet3.write_string(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
+        worksheet3.write_string_with_format(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
         worksheet3.set_column_width(col, 16)?;
     }
     for row in 1..max_row {
-        worksheet3.write_string(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
+        worksheet3.write_string_with_format(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
 
         for col in 1..max_col {
-            worksheet3.write_number(row, col, col, &amp;center_format)?;
+            worksheet3.write_number_with_format(row, col, col, &amp;center_format)?;
         }
     }
 
@@ -257,14 +257,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet4.write_blank(0, 0, &amp;header_format)?;
 
     for col in 1..max_col {
-        worksheet4.write_string(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
+        worksheet4.write_string_with_format(0, col, &quot;Scroll down&quot;, &amp;header_format)?;
         worksheet4.set_column_width(col, 16)?;
     }
     for row in 1..max_row {
-        worksheet4.write_string(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
+        worksheet4.write_string_with_format(row, 0, &quot;Scroll Across&quot;, &amp;header_format)?;
 
         for col in 1..max_col {
-            worksheet4.write_number(row, col, col, &amp;center_format)?;
+            worksheet4.write_number_with_format(row, col, col, &amp;center_format)?;
         }
     }
 

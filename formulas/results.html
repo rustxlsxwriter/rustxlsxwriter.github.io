@@ -170,7 +170,7 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
 </span>    worksheet
-        .write_formula_only(0, 0, &quot;1+1&quot;)?
+        .write_formula(0, 0, &quot;1+1&quot;)?
         .set_formula_result(0, 0, &quot;2&quot;);
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;

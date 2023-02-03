@@ -143,6 +143,56 @@
                     <main>
                         <h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0260---2023-02-03"><a class="header" href="#0260---2023-02-03">[0.26.0] - 2023-02-03</a></h2>
+<p><strong>Note: this version contains a major refactoring/renaming of some of the main
+data writing functions and some of the enums and secondary structs. This will
+require code changes from all current users but will allow more consistent
+APIs in future releases. Nevertheless, I apologize for this level of change.</strong></p>
+<h3 id="changed"><a class="header" href="#changed">Changed</a></h3>
+<ul>
+<li>
+<p>The following worksheet functions have changed names to reflect their
+frequency of usage.</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Previous name</th><th style="text-align: left">New name</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>write_string_only()</code></td><td style="text-align: left"><code>write_string()</code></td></tr>
+<tr><td style="text-align: left"><code>write_number_only()</code></td><td style="text-align: left"><code>write_number()</code></td></tr>
+<tr><td style="text-align: left"><code>write_formula_only()</code></td><td style="text-align: left"><code>write_formula()</code></td></tr>
+<tr><td style="text-align: left"><code>write_boolean_only()</code></td><td style="text-align: left"><code>write_boolean()</code></td></tr>
+<tr><td style="text-align: left"><code>write_rich_string_only()</code></td><td style="text-align: left"><code>write_rich_string()</code></td></tr>
+<tr><td style="text-align: left"><code>write_array_formula_only()</code></td><td style="text-align: left"><code>write_array_formula()</code></td></tr>
+<tr><td style="text-align: left"><code>write_dynamic_array_formula_only()</code></td><td style="text-align: left"><code>write_dynamic_array_formula()</code></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>write_array_formula()</code></td><td style="text-align: left"><code>write_array_formula_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_boolean()</code></td><td style="text-align: left"><code>write_boolean_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_dynamic_array_formula()</code></td><td style="text-align: left"><code>write_dynamic_array_formula_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_formula()</code></td><td style="text-align: left"><code>write_formula_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_number()</code></td><td style="text-align: left"><code>write_number_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_rich_string()</code></td><td style="text-align: left"><code>write_rich_string_with_format()</code></td></tr>
+<tr><td style="text-align: left"><code>write_string()</code></td><td style="text-align: left"><code>write_string_with_format()</code></td></tr>
+</tbody></table>
+</div></li>
+<li>
+<p>The following enums and structs have changed to a more logical naming:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Previous name</th><th style="text-align: left">New name</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>XlsxAlign</code></td><td style="text-align: left"><code>FormatAlign</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxBorder</code></td><td style="text-align: left"><code>FormatBorder</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxDiagonalBorder</code></td><td style="text-align: left"><code>FormatDiagonalBorder</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxPattern</code></td><td style="text-align: left"><code>FormatPattern</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxScript</code></td><td style="text-align: left"><code>FormatScript</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxUnderline</code></td><td style="text-align: left"><code>FormatUnderline</code></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>XlsxObjectMovement</code></td><td style="text-align: left"><code>ObjectMovement</code></td></tr>
+<tr><td style="text-align: left"><code>XlsxImagePosition</code></td><td style="text-align: left"><code>HeaderImagePosition</code></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>ProtectWorksheetOptions</code></td><td style="text-align: left"><code>ProtectionOptions</code></td></tr>
+<tr><td style="text-align: left"><code>Properties</code></td><td style="text-align: left"><code>DocProperties</code></td></tr>
+</tbody></table>
+</div></li>
+<li>
+<p>The <code>DocProperties::set_custom_property()</code> method replaces several type
+specific methods with a single trait based generic method.</p>
+</li>
+</ul>
 <h2 id="0250---2023-01-30"><a class="header" href="#0250---2023-01-30">[0.25.0] - 2023-01-30</a></h2>
 <p><strong>Note</strong>: The next version of rust_xlsxwriter will contain backward incompatible
 changes in order to standardize and simplify certain parts of the API.</p>
@@ -163,7 +213,7 @@ language ports of &quot;xlsxwriter&quot;.</p>
 <li>Added support for hiding rows and columns (to hide intermediate calculations)
 via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_hidden"><code>worksheet.set_column_hidden()</code></a> and<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>
 method. This is also a required precursor to adding autofilter conditions.</li>
-<li>Added the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxObjectMovement.html">XlsxObjectMovement</a> enum to control how a worksheet object, such a
+<li>Added the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.ObjectMovement.html">ObjectMovement</a> enum to control how a worksheet object, such a
 an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </ul>
 <h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
@@ -191,10 +241,10 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 <h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>Added support for setting document metadata properties such as Author and
-Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Properties.html"><code>Properties</code></a> and
+Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.DocProperties.html"><code>DocProperties</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.set_properties"><code>workbook::set_properties()</code></a>.</li>
 </ul>
-<h3 id="changed"><a class="header" href="#changed">Changed</a></h3>
+<h3 id="changed-1"><a class="header" href="#changed-1">Changed</a></h3>
 <ul>
 <li>Change date/time parameters to references in <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_datetime"><code>worksheet.write_datetime()</code></a>,
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_date"><code>worksheet.write_date()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_time"><code>worksheet.write_time()</code></a> for consistency.</li>
@@ -205,7 +255,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 <li>Improved fitting algorithm for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a>. See also the
 <a href="https://rustxlsxwriter.github.io/examples/autofit.html">app_autofit</a> sample application.</li>
 </ul>
-<h3 id="changed-1"><a class="header" href="#changed-1">Changed</a></h3>
+<h3 id="changed-2"><a class="header" href="#changed-2">Changed</a></h3>
 <ul>
 <li>The <code>worksheet.set_autofit()</code> method has been renamed to <code>worksheet.autofit()</code>
 for consistency with the other language versions of this library.</li>
@@ -229,7 +279,7 @@ an upcoming version. See also <a href="https://rustxlsxwriter.github.io/examples
 <ul>
 <li>
 <p>Added support for &quot;rich&quot; strings with multiple font formats via
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string_only"><code>worksheet.write_rich_string_only()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string"><code>worksheet.write_rich_string()</code></a>.
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string_only"><code>worksheet.write_rich_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_rich_string"><code>worksheet.write_rich_string_with_format()</code></a>.
 For example strings like &quot;This is <strong>bold</strong> and this is <em>italic</em>&quot;.</p>
 <p>See also the <a href="https://rustxlsxwriter.github.io/examples/rich_strings.html">Rich strings example</a> in the user guide.</p>
 </li>
@@ -298,7 +348,7 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </ul>
 <p>See also the <a href="https://rustxlsxwriter.github.io/examples/hyperlinks.html">hyperlinks example</a> in the user guide.</p>
 <h2 id="0121---2022-11-09"><a class="header" href="#0121---2022-11-09">[0.12.1] - 2022-11-09</a></h2>
-<h3 id="changed-2"><a class="header" href="#changed-2">Changed</a></h3>
+<h3 id="changed-3"><a class="header" href="#changed-3">Changed</a></h3>
 <ul>
 <li>
 <p>Dependency changes to make WASM compilation easier:</p>
@@ -346,7 +396,7 @@ worksheets. See also the <a href="https://rustxlsxwriter.github.io/examples/pane
 <p><strong>Note, this version contains a major backward incompatible API change where it
 restructures the Workbook constructor/destructor sequence and introduces a
 <code>save()</code> method to replace <code>close()</code>.</strong></p>
-<h3 id="changed-3"><a class="header" href="#changed-3">Changed</a></h3>
+<h3 id="changed-4"><a class="header" href="#changed-4">Changed</a></h3>
 <ul>
 <li>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.new"><code>Workbook::new()</code></a> method no longer takes a filename. Instead the naming
 of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save"><code>workbook.save()</code></a> method which replaces
@@ -472,8 +522,8 @@ Footers</a>.</p>
 <h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array_formula()</code></a> and
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_array_formula"><code>worksheet.write_dynamic_array_formula()</code></a>.</li>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_dynamic_array_formula"><code>worksheet.write_dynamic_array_formula_with_format()</code></a>.</li>
 </ul>
 <p>See also the rust_xlsxwriter user documentation on <a href="https://rustxlsxwriter.github.io/formulas/dynamic_arrays.html">Dynamic Array support</a>.</p>
 <h2 id="031---2022-10-01"><a class="header" href="#031---2022-10-01">[0.3.1] - 2022-10-01</a></h2>
@@ -484,7 +534,7 @@ Footers</a>.</p>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
 <h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
 <ul>
-<li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean()</code></a> method to support writing Excel boolean
+<li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean_with_format()</code></a> method to support writing Excel boolean
 values.</li>
 </ul>
 <h2 id="021---2022-09-22"><a class="header" href="#021---2022-09-22">[0.2.1] - 2022-09-22</a></h2>

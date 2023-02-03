@@ -165,8 +165,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add a general heading format.
     let header_format = Format::new()
         .set_bold()
-        .set_align(XlsxAlign::Top)
-        .set_border(XlsxBorder::Thin)
+        .set_align(FormatAlign::Top)
+        .set_border(FormatBorder::Thin)
         .set_background_color(XlsxColor::RGB(0xC6EFCE));
 
     // -----------------------------------------------------------------------
@@ -180,57 +180,57 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.set_row_height(0, 25)?;
 
     // Add some descriptive text and the formatted numbers.
-    worksheet.write_string(0, 0, &quot;Number Categories&quot;, &amp;header_format)?;
-    worksheet.write_string(0, 1, &quot;Formatted Numbers&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 0, &quot;Number Categories&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 1, &quot;Formatted Numbers&quot;, &amp;header_format)?;
 
     // Write an unformatted number with the default or &quot;General&quot; format.
-    worksheet.write_string_only(1, 0, &quot;General&quot;)?;
-    worksheet.write_number_only(1, 1, 1234.567)?;
+    worksheet.write_string(1, 0, &quot;General&quot;)?;
+    worksheet.write_number(1, 1, 1234.567)?;
 
     // Write a number with a decimal format.
-    worksheet.write_string_only(2, 0, &quot;Number&quot;)?;
+    worksheet.write_string(2, 0, &quot;Number&quot;)?;
     let decimal_format = Format::new().set_num_format(&quot;0.00&quot;);
-    worksheet.write_number(2, 1, 1234.567, &amp;decimal_format)?;
+    worksheet.write_number_with_format(2, 1, 1234.567, &amp;decimal_format)?;
 
     // Write a number with a currency format.
-    worksheet.write_string_only(3, 0, &quot;Currency&quot;)?;
+    worksheet.write_string(3, 0, &quot;Currency&quot;)?;
     let currency_format = Format::new().set_num_format(&quot;[$¥-ja-JP]#,##0.00&quot;);
-    worksheet.write_number(3, 1, 1234.567, &amp;currency_format)?;
+    worksheet.write_number_with_format(3, 1, 1234.567, &amp;currency_format)?;
 
     // Write a number with an accountancy format.
-    worksheet.write_string_only(4, 0, &quot;Accountancy&quot;)?;
+    worksheet.write_string(4, 0, &quot;Accountancy&quot;)?;
     let accountancy_format = Format::new().set_num_format(&quot;_-[$¥-ja-JP]* #,##0.00_-&quot;);
-    worksheet.write_number(4, 1, 1234.567, &amp;accountancy_format)?;
+    worksheet.write_number_with_format(4, 1, 1234.567, &amp;accountancy_format)?;
 
     // Write a number with a short date format.
-    worksheet.write_string_only(5, 0, &quot;Date&quot;)?;
+    worksheet.write_string(5, 0, &quot;Date&quot;)?;
     let short_date_format = Format::new().set_num_format(&quot;yyyy-mm-dd;@&quot;);
-    worksheet.write_number(5, 1, 44927.23, &amp;short_date_format)?;
+    worksheet.write_number_with_format(5, 1, 44927.23, &amp;short_date_format)?;
 
     // Write a number with a long date format.
-    worksheet.write_string_only(6, 0, &quot;Date&quot;)?;
+    worksheet.write_string(6, 0, &quot;Date&quot;)?;
     let long_date_format = Format::new().set_num_format(&quot;[$-x-sysdate]dddd, mmmm dd, yyyy&quot;);
-    worksheet.write_number(6, 1, 44927.23, &amp;long_date_format)?;
+    worksheet.write_number_with_format(6, 1, 44927.23, &amp;long_date_format)?;
 
     // Write a number with a percentage format.
-    worksheet.write_string_only(7, 0, &quot;Percentage&quot;)?;
+    worksheet.write_string(7, 0, &quot;Percentage&quot;)?;
     let percentage_format = Format::new().set_num_format(&quot;0.00%&quot;);
-    worksheet.write_number(7, 1, 72.5 / 100.0, &amp;percentage_format)?;
+    worksheet.write_number_with_format(7, 1, 72.5 / 100.0, &amp;percentage_format)?;
 
     // Write a number with a fraction format.
-    worksheet.write_string_only(8, 0, &quot;Fraction&quot;)?;
+    worksheet.write_string(8, 0, &quot;Fraction&quot;)?;
     let fraction_format = Format::new().set_num_format(&quot;# ??/??&quot;);
-    worksheet.write_number(8, 1, 5.0 / 16.0, &amp;fraction_format)?;
+    worksheet.write_number_with_format(8, 1, 5.0 / 16.0, &amp;fraction_format)?;
 
     // Write a number with a percentage format.
-    worksheet.write_string_only(9, 0, &quot;Scientific&quot;)?;
+    worksheet.write_string(9, 0, &quot;Scientific&quot;)?;
     let scientific_format = Format::new().set_num_format(&quot;0.00E+00&quot;);
-    worksheet.write_number(9, 1, 1234.567, &amp;scientific_format)?;
+    worksheet.write_number_with_format(9, 1, 1234.567, &amp;scientific_format)?;
 
     // Write a number with a text format.
-    worksheet.write_string_only(10, 0, &quot;Text&quot;)?;
+    worksheet.write_string(10, 0, &quot;Text&quot;)?;
     let text_format = Format::new().set_num_format(&quot;@&quot;);
-    worksheet.write_number(10, 1, 1234.567, &amp;text_format)?;
+    worksheet.write_number_with_format(10, 1, 1234.567, &amp;text_format)?;
 
     // -----------------------------------------------------------------------
     // Create a worksheet that demonstrates number formatting.
@@ -244,52 +244,52 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     }
 
     // Add some descriptive text at the top of the worksheet.
-    worksheet.write_string(0, 0, &quot;Alignment formats&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 0, &quot;Alignment formats&quot;, &amp;header_format)?;
 
     // Some examples of positional alignment formats.
-    let center_format = Format::new().set_align(XlsxAlign::Center);
-    worksheet.write_string(1, 0, &quot;Center&quot;, &amp;center_format)?;
+    let center_format = Format::new().set_align(FormatAlign::Center);
+    worksheet.write_string_with_format(1, 0, &quot;Center&quot;, &amp;center_format)?;
 
     let top_left_format = Format::new()
-        .set_align(XlsxAlign::Top)
-        .set_align(XlsxAlign::Left);
-    worksheet.write_string(2, 0, &quot;Top - Left&quot;, &amp;top_left_format)?;
+        .set_align(FormatAlign::Top)
+        .set_align(FormatAlign::Left);
+    worksheet.write_string_with_format(2, 0, &quot;Top - Left&quot;, &amp;top_left_format)?;
 
     let center_center_format = Format::new()
-        .set_align(XlsxAlign::VerticalCenter)
-        .set_align(XlsxAlign::Center);
-    worksheet.write_string(3, 0, &quot;Center - Center&quot;, &amp;center_center_format)?;
+        .set_align(FormatAlign::VerticalCenter)
+        .set_align(FormatAlign::Center);
+    worksheet.write_string_with_format(3, 0, &quot;Center - Center&quot;, &amp;center_center_format)?;
 
     let bottom_right_format = Format::new()
-        .set_align(XlsxAlign::Bottom)
-        .set_align(XlsxAlign::Right);
-    worksheet.write_string(4, 0, &quot;Bottom - Right&quot;, &amp;bottom_right_format)?;
+        .set_align(FormatAlign::Bottom)
+        .set_align(FormatAlign::Right);
+    worksheet.write_string_with_format(4, 0, &quot;Bottom - Right&quot;, &amp;bottom_right_format)?;
 
     // Some indentation formats.
     let indent1_format = Format::new().set_indent(1);
-    worksheet.write_string(5, 0, &quot;Indent 1&quot;, &amp;indent1_format)?;
+    worksheet.write_string_with_format(5, 0, &quot;Indent 1&quot;, &amp;indent1_format)?;
 
     let indent2_format = Format::new().set_indent(2);
-    worksheet.write_string(6, 0, &quot;Indent 2&quot;, &amp;indent2_format)?;
+    worksheet.write_string_with_format(6, 0, &quot;Indent 2&quot;, &amp;indent2_format)?;
 
     // Text wrap format.
     let text_wrap_format = Format::new().set_text_wrap();
-    worksheet.write_string(7, 0, &quot;Some text that is wrapped&quot;, &amp;text_wrap_format)?;
-    worksheet.write_string(8, 0, &quot;Text\nwrapped\nat newlines&quot;, &amp;text_wrap_format)?;
+    worksheet.write_string_with_format(7, 0, &quot;Some text that is wrapped&quot;, &amp;text_wrap_format)?;
+    worksheet.write_string_with_format(8, 0, &quot;Text\nwrapped\nat newlines&quot;, &amp;text_wrap_format)?;
 
     // Shrink text format.
     let shrink_format = Format::new().set_shrink();
-    worksheet.write_string(9, 0, &quot;Shrink wide text to fit cell&quot;, &amp;shrink_format)?;
+    worksheet.write_string_with_format(9, 0, &quot;Shrink wide text to fit cell&quot;, &amp;shrink_format)?;
 
     // Text rotation formats.
     let rotate_format1 = Format::new().set_rotation(30);
-    worksheet.write_string(10, 0, &quot;Rotate&quot;, &amp;rotate_format1)?;
+    worksheet.write_string_with_format(10, 0, &quot;Rotate&quot;, &amp;rotate_format1)?;
 
     let rotate_format2 = Format::new().set_rotation(-30);
-    worksheet.write_string(11, 0, &quot;Rotate&quot;, &amp;rotate_format2)?;
+    worksheet.write_string_with_format(11, 0, &quot;Rotate&quot;, &amp;rotate_format2)?;
 
     let rotate_format3 = Format::new().set_rotation(270);
-    worksheet.write_string(12, 0, &quot;Rotate&quot;, &amp;rotate_format3)?;
+    worksheet.write_string_with_format(12, 0, &quot;Rotate&quot;, &amp;rotate_format3)?;
 
     // -----------------------------------------------------------------------
     // Create a worksheet that demonstrates font formatting.
@@ -302,45 +302,45 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.set_row_height(0, 25)?;
 
     // Add some descriptive text at the top of the worksheet.
-    worksheet.write_string(0, 0, &quot;Font formatting&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 0, &quot;Font formatting&quot;, &amp;header_format)?;
 
     // Different fonts.
-    worksheet.write_string_only(1, 0, &quot;Calibri 11 (default font)&quot;)?;
+    worksheet.write_string(1, 0, &quot;Calibri 11 (default font)&quot;)?;
 
     let algerian_format = Format::new().set_font_name(&quot;Algerian&quot;);
-    worksheet.write_string(2, 0, &quot;Algerian&quot;, &amp;algerian_format)?;
+    worksheet.write_string_with_format(2, 0, &quot;Algerian&quot;, &amp;algerian_format)?;
 
     let consolas_format = Format::new().set_font_name(&quot;Consolas&quot;);
-    worksheet.write_string(3, 0, &quot;Consolas&quot;, &amp;consolas_format)?;
+    worksheet.write_string_with_format(3, 0, &quot;Consolas&quot;, &amp;consolas_format)?;
 
     let comic_sans_format = Format::new().set_font_name(&quot;Comic Sans MS&quot;);
-    worksheet.write_string(4, 0, &quot;Comic Sans MS&quot;, &amp;comic_sans_format)?;
+    worksheet.write_string_with_format(4, 0, &quot;Comic Sans MS&quot;, &amp;comic_sans_format)?;
 
     // Font styles.
     let bold = Format::new().set_bold();
-    worksheet.write_string(5, 0, &quot;Bold&quot;, &amp;bold)?;
+    worksheet.write_string_with_format(5, 0, &quot;Bold&quot;, &amp;bold)?;
 
     let italic = Format::new().set_italic();
-    worksheet.write_string(6, 0, &quot;Italic&quot;, &amp;italic)?;
+    worksheet.write_string_with_format(6, 0, &quot;Italic&quot;, &amp;italic)?;
 
     let bold_italic = Format::new().set_bold().set_italic();
-    worksheet.write_string(7, 0, &quot;Bold/Italic&quot;, &amp;bold_italic)?;
+    worksheet.write_string_with_format(7, 0, &quot;Bold/Italic&quot;, &amp;bold_italic)?;
 
     // Font size.
     let size_format = Format::new().set_font_size(18);
-    worksheet.write_string(8, 0, &quot;Font size 18&quot;, &amp;size_format)?;
+    worksheet.write_string_with_format(8, 0, &quot;Font size 18&quot;, &amp;size_format)?;
 
     // Font color.
     let font_color_format = Format::new().set_font_color(XlsxColor::Red);
-    worksheet.write_string(9, 0, &quot;Font color&quot;, &amp;font_color_format)?;
+    worksheet.write_string_with_format(9, 0, &quot;Font color&quot;, &amp;font_color_format)?;
 
     // Font underline.
-    let underline_format = Format::new().set_underline(XlsxUnderline::Single);
-    worksheet.write_string(10, 0, &quot;Underline&quot;, &amp;underline_format)?;
+    let underline_format = Format::new().set_underline(FormatUnderline::Single);
+    worksheet.write_string_with_format(10, 0, &quot;Underline&quot;, &amp;underline_format)?;
 
     // Font strike-though.
     let strikethrough_format = Format::new().set_font_strikethrough();
-    worksheet.write_string(11, 0, &quot;Strikethrough&quot;, &amp;strikethrough_format)?;
+    worksheet.write_string_with_format(11, 0, &quot;Strikethrough&quot;, &amp;strikethrough_format)?;
 
     // -----------------------------------------------------------------------
     // Create a worksheet that demonstrates border formatting.
@@ -352,22 +352,22 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.set_row_height(0, 25)?;
 
     // Add some descriptive text at the top of the worksheet.
-    worksheet.write_string(0, 2, &quot;Border formats&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 2, &quot;Border formats&quot;, &amp;header_format)?;
 
     // Add some borders to cells.
-    let border_format1 = Format::new().set_border(XlsxBorder::Thin);
-    worksheet.write_string(2, 2, &quot;Thin Border&quot;, &amp;border_format1)?;
+    let border_format1 = Format::new().set_border(FormatBorder::Thin);
+    worksheet.write_string_with_format(2, 2, &quot;Thin Border&quot;, &amp;border_format1)?;
 
-    let border_format2 = Format::new().set_border(XlsxBorder::Dotted);
-    worksheet.write_string(4, 2, &quot;Dotted Border&quot;, &amp;border_format2)?;
+    let border_format2 = Format::new().set_border(FormatBorder::Dotted);
+    worksheet.write_string_with_format(4, 2, &quot;Dotted Border&quot;, &amp;border_format2)?;
 
-    let border_format3 = Format::new().set_border(XlsxBorder::Double);
-    worksheet.write_string(6, 2, &quot;Double Border&quot;, &amp;border_format3)?;
+    let border_format3 = Format::new().set_border(FormatBorder::Double);
+    worksheet.write_string_with_format(6, 2, &quot;Double Border&quot;, &amp;border_format3)?;
 
     let border_format4 = Format::new()
-        .set_border(XlsxBorder::Thin)
+        .set_border(FormatBorder::Thin)
         .set_border_color(XlsxColor::Red);
-    worksheet.write_string(8, 2, &quot;Color Border&quot;, &amp;border_format4)?;
+    worksheet.write_string_with_format(8, 2, &quot;Color Border&quot;, &amp;border_format4)?;
 
     // -----------------------------------------------------------------------
     // Create a worksheet that demonstrates fill/pattern formatting.
@@ -379,19 +379,19 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.set_row_height(0, 25)?;
 
     // Add some descriptive text at the top of the worksheet.
-    worksheet.write_string(0, 1, &quot;Fill formats&quot;, &amp;header_format)?;
+    worksheet.write_string_with_format(0, 1, &quot;Fill formats&quot;, &amp;header_format)?;
 
     // Write some cells with pattern fills.
     let fill_format1 = Format::new()
         .set_background_color(XlsxColor::Yellow)
-        .set_pattern(XlsxPattern::Solid);
-    worksheet.write_string(2, 1, &quot;Solid fill&quot;, &amp;fill_format1)?;
+        .set_pattern(FormatPattern::Solid);
+    worksheet.write_string_with_format(2, 1, &quot;Solid fill&quot;, &amp;fill_format1)?;
 
     let fill_format2 = Format::new()
         .set_background_color(XlsxColor::Yellow)
         .set_foreground_color(XlsxColor::Orange)
-        .set_pattern(XlsxPattern::Gray0625);
-    worksheet.write_string(4, 1, &quot;Pattern fill&quot;, &amp;fill_format2)?;
+        .set_pattern(FormatPattern::Gray0625);
+    worksheet.write_string_with_format(4, 1, &quot;Pattern fill&quot;, &amp;fill_format2)?;
 
     // Save the file to disk.
     workbook.save(&quot;cell_formats.xlsx&quot;)?;

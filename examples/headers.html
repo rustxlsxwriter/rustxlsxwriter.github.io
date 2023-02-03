@@ -152,7 +152,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -167,7 +167,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span>    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 <span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -177,7 +177,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span><span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -188,14 +188,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span><span class="boring">    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-</span><span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+</span><span class="boring">    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 </span><span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -205,7 +205,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 </span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -215,7 +215,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
@@ -224,7 +224,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
@@ -241,7 +241,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -256,7 +256,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 </span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -266,7 +266,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span>    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -277,14 +277,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span><span class="boring">    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-</span><span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+</span><span class="boring">    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 </span><span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -294,7 +294,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 </span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -304,7 +304,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
@@ -313,7 +313,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
@@ -330,7 +330,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -345,7 +345,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 </span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -355,7 +355,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span><span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -366,14 +366,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span>    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 <span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -383,7 +383,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 </span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -393,7 +393,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
@@ -402,7 +402,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
@@ -419,7 +419,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -434,7 +434,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 </span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -444,7 +444,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span><span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -455,14 +455,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span><span class="boring">    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-</span><span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+</span><span class="boring">    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 </span><span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -472,7 +472,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span>    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 <span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -482,7 +482,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
@@ -491,7 +491,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
@@ -508,7 +508,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -523,7 +523,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 </span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -533,7 +533,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span><span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -544,14 +544,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span><span class="boring">    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-</span><span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+</span><span class="boring">    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 </span><span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -561,7 +561,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 </span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -571,7 +571,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span>    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 <span class="boring">
@@ -580,7 +580,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 </span><span class="boring">
@@ -597,7 +597,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span><span class="boring">use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -612,7 +612,7 @@
 </span><span class="boring">    worksheet1.set_view_page_layout();
 </span><span class="boring">
 </span><span class="boring">    // Add some sample text.
-</span><span class="boring">    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
 </span><span class="boring">    worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -622,7 +622,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
 </span><span class="boring">    worksheet2.set_view_page_layout();
-</span><span class="boring">    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
 </span><span class="boring">    worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -633,14 +633,14 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
 </span><span class="boring">    worksheet3.set_view_page_layout();
-</span><span class="boring">    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
 </span><span class="boring">    image.set_scale_height(0.5);
 </span><span class="boring">    image.set_scale_width(0.5);
 </span><span class="boring">
 </span><span class="boring">    worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-</span><span class="boring">    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+</span><span class="boring">    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 </span><span class="boring">
 </span><span class="boring">    // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
 </span><span class="boring">    worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -650,7 +650,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
 </span><span class="boring">    worksheet4.set_view_page_layout();
-</span><span class="boring">    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
 </span><span class="boring">    worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -660,7 +660,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
 </span><span class="boring">    worksheet5.set_view_page_layout();
-</span><span class="boring">    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span><span class="boring">    worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 </span><span class="boring">
@@ -669,7 +669,7 @@
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
 </span><span class="boring">    worksheet6.set_view_page_layout();
-</span><span class="boring">    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+</span><span class="boring">    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 </span><span class="boring">
 </span>    worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 <span class="boring">
@@ -686,7 +686,7 @@
 </span><span class="boring">//! An example of setting headers and footers in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Image, Workbook, XlsxError, XlsxImagePosition};
+</span>use rust_xlsxwriter::{HeaderImagePosition, Image, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -701,7 +701,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet1.set_view_page_layout();
 
     // Add some sample text.
-    worksheet1.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet1.write_string(0, 0, &quot;Some text&quot;)?;
 
     worksheet1.set_header(&quot;&amp;CHere is some centered text.&quot;);
     worksheet1.set_footer(&quot;&amp;LHere is some left aligned text.&quot;);
@@ -711,7 +711,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet2 = workbook.add_worksheet().set_name(&quot;Variables&quot;)?;
     worksheet2.set_view_page_layout();
-    worksheet2.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet2.write_string(0, 0, &quot;Some text&quot;)?;
 
     // Note the sections separators &quot;&amp;L&quot; (left) &quot;&amp;C&quot; (center) and &quot;&amp;R&quot; (right).
     worksheet2.set_header(&quot;&amp;LPage &amp;[Page] of &amp;[Pages]&amp;CFilename: &amp;[File]&amp;RSheetname: &amp;[Tab]&quot;);
@@ -722,14 +722,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet3 = workbook.add_worksheet().set_name(&quot;Images&quot;)?;
     worksheet3.set_view_page_layout();
-    worksheet3.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet3.write_string(0, 0, &quot;Some text&quot;)?;
 
     let mut image = Image::new(&quot;examples/rust_logo.png&quot;)?;
     image.set_scale_height(0.5);
     image.set_scale_width(0.5);
 
     worksheet3.set_header(&quot;&amp;L&amp;[Picture]&quot;);
-    worksheet3.set_header_image(&amp;image, XlsxImagePosition::Left)?;
+    worksheet3.set_header_image(&amp;image, HeaderImagePosition::Left)?;
 
     // Increase the top margin to 1.2 for clarity. The -1.0 values are ignored.
     worksheet3.set_margins(-1.0, -1.0, 1.2, -1.0, -1.0, -1.0);
@@ -739,7 +739,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet4 = workbook.add_worksheet().set_name(&quot;Mixed fonts&quot;)?;
     worksheet4.set_view_page_layout();
-    worksheet4.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet4.write_string(0, 0, &quot;Some text&quot;)?;
 
     worksheet4.set_header(r#&quot;&amp;C&amp;&quot;Courier New,Bold&quot;Hello &amp;&quot;Arial,Italic&quot;World&quot;#);
     worksheet4.set_footer(r#&quot;&amp;C&amp;&quot;Symbol&quot;e&amp;&quot;Arial&quot; = mc&amp;X2&quot;#);
@@ -749,7 +749,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet5 = workbook.add_worksheet().set_name(&quot;Word wrap&quot;)?;
     worksheet5.set_view_page_layout();
-    worksheet5.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet5.write_string(0, 0, &quot;Some text&quot;)?;
 
     worksheet5.set_header(&quot;&amp;CHeading 1\nHeading 2&quot;);
 
@@ -758,7 +758,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let worksheet6 = workbook.add_worksheet().set_name(&quot;Ampersand&quot;)?;
     worksheet6.set_view_page_layout();
-    worksheet6.write_string_only(0, 0, &quot;Some text&quot;)?;
+    worksheet6.write_string(0, 0, &quot;Some text&quot;)?;
 
     worksheet6.set_header(&quot;&amp;CCuriouser &amp;&amp; Curiouser - Attorneys at Law&quot;);
 
