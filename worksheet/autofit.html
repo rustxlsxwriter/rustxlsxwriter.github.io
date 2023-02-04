@@ -143,24 +143,22 @@
                     <main>
                         <h1 id="autofitting-column-widths"><a class="header" href="#autofitting-column-widths">Autofitting column widths</a></h1>
 <p>Column widths in a <code>rust_xlsxwriter</code> worksheet can be adjusted automatically
-using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> method.</p>
-<p>There is no option in the xlsx file format that <code>rust_xlsxwriter</code> can be used to
-say &quot;autofit columns on loading&quot;. Auto-fitting of columns is something that
-Excel does at runtime when it has access to all of the worksheet information as
-well as the Windows functions for calculating display areas based on fonts and
-formatting.</p>
-<p>As such <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> simulates this behavior by calculating string
+using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method.</p>
+<p>There is no option in the xlsx file format that can be used to say &quot;autofit
+columns on loading&quot;. Auto-fitting of columns is something that Excel does at
+runtime when it has access to all of the worksheet information as well as the
+Windows functions for calculating display areas based on fonts and formatting.</p>
+<p>As such <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> simulates this behavior by calculating string
 widths using metrics taken from Excel. This isn't perfect but for most cases it
 should be sufficient and if not you can set your own widths, see below.</p>
-<p>The <code>worksheet.set_autofit()</code> method ignores columns that already have an
-explicit column width set via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> or
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width_pixels"><code>worksheet.set_column_width_pixels()</code></a>. You can use these methods if you wish
-to override the <code>worksheet.set_autofit()</code> values.</p>
-<p>It is intended that the <code>worksheet.set_autofit()</code> fitting algorithm will be
-improved in upcoming releases.</p>
-<p><strong>Note</strong>, <code>worksheet.set_autofit()</code> iterates through all the cells in a
-worksheet that have been populated with data and performs a length calculation
-on each one, so it can have a performance overhead for bigger worksheets.</p>
+<p>The <code>worksheet.autofit()</code> method ignores columns that already have an explicit
+column width set via <a href="Worksheet::set_column_width()"><code>set_column_width()</code></a> or
+<a href="Worksheet::set_column_width_pixels()"><code>set_column_width_pixels()</code></a> if it is
+greater than the calculate maximum width. Alternatively, calling these methods
+after <code>worksheet.autofit()</code> will override the autofit value.</p>
+<p><strong>Note</strong>, <code>worksheet.autofit()</code> iterates through all the cells in a worksheet
+that have been populated with data and performs a length calculation on each
+one, so it can have a performance overhead for larger worksheets.</p>
 <p>See also the <a href="../examples/autofit.html">Autofitting Columns</a> example.</p>
 
                     </main>

@@ -182,7 +182,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.25.0&quot;
+rust_xlsxwriter = &quot;0.26.0&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -410,8 +410,8 @@ existing files.</p>
 </span><span class="boring">}</span></code></pre>
 <p>The worksheet will have a standard Excel name, in this case &quot;Sheet1&quot;. You can
 specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_name"><code>worksheet.set_name()</code></a> method.</p>
-<p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string_only"><code>worksheet.write_string_only()</code></a> and
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number_only"><code>worksheet.write_number_only()</code></a> methods to write each row of our data:</p>
+<p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a> methods to write each row of our data:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
@@ -448,8 +448,6 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}</span></code></pre>
-<p>The <code>_only</code> part of the method names refers to the fact that the data type is
-written without any formatting. We will see how to add formatting shortly.</p>
 <p>Throughout rust_xlsxwriter rows and columns are zero indexed. So, for example,
 the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 <p>We then add a formula to calculate the total of the items in the second column:</p>
@@ -640,8 +638,9 @@ amount of the its functionality to add some simple formatting:</p>
 </span><span class="boring">    Ok(())
 </span><span class="boring">}</span></code></pre>
 <p>We can use these formats in worksheet methods that support formatting such as
-the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a> methods which
-can write data and formatting together.</p>
+the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string_with_format"><code>worksheet.write_string_with_format()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number_with_format"><code>worksheet.write_number_with_format()</code></a> methods which can write data and
+formatting together.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-dates-and-more-formatting"><a class="header" href="#adding-dates-and-more-formatting">Adding dates and more formatting</a></h1>
 <p>Let's extend the program a little bit more to add some dates to the data:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -1029,7 +1028,7 @@ $ cargo run --example doc_properties_checksum2
 $ sum properties.xlsx
 8914 6 properties.xlsx # Same as previous
 </code></pre>
-<p>For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Properties.html"><code>Properties</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.set_properties"><code>workbook::set_properties()</code></a>.</p>
+<p>For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.DocProperties.html"><code>DocProperties</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.set_properties"><code>workbook::set_properties()</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-worksheet-struct"><a class="header" href="#the-worksheet-struct">The Worksheet struct</a></h1>
 <p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html"><code>Worksheet</code></a> struct struct represents an Excel worksheet. It handles operations such as writing data to cells or formatting worksheet layout.</p>
 <p><img src="worksheet/../../images/demo.png" alt="Image of output from app_demo.rs" /></p>
@@ -1481,24 +1480,22 @@ characters, including the control characters. Strings longer than this
 will not be written, and a warning will be output.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="autofitting-column-widths"><a class="header" href="#autofitting-column-widths">Autofitting column widths</a></h1>
 <p>Column widths in a <code>rust_xlsxwriter</code> worksheet can be adjusted automatically
-using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> method.</p>
-<p>There is no option in the xlsx file format that <code>rust_xlsxwriter</code> can be used to
-say &quot;autofit columns on loading&quot;. Auto-fitting of columns is something that
-Excel does at runtime when it has access to all of the worksheet information as
-well as the Windows functions for calculating display areas based on fonts and
-formatting.</p>
-<p>As such <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_autofit"><code>worksheet.set_autofit()</code></a> simulates this behavior by calculating string
+using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method.</p>
+<p>There is no option in the xlsx file format that can be used to say &quot;autofit
+columns on loading&quot;. Auto-fitting of columns is something that Excel does at
+runtime when it has access to all of the worksheet information as well as the
+Windows functions for calculating display areas based on fonts and formatting.</p>
+<p>As such <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> simulates this behavior by calculating string
 widths using metrics taken from Excel. This isn't perfect but for most cases it
 should be sufficient and if not you can set your own widths, see below.</p>
-<p>The <code>worksheet.set_autofit()</code> method ignores columns that already have an
-explicit column width set via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width"><code>worksheet.set_column_width()</code></a> or
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_width_pixels"><code>worksheet.set_column_width_pixels()</code></a>. You can use these methods if you wish
-to override the <code>worksheet.set_autofit()</code> values.</p>
-<p>It is intended that the <code>worksheet.set_autofit()</code> fitting algorithm will be
-improved in upcoming releases.</p>
-<p><strong>Note</strong>, <code>worksheet.set_autofit()</code> iterates through all the cells in a
-worksheet that have been populated with data and performs a length calculation
-on each one, so it can have a performance overhead for bigger worksheets.</p>
+<p>The <code>worksheet.autofit()</code> method ignores columns that already have an explicit
+column width set via <a href="worksheet/Worksheet::set_column_width()"><code>set_column_width()</code></a> or
+<a href="worksheet/Worksheet::set_column_width_pixels()"><code>set_column_width_pixels()</code></a> if it is
+greater than the calculate maximum width. Alternatively, calling these methods
+after <code>worksheet.autofit()</code> will override the autofit value.</p>
+<p><strong>Note</strong>, <code>worksheet.autofit()</code> iterates through all the cells in a worksheet
+that have been populated with data and performs a length calculation on each
+one, so it can have a performance overhead for larger worksheets.</p>
 <p>See also the <a href="worksheet/../examples/autofit.html">Autofitting Columns</a> example.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-worksheet-tabs"><a class="header" href="#working-with-worksheet-tabs">Working with worksheet tabs</a></h1>
 <p>Worksheet tabs in Excel allow the user to differentiate between different
@@ -1846,7 +1843,7 @@ protected. The default Excel options are:</p>
 <p>Almost all the options are protected by default apart from &quot;Select locked cells&quot;
 and &quot;Select unlocked cells&quot;.</p>
 <p>If you wish to turn on or off any of these options you can use the
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ProtectWorksheetOptions.html"><code>ProtectWorksheetOptions</code></a> struct and the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect_with_options"><code>worksheet.protect_with_options()</code></a>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ProtectionOptions.html"><code>ProtectionOptions</code></a> struct and the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect_with_options"><code>worksheet.protect_with_options()</code></a>
 method. For example:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -2753,7 +2750,7 @@ function to get a static/CSE range and
 applies to. However, since the range is dynamic this generally won't be known in
 advance in which case you can specify the range with the same start and end
 cell. The following range is &quot;F2:F2&quot;:</p>
-<pre><code class="language-rust">    worksheet1.write_dynamic_array_formula_only(1, 5, 1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;</code></pre>
+<pre><code class="language-rust">    worksheet1.write_dynamic_array_formula(1, 5, 1, 5, &quot;=FILTER(A1:D17,C1:C17=K2)&quot;)?;</code></pre>
 <p>As a syntactic shortcut you can use the <code>worksheet.write_dynamic_formula()</code>
 function which only requires the start cell:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0

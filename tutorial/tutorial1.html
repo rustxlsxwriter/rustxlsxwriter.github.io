@@ -264,8 +264,8 @@ existing files.</p>
 </span><span class="boring">}</span></code></pre>
 <p>The worksheet will have a standard Excel name, in this case &quot;Sheet1&quot;. You can
 specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_name"><code>worksheet.set_name()</code></a> method.</p>
-<p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string_only"><code>worksheet.write_string_only()</code></a> and
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number_only"><code>worksheet.write_number_only()</code></a> methods to write each row of our data:</p>
+<p>We then iterate over the data and use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_number"><code>worksheet.write_number()</code></a> methods to write each row of our data:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
@@ -302,8 +302,6 @@ specify the worksheet name using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}</span></code></pre>
-<p>The <code>_only</code> part of the method names refers to the fact that the data type is
-written without any formatting. We will see how to add formatting shortly.</p>
 <p>Throughout rust_xlsxwriter rows and columns are zero indexed. So, for example,
 the first cell in a worksheet, <code>A1</code>, is <code>(0, 0)</code>.</p>
 <p>We then add a formula to calculate the total of the items in the second column:</p>
