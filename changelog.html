@@ -155,7 +155,7 @@ but it will be extended in the next release for most other chart elements.</p>
 <p>See also the <a href="https://rustxlsxwriter.github.io/examples/chart_pattern.html">Chart Fill Pattern</a> example in the user guide.</p>
 </li>
 <li>
-<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/trait.IntoColor.html"><code>IntoColor</code></a> trait to allow syntactic shortcuts for <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>
+<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/trait.IntoColor.html"><code>IntoColor</code></a> trait to allow syntactic shortcuts for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>
 parameters in methods. So now you can set a RGB color like this
 <code>object.set_color(&quot;#FF7F50&quot;)</code> instead of the more verbose
 <code>object.set_color(XlsxColor::RGB(0xFF7F50))</code>. This addition doesn't require
@@ -165,10 +165,10 @@ any API changes from the end user.</p>
 <p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.insert_image_fit_to_cell"><code>worksheet.insert_image_fit_to_cell()</code></a> method to add an image to a
 worksheet and scale it so that it fits in a cell. This method can be useful
 when creating a product spreadsheet with a column of images for each product.</p>
-<p>See also the <a href="https://rustxlsxwriter.github.io/examples/insert_image_to_fit..html">insert_image_to_fit</a> example in the user guide.</p>
+<p>See also the <a href="https://rustxlsxwriter.github.io/examples/insert_image_to_fit.html">insert_image_to_fit</a> example in the user guide.</p>
 </li>
 <li>
-<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html#method.set_gap"><code>chart.set_gap()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html#method.set_overlap"><code>chart.set_overlap()</code></a> method to control layout
+<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartSeries.html#method.set_gap"><code>chart.series.set_gap()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartSeries.html#method.set_overlap"><code>chart.series.set_overlap()</code></a> method to control layout
 of histogram style charts.</p>
 </li>
 </ul>
@@ -422,7 +422,7 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 <h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
-<li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
+<li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
