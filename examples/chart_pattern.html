@@ -181,27 +181,31 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_name(&quot;Sheet1!$A$1&quot;)
         .set_values(&quot;Sheet1!$A$2:$A$5&quot;)
         .set_gap(70)
-        .format()
-        .set_pattern_fill(
-            &amp;ChartPatternFill::new()
-                .set_pattern(ChartPatternFillType::Shingle)
-                .set_foreground_color(&quot;#804000&quot;)
-                .set_background_color(&quot;#C68C53&quot;),
-        )
-        .set_border(&amp;ChartLine::new().set_color(&quot;#804000&quot;));
+        .set_format(
+            &amp;ChartFormat::new()
+                .set_pattern_fill(
+                    &amp;ChartPatternFill::new()
+                        .set_pattern(ChartPatternFillType::Shingle)
+                        .set_foreground_color(&quot;#804000&quot;)
+                        .set_background_color(&quot;#C68C53&quot;),
+                )
+                .set_border(&amp;ChartLine::new().set_color(&quot;#804000&quot;)),
+        );
 
     chart
         .add_series()
         .set_name(&quot;Sheet1!$B$1&quot;)
         .set_values(&quot;Sheet1!$B$2:$B$5&quot;)
-        .format()
-        .set_pattern_fill(
-            &amp;ChartPatternFill::new()
-                .set_pattern(ChartPatternFillType::HorizontalBrick)
-                .set_foreground_color(&quot;#B30000&quot;)
-                .set_background_color(&quot;#FF6666&quot;),
-        )
-        .set_border(&amp;ChartLine::new().set_color(&quot;#B30000&quot;));
+        .set_format(
+            &amp;ChartFormat::new()
+                .set_pattern_fill(
+                    &amp;ChartPatternFill::new()
+                        .set_pattern(ChartPatternFillType::HorizontalBrick)
+                        .set_foreground_color(&quot;#B30000&quot;)
+                        .set_background_color(&quot;#FF6666&quot;),
+                )
+                .set_border(&amp;ChartLine::new().set_color(&quot;#B30000&quot;)),
+        );
 
     // Add a chart title and some axis labels.
     chart.title().set_name(&quot;Cladding types&quot;);
