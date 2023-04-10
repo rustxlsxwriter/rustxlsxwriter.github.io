@@ -2285,11 +2285,13 @@ translated internally to RGB colors. These are shown in the table below.</p>
 <tr><td><code>XlsxColor::Silver</code></td><td><code>0xC0C0C0</code></td></tr>
 <tr><td><code>XlsxColor::White</code></td><td><code>0xFFFFFF</code></td></tr>
 <tr><td><code>XlsxColor::Yellow</code></td><td><code>0xFFFF00</code></td></tr>
+<tr><td><code>XlsxColor::Default  </code></td><td>None</td></tr>
 <tr><td><code>XlsxColor::Automatic</code></td><td>None</td></tr>
 </tbody></table>
 </div>
-<p>The <code>XlsxColor::Automatic</code> value translates to the default color in whatever
-context it is used.</p>
+<p>The <code>XlsxColor::Default</code> value translates to the default color in whatever
+context it is used. The <code>XlsxColor::Automatic</code> value is usually the same but can
+be overridden by system settings.</p>
 <h2 id="rgb-colors"><a class="header" href="#rgb-colors">RGB colors</a></h2>
 <p>These are the most common colors used throughout Excel. In <code>rust_xlsxwriter</code>
 they can be generated using the <code>XlsxColor::RGB()</code> member of the enum like this:
