@@ -182,7 +182,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.32.0&quot;
+rust_xlsxwriter = &quot;0.33.0&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -2710,10 +2710,10 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
@@ -3009,10 +3009,10 @@ function which only requires the start cell:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
@@ -3333,10 +3333,10 @@ following formula:</p>
 </span><span class="boring">        (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
 </span><span class="boring">    ];
 </span><span class="boring">
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, header)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, header)?;
 </span><span class="boring">
 </span><span class="boring">    let mut row = 1;
 </span><span class="boring">    for data in worksheet_data.iter() {
@@ -7115,7 +7115,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
             let mut font_color = XlsxColor::White;
             if col == 0 {
-                font_color = XlsxColor::Automatic;
+                font_color = XlsxColor::Default;
             }
 
             let color_format = Format::new()
@@ -7213,7 +7213,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     }
 
     // -----------------------------------------------------------------------
-    // Create a simple Column chart.
+    // Create a new chart.
     // -----------------------------------------------------------------------
     let mut chart = Chart::new(ChartType::Column);
 
@@ -8196,6 +8196,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 <p><strong>Image of the output file:</strong></p>
 <p>Chart 1 in the following example is a default pie chart:
 <img src="examples/../../images/chart_pie1.png" alt="Image of output chart example" /></p>
+<p>Chart 2 shows how to set segment colors.</p>
+<p>It is possible to define chart colors for most types of rust_xlsxwriter charts via
+the <code>add_series()</code> method. However, Pie charts are a special case since each
+segment is represented as a point and as such it is necessary to assign
+formatting to each point in the series.
+<img src="examples/../../images/chart_pie2.png" alt="Image of output chart example" /></p>
+<p>Chart 3 shows how to rotate the segments of the chart:
+<img src="examples/../../images/chart_pie3.png" alt="Image of output chart example" /></p>
 <p><strong>Code to generate the output file:</strong></p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -8227,7 +8235,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let mut chart = Chart::new(ChartType::Pie);
 
-    // Configure the first data series for the chart.
+    // Configure the data series for the chart.
     chart
         .add_series()
         .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
@@ -8241,7 +8249,47 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     chart.set_style(10);
 
     // Add the chart to the worksheet.
-    worksheet.insert_chart_with_offset(1, 3, &amp;chart, 25, 10)?;
+    worksheet.insert_chart_with_offset(1, 2, &amp;chart, 25, 10)?;
+
+    // -----------------------------------------------------------------------
+    // Create a Pie chart with user defined segment colors.
+    // -----------------------------------------------------------------------
+    let mut chart = Chart::new(ChartType::Pie);
+
+    // Configure the data series for the chart.
+    chart
+        .add_series()
+        .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
+        .set_values(&quot;Sheet1!$B$2:$B$4&quot;)
+        .set_name(&quot;Pie sales data&quot;)
+        .set_point_colors(&amp;[&quot;#5ABA10&quot;, &quot;#FE110E&quot;, &quot;#CA5C05&quot;]);
+
+    // Add a chart title.
+    chart.title().set_name(&quot;Pie Chart with user defined colors&quot;);
+
+    // Add the chart to the worksheet.
+    worksheet.insert_chart_with_offset(17, 2, &amp;chart, 25, 10)?;
+
+    // -----------------------------------------------------------------------
+    // Create a Pie chart with rotation of the segments.
+    // -----------------------------------------------------------------------
+    let mut chart = Chart::new(ChartType::Pie);
+
+    // Configure the data series for the chart.
+    chart
+        .add_series()
+        .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
+        .set_values(&quot;Sheet1!$B$2:$B$4&quot;)
+        .set_name(&quot;Pie sales data&quot;);
+
+    // Change the angle/rotation of the first segment.
+    chart.set_rotation(90);
+
+    // Add a chart title.
+    chart.title().set_name(&quot;Pie Chart with segment rotation&quot;);
+
+    // Add the chart to the worksheet.
+    worksheet.insert_chart_with_offset(33, 2, &amp;chart, 25, 10)?;
 
     workbook.save(&quot;chart_pie.xlsx&quot;)?;
 
@@ -8252,6 +8300,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 <p><strong>Image of the output file:</strong></p>
 <p>Chart 1 in the following example is a default doughnut chart:
 <img src="examples/../../images/chart_doughnut1.png" alt="Image of output chart example" /></p>
+<p>Chart 4 shows how to set segment colors and other options.</p>
+<p><img src="examples/../../images/chart_doughnut2.png" alt="Image of output chart example" /></p>
 <p><strong>Code to generate the output file:</strong></p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -8283,7 +8333,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // -----------------------------------------------------------------------
     let mut chart = Chart::new(ChartType::Doughnut);
 
-    // Configure the first data series for the chart.
+    // Configure the data series for the chart.
     chart
         .add_series()
         .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
@@ -8297,7 +8347,81 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     chart.set_style(10);
 
     // Add the chart to the worksheet.
-    worksheet.insert_chart_with_offset(1, 3, &amp;chart, 25, 10)?;
+    worksheet.insert_chart_with_offset(1, 2, &amp;chart, 25, 10)?;
+
+    // -----------------------------------------------------------------------
+    // Create a Doughnut chart with user defined segment colors.
+    // -----------------------------------------------------------------------
+    let mut chart = Chart::new(ChartType::Doughnut);
+
+    // Configure the data series for the chart.
+    chart
+        .add_series()
+        .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
+        .set_values(&quot;Sheet1!$B$2:$B$4&quot;)
+        .set_name(&quot;Doughnut sales data&quot;)
+        .set_point_colors(&amp;[&quot;#FA58D0&quot;, &quot;#61210B&quot;, &quot;#F5F6CE&quot;]);
+
+    // Add a chart title.
+    chart
+        .title()
+        .set_name(&quot;Doughnut Chart with user defined colors&quot;);
+
+    // Add the chart to the worksheet.
+    worksheet.insert_chart_with_offset(17, 2, &amp;chart, 25, 10)?;
+
+    // -----------------------------------------------------------------------
+    // Create a Doughnut chart with rotation of the segments.
+    // -----------------------------------------------------------------------
+    let mut chart = Chart::new(ChartType::Doughnut);
+
+    // Configure the data series for the chart.
+    chart
+        .add_series()
+        .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
+        .set_values(&quot;Sheet1!$B$2:$B$4&quot;)
+        .set_name(&quot;Doughnut sales data&quot;);
+
+    // Change the angle/rotation of the first segment.
+    chart.set_rotation(90);
+
+    // Add a chart title.
+    chart
+        .title()
+        .set_name(&quot;Doughnut Chart with segment rotation&quot;);
+
+    // Add the chart to the worksheet.
+    worksheet.insert_chart_with_offset(33, 2, &amp;chart, 25, 10)?;
+
+    // -----------------------------------------------------------------------
+    // Create a Doughnut chart with user defined hole size and other options.
+    // -----------------------------------------------------------------------
+    let mut chart = Chart::new(ChartType::Doughnut);
+
+    // Configure the data series for the chart.
+    chart
+        .add_series()
+        .set_categories(&quot;Sheet1!$A$2:$A$4&quot;)
+        .set_values(&quot;Sheet1!$B$2:$B$4&quot;)
+        .set_name(&quot;Doughnut sales data&quot;)
+        .set_point_colors(&amp;[&quot;#FA58D0&quot;, &quot;#61210B&quot;, &quot;#F5F6CE&quot;]);
+
+    // Add a chart title.
+    chart
+        .title()
+        .set_name(&quot;Doughnut Chart with options applied&quot;);
+
+    // Change the angle/rotation of the first segment.
+    chart.set_rotation(28);
+
+    // Change the hole size.
+    chart.set_hole_size(33);
+
+    // Set a 3D style.
+    chart.set_style(26);
+
+    // Add the chart to the worksheet.
+    worksheet.insert_chart_with_offset(49, 2, &amp;chart, 25, 10)?;
 
     workbook.save(&quot;chart_doughnut.xlsx&quot;)?;
 
@@ -8344,14 +8468,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_values(&quot;Sheet1!$A$2:$A$5&quot;)
         .set_gap(70)
         .set_format(
-            &amp;ChartFormat::new()
+            ChartFormat::new()
                 .set_pattern_fill(
-                    &amp;ChartPatternFill::new()
+                    ChartPatternFill::new()
                         .set_pattern(ChartPatternFillType::Shingle)
                         .set_foreground_color(&quot;#804000&quot;)
                         .set_background_color(&quot;#C68C53&quot;),
                 )
-                .set_border(&amp;ChartLine::new().set_color(&quot;#804000&quot;)),
+                .set_border(ChartLine::new().set_color(&quot;#804000&quot;)),
         );
 
     chart
@@ -8359,14 +8483,14 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_name(&quot;Sheet1!$B$1&quot;)
         .set_values(&quot;Sheet1!$B$2:$B$5&quot;)
         .set_format(
-            &amp;ChartFormat::new()
+            ChartFormat::new()
                 .set_pattern_fill(
-                    &amp;ChartPatternFill::new()
+                    ChartPatternFill::new()
                         .set_pattern(ChartPatternFillType::HorizontalBrick)
                         .set_foreground_color(&quot;#B30000&quot;)
                         .set_background_color(&quot;#FF6666&quot;),
                 )
-                .set_border(&amp;ChartLine::new().set_color(&quot;#B30000&quot;)),
+                .set_border(ChartLine::new().set_color(&quot;#B30000&quot;)),
         );
 
     // Add a chart title and some axis labels.
@@ -8851,10 +8975,10 @@ fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt
         (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
     ];
 
-    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, header)?;
+    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, header)?;
+    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, header)?;
+    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, header)?;
 
     let mut row = 1;
     for data in worksheet_data.iter() {
@@ -9903,20 +10027,43 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
-<h2 id="0320---2023-04-03"><a class="header" href="#0320---2023-04-03">[0.32.0] - 2023-04-03</a></h2>
+<h2 id="0330---2023-04-10"><a class="header" href="#0330---2023-04-10">[0.33.0] - 2023-04-10</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
+<ul>
+<li>
+<p>Added support for formatting and setting chart points via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartPoint.html"><code>ChartPoint</code></a>
+struct. This is mainly useful as the way of specifying segment colors in Pie
+charts.</p>
+<p>See the undated <a href="https://rustxlsxwriter.github.io/examples/pie_chart.html">Pie Chart</a> example in the user guide.</p>
+</li>
+<li>
+<p>Added support for formatting and setting chart markers via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartMarker.html"><code>ChartMarker</code></a>
+struct.</p>
+</li>
+<li>
+<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html#method.set_rotation"><code>chart.set_rotation()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html#method.set_hole_size"><code>chart.set_hole_size()</code></a> methods for Pie and Doughnut charts.</p>
+</li>
+<li>
+<p>Added support to differentiate between <code>XlsxColor::Default</code> and
+<code>XlsxColor::Automatic</code> colors for Excel elements. These are usually equivalent
+but there are some cases where the &quot;Automatic&quot; color, which can be set at a
+system level, is different from the Default color.</p>
+</li>
+</ul>
+<h2 id="0320---2023-04-03"><a class="header" href="#0320---2023-04-03">[0.32.0] - 2023-04-03</a></h2>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <ul>
 <li>Added formatting for the chart title and axes via the the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a>
 struct.</li>
 </ul>
 <h2 id="0310---2023-04-02"><a class="header" href="#0310---2023-04-02">[0.31.0] - 2023-04-02</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>Added formatting for the chart area, plot area, and legend via the the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a> struct.</li>
 </ul>
 <h2 id="0300---2023-03-31"><a class="header" href="#0300---2023-03-31">[0.30.0] - 2023-03-31</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>
 <p>Added chart formatting for Lines, Borders, Solid fills and Pattern fills via
@@ -9943,7 +10090,7 @@ of histogram style charts.</p>
 </li>
 </ul>
 <h2 id="0290---2023-03-16"><a class="header" href="#0290---2023-03-16">[0.29.0] - 2023-03-16</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>
 <p>Added support for resizing and object positioning to the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct.</p>
@@ -9954,12 +10101,12 @@ of histogram style charts.</p>
 </li>
 </ul>
 <h2 id="0280---2023-03-14"><a class="header" href="#0280---2023-03-14">[0.28.0] - 2023-03-14</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <ul>
 <li>Added support for positioning or hiding Chart legends. See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartLegend.html"><code>ChartLegend</code></a>.</li>
 </ul>
 <h2 id="0270---2023-03-13"><a class="header" href="#0270---2023-03-13">[0.27.0] - 2023-03-13</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>
 <p>Added support for Charts via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct and the
@@ -10026,7 +10173,7 @@ specific methods with a single trait based generic method.</p>
 </li>
 </ul>
 <h2 id="0250---2023-01-30"><a class="header" href="#0250---2023-01-30">[0.25.0] - 2023-01-30</a></h2>
-<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
+<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
 <ul>
 <li>
 <p>Added ability to filter columns in <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofilter"><code>worksheet.autofilter()</code></a> ranges via
@@ -10038,7 +10185,7 @@ language ports of &quot;xlsxwriter&quot;.</p>
 </li>
 </ul>
 <h2 id="0240---2023-01-18"><a class="header" href="#0240---2023-01-18">[0.24.0] - 2023-01-18</a></h2>
-<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
+<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
 <ul>
 <li>Added support for hiding rows and columns (to hide intermediate calculations)
 via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_hidden"><code>worksheet.set_column_hidden()</code></a> and<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>
@@ -10047,7 +10194,7 @@ method. This is also a required precursor to adding autofilter conditions.</li>
 an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </ul>
 <h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
-<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
+<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
 <p>Added more page setup methods.</p>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_selection"><code>worksheet.set_selection()</code></a> method to select a cell or range of cells in a worksheet.</li>
@@ -10055,7 +10202,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_breaks"><code>worksheet.set_page_breaks()</code></a> method to add page breaks to a worksheet.</li>
 </ul>
 <h2 id="0220---2023-01-13"><a class="header" href="#0220---2023-01-13">[0.22.0] - 2023-01-13</a></h2>
-<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
+<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
 <ul>
 <li>
 <p>Added support for worksheet protection via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect"><code>worksheet.protect()</code></a>,
@@ -10068,7 +10215,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </li>
 </ul>
 <h2 id="0210---2023-01-09"><a class="header" href="#0210---2023-01-09">[0.21.0] - 2023-01-09</a></h2>
-<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
+<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
 <ul>
 <li>Added support for setting document metadata properties such as Author and
 Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.DocProperties.html"><code>DocProperties</code></a> and
@@ -10080,7 +10227,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_date"><code>worksheet.write_date()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_time"><code>worksheet.write_time()</code></a> for consistency.</li>
 </ul>
 <h2 id="0200---2023-01-06"><a class="header" href="#0200---2023-01-06">[0.20.0] - 2023-01-06</a></h2>
-<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
+<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
 <ul>
 <li>Improved fitting algorithm for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a>. See also the
 <a href="https://rustxlsxwriter.github.io/examples/autofit.html">app_autofit</a> sample application.</li>
@@ -10091,7 +10238,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 for consistency with the other language versions of this library.</li>
 </ul>
 <h2 id="0190---2022-12-27"><a class="header" href="#0190---2022-12-27">[0.19.0] - 2022-12-27</a></h2>
-<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
+<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
 <ul>
 <li>
 <p>Added support for created defined variable names at a workbook and worksheet
@@ -10105,7 +10252,7 @@ an upcoming version. See also <a href="https://rustxlsxwriter.github.io/examples
 </li>
 </ul>
 <h2 id="0180---2022-12-19"><a class="header" href="#0180---2022-12-19">[0.18.0] - 2022-12-19</a></h2>
-<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
+<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
 <ul>
 <li>
 <p>Added support for &quot;rich&quot; strings with multiple font formats via
@@ -10121,7 +10268,7 @@ For example strings like &quot;This is <strong>bold</strong> and this is <em>ita
 Also fixes similar issues in some formatting code.</li>
 </ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
-<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
+<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in headers/footers via the
@@ -10130,13 +10277,13 @@ Also fixes similar issues in some formatting code.</li>
 </li>
 </ul>
 <h2 id="0160---2022-12-09"><a class="header" href="#0160---2022-12-09">[0.16.0] - 2022-12-09</a></h2>
-<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
+<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
 <ul>
 <li>Replicate the optimization used by Excel where it only stores one copy of a
 repeated/duplicate image in a workbook.</li>
 </ul>
 <h2 id="0150---2022-12-08"><a class="header" href="#0150---2022-12-08">[0.15.0] - 2022-12-08</a></h2>
-<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
+<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in buffers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Image.html#method.new_from_buffer"><code>image.new_from_buffer()</code></a>.</p>
@@ -10146,7 +10293,7 @@ repeated/duplicate image in a workbook.</li>
 </li>
 </ul>
 <h2 id="0140---2022-12-05"><a class="header" href="#0140---2022-12-05">[0.14.0] - 2022-12-05</a></h2>
-<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
+<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
 <ul>
 <li>
 <p>Added support for inserting images into worksheets with
@@ -10164,7 +10311,7 @@ in images and images in headers/footers.</p>
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>
 </ul>
 <h2 id="0130---2022-11-21"><a class="header" href="#0130---2022-11-21">[0.13.0] - 2022-11-21</a></h2>
-<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
+<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
 <ul>
 <li>
 <p>Added support for writing hyperlinks in worksheets via the following methods:</p>
@@ -10189,14 +10336,14 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </li>
 </ul>
 <h2 id="0120---2022-11-06"><a class="header" href="#0120---2022-11-06">[0.12.0] - 2022-11-06</a></h2>
-<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
+<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
 <li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
-<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
+<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
 <ul>
 <li>
 <p>Added several worksheet methods for working with worksheet tabs:</p>
@@ -10211,7 +10358,7 @@ Colors</a> in the user guide.</li>
 </li>
 </ul>
 <h2 id="0100---2022-11-03"><a class="header" href="#0100---2022-11-03">[0.10.0] - 2022-11-03</a></h2>
-<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
+<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
 <ul>
 <li>
 <p>Added a simulated <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method to automatically adjust
@@ -10234,7 +10381,7 @@ of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_x
 <li>There are now supporting <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> methods.</li>
 </ul>
-<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
+<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
 <ul>
 <li>
 <p>Added new methods to get references to worksheet objects used by the workbook:</p>
@@ -10252,7 +10399,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="080---2022-10-28"><a class="header" href="#080---2022-10-28">[0.8.0] - 2022-10-28</a></h2>
-<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
+<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
 <ul>
 <li>
 <p>Added support for creating files from paths via <code>workbook.new_from_path()</code>.</p>
@@ -10262,7 +10409,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
-<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
+<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
 <ul>
 <li>
 <p>Added an almost the complete set of Page Setup methods:</p>
@@ -10320,7 +10467,7 @@ with the borrow checker.</p>
 Issue #6</a>.</li>
 </ul>
 <h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
-<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
+<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -10334,7 +10481,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
+<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -10349,7 +10496,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
+<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array()</code></a> and
@@ -10362,7 +10509,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
+<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean_with_format()</code></a> method to support writing Excel boolean
 values.</li>
@@ -10373,12 +10520,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
+<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
+<h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>

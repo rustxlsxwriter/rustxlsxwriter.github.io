@@ -407,10 +407,10 @@ fn write_worksheet_data(worksheet: &amp;mut Worksheet, header: &amp;Format) -&gt
         (&quot;South&quot;, &quot;Hector&quot;, &quot;Apple&quot;, 9814),
     ];
 
-    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, &amp;header)?;
-    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, &amp;header)?;
+    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, header)?;
+    worksheet.write_string_with_format(0, 1, &quot;Sales Rep&quot;, header)?;
+    worksheet.write_string_with_format(0, 2, &quot;Product&quot;, header)?;
+    worksheet.write_string_with_format(0, 3, &quot;Units&quot;, header)?;
 
     let mut row = 1;
     for data in worksheet_data.iter() {
