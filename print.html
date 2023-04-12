@@ -182,7 +182,7 @@ version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.33.0&quot;
+rust_xlsxwriter = &quot;0.34.0&quot;
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -9931,26 +9931,48 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 (<a href="https://libxlsxwriter.github.io">libxlsxwriter</a>), Python (<a href="https://xlsxwriter.readthedocs.io/index.html">XlsxWriter</a>) and Perl (<a href="https://metacpan.org/dist/Excel-Writer-XLSX/view/lib/Excel/Writer/XLSX.pm">Excel::Writer::XLSX</a>).</p>
 <p>A <a href="https://lib.rs/crates/hyperfine">hyperfine</a> performance comparison between the C, Rust and Python versions is
 shown below. The Perl performance is similar to the Python library.</p>
-<pre><code>$ hyperfine target/release/examples/app_perf_test ./c_perf_test &quot;python py_perf_test.py&quot;
-Benchmark 1: target/release/examples/app_perf_test
-  Time (mean ± σ):     447.2 ms ±   8.3 ms    [User: 402.8 ms, System: 39.4 ms]
-  Range (min … max):   431.5 ms … 460.7 ms    10 runs
+<pre><code>$ hyperfine ./app_perf_test ./c_perf_test &quot;python py_perf_test.py&quot; --warmup 3
+Benchmark 1: ./app_perf_test
+  Time (mean ± σ):     233.6 ms ±   1.6 ms    [User: 216.0 ms, System: 15.7 ms]
+  Range (min … max):   230.7 ms … 235.7 ms    12 runs
 
 Benchmark 2: ./c_perf_test
-  Time (mean ± σ):     362.5 ms ±   6.4 ms    [User: 305.2 ms, System: 53.0 ms]
-  Range (min … max):   353.2 ms … 371.9 ms    10 runs
+  Time (mean ± σ):     197.2 ms ±   2.0 ms    [User: 163.1 ms, System: 28.4 ms]
+  Range (min … max):   194.5 ms … 201.0 ms    14 runs
 
 Benchmark 3: python py_perf_test.py
-  Time (mean ± σ):      2.899 s ±  0.023 s    [User: 2.787 s, System: 0.088 s]
-  Range (min … max):    2.868 s …  2.934 s    10 runs
+  Time (mean ± σ):      1.099 s ±  0.011 s    [User: 1.051 s, System: 0.041 s]
+  Range (min … max):    1.085 s …  1.125 s    10 runs
 
 Summary
   './c_perf_test' ran
-    1.23 ± 0.03 times faster than 'target/release/examples/app_perf_test'
-    8.00 ± 0.16 times faster than 'python py_perf_test.py'
+    1.18 ± 0.01 times faster than './app_perf_test'
+    5.57 ± 0.08 times faster than 'python py_perf_test.py'
 </code></pre>
 <p>Or in other words, the C version is the fastest and if we take that as 1 then
-the rust version is 1.2x (or 20%) slower and the Python version is 8x slower.</p>
+the rust version is 1.18x (or 18%) slower and the Python version is 5.5x slower.</p>
+<p>The <code>rust_xlsxwriter</code> library also has an optional compilation &quot;feature&quot; called
+<code>zlib</code> which will allow it (via ZipWriter) to use compression from a native C
+library. This improves the performance on large files significantly and even
+beats the C/libxlsxwriter version:</p>
+<pre><code>$ hyperfine ./app_perf_test ./app_perf_test_zlib ./c_perf_test --warmup 3
+Benchmark 1: ./app_perf_test
+  Time (mean ± σ):     244.3 ms ±  10.5 ms    [User: 221.5 ms, System: 18.1 ms]
+  Range (min … max):   231.8 ms … 259.8 ms    11 runs
+
+Benchmark 2: ./app_perf_test_zlib
+  Time (mean ± σ):     149.4 ms ±  10.5 ms    [User: 129.5 ms, System: 16.1 ms]
+  Range (min … max):   140.7 ms … 178.5 ms    18 runs
+
+Benchmark 3: ./c_perf_test
+  Time (mean ± σ):     197.7 ms ±   2.3 ms    [User: 163.4 ms, System: 28.4 ms]
+  Range (min … max):   195.4 ms … 204.5 ms    14 runs
+
+Summary
+  './app_perf_test_zlib' ran
+    1.32 ± 0.09 times faster than './c_perf_test'
+    1.63 ± 0.13 times faster than './app_perf_test'
+</code></pre>
 <p>As with any performance test there are a lot of factors that may affect the
 results, however these results are indicative of the relative performance.</p>
 <p>The programs used to generate these results are shown below.</p>
@@ -10029,8 +10051,25 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0340---2023-04-12"><a class="header" href="#0340---2023-04-12">[0.34.0] - 2023-04-12</a></h2>
+<p>Performance improvement release.</p>
+<h2 id="added"><a class="header" href="#added">Added</a></h2>
+<ul>
+<li>
+<p>Added optimizations across the library. For larger files this version is 10%
+faster than previous versions.</p>
+<p>These optimizations were provided by Adrián Delgado, see <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/23">GitHub Issue #23</a>.</p>
+</li>
+<li>
+<p>Added crate feature <code>zlib</code> which adds a dependency on zlib and a C compiler
+but is around 1.6x faster for larger files. With this feature enabled it is
+even faster than the native C version libxlsxwriter by around 1.4x for large
+files.</p>
+<p>See also the <a href="https://rustxlsxwriter.github.io/performance.html">Performance</a> section of the user guide.</p>
+</li>
+</ul>
 <h2 id="0330---2023-04-10"><a class="header" href="#0330---2023-04-10">[0.33.0] - 2023-04-10</a></h2>
-<h3 id="added"><a class="header" href="#added">Added</a></h3>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <ul>
 <li>
 <p>Added support for formatting and setting chart points via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartPoint.html"><code>ChartPoint</code></a>
@@ -10053,19 +10092,19 @@ system level, is different from the Default color.</p>
 </li>
 </ul>
 <h2 id="0320---2023-04-03"><a class="header" href="#0320---2023-04-03">[0.32.0] - 2023-04-03</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>Added formatting for the chart title and axes via the the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a>
 struct.</li>
 </ul>
 <h2 id="0310---2023-04-02"><a class="header" href="#0310---2023-04-02">[0.31.0] - 2023-04-02</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>Added formatting for the chart area, plot area, and legend via the the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a> struct.</li>
 </ul>
 <h2 id="0300---2023-03-31"><a class="header" href="#0300---2023-03-31">[0.30.0] - 2023-03-31</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>
 <p>Added chart formatting for Lines, Borders, Solid fills and Pattern fills via
@@ -10092,7 +10131,7 @@ of histogram style charts.</p>
 </li>
 </ul>
 <h2 id="0290---2023-03-16"><a class="header" href="#0290---2023-03-16">[0.29.0] - 2023-03-16</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <ul>
 <li>
 <p>Added support for resizing and object positioning to the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct.</p>
@@ -10103,12 +10142,12 @@ of histogram style charts.</p>
 </li>
 </ul>
 <h2 id="0280---2023-03-14"><a class="header" href="#0280---2023-03-14">[0.28.0] - 2023-03-14</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>Added support for positioning or hiding Chart legends. See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartLegend.html"><code>ChartLegend</code></a>.</li>
 </ul>
 <h2 id="0270---2023-03-13"><a class="header" href="#0270---2023-03-13">[0.27.0] - 2023-03-13</a></h2>
-<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
+<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
 <ul>
 <li>
 <p>Added support for Charts via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct and the
@@ -10175,7 +10214,7 @@ specific methods with a single trait based generic method.</p>
 </li>
 </ul>
 <h2 id="0250---2023-01-30"><a class="header" href="#0250---2023-01-30">[0.25.0] - 2023-01-30</a></h2>
-<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
+<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
 <ul>
 <li>
 <p>Added ability to filter columns in <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofilter"><code>worksheet.autofilter()</code></a> ranges via
@@ -10187,7 +10226,7 @@ language ports of &quot;xlsxwriter&quot;.</p>
 </li>
 </ul>
 <h2 id="0240---2023-01-18"><a class="header" href="#0240---2023-01-18">[0.24.0] - 2023-01-18</a></h2>
-<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
+<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
 <ul>
 <li>Added support for hiding rows and columns (to hide intermediate calculations)
 via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_hidden"><code>worksheet.set_column_hidden()</code></a> and<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>
@@ -10196,7 +10235,7 @@ method. This is also a required precursor to adding autofilter conditions.</li>
 an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </ul>
 <h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
-<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
+<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
 <p>Added more page setup methods.</p>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_selection"><code>worksheet.set_selection()</code></a> method to select a cell or range of cells in a worksheet.</li>
@@ -10204,7 +10243,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_breaks"><code>worksheet.set_page_breaks()</code></a> method to add page breaks to a worksheet.</li>
 </ul>
 <h2 id="0220---2023-01-13"><a class="header" href="#0220---2023-01-13">[0.22.0] - 2023-01-13</a></h2>
-<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
+<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
 <ul>
 <li>
 <p>Added support for worksheet protection via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect"><code>worksheet.protect()</code></a>,
@@ -10217,7 +10256,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </li>
 </ul>
 <h2 id="0210---2023-01-09"><a class="header" href="#0210---2023-01-09">[0.21.0] - 2023-01-09</a></h2>
-<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
+<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
 <ul>
 <li>Added support for setting document metadata properties such as Author and
 Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.DocProperties.html"><code>DocProperties</code></a> and
@@ -10229,7 +10268,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_date"><code>worksheet.write_date()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_time"><code>worksheet.write_time()</code></a> for consistency.</li>
 </ul>
 <h2 id="0200---2023-01-06"><a class="header" href="#0200---2023-01-06">[0.20.0] - 2023-01-06</a></h2>
-<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
+<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
 <ul>
 <li>Improved fitting algorithm for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a>. See also the
 <a href="https://rustxlsxwriter.github.io/examples/autofit.html">app_autofit</a> sample application.</li>
@@ -10240,7 +10279,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 for consistency with the other language versions of this library.</li>
 </ul>
 <h2 id="0190---2022-12-27"><a class="header" href="#0190---2022-12-27">[0.19.0] - 2022-12-27</a></h2>
-<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
+<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
 <ul>
 <li>
 <p>Added support for created defined variable names at a workbook and worksheet
@@ -10254,7 +10293,7 @@ an upcoming version. See also <a href="https://rustxlsxwriter.github.io/examples
 </li>
 </ul>
 <h2 id="0180---2022-12-19"><a class="header" href="#0180---2022-12-19">[0.18.0] - 2022-12-19</a></h2>
-<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
+<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
 <ul>
 <li>
 <p>Added support for &quot;rich&quot; strings with multiple font formats via
@@ -10270,7 +10309,7 @@ For example strings like &quot;This is <strong>bold</strong> and this is <em>ita
 Also fixes similar issues in some formatting code.</li>
 </ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
-<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
+<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in headers/footers via the
@@ -10279,13 +10318,13 @@ Also fixes similar issues in some formatting code.</li>
 </li>
 </ul>
 <h2 id="0160---2022-12-09"><a class="header" href="#0160---2022-12-09">[0.16.0] - 2022-12-09</a></h2>
-<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
+<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>Replicate the optimization used by Excel where it only stores one copy of a
 repeated/duplicate image in a workbook.</li>
 </ul>
 <h2 id="0150---2022-12-08"><a class="header" href="#0150---2022-12-08">[0.15.0] - 2022-12-08</a></h2>
-<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
+<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in buffers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Image.html#method.new_from_buffer"><code>image.new_from_buffer()</code></a>.</p>
@@ -10295,7 +10334,7 @@ repeated/duplicate image in a workbook.</li>
 </li>
 </ul>
 <h2 id="0140---2022-12-05"><a class="header" href="#0140---2022-12-05">[0.14.0] - 2022-12-05</a></h2>
-<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
+<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
 <ul>
 <li>
 <p>Added support for inserting images into worksheets with
@@ -10313,7 +10352,7 @@ in images and images in headers/footers.</p>
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>
 </ul>
 <h2 id="0130---2022-11-21"><a class="header" href="#0130---2022-11-21">[0.13.0] - 2022-11-21</a></h2>
-<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
+<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
 <ul>
 <li>
 <p>Added support for writing hyperlinks in worksheets via the following methods:</p>
@@ -10338,14 +10377,14 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </li>
 </ul>
 <h2 id="0120---2022-11-06"><a class="header" href="#0120---2022-11-06">[0.12.0] - 2022-11-06</a></h2>
-<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
+<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
 <li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
-<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
+<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
 <ul>
 <li>
 <p>Added several worksheet methods for working with worksheet tabs:</p>
@@ -10360,7 +10399,7 @@ Colors</a> in the user guide.</li>
 </li>
 </ul>
 <h2 id="0100---2022-11-03"><a class="header" href="#0100---2022-11-03">[0.10.0] - 2022-11-03</a></h2>
-<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
+<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
 <ul>
 <li>
 <p>Added a simulated <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method to automatically adjust
@@ -10383,7 +10422,7 @@ of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_x
 <li>There are now supporting <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> methods.</li>
 </ul>
-<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
+<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
 <ul>
 <li>
 <p>Added new methods to get references to worksheet objects used by the workbook:</p>
@@ -10401,7 +10440,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="080---2022-10-28"><a class="header" href="#080---2022-10-28">[0.8.0] - 2022-10-28</a></h2>
-<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
+<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
 <ul>
 <li>
 <p>Added support for creating files from paths via <code>workbook.new_from_path()</code>.</p>
@@ -10411,7 +10450,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
-<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
+<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
 <ul>
 <li>
 <p>Added an almost the complete set of Page Setup methods:</p>
@@ -10469,7 +10508,7 @@ with the borrow checker.</p>
 Issue #6</a>.</li>
 </ul>
 <h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
-<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
+<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -10483,7 +10522,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
+<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -10498,7 +10537,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
+<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array()</code></a> and
@@ -10511,7 +10550,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
+<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean_with_format()</code></a> method to support writing Excel boolean
 values.</li>
@@ -10522,12 +10561,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
+<h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
+<h3 id="added-32"><a class="header" href="#added-32">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>
