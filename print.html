@@ -165,7 +165,7 @@ required is to add it the <code>Cargo.toml</code> file for your project. To demo
 will start with a small sample application.</p>
 <h2 id="create-a-sample-application"><a class="header" href="#create-a-sample-application">Create a sample application</a></h2>
 <p>Create a new rust command-line application as follows:</p>
-<pre><code class="language-bash">cargo new hello-xlsx
+<pre><code class="language-bash">$ cargo new hello-xlsx
 </code></pre>
 <p>This will create a directory like the following:</p>
 <pre><code class="language-bash">hello-xlsx/
@@ -173,16 +173,18 @@ will start with a small sample application.</p>
 └── src
     └── main.rs
 </code></pre>
-<p>Edit the Cargo.toml file and add the following <code>rust_xlsxwriter</code> dependency
-so the file looks like below. Note, <code>rust_xlsxwriter</code> adds new features
-regularly do make sure you use the latest version.</p>
+<p>Change to the new <code>hello-xlsx</code> directory and add the <code>rust_xlsxwriter</code> dependency:</p>
+<pre><code class="language-bash">$ cd hello-xlsx
+$ cargo add rust_xlsxwriter
+</code></pre>
+<p>This will give you an updated <code>Cargo.toml</code> file that looks something like this:</p>
 <pre><code class="language-toml">[package]
 name = &quot;hello-xlsx&quot;
 version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
 [dependencies]
-rust_xlsxwriter = &quot;0.35.0&quot;
+rust_xlsxwriter = &quot;0.35.0
 </code></pre>
 <p>Modify the main.rs file so it looks like this:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
@@ -213,7 +215,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     Ok(())
 }</code></pre>
 <p>The run the application as follows:</p>
-<pre><code class="language-bash">cargo run
+<pre><code class="language-bash">$   cargo run
 </code></pre>
 <p>This will create an output file called <code>hello.xlsx</code> which should look
 something like this:</p>
