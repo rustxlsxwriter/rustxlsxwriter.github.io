@@ -177,24 +177,24 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.set_column_width(0, 22)?;
 
     // Write a string without formatting.
-    worksheet.write_string(0, 0, &quot;Hello&quot;)?;
+    worksheet.write(0, 0, &quot;Hello&quot;)?;
 
     // Write a string with the bold format defined above.
-    worksheet.write_string_with_format(1, 0, &quot;World&quot;, &amp;bold_format)?;
+    worksheet.write_with_format(1, 0, &quot;World&quot;, &amp;bold_format)?;
 
     // Write some numbers.
-    worksheet.write_number(2, 0, 1)?;
-    worksheet.write_number(3, 0, 2.34)?;
+    worksheet.write(2, 0, 1)?;
+    worksheet.write(3, 0, 2.34)?;
 
     // Write a number with formatting.
-    worksheet.write_number_with_format(4, 0, 3.00, &amp;decimal_format)?;
+    worksheet.write_with_format(4, 0, 3.00, &amp;decimal_format)?;
 
     // Write a formula.
     worksheet.write_formula(5, 0, &quot;=SIN(PI()/4)&quot;)?;
 
     // Write a date.
     let date = NaiveDate::from_ymd_opt(2023, 1, 25).unwrap();
-    worksheet.write_date(6, 0, &amp;date, &amp;date_format)?;
+    worksheet.write_with_format(6, 0, &amp;date, &amp;date_format)?;
 
     // Write some links.
     worksheet.write_url(7, 0, &quot;https://www.rust-lang.org&quot;)?;
