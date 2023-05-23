@@ -151,7 +151,7 @@ applications that don't have a facility to calculate formulas will only display
 the 0 results. Examples of such applications are Excel viewers, PDF converters,
 and some mobile device applications.</p>
 <p>If required, it is also possible to specify the calculated result of the
-formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result"><code>worksheet.set_formula_result()</code></a> method:</p>
+formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result"><code>worksheet.set_formula_result()</code></a> method or the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Formula.html#method.set_result"><code>formula.set_result()</code></a> method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
@@ -160,7 +160,7 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">//! Note, this is only required for non-Excel applications that don't calculate
 </span><span class="boring">//! formula results.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Formula, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -169,9 +169,13 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    worksheet
+</span>    // Using the formula string syntax.
+    worksheet
         .write_formula(0, 0, &quot;1+1&quot;)?
         .set_formula_result(0, 0, &quot;2&quot;);
+
+    // Or using a Formula type.
+    worksheet.write_formula(1, 0, Formula::new(&quot;2+2&quot;).set_result(&quot;4&quot;))?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">

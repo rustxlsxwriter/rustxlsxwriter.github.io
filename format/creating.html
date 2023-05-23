@@ -154,7 +154,7 @@ together, for example:</p>
 </span><span class="boring">//! The following example demonstrates create a new format and setting the
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -167,7 +167,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format = Format::new()
         .set_bold()
         .set_italic()
-        .set_font_color(XlsxColor::Red);
+        .set_font_color(Color::Red);
 
     worksheet.write_string_with_format(0, 0, &quot;Hello&quot;, &amp;format)?;
 
@@ -185,7 +185,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">//! The following example demonstrates cloning a format and setting the
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -198,7 +198,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format1 = Format::new().set_bold();
 
     // Clone a new format and set some properties.
-    let format2 = format1.clone().set_font_color(XlsxColor::Blue);
+    let format2 = format1.clone().set_font_color(Color::Blue);
 
     worksheet.write_string_with_format(0, 0, &quot;Hello&quot;, &amp;format1)?;
     worksheet.write_string_with_format(1, 0, &quot;Hello&quot;, &amp;format2)?;

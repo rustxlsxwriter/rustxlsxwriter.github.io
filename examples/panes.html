@@ -156,7 +156,7 @@ when a user scrolls.</p>
 </span><span class="boring">//! A simple example of setting some &quot;freeze&quot; panes in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatAlign, FormatBorder, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -167,7 +167,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_bold()
         .set_align(FormatAlign::Center)
         .set_align(FormatAlign::VerticalCenter)
-        .set_foreground_color(XlsxColor::RGB(0xD7E4BC))
+        .set_foreground_color(Color::RGB(0xD7E4BC))
         .set_border(FormatBorder::Thin);
 
     let center_format = Format::new().set_align(FormatAlign::Center);

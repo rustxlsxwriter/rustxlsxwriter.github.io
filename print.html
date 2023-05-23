@@ -1033,7 +1033,7 @@ $ sum properties.xlsx
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
 </span>use chrono::NaiveDate;
-use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Image, Workbook, XlsxError};
+use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Image, Url, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -1074,8 +1074,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_with_format(6, 0, &amp;date, &amp;date_format)?;
 
     // Write some links.
-    worksheet.write_url(7, 0, &quot;https://www.rust-lang.org&quot;)?;
-    worksheet.write_url_with_text(8, 0, &quot;https://www.rust-lang.org&quot;, &quot;Learn Rust&quot;)?;
+    worksheet.write(7, 0, Url::new(&quot;https://www.rust-lang.org&quot;))?;
+    worksheet.write(
+        8,
+        0,
+        Url::new(&quot;https://www.rust-lang.org&quot;).set_text(&quot;Learn Rust&quot;),
+    )?;
 
     // Write some merged cells.
     worksheet.merge_range(9, 0, 9, 1, &quot;Merged cells&quot;, &amp;merge_format)?;
@@ -1580,14 +1584,14 @@ worksheet) in a group of worksheets.</p>
 <h2 id="setting-worksheet-tab-colors"><a class="header" href="#setting-worksheet-tab-colors">Setting worksheet tab colors</a></h2>
 <p>Another way of highlighting one or more worksheets in Excel is to set the tab
 color. With <code>rust_xlsxwriter</code> this is achieved with
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_tab_color"><code>worksheet.set_tab_color()</code></a> and a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a> color:</p>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_tab_color"><code>worksheet.set_tab_color()</code></a> and a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.Color.html"><code>Color</code></a> color:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates set the tab color of worksheets.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
@@ -1597,9 +1601,9 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
     let mut worksheet3 = Worksheet::new();
     let mut worksheet4 = Worksheet::new();
 
-    worksheet1.set_tab_color(XlsxColor::Red);
-    worksheet2.set_tab_color(XlsxColor::Green);
-    worksheet3.set_tab_color(XlsxColor::RGB(0xFF9900));
+    worksheet1.set_tab_color(Color::Red);
+    worksheet2.set_tab_color(Color::Green);
+    worksheet3.set_tab_color(Color::RGB(0xFF9900));
 
     // worksheet4 will have the default color.
     worksheet4.set_active(true);
@@ -1921,7 +1925,7 @@ borders, alignment and number formatting.</p>
 </span><span class="boring">//! The following example demonstrates some of the available formatting
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatBorder, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatBorder, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -1946,10 +1950,10 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format4 = Format::new().set_font_name(&quot;Edwardian Script ITC&quot;);
     worksheet.write_string_with_format(3, 0, &quot;Fonts&quot;, &amp;format4)?;
 
-    let format5 = Format::new().set_font_color(XlsxColor::Red);
+    let format5 = Format::new().set_font_color(Color::Red);
     worksheet.write_string_with_format(4, 0, &quot;Font color&quot;, &amp;format5)?;
 
-    let format6 = Format::new().set_background_color(XlsxColor::RGB(0xDAA520));
+    let format6 = Format::new().set_background_color(Color::RGB(0xDAA520));
     worksheet.write_string_with_format(5, 0, &quot;Fills&quot;, &amp;format6)?;
 
     let format7 = Format::new().set_border(FormatBorder::Thin);
@@ -1981,7 +1985,7 @@ together, for example:</p>
 </span><span class="boring">//! The following example demonstrates create a new format and setting the
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -1994,7 +1998,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format = Format::new()
         .set_bold()
         .set_italic()
-        .set_font_color(XlsxColor::Red);
+        .set_font_color(Color::Red);
 
     worksheet.write_string_with_format(0, 0, &quot;Hello&quot;, &amp;format)?;
 
@@ -2012,7 +2016,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">//! The following example demonstrates cloning a format and setting the
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -2025,7 +2029,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format1 = Format::new().set_bold();
 
     // Clone a new format and set some properties.
-    let format2 = format1.clone().set_font_color(XlsxColor::Blue);
+    let format2 = format1.clone().set_font_color(Color::Blue);
 
     worksheet.write_string_with_format(0, 0, &quot;Hello&quot;, &amp;format1)?;
     worksheet.write_string_with_format(1, 0, &quot;Hello&quot;, &amp;format2)?;
@@ -2249,53 +2253,53 @@ locale:</p>
 <p>In order to replicate Excel's behavior all XlsxWriter programs should use US
 locale formatting which will then be rendered in the settings of your host OS.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-colors"><a class="header" href="#working-with-colors">Working with Colors</a></h1>
-<p>The <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a> enum defines Excel colors the can be used throughout the
+<p>The <a href="https://docs.rs/rust_xlsxwriter/0.11.0/rust_xlsxwriter/enum.Color.html"><code>Color</code></a> enum defines Excel colors the can be used throughout the
 <code>rust_xlsxwriter</code> library.</p>
 <p>There are 3 types of colors within the enum:</p>
 <ol>
-<li>Predefined named RGB colors like <code>XlsxColor::Green</code>.</li>
-<li>User defined RGB colors like <code>XlsxColor::RGB(0x4F026A)</code>.</li>
-<li>Theme colors like <code>XlsxColor::Theme(9, 4)</code>.</li>
+<li>Predefined named RGB colors like <code>Color::Green</code>.</li>
+<li>User defined RGB colors like <code>Color::RGB(0x4F026A)</code>.</li>
+<li>Theme colors like <code>Color::Theme(9, 4)</code>.</li>
 </ol>
 <p>These are explained in more detail in the sections below.</p>
 <h2 id="named-colors"><a class="header" href="#named-colors">Named colors</a></h2>
 <p>For convenience there are a number of predefined named colors which are
 translated internally to RGB colors. These are shown in the table below.</p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody>
-<tr><td><code>XlsxColor::Black</code></td><td><code>0x000000</code></td></tr>
-<tr><td><code>XlsxColor::Blue</code></td><td><code>0x0000FF</code></td></tr>
-<tr><td><code>XlsxColor::Brown</code></td><td><code>0x800000</code></td></tr>
-<tr><td><code>XlsxColor::Cyan</code></td><td><code>0x00FFFF</code></td></tr>
-<tr><td><code>XlsxColor::Gray</code></td><td><code>0x808080</code></td></tr>
-<tr><td><code>XlsxColor::Green</code></td><td><code>0x008000</code></td></tr>
-<tr><td><code>XlsxColor::Lime</code></td><td><code>0x00FF00</code></td></tr>
-<tr><td><code>XlsxColor::Magenta</code></td><td><code>0xFF00FF</code></td></tr>
-<tr><td><code>XlsxColor::Navy</code></td><td><code>0x000080</code></td></tr>
-<tr><td><code>XlsxColor::Orange</code></td><td><code>0xFF6600</code></td></tr>
-<tr><td><code>XlsxColor::Pink</code></td><td><code>0xFF00FF</code></td></tr>
-<tr><td><code>XlsxColor::Purple</code></td><td><code>0x800080</code></td></tr>
-<tr><td><code>XlsxColor::Red</code></td><td><code>0xFF0000</code></td></tr>
-<tr><td><code>XlsxColor::Silver</code></td><td><code>0xC0C0C0</code></td></tr>
-<tr><td><code>XlsxColor::White</code></td><td><code>0xFFFFFF</code></td></tr>
-<tr><td><code>XlsxColor::Yellow</code></td><td><code>0xFFFF00</code></td></tr>
-<tr><td><code>XlsxColor::Default  </code></td><td>None</td></tr>
-<tr><td><code>XlsxColor::Automatic</code></td><td>None</td></tr>
+<tr><td><code>Color::Black</code></td><td><code>0x000000</code></td></tr>
+<tr><td><code>Color::Blue</code></td><td><code>0x0000FF</code></td></tr>
+<tr><td><code>Color::Brown</code></td><td><code>0x800000</code></td></tr>
+<tr><td><code>Color::Cyan</code></td><td><code>0x00FFFF</code></td></tr>
+<tr><td><code>Color::Gray</code></td><td><code>0x808080</code></td></tr>
+<tr><td><code>Color::Green</code></td><td><code>0x008000</code></td></tr>
+<tr><td><code>Color::Lime</code></td><td><code>0x00FF00</code></td></tr>
+<tr><td><code>Color::Magenta</code></td><td><code>0xFF00FF</code></td></tr>
+<tr><td><code>Color::Navy</code></td><td><code>0x000080</code></td></tr>
+<tr><td><code>Color::Orange</code></td><td><code>0xFF6600</code></td></tr>
+<tr><td><code>Color::Pink</code></td><td><code>0xFF00FF</code></td></tr>
+<tr><td><code>Color::Purple</code></td><td><code>0x800080</code></td></tr>
+<tr><td><code>Color::Red</code></td><td><code>0xFF0000</code></td></tr>
+<tr><td><code>Color::Silver</code></td><td><code>0xC0C0C0</code></td></tr>
+<tr><td><code>Color::White</code></td><td><code>0xFFFFFF</code></td></tr>
+<tr><td><code>Color::Yellow</code></td><td><code>0xFFFF00</code></td></tr>
+<tr><td><code>Color::Default  </code></td><td>None</td></tr>
+<tr><td><code>Color::Automatic</code></td><td>None</td></tr>
 </tbody></table>
 </div>
-<p>The <code>XlsxColor::Default</code> value translates to the default color in whatever
-context it is used. The <code>XlsxColor::Automatic</code> value is usually the same but can
-be overridden by system settings.</p>
+<p>The <code>Color::Default</code> value translates to the default color in whatever context
+it is used. The <code>Color::Automatic</code> value is usually the same but can be
+overridden by system settings.</p>
 <h2 id="rgb-colors"><a class="header" href="#rgb-colors">RGB colors</a></h2>
 <p>These are the most common colors used throughout Excel. In <code>rust_xlsxwriter</code>
-they can be generated using the <code>XlsxColor::RGB()</code> member of the enum like this:
-<code>XlsxColor::RGB(0x4F026A)</code>.</p>
+they can be generated using the <code>Color::RGB()</code> member of the enum like this:
+<code>Color::RGB(0x4F026A)</code>.</p>
 <p>These are similar to <a href="https://htmlcolors.com">HTML style colors</a> which most people will be familiar with.</p>
 <h2 id="theme-colors"><a class="header" href="#theme-colors">Theme colors</a></h2>
 <p>Theme colors are colors  from the standard palette of 60 colors which is shown
 in the image below.</p>
 <p><img src="colors/../../images/theme_color_palette.png" alt="Image of the Excel theme color palette" /></p>
-<p>The syntax for theme colors in XlsxColor is <code>Theme(color, shade)</code> where <code>color</code>
-is one of the 0-9 values on the top row and <code>shade</code> is the variant in the
+<p>The syntax for theme colors in Color is <code>Theme(color, shade)</code> where <code>color</code> is
+one of the 0-9 values on the top row and <code>shade</code> is the variant in the
 associated column from 0-5. For example &quot;White, background 1&quot; in the top left is
 <code>Theme(0, 0)</code> and &quot;Orange, Accent 6, Darker 50%&quot; in the bottom right is
 <code>Theme(9, 5)</code>.</p>
@@ -2307,7 +2311,7 @@ associated column from 0-5. For example &quot;White, background 1&quot; in the t
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
 </span><span class="boring">
-</span><span class="boring">//! The following example demonstrates a simple formula.
+</span><span class="boring">//! The following example demonstrates writing a simple formula.
 </span><span class="boring">
 </span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
 </span><span class="boring">
@@ -2339,7 +2343,7 @@ applications that don't have a facility to calculate formulas will only display
 the 0 results. Examples of such applications are Excel viewers, PDF converters,
 and some mobile device applications.</p>
 <p>If required, it is also possible to specify the calculated result of the
-formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result"><code>worksheet.set_formula_result()</code></a> method:</p>
+formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_formula_result"><code>worksheet.set_formula_result()</code></a> method or the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Formula.html#method.set_result"><code>formula.set_result()</code></a> method:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
@@ -2348,7 +2352,7 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">//! Note, this is only required for non-Excel applications that don't calculate
 </span><span class="boring">//! formula results.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Formula, Workbook, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -2357,9 +2361,13 @@ formula using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwrite
 </span><span class="boring">    // Add a worksheet to the workbook.
 </span><span class="boring">    let worksheet = workbook.add_worksheet();
 </span><span class="boring">
-</span>    worksheet
+</span>    // Using the formula string syntax.
+    worksheet
         .write_formula(0, 0, &quot;1+1&quot;)?
         .set_formula_result(0, 0, &quot;2&quot;);
+
+    // Or using a Formula type.
+    worksheet.write_formula(1, 0, Formula::new(&quot;2+2&quot;).set_result(&quot;4&quot;))?;
 <span class="boring">
 </span><span class="boring">    workbook.save(&quot;formulas.xlsx&quot;)?;
 </span><span class="boring">
@@ -2457,7 +2465,7 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -2465,12 +2473,12 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.
@@ -2756,7 +2764,7 @@ function which only requires the start cell:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -2764,12 +2772,12 @@ function which only requires the start cell:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.
@@ -3080,7 +3088,7 @@ following formula:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -3088,12 +3096,12 @@ following formula:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.
@@ -6143,7 +6151,7 @@ dates.</p>
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
 </span>use chrono::NaiveDate;
-use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Image, Workbook, XlsxError};
+use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Image, Url, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -6184,8 +6192,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_with_format(6, 0, &amp;date, &amp;date_format)?;
 
     // Write some links.
-    worksheet.write_url(7, 0, &quot;https://www.rust-lang.org&quot;)?;
-    worksheet.write_url_with_text(8, 0, &quot;https://www.rust-lang.org&quot;, &quot;Learn Rust&quot;)?;
+    worksheet.write(7, 0, Url::new(&quot;https://www.rust-lang.org&quot;))?;
+    worksheet.write(
+        8,
+        0,
+        Url::new(&quot;https://www.rust-lang.org&quot;).set_text(&quot;Learn Rust&quot;),
+    )?;
 
     // Write some merged cells.
     worksheet.merge_range(9, 0, 9, 1, &quot;Merged cells&quot;, &amp;merge_format)?;
@@ -6225,7 +6237,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_bold()
         .set_align(FormatAlign::Top)
         .set_border(FormatBorder::Thin)
-        .set_background_color(XlsxColor::RGB(0xC6EFCE));
+        .set_background_color(Color::RGB(0xC6EFCE));
 
     // -----------------------------------------------------------------------
     // Create a worksheet that demonstrates number formatting.
@@ -6389,7 +6401,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     worksheet.write_string_with_format(8, 0, &quot;Font size 18&quot;, &amp;size_format)?;
 
     // Font color.
-    let font_color_format = Format::new().set_font_color(XlsxColor::Red);
+    let font_color_format = Format::new().set_font_color(Color::Red);
     worksheet.write_string_with_format(9, 0, &quot;Font color&quot;, &amp;font_color_format)?;
 
     // Font underline.
@@ -6424,7 +6436,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     let border_format4 = Format::new()
         .set_border(FormatBorder::Thin)
-        .set_border_color(XlsxColor::Red);
+        .set_border_color(Color::Red);
     worksheet.write_string_with_format(8, 2, &quot;Color Border&quot;, &amp;border_format4)?;
 
     // -----------------------------------------------------------------------
@@ -6441,13 +6453,13 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Write some cells with pattern fills.
     let fill_format1 = Format::new()
-        .set_background_color(XlsxColor::Yellow)
+        .set_background_color(Color::Yellow)
         .set_pattern(FormatPattern::Solid);
     worksheet.write_string_with_format(2, 1, &quot;Solid fill&quot;, &amp;fill_format1)?;
 
     let fill_format2 = Format::new()
-        .set_background_color(XlsxColor::Yellow)
-        .set_foreground_color(XlsxColor::Orange)
+        .set_background_color(Color::Yellow)
+        .set_foreground_color(Color::Orange)
         .set_pattern(FormatPattern::Gray0625);
     worksheet.write_string_with_format(4, 1, &quot;Pattern fill&quot;, &amp;fill_format2)?;
 
@@ -6471,7 +6483,7 @@ types, such as number, as shown below.</p>
 </span><span class="boring">//! An example of creating merged ranges in a worksheet using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatAlign, FormatBorder, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -6500,7 +6512,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_align(FormatAlign::Center)
         .set_align(FormatAlign::VerticalCenter)
         .set_border(FormatBorder::Thin)
-        .set_background_color(XlsxColor::Silver);
+        .set_background_color(Color::Silver);
 
     worksheet.merge_range(7, 1, 8, 3, &quot;Merged cells&quot;, &amp;format)?;
 
@@ -6926,7 +6938,7 @@ impl IntoExcelData for UnixTime {
 </span><span class="boring">//! An example of using the rust_xlsxwriter library to write &quot;rich&quot; multi-format
 </span><span class="boring">//! strings in worksheet cells.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatAlign, FormatScript, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatAlign, FormatScript, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -6939,8 +6951,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Add some formats to use in the rich strings.
     let default = Format::default();
-    let red = Format::new().set_font_color(XlsxColor::Red);
-    let blue = Format::new().set_font_color(XlsxColor::Blue);
+    let red = Format::new().set_font_color(Color::Red);
+    let blue = Format::new().set_font_color(Color::Blue);
     let bold = Format::new().set_bold();
     let italic = Format::new().set_italic();
     let center = Format::new().set_align(FormatAlign::Center);
@@ -7014,76 +7026,76 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let worksheet = workbook.add_worksheet().set_name(&quot;RGB Colors&quot;)?;
 
     // Write some enum defined colors to cells.
-    let color_format = Format::new().set_background_color(XlsxColor::Black);
+    let color_format = Format::new().set_background_color(Color::Black);
     worksheet.write_string(0, 0, &quot;Black&quot;)?;
     worksheet.write_blank(0, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Blue);
+    let color_format = Format::new().set_background_color(Color::Blue);
     worksheet.write_string(1, 0, &quot;Blue&quot;)?;
     worksheet.write_blank(1, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Brown);
+    let color_format = Format::new().set_background_color(Color::Brown);
     worksheet.write_string(2, 0, &quot;Brown&quot;)?;
     worksheet.write_blank(2, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Cyan);
+    let color_format = Format::new().set_background_color(Color::Cyan);
     worksheet.write_string(3, 0, &quot;Cyan&quot;)?;
     worksheet.write_blank(3, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Gray);
+    let color_format = Format::new().set_background_color(Color::Gray);
     worksheet.write_string(4, 0, &quot;Gray&quot;)?;
     worksheet.write_blank(4, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Green);
+    let color_format = Format::new().set_background_color(Color::Green);
     worksheet.write_string(5, 0, &quot;Green&quot;)?;
     worksheet.write_blank(5, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Lime);
+    let color_format = Format::new().set_background_color(Color::Lime);
     worksheet.write_string(6, 0, &quot;Lime&quot;)?;
     worksheet.write_blank(6, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Magenta);
+    let color_format = Format::new().set_background_color(Color::Magenta);
     worksheet.write_string(7, 0, &quot;Magenta&quot;)?;
     worksheet.write_blank(7, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Navy);
+    let color_format = Format::new().set_background_color(Color::Navy);
     worksheet.write_string(8, 0, &quot;Navy&quot;)?;
     worksheet.write_blank(8, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Orange);
+    let color_format = Format::new().set_background_color(Color::Orange);
     worksheet.write_string(9, 0, &quot;Orange&quot;)?;
     worksheet.write_blank(9, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Pink);
+    let color_format = Format::new().set_background_color(Color::Pink);
     worksheet.write_string(10, 0, &quot;Pink&quot;)?;
     worksheet.write_blank(10, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Purple);
+    let color_format = Format::new().set_background_color(Color::Purple);
     worksheet.write_string(11, 0, &quot;Purple&quot;)?;
     worksheet.write_blank(11, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Red);
+    let color_format = Format::new().set_background_color(Color::Red);
     worksheet.write_string(12, 0, &quot;Red&quot;)?;
     worksheet.write_blank(12, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Silver);
+    let color_format = Format::new().set_background_color(Color::Silver);
     worksheet.write_string(13, 0, &quot;Silver&quot;)?;
     worksheet.write_blank(13, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::White);
+    let color_format = Format::new().set_background_color(Color::White);
     worksheet.write_string(14, 0, &quot;White&quot;)?;
     worksheet.write_blank(14, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::Yellow);
+    let color_format = Format::new().set_background_color(Color::Yellow);
     worksheet.write_string(15, 0, &quot;Yellow&quot;)?;
     worksheet.write_blank(15, 1, &amp;color_format)?;
 
     // Write some user defined RGB colors to cells.
-    let color_format = Format::new().set_background_color(XlsxColor::RGB(0xFF7F50));
+    let color_format = Format::new().set_background_color(Color::RGB(0xFF7F50));
     worksheet.write_string(16, 0, &quot;#FF7F50&quot;)?;
     worksheet.write_blank(16, 1, &amp;color_format)?;
 
-    let color_format = Format::new().set_background_color(XlsxColor::RGB(0xDCDCDC));
+    let color_format = Format::new().set_background_color(Color::RGB(0xDCDCDC));
     worksheet.write_string(17, 0, &quot;#DCDCDC&quot;)?;
     worksheet.write_blank(17, 1, &amp;color_format)?;
 
@@ -7105,12 +7117,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         for col in 0..=9u16 {
             let color = col as u8;
             let shade = row as u8;
-            let theme_color = XlsxColor::Theme(color, shade);
+            let theme_color = Color::Theme(color, shade);
             let text = format!(&quot;({}, {})&quot;, col, row);
 
-            let mut font_color = XlsxColor::White;
+            let mut font_color = Color::White;
             if col == 0 {
-                font_color = XlsxColor::Default;
+                font_color = Color::Default;
             }
 
             let color_format = Format::new()
@@ -7142,7 +7154,7 @@ the workbook.</p>
 </span><span class="boring">//! A simple, getting started, example of some of the features of the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatUnderline, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatUnderline, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -7150,7 +7162,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Create a format to use in the worksheet.
     let link_format = Format::new()
-        .set_font_color(XlsxColor::Red)
+        .set_font_color(Color::Red)
         .set_underline(FormatUnderline::Single);
 
     // Add a worksheet to the workbook.
@@ -8722,7 +8734,7 @@ functions.</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -8730,12 +8742,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Create some header formats to use in the worksheets.
     let header1 = Format::new()
-        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+        .set_foreground_color(Color::RGB(0x74AC4C))
+        .set_font_color(Color::RGB(0xFFFFFF));
 
     let header2 = Format::new()
-        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+        .set_foreground_color(Color::RGB(0x528FD3))
+        .set_font_color(Color::RGB(0xFFFFFF));
 
     // -----------------------------------------------------------------------
     // Example of using the FILTER() function.
@@ -9753,7 +9765,7 @@ when a user scrolls.</p>
 </span><span class="boring">//! A simple example of setting some &quot;freeze&quot; panes in worksheets using the
 </span><span class="boring">//! rust_xlsxwriter library.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatAlign, FormatBorder, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatAlign, FormatBorder, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -9764,7 +9776,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_bold()
         .set_align(FormatAlign::Center)
         .set_align(FormatAlign::VerticalCenter)
-        .set_foreground_color(XlsxColor::RGB(0xD7E4BC))
+        .set_foreground_color(Color::RGB(0xD7E4BC))
         .set_border(FormatBorder::Thin);
 
     let center_format = Format::new().set_align(FormatAlign::Center);
@@ -10044,8 +10056,28 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
-<h2 id="0380---2023-05-05"><a class="header" href="#0380---2023-05-05">[0.38.0] - 2023-05-05</a></h2>
+<h2 id="0390---2023-05-23"><a class="header" href="#0390---2023-05-23">[0.39.0] - 2023-05-23</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
+<ul>
+<li>
+<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_row"><code>worksheet.write_row()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_col"><code>worksheet.write_col()</code></a> methods to write
+arrays/iterators of data.</p>
+</li>
+<li>
+<p>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Formula.html"><code>Formula</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Url.html"><code>Url</code></a> types to use with generic <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write"><code>worksheet.write()</code></a>.</p>
+<p><a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">Feature Request #15</a>.</p>
+</li>
+<li>
+<p>Make several string handling APIs more generic using <code>impl Into&lt;String&gt;</code>.</p>
+<p><a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">Feature Request #15</a>.</p>
+</li>
+<li>
+<p>Renamed/refactored <code>XlsxColor</code> to <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.Color.html"><code>Color</code></a> for API consistency. The
+<code>XlsxColor</code> type alias is still available for backward compatibility.</p>
+</li>
+</ul>
+<h2 id="0380---2023-05-05"><a class="header" href="#0380---2023-05-05">[0.38.0] - 2023-05-05</a></h2>
+<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
 <ul>
 <li>
 <p>Added several Chart axis and series methods:</p>
@@ -10073,14 +10105,14 @@ workbook.close()
 </li>
 </ul>
 <h2 id="0370---2023-04-30"><a class="header" href="#0370---2023-04-30">[0.37.0] - 2023-04-30</a></h2>
-<h3 id="added-1"><a class="header" href="#added-1">Added</a></h3>
+<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
 <ul>
 <li>
 <p>Added font formatting support to chart titles, legends, axes and data labels
 via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFont.html"><code>ChartFont</code></a> and various <code>set_font()</code> methods.</p>
 </li>
 <li>
-<p>Made <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write()</code></a> more generic via
+<p>Made <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write_string()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write"><code>worksheet.write()</code></a> more generic via
 <code>impl Into&lt;String&gt;</code> to allow them to handle <code>&amp;str</code>, <code>&amp;String</code>, <code>String</code>, and
 <code>Cow&lt;&gt;</code> types.</p>
 <p>See <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/35">GitHub Feature Request #35</a>.</p>
@@ -10089,7 +10121,7 @@ via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart
 <h2 id="0361---2023-04-18"><a class="header" href="#0361---2023-04-18">[0.36.1] - 2023-04-18</a></h2>
 <p>Fix cargo/release issue with 0.36.0 release.</p>
 <h2 id="0360---2023-04-18"><a class="header" href="#0360---2023-04-18">[0.36.0] - 2023-04-18</a></h2>
-<h3 id="added-2"><a class="header" href="#added-2">Added</a></h3>
+<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
 <ul>
 <li>Added performance improvement for applications that use a lot of <code>Format</code>
 objects. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/30">GitHub Issue #30</a>.</li>
@@ -10100,13 +10132,13 @@ objects. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/30">GitHub
 multithreaded applications. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/29">GitHub Issue #29</a>.</li>
 </ul>
 <h2 id="0350---2023-04-16"><a class="header" href="#0350---2023-04-16">[0.35.0] - 2023-04-16</a></h2>
-<h3 id="added-3"><a class="header" href="#added-3">Added</a></h3>
+<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
 <ul>
 <li>Added support for Chart Series data labels including custom data labels. See
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartDataLabel.html"><code>ChartDataLabel</code></a>, <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartSeries.html#method.set_data_label"><code>chart.series.set_data_label()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartSeries.html#method.set_custom_data_labels"><code>chart.series.set_custom_data_labels()</code></a>.</li>
 </ul>
 <h2 id="0340---2023-04-12"><a class="header" href="#0340---2023-04-12">[0.34.0] - 2023-04-12</a></h2>
-<h3 id="added-4"><a class="header" href="#added-4">Added</a></h3>
+<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
 <p>Performance improvement release.</p>
 <ul>
 <li>
@@ -10123,7 +10155,7 @@ files.</p>
 </li>
 </ul>
 <h2 id="0330---2023-04-10"><a class="header" href="#0330---2023-04-10">[0.33.0] - 2023-04-10</a></h2>
-<h3 id="added-5"><a class="header" href="#added-5">Added</a></h3>
+<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
 <ul>
 <li>
 <p>Added support for formatting and setting chart points via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartPoint.html"><code>ChartPoint</code></a>
@@ -10146,19 +10178,19 @@ system level, is different from the Default color.</p>
 </li>
 </ul>
 <h2 id="0320---2023-04-03"><a class="header" href="#0320---2023-04-03">[0.32.0] - 2023-04-03</a></h2>
-<h3 id="added-6"><a class="header" href="#added-6">Added</a></h3>
+<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
 <ul>
 <li>Added formatting for the chart title and axes via the the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a>
 struct.</li>
 </ul>
 <h2 id="0310---2023-04-02"><a class="header" href="#0310---2023-04-02">[0.31.0] - 2023-04-02</a></h2>
-<h3 id="added-7"><a class="header" href="#added-7">Added</a></h3>
+<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
 <ul>
 <li>Added formatting for the chart area, plot area, and legend via the the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartFormat.html"><code>ChartFormat</code></a> struct.</li>
 </ul>
 <h2 id="0300---2023-03-31"><a class="header" href="#0300---2023-03-31">[0.30.0] - 2023-03-31</a></h2>
-<h3 id="added-8"><a class="header" href="#added-8">Added</a></h3>
+<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
 <ul>
 <li>
 <p>Added chart formatting for Lines, Borders, Solid fills and Pattern fills via
@@ -10185,23 +10217,23 @@ of histogram style charts.</p>
 </li>
 </ul>
 <h2 id="0290---2023-03-16"><a class="header" href="#0290---2023-03-16">[0.29.0] - 2023-03-16</a></h2>
-<h3 id="added-9"><a class="header" href="#added-9">Added</a></h3>
+<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
 <ul>
 <li>
 <p>Added support for resizing and object positioning to the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct.</p>
 </li>
 <li>
 <p>Added handling for <code>chrono</code> date/time types to the generic
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write()</code></a> method.</p>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write"><code>worksheet.write()</code></a> method.</p>
 </li>
 </ul>
 <h2 id="0280---2023-03-14"><a class="header" href="#0280---2023-03-14">[0.28.0] - 2023-03-14</a></h2>
-<h3 id="added-10"><a class="header" href="#added-10">Added</a></h3>
+<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
 <ul>
 <li>Added support for positioning or hiding Chart legends. See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ChartLegend.html"><code>ChartLegend</code></a>.</li>
 </ul>
 <h2 id="0270---2023-03-13"><a class="header" href="#0270---2023-03-13">[0.27.0] - 2023-03-13</a></h2>
-<h3 id="added-11"><a class="header" href="#added-11">Added</a></h3>
+<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
 <ul>
 <li>
 <p>Added support for Charts via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Chart.html"><code>Chart</code></a> struct and the
@@ -10209,10 +10241,10 @@ of histogram style charts.</p>
 guide.</p>
 </li>
 <li>
-<p>Added a generic <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write()</code></a> method that writes string or number
+<p>Added a generic <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write"><code>worksheet.write()</code></a> method that writes string or number
 types. This will be extended in an upcoming release to provide a single
 <code>write()</code> method for all of the currently supported types.</p>
-<p>It also allows the user to extend <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_string"><code>worksheet.write()</code></a> to handle user defined
+<p>It also allows the user to extend <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write"><code>worksheet.write()</code></a> to handle user defined
 types via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/trait.IntoExcelData.html"><code>IntoExcelData</code></a> trait. See also the <a href="https://rustxlsxwriter.github.io/examples/generic_write.html">Writing Generic data</a>
 example in the user guide.</p>
 </li>
@@ -10268,7 +10300,7 @@ specific methods with a single trait based generic method.</p>
 </li>
 </ul>
 <h2 id="0250---2023-01-30"><a class="header" href="#0250---2023-01-30">[0.25.0] - 2023-01-30</a></h2>
-<h3 id="added-12"><a class="header" href="#added-12">Added</a></h3>
+<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
 <ul>
 <li>
 <p>Added ability to filter columns in <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofilter"><code>worksheet.autofilter()</code></a> ranges via
@@ -10280,7 +10312,7 @@ language ports of &quot;xlsxwriter&quot;.</p>
 </li>
 </ul>
 <h2 id="0240---2023-01-18"><a class="header" href="#0240---2023-01-18">[0.24.0] - 2023-01-18</a></h2>
-<h3 id="added-13"><a class="header" href="#added-13">Added</a></h3>
+<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
 <ul>
 <li>Added support for hiding rows and columns (to hide intermediate calculations)
 via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_column_hidden"><code>worksheet.set_column_hidden()</code></a> and<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_row_hidden"><code>worksheet.set_row_hidden()</code></a>
@@ -10289,7 +10321,7 @@ method. This is also a required precursor to adding autofilter conditions.</li>
 an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </ul>
 <h2 id="0230---2023-01-16"><a class="header" href="#0230---2023-01-16">[0.23.0] - 2023-01-16</a></h2>
-<h3 id="added-14"><a class="header" href="#added-14">Added</a></h3>
+<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
 <p>Added more page setup methods.</p>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_selection"><code>worksheet.set_selection()</code></a> method to select a cell or range of cells in a worksheet.</li>
@@ -10297,7 +10329,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_page_breaks"><code>worksheet.set_page_breaks()</code></a> method to add page breaks to a worksheet.</li>
 </ul>
 <h2 id="0220---2023-01-13"><a class="header" href="#0220---2023-01-13">[0.22.0] - 2023-01-13</a></h2>
-<h3 id="added-15"><a class="header" href="#added-15">Added</a></h3>
+<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
 <ul>
 <li>
 <p>Added support for worksheet protection via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.protect"><code>worksheet.protect()</code></a>,
@@ -10310,7 +10342,7 @@ an image, moves when the cells underneath it are moved, resized or deleted.</li>
 </li>
 </ul>
 <h2 id="0210---2023-01-09"><a class="header" href="#0210---2023-01-09">[0.21.0] - 2023-01-09</a></h2>
-<h3 id="added-16"><a class="header" href="#added-16">Added</a></h3>
+<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
 <ul>
 <li>Added support for setting document metadata properties such as Author and
 Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.DocProperties.html"><code>DocProperties</code></a> and
@@ -10322,7 +10354,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_date"><code>worksheet.write_date()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_time"><code>worksheet.write_time()</code></a> for consistency.</li>
 </ul>
 <h2 id="0200---2023-01-06"><a class="header" href="#0200---2023-01-06">[0.20.0] - 2023-01-06</a></h2>
-<h3 id="added-17"><a class="header" href="#added-17">Added</a></h3>
+<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
 <ul>
 <li>Improved fitting algorithm for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a>. See also the
 <a href="https://rustxlsxwriter.github.io/examples/autofit.html">app_autofit</a> sample application.</li>
@@ -10333,7 +10365,7 @@ Creation Date. For more details see <a href="https://docs.rs/rust_xlsxwriter/lat
 for consistency with the other language versions of this library.</li>
 </ul>
 <h2 id="0190---2022-12-27"><a class="header" href="#0190---2022-12-27">[0.19.0] - 2022-12-27</a></h2>
-<h3 id="added-18"><a class="header" href="#added-18">Added</a></h3>
+<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
 <ul>
 <li>
 <p>Added support for created defined variable names at a workbook and worksheet
@@ -10347,7 +10379,7 @@ an upcoming version. See also <a href="https://rustxlsxwriter.github.io/examples
 </li>
 </ul>
 <h2 id="0180---2022-12-19"><a class="header" href="#0180---2022-12-19">[0.18.0] - 2022-12-19</a></h2>
-<h3 id="added-19"><a class="header" href="#added-19">Added</a></h3>
+<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
 <ul>
 <li>
 <p>Added support for &quot;rich&quot; strings with multiple font formats via
@@ -10363,7 +10395,7 @@ For example strings like &quot;This is <strong>bold</strong> and this is <em>ita
 Also fixes similar issues in some formatting code.</li>
 </ul>
 <h2 id="0170---2022-12-17"><a class="header" href="#0170---2022-12-17">[0.17.0] - 2022-12-17</a></h2>
-<h3 id="added-20"><a class="header" href="#added-20">Added</a></h3>
+<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in headers/footers via the
@@ -10372,13 +10404,13 @@ Also fixes similar issues in some formatting code.</li>
 </li>
 </ul>
 <h2 id="0160---2022-12-09"><a class="header" href="#0160---2022-12-09">[0.16.0] - 2022-12-09</a></h2>
-<h3 id="added-21"><a class="header" href="#added-21">Added</a></h3>
+<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
 <ul>
 <li>Replicate the optimization used by Excel where it only stores one copy of a
 repeated/duplicate image in a workbook.</li>
 </ul>
 <h2 id="0150---2022-12-08"><a class="header" href="#0150---2022-12-08">[0.15.0] - 2022-12-08</a></h2>
-<h3 id="added-22"><a class="header" href="#added-22">Added</a></h3>
+<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
 <ul>
 <li>
 <p>Added support for images in buffers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Image.html#method.new_from_buffer"><code>image.new_from_buffer()</code></a>.</p>
@@ -10388,7 +10420,7 @@ repeated/duplicate image in a workbook.</li>
 </li>
 </ul>
 <h2 id="0140---2022-12-05"><a class="header" href="#0140---2022-12-05">[0.14.0] - 2022-12-05</a></h2>
-<h3 id="added-23"><a class="header" href="#added-23">Added</a></h3>
+<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
 <ul>
 <li>
 <p>Added support for inserting images into worksheets with
@@ -10406,7 +10438,7 @@ in images and images in headers/footers.</p>
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>
 </ul>
 <h2 id="0130---2022-11-21"><a class="header" href="#0130---2022-11-21">[0.13.0] - 2022-11-21</a></h2>
-<h3 id="added-24"><a class="header" href="#added-24">Added</a></h3>
+<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
 <ul>
 <li>
 <p>Added support for writing hyperlinks in worksheets via the following methods:</p>
@@ -10431,14 +10463,14 @@ The <code>workbook.save_to_path()</code> method has been removed. See <a href="h
 </li>
 </ul>
 <h2 id="0120---2022-11-06"><a class="header" href="#0120---2022-11-06">[0.12.0] - 2022-11-06</a></h2>
-<h3 id="added-25"><a class="header" href="#added-25">Added</a></h3>
+<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.merge_range"><code>worksheet.merge_range()</code></a> method.</li>
 <li>Added support for Theme colors to <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a>. See also <a href="https://rustxlsxwriter.github.io/colors/intro.html">Working with
 Colors</a> in the user guide.</li>
 </ul>
 <h2 id="0110---2022-11-04"><a class="header" href="#0110---2022-11-04">[0.11.0] - 2022-11-04</a></h2>
-<h3 id="added-26"><a class="header" href="#added-26">Added</a></h3>
+<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
 <ul>
 <li>
 <p>Added several worksheet methods for working with worksheet tabs:</p>
@@ -10453,7 +10485,7 @@ Colors</a> in the user guide.</li>
 </li>
 </ul>
 <h2 id="0100---2022-11-03"><a class="header" href="#0100---2022-11-03">[0.10.0] - 2022-11-03</a></h2>
-<h3 id="added-27"><a class="header" href="#added-27">Added</a></h3>
+<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
 <ul>
 <li>
 <p>Added a simulated <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.autofit"><code>worksheet.autofit()</code></a> method to automatically adjust
@@ -10476,7 +10508,7 @@ of the file has move to a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_x
 <li>There are now supporting <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_path"><code>workbook.save_to_path()</code></a> and
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.save_to_buffer"><code>workbook.save_to_buffer()</code></a> methods.</li>
 </ul>
-<h3 id="added-28"><a class="header" href="#added-28">Added</a></h3>
+<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
 <ul>
 <li>
 <p>Added new methods to get references to worksheet objects used by the workbook:</p>
@@ -10494,7 +10526,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="080---2022-10-28"><a class="header" href="#080---2022-10-28">[0.8.0] - 2022-10-28</a></h2>
-<h3 id="added-29"><a class="header" href="#added-29">Added</a></h3>
+<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
 <ul>
 <li>
 <p>Added support for creating files from paths via <code>workbook.new_from_path()</code>.</p>
@@ -10504,7 +10536,7 @@ with the borrow checker.</p>
 </li>
 </ul>
 <h2 id="070---2022-10-22"><a class="header" href="#070---2022-10-22">[0.7.0] - 2022-10-22</a></h2>
-<h3 id="added-30"><a class="header" href="#added-30">Added</a></h3>
+<h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
 <ul>
 <li>
 <p>Added an almost the complete set of Page Setup methods:</p>
@@ -10562,7 +10594,7 @@ with the borrow checker.</p>
 Issue #6</a>.</li>
 </ul>
 <h2 id="060---2022-10-18"><a class="header" href="#060---2022-10-18">[0.6.0] - 2022-10-18</a></h2>
-<h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
+<h3 id="added-32"><a class="header" href="#added-32">Added</a></h3>
 <ul>
 <li>
 <p>Added more page setup methods:</p>
@@ -10576,7 +10608,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="050---2022-10-16"><a class="header" href="#050---2022-10-16">[0.5.0] - 2022-10-16</a></h2>
-<h3 id="added-32"><a class="header" href="#added-32">Added</a></h3>
+<h3 id="added-33"><a class="header" href="#added-33">Added</a></h3>
 <ul>
 <li>
 <p>Added page setup methods:</p>
@@ -10591,7 +10623,7 @@ Footers</a>.</p>
 </li>
 </ul>
 <h2 id="040---2022-10-10"><a class="header" href="#040---2022-10-10">[0.4.0] - 2022-10-10</a></h2>
-<h3 id="added-33"><a class="header" href="#added-33">Added</a></h3>
+<h3 id="added-34"><a class="header" href="#added-34">Added</a></h3>
 <ul>
 <li>Added support for array formulas and dynamic array formulas via
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_array_formula"><code>worksheet.write_array()</code></a> and
@@ -10604,7 +10636,7 @@ Footers</a>.</p>
 <li>Fixed minor crate issue.</li>
 </ul>
 <h2 id="030---2022-10-01"><a class="header" href="#030---2022-10-01">[0.3.0] - 2022-10-01</a></h2>
-<h3 id="added-34"><a class="header" href="#added-34">Added</a></h3>
+<h3 id="added-35"><a class="header" href="#added-35">Added</a></h3>
 <ul>
 <li>Added <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.write_boolean"><code>worksheet.write_boolean_with_format()</code></a> method to support writing Excel boolean
 values.</li>
@@ -10615,12 +10647,12 @@ values.</li>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
 <h2 id="020---2022-09-24"><a class="header" href="#020---2022-09-24">[0.2.0] - 2022-09-24</a></h2>
-<h3 id="added-35"><a class="header" href="#added-35">Added</a></h3>
+<h3 id="added-36"><a class="header" href="#added-36">Added</a></h3>
 <ul>
 <li>First functional version. Supports the main data types and formatting.</li>
 </ul>
 <h2 id="010---2022-07-12"><a class="header" href="#010---2022-07-12">[0.1.0] - 2022-07-12</a></h2>
-<h3 id="added-36"><a class="header" href="#added-36">Added</a></h3>
+<h3 id="added-37"><a class="header" href="#added-37">Added</a></h3>
 <ul>
 <li>Initial, non-functional crate, to initiate namespace.</li>
 </ul>

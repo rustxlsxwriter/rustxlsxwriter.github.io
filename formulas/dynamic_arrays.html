@@ -171,7 +171,7 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -179,12 +179,12 @@ values that can vary in size depending on the the filter results:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.
@@ -470,7 +470,7 @@ function which only requires the start cell:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -478,12 +478,12 @@ function which only requires the start cell:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.
@@ -794,7 +794,7 @@ following formula:</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span><span class="boring">use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // Create a new Excel file object.
@@ -802,12 +802,12 @@ following formula:</p>
 </span><span class="boring">
 </span><span class="boring">    // Create some header formats to use in the worksheets.
 </span><span class="boring">    let header1 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x74AC4C))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    let header2 = Format::new()
-</span><span class="boring">        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-</span><span class="boring">        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+</span><span class="boring">        .set_foreground_color(Color::RGB(0x528FD3))
+</span><span class="boring">        .set_font_color(Color::RGB(0xFFFFFF));
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example of using the FILTER() function.

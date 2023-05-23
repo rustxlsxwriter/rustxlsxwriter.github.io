@@ -159,7 +159,7 @@ functions.</p>
 </span><span class="boring">//! functions that create dynamic arrays. These functions are new to Excel
 </span><span class="boring">//! 365. The examples mirror the examples in the Excel documentation for these
 </span><span class="boring">//! functions.
-</span>use rust_xlsxwriter::{Format, Workbook, Worksheet, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, Workbook, Worksheet, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -167,12 +167,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
 
     // Create some header formats to use in the worksheets.
     let header1 = Format::new()
-        .set_foreground_color(XlsxColor::RGB(0x74AC4C))
-        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+        .set_foreground_color(Color::RGB(0x74AC4C))
+        .set_font_color(Color::RGB(0xFFFFFF));
 
     let header2 = Format::new()
-        .set_foreground_color(XlsxColor::RGB(0x528FD3))
-        .set_font_color(XlsxColor::RGB(0xFFFFFF));
+        .set_foreground_color(Color::RGB(0x528FD3))
+        .set_font_color(Color::RGB(0xFFFFFF));
 
     // -----------------------------------------------------------------------
     // Example of using the FILTER() function.

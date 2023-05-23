@@ -231,14 +231,14 @@ worksheet) in a group of worksheets.</p>
 <h2 id="setting-worksheet-tab-colors"><a class="header" href="#setting-worksheet-tab-colors">Setting worksheet tab colors</a></h2>
 <p>Another way of highlighting one or more worksheets in Excel is to set the tab
 color. With <code>rust_xlsxwriter</code> this is achieved with
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_tab_color"><code>worksheet.set_tab_color()</code></a> and a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.XlsxColor.html"><code>XlsxColor</code></a> color:</p>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.set_tab_color"><code>worksheet.set_tab_color()</code></a> and a <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.Color.html"><code>Color</code></a> color:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2023, John McNamara, jmcnamara@cpan.org
 </span><span class="boring">
 </span><span class="boring">//! The following example demonstrates set the tab color of worksheets.
 </span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, Worksheet, XlsxColor, XlsxError};
+</span><span class="boring">use rust_xlsxwriter::{Color, Workbook, Worksheet, XlsxError};
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    let mut workbook = Workbook::new();
@@ -248,9 +248,9 @@ color. With <code>rust_xlsxwriter</code> this is achieved with
     let mut worksheet3 = Worksheet::new();
     let mut worksheet4 = Worksheet::new();
 
-    worksheet1.set_tab_color(XlsxColor::Red);
-    worksheet2.set_tab_color(XlsxColor::Green);
-    worksheet3.set_tab_color(XlsxColor::RGB(0xFF9900));
+    worksheet1.set_tab_color(Color::Red);
+    worksheet2.set_tab_color(Color::Green);
+    worksheet3.set_tab_color(Color::RGB(0xFF9900));
 
     // worksheet4 will have the default color.
     worksheet4.set_active(true);

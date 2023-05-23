@@ -154,7 +154,7 @@ borders, alignment and number formatting.</p>
 </span><span class="boring">//! The following example demonstrates some of the available formatting
 </span><span class="boring">//! properties.
 </span><span class="boring">
-</span>use rust_xlsxwriter::{Format, FormatBorder, Workbook, XlsxColor, XlsxError};
+</span>use rust_xlsxwriter::{Color, Format, FormatBorder, Workbook, XlsxError};
 
 fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Create a new Excel file object.
@@ -179,10 +179,10 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let format4 = Format::new().set_font_name(&quot;Edwardian Script ITC&quot;);
     worksheet.write_string_with_format(3, 0, &quot;Fonts&quot;, &amp;format4)?;
 
-    let format5 = Format::new().set_font_color(XlsxColor::Red);
+    let format5 = Format::new().set_font_color(Color::Red);
     worksheet.write_string_with_format(4, 0, &quot;Font color&quot;, &amp;format5)?;
 
-    let format6 = Format::new().set_background_color(XlsxColor::RGB(0xDAA520));
+    let format6 = Format::new().set_background_color(Color::RGB(0xDAA520));
     worksheet.write_string_with_format(5, 0, &quot;Fills&quot;, &amp;format6)?;
 
     let format7 = Format::new().set_border(FormatBorder::Thin);
