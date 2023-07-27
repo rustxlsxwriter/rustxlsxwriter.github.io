@@ -146,8 +146,9 @@
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/trait.IntoExcelData.html"><code>IntoExcelData</code></a> trait to handle arbitrary user data that can be mapped to one
 of the main Excel data types.</p>
 <p>For this example we create a simple struct type to represent a <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Time</a>. This
-is the number of elapsed seconds since the epoch of January 1970 (UTC). This
-type isn't handled by default by<code>rust_xlsxwriter</code>.</p>
+is the number of elapsed seconds since the epoch of January 1970 (UTC). Note,
+this is for demonstration purposes only. The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ExcelDateTime.html"><code>ExcelDateTime</code></a> struct in
+<code>rust_xlsxwriter</code> can handle Unix timestamps.</p>
 <p><strong>Image of the output file:</strong></p>
 <p><img src="../../images/write_generic.png" alt="Image of generic writer example" /></p>
 <p><strong>Code to generate the output file:</strong></p>
