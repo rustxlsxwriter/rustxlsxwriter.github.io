@@ -253,8 +253,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -281,8 +280,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -309,9 +307,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -338,9 +334,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -367,7 +361,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -375,7 +368,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -402,7 +396,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -413,7 +406,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -440,7 +434,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -451,8 +444,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -477,8 +470,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -500,8 +493,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -528,7 +521,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -550,9 +542,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -579,7 +573,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -601,9 +594,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -713,8 +708,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -741,8 +735,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -769,9 +762,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -798,9 +789,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -827,7 +816,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -835,7 +823,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -862,7 +851,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -873,7 +861,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -900,7 +889,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -911,8 +899,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -937,8 +925,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -960,8 +948,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -988,7 +976,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1010,9 +997,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1039,7 +1028,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1061,9 +1049,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1173,8 +1163,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
-    table.set_autofilter(false);
+    let table = Table::new().set_autofilter(false);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1201,8 +1190,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -1229,9 +1217,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1258,9 +1244,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1287,7 +1271,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1295,7 +1278,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1322,7 +1306,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1333,7 +1316,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -1360,7 +1344,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1371,8 +1354,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1397,8 +1380,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1420,8 +1403,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1448,7 +1431,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1470,9 +1452,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1499,7 +1483,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1521,9 +1504,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1633,8 +1618,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1661,8 +1645,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
-    table.set_header_row(false);
+    let table = Table::new().set_header_row(false);
 
     // Add the table to the worksheet.
     worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -1689,9 +1672,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1718,9 +1699,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1747,7 +1726,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1755,7 +1733,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -1782,7 +1761,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1793,7 +1771,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -1820,7 +1799,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -1831,8 +1809,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1857,8 +1835,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1880,8 +1858,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1908,7 +1886,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1930,9 +1907,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -1959,7 +1938,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -1981,9 +1959,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2093,8 +2073,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2121,8 +2100,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -2149,9 +2127,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
-    table.set_first_column(true);
-    table.set_last_column(true);
+    let table = Table::new().set_first_column(true).set_last_column(true);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2178,9 +2154,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2207,7 +2181,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2215,7 +2188,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2242,7 +2216,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2253,7 +2226,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -2280,7 +2254,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2291,8 +2264,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2317,8 +2290,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2340,8 +2313,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2368,7 +2341,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2390,9 +2362,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2419,7 +2393,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2441,9 +2414,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2553,8 +2528,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2581,8 +2555,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -2609,9 +2582,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2638,9 +2609,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
-    table.set_banded_rows(false);
-    table.set_banded_columns(true);
+    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2667,7 +2636,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2675,7 +2643,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -2702,7 +2671,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2713,7 +2681,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -2740,7 +2709,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -2751,8 +2719,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2777,8 +2745,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2800,8 +2768,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2828,7 +2796,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2850,9 +2817,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -2879,7 +2848,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -2901,9 +2869,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3013,8 +2983,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3041,8 +3010,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -3069,9 +3037,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3098,9 +3064,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3127,7 +3091,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new().set_header(&quot;Product&quot;),
         TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3135,7 +3098,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
         TableColumn::new().set_header(&quot;Quarter 3&quot;),
         TableColumn::new().set_header(&quot;Quarter 4&quot;),
     ];
-    table.set_columns(&amp;columns);
+
+    let table = Table::new().set_columns(&amp;columns);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3162,7 +3126,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3173,7 +3136,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -3200,7 +3164,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3211,8 +3174,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3237,8 +3200,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3260,8 +3223,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3288,7 +3251,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3310,9 +3272,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3339,7 +3303,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3361,9 +3324,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3473,8 +3438,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3501,8 +3465,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -3529,9 +3492,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3558,9 +3519,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3587,7 +3546,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3595,7 +3553,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3622,7 +3581,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new().set_header(&quot;Product&quot;),
         TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3633,7 +3591,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
             .set_header(&quot;Year&quot;)
             .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
     ];
-    table.set_columns(&amp;columns);
+
+    let table = Table::new().set_columns(&amp;columns);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -3660,7 +3619,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -3671,8 +3629,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3697,8 +3655,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3720,8 +3678,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3748,7 +3706,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3770,9 +3727,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3799,7 +3758,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -3821,9 +3779,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -3933,8 +3893,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -3961,8 +3920,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -3989,9 +3947,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4018,9 +3974,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4047,7 +4001,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4055,7 +4008,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4082,7 +4036,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4093,7 +4046,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -4120,7 +4074,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new().set_header(&quot;Product&quot;),
         TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4131,8 +4084,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
             .set_header(&quot;Year&quot;)
             .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
     ];
-    table.set_columns(&amp;columns);
-    table.set_total_row(true);
+
+    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4157,8 +4110,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -4180,8 +4133,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4208,7 +4161,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -4230,9 +4182,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4259,7 +4213,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -4281,9 +4234,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4393,8 +4348,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4421,8 +4375,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -4449,9 +4402,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4478,9 +4429,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4507,7 +4456,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4515,7 +4463,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4542,7 +4491,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4553,7 +4501,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -4580,7 +4529,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4591,8 +4539,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4617,8 +4565,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     // Write the table data.
     worksheet.write_column(3, 1, items)?;
     worksheet.write_row_matrix(3, 2, data)?;
+
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new()
             .set_header(&quot;Product&quot;)
@@ -4640,13 +4588,13 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
             .set_total_function(TableFunction::Sum)
             .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
     ];
-    table.set_columns(&amp;columns);
-    table.set_total_row(true);
+
+    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 7, 6, &amp;table)?;
-
-<span class="boring">    // -----------------------------------------------------------------------
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example 11. Table with alternative Excel style.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
@@ -4668,7 +4616,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -4690,9 +4637,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4719,7 +4668,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -4741,9 +4689,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -4853,8 +4803,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4881,8 +4830,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -4909,9 +4857,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4938,9 +4884,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -4967,7 +4911,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -4975,7 +4918,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -5002,7 +4946,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -5013,7 +4956,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -5040,7 +4984,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -5051,8 +4994,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5077,8 +5020,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -5100,8 +5043,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5110,8 +5053,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Example 11. Table with alternative Excel style.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
-</span><span class="boring">    // Add a worksheet to the workbook.
-</span>    let worksheet = workbook.add_worksheet();
+</span>    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
 
     let caption = &quot;Table with alternative Excel style.&quot;;
 
@@ -5128,7 +5071,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new()
             .set_header(&quot;Product&quot;)
@@ -5150,14 +5092,16 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
             .set_total_function(TableFunction::Sum)
             .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
     ];
-    table.set_columns(&amp;columns);
-    table.set_total_row(true);
-    table.set_style(TableStyle::Light11);
+
+    let table = Table::new()
+        .set_columns(&amp;columns)
+        .set_total_row(true)
+        .set_style(TableStyle::Light11);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 7, 6, &amp;table)?;
-
-<span class="boring">    // -----------------------------------------------------------------------
+<span class="boring">
+</span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">    // Example 12. Table with Excel style removed.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
@@ -5179,7 +5123,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -5201,9 +5144,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::None);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::None);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5313,8 +5258,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_autofilter(false);
+</span><span class="boring">    let table = Table::new().set_autofilter(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -5341,8 +5285,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_header_row(false);
+</span><span class="boring">    let table = Table::new().set_header_row(false);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(3, 1, 6, 5, &amp;table)?;
@@ -5369,9 +5312,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_first_column(true);
-</span><span class="boring">    table.set_last_column(true);
+</span><span class="boring">    let table = Table::new().set_first_column(true).set_last_column(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -5398,9 +5339,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
-</span><span class="boring">    table.set_banded_rows(false);
-</span><span class="boring">    table.set_banded_columns(true);
+</span><span class="boring">    let table = Table::new().set_banded_rows(false).set_banded_columns(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -5427,7 +5366,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -5435,7 +5373,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 3&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 4&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 5, &amp;table)?;
@@ -5462,7 +5401,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -5473,7 +5411,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table8[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 6, 6, &amp;table)?;
@@ -5500,7 +5439,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new().set_header(&quot;Product&quot;),
 </span><span class="boring">        TableColumn::new().set_header(&quot;Quarter 1&quot;),
@@ -5511,8 +5449,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_header(&quot;Year&quot;)
 </span><span class="boring">            .set_formula(&quot;SUM(Table9[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5537,8 +5475,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Write the table data.
 </span><span class="boring">    worksheet.write_column(3, 1, items)?;
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
+</span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -5560,8 +5498,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table10[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new().set_columns(&amp;columns).set_total_row(true);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5588,7 +5526,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    worksheet.write_row_matrix(3, 2, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Create and configure a new table.
-</span><span class="boring">    let mut table = Table::new();
 </span><span class="boring">    let columns = vec![
 </span><span class="boring">        TableColumn::new()
 </span><span class="boring">            .set_header(&quot;Product&quot;)
@@ -5610,9 +5547,11 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">            .set_total_function(TableFunction::Sum)
 </span><span class="boring">            .set_formula(&quot;SUM(Table11[@[Quarter 1]:[Quarter 4]])&quot;),
 </span><span class="boring">    ];
-</span><span class="boring">    table.set_columns(&amp;columns);
-</span><span class="boring">    table.set_total_row(true);
-</span><span class="boring">    table.set_style(TableStyle::Light11);
+</span><span class="boring">
+</span><span class="boring">    let table = Table::new()
+</span><span class="boring">        .set_columns(&amp;columns)
+</span><span class="boring">        .set_total_row(true)
+</span><span class="boring">        .set_style(TableStyle::Light11);
 </span><span class="boring">
 </span><span class="boring">    // Add the table to the worksheet.
 </span><span class="boring">    worksheet.add_table(2, 1, 7, 6, &amp;table)?;
@@ -5621,8 +5560,8 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    // Example 12. Table with Excel style removed.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
-</span><span class="boring">    // Add a worksheet to the workbook.
-</span>    let worksheet = workbook.add_worksheet();
+</span>    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
 
     let caption = &quot;Table with Excel style removed.&quot;;
 
@@ -5639,7 +5578,6 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     worksheet.write_row_matrix(3, 2, data)?;
 
     // Create and configure a new table.
-    let mut table = Table::new();
     let columns = vec![
         TableColumn::new()
             .set_header(&quot;Product&quot;)
@@ -5661,16 +5599,18 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
             .set_total_function(TableFunction::Sum)
             .set_formula(&quot;SUM(Table12[@[Quarter 1]:[Quarter 4]])&quot;),
     ];
-    table.set_columns(&amp;columns);
-    table.set_total_row(true);
-    table.set_style(TableStyle::None);
+
+    let table = Table::new()
+        .set_columns(&amp;columns)
+        .set_total_row(true)
+        .set_style(TableStyle::None);
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 7, 6, &amp;table)?;
 
-<span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;tables.xlsx&quot;)?;
-</span><span class="boring">
+    // Save the file to disk.
+    workbook.save(&quot;tables.xlsx&quot;)?;
+<span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}</span></code></pre>
 
