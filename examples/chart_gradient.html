@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
@@ -31,7 +31,8 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
@@ -60,40 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="../workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="../worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="../worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="../worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../autofilters/autofilters.html"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="../examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="../examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="../examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="../examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="../examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="../examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="../examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="../examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="../examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="../examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="../examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="../examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="../examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="../examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="../examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="../examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="../examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_gradient.html" class="active"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="../examples/images.html"><strong aria-hidden="true">9.28.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="../examples/embedded_images.html"><strong aria-hidden="true">9.29.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="../examples/insert_image_to_fit.html"><strong aria-hidden="true">9.30.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">9.31.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/defined_names.html"><strong aria-hidden="true">9.32.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">9.33.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/lambda.html"><strong aria-hidden="true">9.34.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">9.35.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="../examples/doc_properties.html"><strong aria-hidden="true">9.36.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="../examples/watermark.html"><strong aria-hidden="true">9.37.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="../examples/panes.html"><strong aria-hidden="true">9.38.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="../examples/protection.html"><strong aria-hidden="true">9.39.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="../workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="../worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="../worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="../worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../autofilters/autofilters.html"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="../examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="../examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="../examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="../examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="../examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="../examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="../examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="../examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="../examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="../examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="../examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="../examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="../examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="../examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="../examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="../examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="../examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_gradient.html" class="active"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="../examples/sparklines1.html"><strong aria-hidden="true">9.28.</strong> Sparklines: Simple example</a></li><li class="chapter-item expanded "><a href="../examples/sparklines2.html"><strong aria-hidden="true">9.29.</strong> Sparklines: Example with optional properties</a></li><li class="chapter-item expanded "><a href="../examples/images.html"><strong aria-hidden="true">9.30.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="../examples/embedded_images.html"><strong aria-hidden="true">9.31.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="../examples/insert_image_to_fit.html"><strong aria-hidden="true">9.32.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">9.33.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/defined_names.html"><strong aria-hidden="true">9.34.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">9.35.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/lambda.html"><strong aria-hidden="true">9.36.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">9.37.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="../examples/doc_properties.html"><strong aria-hidden="true">9.38.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="../examples/watermark.html"><strong aria-hidden="true">9.39.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="../examples/panes.html"><strong aria-hidden="true">9.40.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="../examples/protection.html"><strong aria-hidden="true">9.41.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -164,9 +196,9 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     let bold = Format::new().set_bold();
 
     // Add the worksheet data that the charts will refer to.
-    worksheet.write_with_format(0, 0, &quot;Number&quot;, &amp;bold)?;
-    worksheet.write_with_format(0, 1, &quot;Batch 1&quot;, &amp;bold)?;
-    worksheet.write_with_format(0, 2, &quot;Batch 2&quot;, &amp;bold)?;
+    worksheet.write_with_format(0, 0, "Number", &amp;bold)?;
+    worksheet.write_with_format(0, 1, "Batch 1", &amp;bold)?;
+    worksheet.write_with_format(0, 2, "Batch 2", &amp;bold)?;
 
     let data = [
         [2, 3, 4, 5, 6, 7],
@@ -187,12 +219,12 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     //
     chart
         .add_series()
-        .set_categories(&quot;Sheet1!$A$2:$A$7&quot;)
-        .set_values(&quot;Sheet1!$B$2:$B$7&quot;)
-        .set_name(&quot;Sheet1!$B$1&quot;)
+        .set_categories("Sheet1!$A$2:$A$7")
+        .set_values("Sheet1!$B$2:$B$7")
+        .set_name("Sheet1!$B$1")
         .set_format(ChartGradientFill::new().set_gradient_stops(&amp;[
-            ChartGradientStop::new(&quot;#963735&quot;, 0),
-            ChartGradientStop::new(&quot;#F1DCDB&quot;, 100),
+            ChartGradientStop::new("#963735", 0),
+            ChartGradientStop::new("#F1DCDB", 100),
         ]));
 
     //
@@ -200,26 +232,26 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     //
     chart
         .add_series()
-        .set_categories(&quot;Sheet1!$A$2:$A$7&quot;)
-        .set_values(&quot;Sheet1!$C$2:$C$7&quot;)
-        .set_name(&quot;Sheet1!$C$1&quot;)
+        .set_categories("Sheet1!$A$2:$A$7")
+        .set_values("Sheet1!$C$2:$C$7")
+        .set_name("Sheet1!$C$1")
         .set_format(ChartGradientFill::new().set_gradient_stops(&amp;[
-            ChartGradientStop::new(&quot;#E36C0A&quot;, 0),
-            ChartGradientStop::new(&quot;#FCEADA&quot;, 100),
+            ChartGradientStop::new("#E36C0A", 0),
+            ChartGradientStop::new("#FCEADA", 100),
         ]));
 
     //
     // Create a gradient profile and add it to chart plot area.
     //
     chart.set_plot_area_format(ChartGradientFill::new().set_gradient_stops(&amp;[
-        ChartGradientStop::new(&quot;#FFEFD1&quot;, 0),
-        ChartGradientStop::new(&quot;#F0EBD5&quot;, 50),
-        ChartGradientStop::new(&quot;#B69F66&quot;, 100),
+        ChartGradientStop::new("#FFEFD1", 0),
+        ChartGradientStop::new("#F0EBD5", 50),
+        ChartGradientStop::new("#B69F66", 100),
     ]));
 
     // Add some axis labels.
-    chart.x_axis().set_name(&quot;Test number&quot;);
-    chart.y_axis().set_name(&quot;Sample length (mm)&quot;);
+    chart.x_axis().set_name("Test number");
+    chart.y_axis().set_name("Sample length (mm)");
 
     // Turn off the chart legend.
     chart.legend().set_hidden();
@@ -227,7 +259,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Add the chart to the worksheet.
     worksheet.insert_chart_with_offset(0, 3, &amp;chart, 25, 10)?;
 
-    workbook.save(&quot;chart_gradient.xlsx&quot;)?;
+    workbook.save("chart_gradient.xlsx")?;
 
     Ok(())
 }</code></pre>
@@ -240,7 +272,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../examples/chart_data_table.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../examples/chart_data_table.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -254,7 +286,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../examples/chart_data_table.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../examples/chart_data_table.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -280,5 +312,6 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

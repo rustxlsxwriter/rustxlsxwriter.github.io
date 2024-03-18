@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -31,7 +31,8 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -60,40 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="autofilters/autofilters.html"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="examples/chart_gradient.html"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="examples/images.html"><strong aria-hidden="true">9.28.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="examples/embedded_images.html"><strong aria-hidden="true">9.29.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="examples/insert_image_to_fit.html"><strong aria-hidden="true">9.30.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">9.31.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="examples/defined_names.html"><strong aria-hidden="true">9.32.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="examples/dynamic_arrays.html"><strong aria-hidden="true">9.33.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="examples/lambda.html"><strong aria-hidden="true">9.34.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="examples/headers.html"><strong aria-hidden="true">9.35.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="examples/doc_properties.html"><strong aria-hidden="true">9.36.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="examples/watermark.html"><strong aria-hidden="true">9.37.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="examples/panes.html"><strong aria-hidden="true">9.38.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="examples/protection.html"><strong aria-hidden="true">9.39.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html" class="active"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="autofilters/autofilters.html"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="examples/chart_gradient.html"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="examples/sparklines1.html"><strong aria-hidden="true">9.28.</strong> Sparklines: Simple example</a></li><li class="chapter-item expanded "><a href="examples/sparklines2.html"><strong aria-hidden="true">9.29.</strong> Sparklines: Example with optional properties</a></li><li class="chapter-item expanded "><a href="examples/images.html"><strong aria-hidden="true">9.30.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="examples/embedded_images.html"><strong aria-hidden="true">9.31.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="examples/insert_image_to_fit.html"><strong aria-hidden="true">9.32.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="examples/right_to_left.html"><strong aria-hidden="true">9.33.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="examples/defined_names.html"><strong aria-hidden="true">9.34.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="examples/dynamic_arrays.html"><strong aria-hidden="true">9.35.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="examples/lambda.html"><strong aria-hidden="true">9.36.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="examples/headers.html"><strong aria-hidden="true">9.37.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="examples/doc_properties.html"><strong aria-hidden="true">9.38.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="examples/watermark.html"><strong aria-hidden="true">9.39.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="examples/panes.html"><strong aria-hidden="true">9.40.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="examples/protection.html"><strong aria-hidden="true">9.41.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="license.html" class="active"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -154,51 +186,51 @@ the MIT license, as shown below.</p>
 <ol>
 <li>
 <p>Definitions.</p>
-<p>&quot;License&quot; shall mean the terms and conditions for use, reproduction,
+<p>"License" shall mean the terms and conditions for use, reproduction,
 and distribution as defined by Sections 1 through 9 of this document.</p>
-<p>&quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+<p>"Licensor" shall mean the copyright owner or entity authorized by
 the copyright owner that is granting the License.</p>
-<p>&quot;Legal Entity&quot; shall mean the union of the acting entity and all
+<p>"Legal Entity" shall mean the union of the acting entity and all
 other entities that control, are controlled by, or are under common
 control with that entity. For the purposes of this definition,
-&quot;control&quot; means (i) the power, direct or indirect, to cause the
+"control" means (i) the power, direct or indirect, to cause the
 direction or management of such entity, whether by contract or
 otherwise, or (ii) ownership of fifty percent (50%) or more of the
 outstanding shares, or (iii) beneficial ownership of such entity.</p>
-<p>&quot;You&quot; (or &quot;Your&quot;) shall mean an individual or Legal Entity
+<p>"You" (or "Your") shall mean an individual or Legal Entity
 exercising permissions granted by this License.</p>
-<p>&quot;Source&quot; form shall mean the preferred form for making modifications,
+<p>"Source" form shall mean the preferred form for making modifications,
 including but not limited to software source code, documentation
 source, and configuration files.</p>
-<p>&quot;Object&quot; form shall mean any form resulting from mechanical
+<p>"Object" form shall mean any form resulting from mechanical
 transformation or translation of a Source form, including but
 not limited to compiled object code, generated documentation,
 and conversions to other media types.</p>
-<p>&quot;Work&quot; shall mean the work of authorship, whether in Source or
+<p>"Work" shall mean the work of authorship, whether in Source or
 Object form, made available under the License, as indicated by a
 copyright notice that is included in or attached to the work
 (an example is provided in the Appendix below).</p>
-<p>&quot;Derivative Works&quot; shall mean any work, whether in Source or Object
+<p>"Derivative Works" shall mean any work, whether in Source or Object
 form, that is based on (or derived from) the Work and for which the
 editorial revisions, annotations, elaborations, or other modifications
 represent, as a whole, an original work of authorship. For the purposes
 of this License, Derivative Works shall not include works that remain
 separable from, or merely link (or bind by name) to the interfaces of,
 the Work and Derivative Works thereof.</p>
-<p>&quot;Contribution&quot; shall mean any work of authorship, including
+<p>"Contribution" shall mean any work of authorship, including
 the original version of the Work and any modifications or additions
 to that Work or Derivative Works thereof, that is intentionally
 submitted to Licensor for inclusion in the Work by the copyright owner
 or by an individual or Legal Entity authorized to submit on behalf of
-the copyright owner. For the purposes of this definition, &quot;submitted&quot;
+the copyright owner. For the purposes of this definition, "submitted"
 means any form of electronic, verbal, or written communication sent
 to the Licensor or its representatives, including but not limited to
 communication on electronic mailing lists, source code control systems,
 and issue tracking systems that are managed by, or on behalf of, the
 Licensor for the purpose of discussing and improving the Work, but
 excluding communication that is conspicuously marked or otherwise
-designated in writing by the copyright owner as &quot;Not a Contribution.&quot;</p>
-<p>&quot;Contributor&quot; shall mean Licensor and any individual or Legal Entity
+designated in writing by the copyright owner as "Not a Contribution."</p>
+<p>"Contributor" shall mean Licensor and any individual or Legal Entity
 on behalf of whom a Contribution has been received by Licensor and
 subsequently incorporated within the Work.</p>
 </li>
@@ -241,7 +273,7 @@ that You distribute, all copyright, patent, trademark, and
 attribution notices from the Source form of the Work,
 excluding those notices that do not pertain to any part of
 the Derivative Works; and</p>
-<p>(d) If the Work includes a &quot;NOTICE&quot; text file as part of its
+<p>(d) If the Work includes a "NOTICE" text file as part of its
 distribution, then any Derivative Works that You distribute must
 include a readable copy of the attribution notices contained
 within such NOTICE file, excluding those notices that do not
@@ -282,7 +314,7 @@ origin of the Work and reproducing the content of the NOTICE file.</p>
 <li>
 <p>Disclaimer of Warranty. Unless required by applicable law or
 agreed to in writing, Licensor provides the Work (and each
-Contributor provides its Contributions) on an &quot;AS IS&quot; BASIS,
+Contributor provides its Contributions) on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied, including, without limitation, any warranties or conditions
 of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
@@ -319,36 +351,36 @@ of your accepting any such warranty or additional liability.</p>
 <p>END OF TERMS AND CONDITIONS</p>
 <p>APPENDIX: How to apply the Apache License to your work.</p>
 <pre><code>  To apply the Apache License to your work, attach the following
-  boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;
+  boilerplate notice, with the fields enclosed by brackets "[]"
   replaced with your own identifying information. (Don't include
   the brackets!)  The text should be enclosed in the appropriate
   comment syntax for the file format. We also recommend that a
   file or class name and description of purpose be included on the
-  same &quot;printed page&quot; as the copyright notice for easier
+  same "printed page" as the copyright notice for easier
   identification within third-party archives.
 </code></pre>
 <p>Copyright 2022-2024 John McNamara <a href="mailto:jmcnamara@cpan.org">jmcnamara@cpan.org</a></p>
-<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<p>Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
 <pre><code>   http://www.apache.org/licenses/LICENSE-2.0
 </code></pre>
 <p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</p>
 <h2 id="mit-license"><a class="header" href="#mit-license">MIT License</a></h2>
 <p>Copyright 2022-2024 John McNamara <a href="mailto:jmcnamara@cpan.org">jmcnamara@cpan.org</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the &quot;Software&quot;), to deal
+of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:</p>
 <p>The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -364,7 +396,7 @@ SOFTWARE.</p>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="author.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="author.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -378,7 +410,7 @@ SOFTWARE.</p>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="author.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="author.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -404,5 +436,6 @@ SOFTWARE.</p>
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
@@ -31,7 +31,8 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
@@ -60,40 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="../workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="../worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="../worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="../worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../autofilters/autofilters.html" class="active"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="../examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="../examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="../examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="../examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="../examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="../examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="../examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="../examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="../examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="../examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="../examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="../examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="../examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="../examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="../examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="../examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="../examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_gradient.html"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="../examples/images.html"><strong aria-hidden="true">9.28.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="../examples/embedded_images.html"><strong aria-hidden="true">9.29.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="../examples/insert_image_to_fit.html"><strong aria-hidden="true">9.30.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">9.31.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/defined_names.html"><strong aria-hidden="true">9.32.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">9.33.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/lambda.html"><strong aria-hidden="true">9.34.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">9.35.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="../examples/doc_properties.html"><strong aria-hidden="true">9.36.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="../examples/watermark.html"><strong aria-hidden="true">9.37.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="../examples/panes.html"><strong aria-hidden="true">9.38.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="../examples/protection.html"><strong aria-hidden="true">9.39.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="../workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="../worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="../worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="../worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../autofilters/autofilters.html" class="active"><strong aria-hidden="true">8.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">9.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">9.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">9.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">9.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/merge_range.html"><strong aria-hidden="true">9.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="../examples/autofilter.html"><strong aria-hidden="true">9.5.</strong> Adding Autofilters</a></li><li class="chapter-item expanded "><a href="../examples/autofit.html"><strong aria-hidden="true">9.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="../examples/tables.html"><strong aria-hidden="true">9.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="../examples/conditional_formats.html"><strong aria-hidden="true">9.8.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="../examples/generic_write.html"><strong aria-hidden="true">9.9.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="../examples/rich_strings.html"><strong aria-hidden="true">9.10.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">9.11.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/hyperlinks.html"><strong aria-hidden="true">9.12.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="../examples/simple_chart.html"><strong aria-hidden="true">9.13.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="../examples/chart_styles.html"><strong aria-hidden="true">9.14.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="../examples/area_chart.html"><strong aria-hidden="true">9.15.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="../examples/bar_chart.html"><strong aria-hidden="true">9.16.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="../examples/column_chart.html"><strong aria-hidden="true">9.17.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="../examples/line_chart.html"><strong aria-hidden="true">9.18.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="../examples/scatter_chart.html"><strong aria-hidden="true">9.19.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="../examples/radar_chart.html"><strong aria-hidden="true">9.20.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="../examples/pie_chart.html"><strong aria-hidden="true">9.21.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="../examples/stock_chart.html"><strong aria-hidden="true">9.22.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="../examples/doughnut_chart.html"><strong aria-hidden="true">9.23.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="../examples/chart_pattern.html"><strong aria-hidden="true">9.24.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_gradient.html"><strong aria-hidden="true">9.25.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_table.html"><strong aria-hidden="true">9.26.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_tools.html"><strong aria-hidden="true">9.27.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="../examples/sparklines1.html"><strong aria-hidden="true">9.28.</strong> Sparklines: Simple example</a></li><li class="chapter-item expanded "><a href="../examples/sparklines2.html"><strong aria-hidden="true">9.29.</strong> Sparklines: Example with optional properties</a></li><li class="chapter-item expanded "><a href="../examples/images.html"><strong aria-hidden="true">9.30.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="../examples/embedded_images.html"><strong aria-hidden="true">9.31.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="../examples/insert_image_to_fit.html"><strong aria-hidden="true">9.32.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">9.33.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/defined_names.html"><strong aria-hidden="true">9.34.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">9.35.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/lambda.html"><strong aria-hidden="true">9.36.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">9.37.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="../examples/doc_properties.html"><strong aria-hidden="true">9.38.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="../examples/watermark.html"><strong aria-hidden="true">9.39.</strong> Adding a watermark</a></li><li class="chapter-item expanded "><a href="../examples/panes.html"><strong aria-hidden="true">9.40.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="../examples/protection.html"><strong aria-hidden="true">9.41.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">11.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">12.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">13.</strong> Author</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -186,9 +218,9 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -202,12 +234,12 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -237,10 +269,10 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -260,7 +292,7 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -270,7 +302,7 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -290,21 +322,21 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -316,64 +348,64 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -384,10 +416,10 @@ that some data is shown and some is hidden.</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -406,7 +438,7 @@ is a list filter where the user selects the items to filter from a list of all
 the values in the the column range:</p>
 <p><img src="../../images/autofilter_list.png" alt="Excel autofilter dialog" /></p>
 <p>The other main type of filter is a custom filter where the user can specify 1 or
-2 conditions like &quot;&gt;= 4000&quot; and &quot;&lt;= 6000&quot;:</p>
+2 conditions like "&gt;= 4000" and "&lt;= 6000":</p>
 <p><img src="../../images/autofilter_custom.png" alt="Excel autofilter dialog" /></p>
 <p>In Excel these are mutually exclusive and you will need to choose one or the
 other depending on your needs.</p>
@@ -416,7 +448,7 @@ the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Filte
 <h2 id="filter-examples"><a class="header" href="#filter-examples">Filter examples</a></h2>
 <p>Using the autofilter data and range shown above we will look at some examples of
 setting filters to highlight certain rows.</p>
-<p>The first example is a list filter to show only rows that are in the &quot;East&quot;
+<p>The first example is a list filter to show only rows that are in the "East"
 region in the first column:</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
@@ -457,9 +489,9 @@ region in the first column:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span>    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span>    let filter_condition = FilterCondition::new().add_list_filter("East");
     worksheet.filter_column(0, &amp;filter_condition)?;
 <span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -473,12 +505,12 @@ region in the first column:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -508,10 +540,10 @@ region in the first column:</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -531,7 +563,7 @@ region in the first column:</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -541,7 +573,7 @@ region in the first column:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -561,21 +593,21 @@ region in the first column:</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -587,64 +619,64 @@ region in the first column:</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -655,10 +687,10 @@ region in the first column:</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -714,9 +746,9 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -730,12 +762,12 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span>    let filter_condition = FilterCondition::new()
-        .add_list_filter(&quot;East&quot;)
-        .add_list_filter(&quot;West&quot;)
-        .add_list_filter(&quot;South&quot;);
+        .add_list_filter("East")
+        .add_list_filter("West")
+        .add_list_filter("South");
     worksheet.filter_column(0, &amp;filter_condition)?;
 <span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -765,10 +797,10 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -788,7 +820,7 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -798,7 +830,7 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -818,21 +850,21 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -844,64 +876,64 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -912,10 +944,10 @@ the dropdown arrow and the non matching rows are filtered out:</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -971,9 +1003,9 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -987,12 +1019,12 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1022,10 +1054,10 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1045,7 +1077,7 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -1055,7 +1087,7 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -1075,21 +1107,21 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -1101,64 +1133,64 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -1169,10 +1201,10 @@ or on their own using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxw
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -1228,9 +1260,9 @@ only:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1244,12 +1276,12 @@ only:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1279,10 +1311,10 @@ only:</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span>    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span>    let filter_condition1 = FilterCondition::new().add_list_filter("East");
     worksheet.filter_column(0, &amp;filter_condition1)?;
 
-    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+    let filter_condition2 = FilterCondition::new().add_list_filter("July");
     worksheet.filter_column(3, &amp;filter_condition2)?;
 <span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1302,7 +1334,7 @@ only:</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -1312,7 +1344,7 @@ only:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -1332,21 +1364,21 @@ only:</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -1358,64 +1390,64 @@ only:</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -1426,10 +1458,10 @@ only:</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -1444,7 +1476,7 @@ only:</p>
 </span><span class="boring">}</span></code></pre>
 <p>Example output, note the filters on columns A and D:</p>
 <p><img src="../../images/app_autofilter5.png" alt="Image of output from app_autofilter.rs" /></p>
-<p>For finer grained control of the filtered data Excel allows 1 or 2 &quot;custom&quot;
+<p>For finer grained control of the filtered data Excel allows 1 or 2 "custom"
 filters for conditions like <code>&gt;=</code> or <code>begins with</code> (for strings):</p>
 <p><img src="../../images/autofilter_custom_menu.png" alt="Excel autofilter dialog" /></p>
 <p>In rust_xlsxwriter you can set custom filters using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html"><code>FilterCondition</code></a>
@@ -1489,9 +1521,9 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1505,12 +1537,12 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1540,10 +1572,10 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1563,7 +1595,7 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
     worksheet.filter_column(2, &amp;filter_condition)?;
 <span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -1573,7 +1605,7 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -1593,21 +1625,21 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -1619,64 +1651,64 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -1687,10 +1719,10 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -1705,7 +1737,7 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">}</span></code></pre>
 <p>Example output:</p>
 <p><img src="../../images/app_autofilter6.png" alt="Image of output from app_autofilter.rs" /></p>
-<p>Using both custom filter conditions you can create conditions like &quot;between&quot;:</p>
+<p>Using both custom filter conditions you can create conditions like "between":</p>
 <pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="boring">//
 </span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
@@ -1745,9 +1777,9 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1761,12 +1793,12 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1796,10 +1828,10 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -1819,7 +1851,7 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -1829,7 +1861,7 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span>    let filter_condition = FilterCondition::new()
         .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
         .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -1849,21 +1881,21 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -1875,64 +1907,64 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -1943,10 +1975,10 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -1961,8 +1993,8 @@ criteria/operators are set using the <a href="https://docs.rs/rust_xlsxwriter/la
 </span><span class="boring">}</span></code></pre>
 <p>Example output:</p>
 <p><img src="../../images/app_autofilter7.png" alt="Image of output from app_autofilter.rs" /></p>
-<p>Note, Excel defaults to using an &quot;And&quot; operator for 2 custom filters but you can
-set an &quot;Or&quot; operator using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_custom_boolean_or"><code>FilterCondition.add_custom_boolean_or()</code></a>
+<p>Note, Excel defaults to using an "And" operator for 2 custom filters but you can
+set an "Or" operator using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.FilterCondition.html#method.add_custom_boolean_or"><code>FilterCondition.add_custom_boolean_or()</code></a>
 method.</p>
 <h2 id="filtering-non-blanks"><a class="header" href="#filtering-non-blanks">Filtering Non-blanks</a></h2>
 <p>Excel supports, and uses, two different way to filter on non-blanks. The first
@@ -2006,9 +2038,9 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2022,12 +2054,12 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2057,10 +2089,10 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2080,7 +2112,7 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -2090,7 +2122,7 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -2110,21 +2142,21 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span>    let filter_condition = FilterCondition::new()
-        .add_list_filter(&quot;East&quot;)
-        .add_list_filter(&quot;West&quot;)
-        .add_list_filter(&quot;North&quot;)
-        .add_list_filter(&quot;South&quot;);
+        .add_list_filter("East")
+        .add_list_filter("West")
+        .add_list_filter("North")
+        .add_list_filter("South");
     worksheet.filter_column(0, &amp;filter_condition)?;
 <span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span><span class="boring">    let filter_condition =
-</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+</span><span class="boring">        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -2136,64 +2168,64 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -2204,10 +2236,10 @@ is to filter all the unique non-blank strings/numbers in the column.</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -2261,9 +2293,9 @@ custom filter to get the same result:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot; in the first
+</span><span class="boring">    // Set a filter condition to only show cells matching "East" in the first
 </span><span class="boring">    // column.
-</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2277,12 +2309,12 @@ custom filter to get the same result:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set a filter condition to only show cells matching &quot;East&quot;, &quot;West&quot; or
-</span><span class="boring">    // &quot;South&quot; in the first column.
+</span><span class="boring">    // Set a filter condition to only show cells matching "East", "West" or
+</span><span class="boring">    // "South" in the first column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2312,10 +2344,10 @@ custom filter to get the same result:</p>
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
 </span><span class="boring">    // Set a filter condition for 2 separate columns.
-</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter(&quot;East&quot;);
+</span><span class="boring">    let filter_condition1 = FilterCondition::new().add_list_filter("East");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition1)?;
 </span><span class="boring">
-</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter(&quot;July&quot;);
+</span><span class="boring">    let filter_condition2 = FilterCondition::new().add_list_filter("July");
 </span><span class="boring">    worksheet.filter_column(3, &amp;filter_condition2)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
@@ -2335,7 +2367,7 @@ custom filter to get the same result:</p>
 </span><span class="boring">    worksheet.filter_column(2, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // -----------------------------------------------------------------------
-</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a &quot;between&quot; condition.
+</span><span class="boring">    // 7. Add an autofilter with 2 custom filters to create a "between" condition.
 </span><span class="boring">    // -----------------------------------------------------------------------
 </span><span class="boring">
 </span><span class="boring">    // Add a worksheet  with some sample data to filter.
@@ -2345,7 +2377,7 @@ custom filter to get the same result:</p>
 </span><span class="boring">    // Set the autofilter area.
 </span><span class="boring">    worksheet.autofilter(0, 0, 50, 3)?;
 </span><span class="boring">
-</span><span class="boring">    // Set two custom number filters in a &quot;between&quot; configuration.
+</span><span class="boring">    // Set two custom number filters in a "between" configuration.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
 </span><span class="boring">        .add_custom_filter(FilterCriteria::GreaterThanOrEqualTo, 4000)
 </span><span class="boring">        .add_custom_filter(FilterCriteria::LessThanOrEqualTo, 6000);
@@ -2365,21 +2397,21 @@ custom filter to get the same result:</p>
 </span><span class="boring">    // Filter non-blanks by filtering on all the unique non-blank
 </span><span class="boring">    // strings/numbers in the column.
 </span><span class="boring">    let filter_condition = FilterCondition::new()
-</span><span class="boring">        .add_list_filter(&quot;East&quot;)
-</span><span class="boring">        .add_list_filter(&quot;West&quot;)
-</span><span class="boring">        .add_list_filter(&quot;North&quot;)
-</span><span class="boring">        .add_list_filter(&quot;South&quot;);
+</span><span class="boring">        .add_list_filter("East")
+</span><span class="boring">        .add_list_filter("West")
+</span><span class="boring">        .add_list_filter("North")
+</span><span class="boring">        .add_list_filter("South");
 </span><span class="boring">    worksheet.filter_column(0, &amp;filter_condition)?;
 </span><span class="boring">
 </span><span class="boring">    // Or you can add a simpler custom filter to get the same result.
 </span><span class="boring">
-</span><span class="boring">    // Set a custom number filter of `!= &quot; &quot;` to filter non blanks.
+</span><span class="boring">    // Set a custom number filter of `!= " "` to filter non blanks.
 </span>    let filter_condition =
-        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, &quot; &quot;);
+        FilterCondition::new().add_custom_filter(FilterCriteria::NotEqualTo, " ");
     worksheet.filter_column(0, &amp;filter_condition)?;
 <span class="boring">
 </span><span class="boring">    // Save the file to disk.
-</span><span class="boring">    workbook.save(&quot;autofilter.xlsx&quot;)?;
+</span><span class="boring">    workbook.save("autofilter.xlsx")?;
 </span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}
@@ -2391,64 +2423,64 @@ custom filter to get the same result:</p>
 </span><span class="boring">) -&gt; Result&lt;(), XlsxError&gt; {
 </span><span class="boring">    // The sample data to add to the worksheet.
 </span><span class="boring">    let mut data = vec![
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 9000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 9000, &quot;September&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 2000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 9000, &quot;August&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Orange&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 10000, &quot;April&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 6000, &quot;January&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 3000, &quot;May&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 3000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 7000, &quot;February&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Pear&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 2000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 6000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Pear&quot;, 8000, &quot;February&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 7000, &quot;August&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 7000, &quot;July&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 6000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Grape&quot;, 8000, &quot;September&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 3000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 10000, &quot;November&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 4000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 1000, &quot;November&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Orange&quot;, 4000, &quot;October&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 5000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 1000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Apple&quot;, 10000, &quot;March&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 7000, &quot;October&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Grape&quot;, 1000, &quot;September&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 10000, &quot;October&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 8000, &quot;March&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Apple&quot;, 4000, &quot;July&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Orange&quot;, 5000, &quot;July&quot;),
-</span><span class="boring">        (&quot;West&quot;, &quot;Apple&quot;, 4000, &quot;June&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 5000, &quot;April&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Pear&quot;, 3000, &quot;August&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 9000, &quot;November&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Orange&quot;, 8000, &quot;October&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Apple&quot;, 10000, &quot;June&quot;),
-</span><span class="boring">        (&quot;South&quot;, &quot;Pear&quot;, 1000, &quot;December&quot;),
-</span><span class="boring">        (&quot;North&quot;, &quot;Grape&quot;, 10000, &quot;July&quot;),
-</span><span class="boring">        (&quot;East&quot;, &quot;Grape&quot;, 6000, &quot;February&quot;),
+</span><span class="boring">        ("East", "Apple", 9000, "July"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("South", "Orange", 9000, "September"),
+</span><span class="boring">        ("North", "Apple", 2000, "November"),
+</span><span class="boring">        ("West", "Apple", 9000, "November"),
+</span><span class="boring">        ("South", "Pear", 7000, "October"),
+</span><span class="boring">        ("North", "Pear", 9000, "August"),
+</span><span class="boring">        ("West", "Orange", 1000, "December"),
+</span><span class="boring">        ("West", "Grape", 1000, "November"),
+</span><span class="boring">        ("South", "Pear", 10000, "April"),
+</span><span class="boring">        ("West", "Grape", 6000, "January"),
+</span><span class="boring">        ("South", "Orange", 3000, "May"),
+</span><span class="boring">        ("North", "Apple", 3000, "December"),
+</span><span class="boring">        ("South", "Apple", 7000, "February"),
+</span><span class="boring">        ("West", "Grape", 1000, "December"),
+</span><span class="boring">        ("East", "Grape", 8000, "February"),
+</span><span class="boring">        ("South", "Grape", 10000, "June"),
+</span><span class="boring">        ("West", "Pear", 7000, "December"),
+</span><span class="boring">        ("South", "Apple", 2000, "October"),
+</span><span class="boring">        ("East", "Grape", 7000, "December"),
+</span><span class="boring">        ("North", "Grape", 6000, "July"),
+</span><span class="boring">        ("East", "Pear", 8000, "February"),
+</span><span class="boring">        ("North", "Apple", 7000, "August"),
+</span><span class="boring">        ("North", "Orange", 7000, "July"),
+</span><span class="boring">        ("North", "Apple", 6000, "June"),
+</span><span class="boring">        ("South", "Grape", 8000, "September"),
+</span><span class="boring">        ("West", "Apple", 3000, "October"),
+</span><span class="boring">        ("South", "Orange", 10000, "November"),
+</span><span class="boring">        ("West", "Grape", 4000, "December"),
+</span><span class="boring">        ("North", "Orange", 5000, "August"),
+</span><span class="boring">        ("East", "Orange", 1000, "November"),
+</span><span class="boring">        ("East", "Orange", 4000, "October"),
+</span><span class="boring">        ("North", "Grape", 5000, "August"),
+</span><span class="boring">        ("East", "Apple", 1000, "July"),
+</span><span class="boring">        ("South", "Apple", 10000, "March"),
+</span><span class="boring">        ("East", "Grape", 7000, "October"),
+</span><span class="boring">        ("West", "Grape", 1000, "September"),
+</span><span class="boring">        ("East", "Grape", 10000, "October"),
+</span><span class="boring">        ("South", "Orange", 8000, "March"),
+</span><span class="boring">        ("North", "Apple", 4000, "July"),
+</span><span class="boring">        ("South", "Orange", 5000, "July"),
+</span><span class="boring">        ("West", "Apple", 4000, "June"),
+</span><span class="boring">        ("East", "Apple", 5000, "April"),
+</span><span class="boring">        ("North", "Pear", 3000, "August"),
+</span><span class="boring">        ("East", "Grape", 9000, "November"),
+</span><span class="boring">        ("North", "Orange", 8000, "October"),
+</span><span class="boring">        ("East", "Apple", 10000, "June"),
+</span><span class="boring">        ("South", "Pear", 1000, "December"),
+</span><span class="boring">        ("North", "Grape", 10000, "July"),
+</span><span class="boring">        ("East", "Grape", 6000, "February"),
 </span><span class="boring">    ];
 </span><span class="boring">
 </span><span class="boring">    // Introduce blanks cells for some of the examples.
 </span><span class="boring">    if add_blanks {
-</span><span class="boring">        data[5].0 = &quot;&quot;;
-</span><span class="boring">        data[18].0 = &quot;&quot;;
-</span><span class="boring">        data[30].0 = &quot;&quot;;
-</span><span class="boring">        data[40].0 = &quot;&quot;;
+</span><span class="boring">        data[5].0 = "";
+</span><span class="boring">        data[18].0 = "";
+</span><span class="boring">        data[30].0 = "";
+</span><span class="boring">        data[40].0 = "";
 </span><span class="boring">    }
 </span><span class="boring">
 </span><span class="boring">    // Widen the columns for clarity.
@@ -2459,10 +2491,10 @@ custom filter to get the same result:</p>
 </span><span class="boring">
 </span><span class="boring">    // Write the header titles.
 </span><span class="boring">    let header_format = Format::new().set_bold();
-</span><span class="boring">    worksheet.write_string_with_format(0, 0, &quot;Region&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 1, &quot;Item&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 2, &quot;Volume&quot;, &amp;header_format)?;
-</span><span class="boring">    worksheet.write_string_with_format(0, 3, &quot;Month&quot;, &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 0, "Region", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 1, "Item", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 2, "Volume", &amp;header_format)?;
+</span><span class="boring">    worksheet.write_string_with_format(0, 3, "Month", &amp;header_format)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the other worksheet data.
 </span><span class="boring">    for (row, data) in data.iter().enumerate() {
@@ -2485,7 +2517,7 @@ runtime and isn't part of the file format.</p>
 <p>In order to simulate this behavior the rust_xlsxwriter library iterates through
 the worksheet data in the autofilter range and hides any rows that don't match.
 This is an additional feature that isn't available in the other language ports
-of &quot;xlsxwriter&quot;. In those versions the programmer has to iterate through the
+of "xlsxwriter". In those versions the programmer has to iterate through the
 input data and hide the rows manually.</p>
 <p>In general the auto-hiding in rust_xlsxwriter works as expected, as can be seen
 in the examples above. However, there are some limitations such as:</p>
@@ -2509,7 +2541,7 @@ using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Wor
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../examples/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../examples/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -2523,7 +2555,7 @@ using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Wor
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../examples/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../examples/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -2549,5 +2581,6 @@ using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Wor
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>
