@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="creating-worksheets"><a class="header" href="#creating-worksheets">Creating worksheets</a></h1>
-<p>There are two way of creating a worksheet object with rust_xlsxwriter: via the
+<p>There are two ways of creating a worksheet object with rust_xlsxwriter: via the
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.add_worksheet"><code>workbook.add_worksheet()</code></a> method and via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Worksheet.html#method.new"><code>Worksheet::new()</code></a> constructor.</p>
 <p>The first method ties the worksheet to the workbook object that will
 automatically write it when the file is saved, whereas the second method
@@ -188,8 +188,8 @@ always returns a mutable reference to an element of an internal vector.</p>
 <p>For a workbook with multiple worksheets this restriction is generally workable
 if you can create and use the worksheets sequentially since you will only need
 to have one reference at any one time.</p>
-<p>However, if you can’t structure your code to work sequentially then you get a
-reference to a previously created worksheet using
+<p>However, if you can’t structure your code to work sequentially then you can get
+a reference to a previously created worksheet using
 <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Workbook.html#method.worksheet_from_index"><code>workbook.worksheet_from_index()</code></a>. The standard borrow checking rules still
 apply so you will have to give up ownership of any other worksheet reference
 prior to calling this method.</p>
@@ -384,8 +384,13 @@ Worksheets and other Workbook objects to be <code>registered</code> with a paren
 in order for them to work. However, there aren't currently any features like
 that, and the author will seek to avoid them as much as possible.</p>
 <p>One common use case that works better with <code>Worksheet::new()</code> and
-<code>workbook.push_worksheet()</code> is creating worksheets to run in a parallelized
-mode.</p>
+<code>workbook.push_worksheet()</code> is creating worksheets to run in a
+parallelized/async mode. However, it is worth noting that there isn't a
+guaranteed performance benefit from creating and working with worksheets in
+parallelized/async mode since the main overhead comes from <strong>writing</strong> the
+worksheets which will occur after the worksheets are joined back to the main
+workbook <code>save()</code> thread. In addition <code>rust_xlsxwriter</code> already parallelizes the
+writing of worksheets as much as possible.</p>
 <p>So if the <code>Worksheet::new()</code> and <code>workbook.push_worksheet()</code> methodology seems
 more natural to you then you should use it.</p>
 
