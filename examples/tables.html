@@ -223,9 +223,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Default table with no data.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -246,9 +244,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -273,9 +269,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -300,9 +294,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -327,9 +319,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -354,9 +344,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -381,9 +369,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -416,9 +402,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -454,9 +438,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -492,9 +474,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -541,9 +521,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -593,9 +571,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -678,9 +654,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -701,9 +675,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Default table with data.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -728,9 +700,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -755,9 +725,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -782,9 +750,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -809,9 +775,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -836,9 +800,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -871,9 +833,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -909,9 +869,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -947,9 +905,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -996,9 +952,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1048,9 +1002,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1133,9 +1085,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1156,9 +1106,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1183,9 +1131,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table without default autofilter.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -1210,9 +1156,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1237,9 +1181,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1264,9 +1206,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1291,9 +1231,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1326,9 +1264,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1364,9 +1300,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1402,9 +1336,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1451,9 +1383,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1503,9 +1433,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1588,9 +1516,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1611,9 +1537,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1638,9 +1562,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1665,9 +1587,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table without default header row.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -1692,9 +1612,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1719,9 +1637,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1746,9 +1662,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1781,9 +1695,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1819,9 +1731,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1857,9 +1767,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1906,9 +1814,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -1958,9 +1864,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2043,9 +1947,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2066,9 +1968,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2093,9 +1993,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2120,9 +2018,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2147,9 +2043,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Default table with 'First Column' and 'Last Column' options.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -2174,9 +2068,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2201,9 +2093,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2236,9 +2126,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2274,9 +2162,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2312,9 +2198,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2361,9 +2245,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2413,9 +2295,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2498,9 +2378,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2521,9 +2399,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2548,9 +2424,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2575,9 +2449,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2602,9 +2474,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2629,9 +2499,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with banded columns but without default banded rows.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -2656,9 +2524,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2691,9 +2557,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2729,9 +2593,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2767,9 +2629,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2816,9 +2676,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2868,9 +2726,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2953,9 +2809,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -2976,9 +2830,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3003,9 +2855,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3030,9 +2880,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3057,9 +2905,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3084,9 +2930,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3111,9 +2955,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with user defined column headers.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -3146,9 +2988,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3184,9 +3024,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3222,9 +3060,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3271,9 +3107,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3323,9 +3157,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3408,9 +3240,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3431,9 +3261,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3458,9 +3286,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3485,9 +3311,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3512,9 +3336,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3539,9 +3361,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3566,9 +3386,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3601,9 +3419,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with user defined column headers, and formulas.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -3639,9 +3455,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3677,9 +3491,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3726,9 +3538,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3778,9 +3588,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3863,9 +3671,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3886,9 +3692,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3913,9 +3717,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3940,9 +3742,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3967,9 +3767,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -3994,9 +3792,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4021,9 +3817,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4056,9 +3850,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4094,9 +3886,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with totals row (but no caption or totals).";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -4132,9 +3922,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4181,9 +3969,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4233,9 +4019,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4318,9 +4102,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4341,9 +4123,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4368,9 +4148,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4395,9 +4173,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4422,9 +4198,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4449,9 +4223,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4476,9 +4248,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4511,9 +4281,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4549,9 +4317,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4587,9 +4353,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with totals row with user captions and functions.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -4636,9 +4400,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4688,9 +4450,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4773,9 +4533,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4796,9 +4554,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4823,9 +4579,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4850,9 +4604,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4877,9 +4629,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4904,9 +4654,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4931,9 +4679,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -4966,9 +4712,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5004,9 +4748,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5042,9 +4784,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5091,9 +4831,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with alternative Excel style.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -5143,9 +4881,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with Excel style removed.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5228,9 +4964,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with no data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5251,9 +4985,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with data.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5278,9 +5010,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default autofilter.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5305,9 +5035,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table without default header row.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5332,9 +5060,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Default table with 'First Column' and 'Last Column' options.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5359,9 +5085,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with banded columns but without default banded rows.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5386,9 +5110,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5421,9 +5143,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with user defined column headers, and formulas.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5459,9 +5179,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row (but no caption or totals).";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5497,9 +5215,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with totals row with user captions and functions.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5546,9 +5262,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 </span><span class="boring">    let caption = "Table with alternative Excel style.";
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=6u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 12)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 6, 12)?;
 </span><span class="boring">
 </span><span class="boring">    // Write the caption.
 </span><span class="boring">    worksheet.write(0, 1, caption)?;
@@ -5598,9 +5312,7 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
     let caption = "Table with Excel style removed.";
 
     // Set the column widths for clarity.
-    for col_num in 1..=6u16 {
-        worksheet.set_column_width(col_num, 12)?;
-    }
+    worksheet.set_column_range_width(1, 6, 12)?;
 
     // Write the caption.
     worksheet.write(0, 1, caption)?;
@@ -5639,10 +5351,10 @@ the table data can be added via standard <a href="https://docs.rs/rust_xlsxwrite
 
     // Add the table to the worksheet.
     worksheet.add_table(2, 1, 7, 6, &amp;table)?;
-
-    // Save the file to disk.
-    workbook.save("tables.xlsx")?;
 <span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save("tables.xlsx")?;
+</span><span class="boring">
 </span><span class="boring">    Ok(())
 </span><span class="boring">}</span></code></pre>
 

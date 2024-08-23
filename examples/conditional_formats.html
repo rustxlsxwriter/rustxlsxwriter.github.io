@@ -254,9 +254,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range.
     let conditional_format = ConditionalFormatCell::new()
@@ -288,9 +286,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -321,9 +317,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -353,9 +347,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -384,9 +376,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -417,9 +407,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -452,9 +440,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -556,9 +542,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -618,9 +602,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -910,9 +892,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -944,9 +924,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range.
     let conditional_format = ConditionalFormatCell::new()
@@ -977,9 +955,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -1009,9 +985,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -1040,9 +1014,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -1073,9 +1045,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -1108,9 +1078,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -1212,9 +1180,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -1274,9 +1240,7 @@ light red. Values &lt; 50 are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -1566,9 +1530,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -1600,9 +1562,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -1633,9 +1593,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range.
     let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -1665,9 +1623,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -1696,9 +1652,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -1729,9 +1683,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -1764,9 +1716,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -1868,9 +1818,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -1930,9 +1878,7 @@ in light red. Unique values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -2222,9 +2168,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -2256,9 +2200,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -2289,9 +2231,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -2321,9 +2261,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range. The default criteria is Above Average.
     let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -2352,9 +2290,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -2385,9 +2321,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -2420,9 +2354,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -2524,9 +2456,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -2586,9 +2516,7 @@ values are in light red. Below average values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -2878,9 +2806,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -2912,9 +2838,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -2945,9 +2869,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -2977,9 +2899,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -3008,9 +2928,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range.
     let conditional_format = ConditionalFormatTop::new()
@@ -3041,9 +2959,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -3076,9 +2992,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -3180,9 +3094,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -3242,9 +3154,7 @@ light red. Bottom 10 values are in light green.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -3534,9 +3444,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -3568,9 +3476,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -3601,9 +3507,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -3633,9 +3537,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -3664,9 +3566,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -3697,9 +3597,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a non-contiguous range.
     let conditional_format = ConditionalFormatCell::new()
@@ -3732,9 +3630,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -3836,9 +3732,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -3898,9 +3792,7 @@ ranges.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -4190,9 +4082,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -4224,9 +4114,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -4257,9 +4145,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -4289,9 +4175,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -4320,9 +4204,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -4353,9 +4235,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -4388,9 +4268,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span>    // Write a conditional format over a range.
     let conditional_format = ConditionalFormatFormula::new()
@@ -4492,9 +4370,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -4554,9 +4430,7 @@ light green. Odd numbered cells are in light red.</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -4846,9 +4720,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -4880,9 +4752,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -4913,9 +4783,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -4945,9 +4813,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -4976,9 +4842,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -5009,9 +4873,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -5044,9 +4906,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -5148,9 +5008,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -5210,9 +5068,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -5501,9 +5357,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -5535,9 +5389,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -5568,9 +5420,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -5600,9 +5450,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -5631,9 +5479,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -5664,9 +5510,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -5699,9 +5543,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -5803,9 +5645,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span>    // Write 2 color scale formats with standard Excel colors.
     let conditional_format = ConditionalFormat2ColorScale::new()
@@ -5865,9 +5705,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -6156,9 +5994,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -6190,9 +6026,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -6223,9 +6057,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -6255,9 +6087,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -6286,9 +6116,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -6319,9 +6147,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -6354,9 +6180,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -6458,9 +6282,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -6520,9 +6342,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span>    // Write 3 color scale formats with standard Excel colors.
     let conditional_format = ConditionalFormat3ColorScale::new()
@@ -6811,9 +6631,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -6845,9 +6663,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -6878,9 +6694,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -6910,9 +6724,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -6941,9 +6753,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -6974,9 +6784,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -7009,9 +6817,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -7113,9 +6919,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -7175,9 +6979,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
@@ -7466,9 +7268,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -7500,9 +7300,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -7533,9 +7331,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatDuplicate::new().set_format(&amp;format1);
@@ -7565,9 +7361,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range. The default criteria is Above Average.
 </span><span class="boring">    let conditional_format = ConditionalFormatAverage::new().set_format(&amp;format1);
@@ -7596,9 +7390,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatTop::new()
@@ -7629,9 +7421,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a non-contiguous range.
 </span><span class="boring">    let conditional_format = ConditionalFormatCell::new()
@@ -7664,9 +7454,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_row_matrix(2, 1, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 1..=10u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(1, 10, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write a conditional format over a range.
 </span><span class="boring">    let conditional_format = ConditionalFormatFormula::new()
@@ -7768,9 +7556,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 2 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat2ColorScale::new()
@@ -7830,9 +7616,7 @@ contain the sub-word 'rust'. Column C shows words that start/end with 't'</p>
 </span><span class="boring">    worksheet.write_column(2, 11, data)?;
 </span><span class="boring">
 </span><span class="boring">    // Set the column widths for clarity.
-</span><span class="boring">    for col_num in 0..=12u16 {
-</span><span class="boring">        worksheet.set_column_width(col_num, 6)?;
-</span><span class="boring">    }
+</span><span class="boring">    worksheet.set_column_range_width(0, 12, 6)?;
 </span><span class="boring">
 </span><span class="boring">    // Write 3 color scale formats with standard Excel colors.
 </span><span class="boring">    let conditional_format = ConditionalFormat3ColorScale::new()
