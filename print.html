@@ -4086,94 +4086,15 @@ original file specification. These functions are referred to by Microsoft as
 fully qualified with a prefix such as <code>_xlfn.</code>, as shown the table in the next
 section below.</p>
 <p>If the prefix isn't included you will get an Excel function name error. For example:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" without
-</span><span class="boring">//! an explicit prefix, which results in an Excel error.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function without prefix. This gives an Excel error.
-</span>    worksheet.write_formula(0, 0, "=STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future1.rs:15}}</code></pre>
 <p><img src="formulas/../../images/working_with_formulas3.png" alt="Image of output from doc_working_with_formulas_future1.rs" /></p>
 <p>If the <code>_xlfn.</code> prefix is included you will get the correct result:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" with
-</span><span class="boring">//! an explicit prefix.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function with explicit prefix.
-</span>    worksheet.write_formula(0, 0, "=_xlfn.STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future2.rs:15}}</code></pre>
 <p><img src="formulas/../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
 <p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
 <p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.use_future_functions"><code>Worksheet::use_future_functions()</code></a> function to
 have <code>rust_xlsxwriter</code> automatically handle future functions for you:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" with
-</span><span class="boring">//! an implicit prefix and the use_future_functions() method.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function and automatically add the required prefix.
-</span>    worksheet.use_future_functions(true);
-    worksheet.write_formula(0, 0, "=STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future3.rs:15:16}}</code></pre>
 <p>This will give the same correct result as the image above.</p>
 <h2 id="list-of-future-functions"><a class="header" href="#list-of-future-functions">List of Future Functions</a></h2>
 <p>The following list is taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX extensions documentation on future
@@ -25635,6 +25556,24 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0750---2024-09-02"><a class="header" href="#0750---2024-09-02">[0.75.0] - 2024-09-02</a></h2>
+<h3 id="removed"><a class="header" href="#removed">Removed</a></h3>
+<ul>
+<li>
+<p>Removed dependency on the <code>regex.rs</code> crate for smaller binary sizes. The only
+non-optional dependency is now <code>zip.rs</code>.</p>
+<p>An example of the size difference is shown below for one of the sample apps:</p>
+<div class="table-wrapper"><table><thead><tr><th><code>app_hello_world</code></th><th>v0.74.0</th><th>v0.74.0</th></tr></thead><tbody>
+<tr><td>Debug</td><td>9.2M</td><td>4.2M</td></tr>
+<tr><td>Release</td><td>3.4M</td><td>1.6M</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<p>Removed the <code>Formula::use_future_functions()</code> and
+<code>Formula::use_table_functions()</code> methods since there functionality is now
+handled automatically as a result of the <code>regex</code> change.</p>
+</li>
+</ul>
 <h2 id="0740---2024-08-24"><a class="header" href="#0740---2024-08-24">[0.74.0] - 2024-08-24</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
 <ul>
@@ -25837,7 +25776,7 @@ previously <code>pub(crate)</code> private.</p>
 <p><a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/83">Feature Request #83</a>.</p>
 </li>
 </ul>
-<h3 id="removed"><a class="header" href="#removed">Removed</a></h3>
+<h3 id="removed-1"><a class="header" href="#removed-1">Removed</a></h3>
 <ul>
 <li>
 <p>Removed unnecessary lifetime on <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> objects used in Worksheet <code>write()</code>
@@ -26102,7 +26041,7 @@ with large multi-worksheet files.</li>
 <h3 id="added-31"><a class="header" href="#added-31">Added</a></h3>
 <ul>
 <li>Added support for worksheet <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Table.html"><code>Table</code></a> header and cell formatting via the
-<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.TableColumn::html#method.set_format"><code>TableColumn::set_format()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.TableColumn::html#method.set_header_format"><code>TableColumn::set_header_format()</code></a> methods.</li>
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.TableColumn.html#method.set_format"><code>TableColumn::set_format()</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.TableColumn.html#method.set_header_format"><code>TableColumn::set_header_format()</code></a> methods.</li>
 </ul>
 <h2 id="0420---2023-07-11"><a class="header" href="#0420---2023-07-11">[0.42.0] - 2023-07-11</a></h2>
 <h3 id="changed-3"><a class="header" href="#changed-3">Changed</a></h3>
@@ -26552,7 +26491,7 @@ features such as EMF and WMF formats, removal of duplicate images, hyperlinks
 in images and images in headers/footers.</p>
 </li>
 </ul>
-<h3 id="removed-1"><a class="header" href="#removed-1">Removed</a></h3>
+<h3 id="removed-2"><a class="header" href="#removed-2">Removed</a></h3>
 <ul>
 <li>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/workbook/struct.Workbook.html#method.save"><code>Workbook::save()</code></a> method has been extended to handle paths or strings.
 The <code>workbook.save_to_path()</code> method has been removed. See <a href="https://github.com/jmcnamara/rust_xlsxwriter/pull/15">PR #15</a>.</li>

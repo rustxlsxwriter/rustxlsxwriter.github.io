@@ -182,94 +182,15 @@ original file specification. These functions are referred to by Microsoft as
 fully qualified with a prefix such as <code>_xlfn.</code>, as shown the table in the next
 section below.</p>
 <p>If the prefix isn't included you will get an Excel function name error. For example:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" without
-</span><span class="boring">//! an explicit prefix, which results in an Excel error.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function without prefix. This gives an Excel error.
-</span>    worksheet.write_formula(0, 0, "=STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future1.rs:15}}</code></pre>
 <p><img src="../../images/working_with_formulas3.png" alt="Image of output from doc_working_with_formulas_future1.rs" /></p>
 <p>If the <code>_xlfn.</code> prefix is included you will get the correct result:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" with
-</span><span class="boring">//! an explicit prefix.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function with explicit prefix.
-</span>    worksheet.write_formula(0, 0, "=_xlfn.STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future2.rs:15}}</code></pre>
 <p><img src="../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
 <p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
 <p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.use_future_functions"><code>Worksheet::use_future_functions()</code></a> function to
 have <code>rust_xlsxwriter</code> automatically handle future functions for you:</p>
-<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
-</span><span class="boring">//
-</span><span class="boring">// Copyright 2022-2024, John McNamara, jmcnamara@cpan.org
-</span><span class="boring">
-</span><span class="boring">//! The following example demonstrates writing an Excel "Future Function" with
-</span><span class="boring">//! an implicit prefix and the use_future_functions() method.
-</span><span class="boring">
-</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
-</span><span class="boring">
-</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
-</span><span class="boring">    let mut workbook = Workbook::new();
-</span><span class="boring">    let worksheet = workbook.add_worksheet();
-</span><span class="boring">
-</span><span class="boring">    // Write a future function and automatically add the required prefix.
-</span>    worksheet.use_future_functions(true);
-    worksheet.write_formula(0, 0, "=STDEV.S(B1:B5)")?;
-<span class="boring">
-</span><span class="boring">    // Write some data for the function to operate on.
-</span><span class="boring">    worksheet.write_number(0, 1, 1.23)?;
-</span><span class="boring">    worksheet.write_number(1, 1, 1.03)?;
-</span><span class="boring">    worksheet.write_number(2, 1, 1.20)?;
-</span><span class="boring">    worksheet.write_number(3, 1, 1.15)?;
-</span><span class="boring">    worksheet.write_number(4, 1, 1.22)?;
-</span><span class="boring">
-</span><span class="boring">    workbook.save("future_function.xlsx")?;
-</span><span class="boring">
-</span><span class="boring">    Ok(())
-</span><span class="boring">}</span></code></pre>
+<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future3.rs:15:16}}</code></pre>
 <p>This will give the same correct result as the image above.</p>
 <h2 id="list-of-future-functions"><a class="header" href="#list-of-future-functions">List of Future Functions</a></h2>
 <p>The following list is taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX extensions documentation on future
