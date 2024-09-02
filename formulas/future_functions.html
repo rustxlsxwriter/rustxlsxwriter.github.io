@@ -178,23 +178,16 @@
 original file specification. These functions are referred to by Microsoft as
 "Future Functions". Examples of these functions are <code>ACOT</code>, <code>CHISQ.DIST.RT</code> ,
 <code>CONFIDENCE.NORM</code>, <code>STDEV.P</code>, <code>STDEV.S</code> and <code>WORKDAY.INTL</code>.</p>
-<p>When written using <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write_formula"><code>Worksheet::write_formula()</code></a> these functions need to be
-fully qualified with a prefix such as <code>_xlfn.</code>, as shown the table in the next
-section below.</p>
-<p>If the prefix isn't included you will get an Excel function name error. For example:</p>
-<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future1.rs:15}}</code></pre>
-<p><img src="../../images/working_with_formulas3.png" alt="Image of output from doc_working_with_formulas_future1.rs" /></p>
-<p>If the <code>_xlfn.</code> prefix is included you will get the correct result:</p>
-<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future2.rs:15}}</code></pre>
-<p><img src="../../images/working_with_formulas2.png" alt="Image of output from doc_working_with_formulas_future2.rs" /></p>
-<p><strong>Note</strong>: The function is displayed by Excel without the prefix.</p>
-<p>Alternatively you can use the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.use_future_functions"><code>Worksheet::use_future_functions()</code></a> function to
-have <code>rust_xlsxwriter</code> automatically handle future functions for you:</p>
-<pre><code class="language-rust">{{#rustdoc_include ../../../rust_xlsxwriter/examples/doc_working_with_formulas_future3.rs:15:16}}</code></pre>
-<p>This will give the same correct result as the image above.</p>
-<h2 id="list-of-future-functions"><a class="header" href="#list-of-future-functions">List of Future Functions</a></h2>
-<p>The following list is taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX extensions documentation on future
-functions</a>.</p>
+<p>Although these formulas are displayed as normal in Excel they are stored with a
+prefix. For example <code>STDEV.S(B1:B5)</code> is stored in the Excel file as
+<code>xlfn.STDEV.S(B1:B5)</code>. The <code>rust_xlsxwriter</code> crate makes these changes
+automatically so in general you don't have to worry about this unless you are
+dealing with features such as Lambda functions, see above. However, if required
+you can manually prefix any required function with the <code>_xlfn.</code> prefix.</p>
+<p>For completeness the following is a list of future functions taken from <a href="http://msdn.microsoft.com/en-us/library/dd907480%28v=office.12%29.aspx">MS XLSX
+extensions documentation on future functions</a>.</p>
+<p>Note, the Python in Excel functions aren't simple functions and aren't
+supported.</p>
 <div class="table-wrapper"><table><thead><tr><th>Future Functions</th></tr></thead><tbody>
 <tr><td><code>_xlfn.ACOT</code></td></tr>
 <tr><td><code>_xlfn.ACOTH</code></td></tr>
