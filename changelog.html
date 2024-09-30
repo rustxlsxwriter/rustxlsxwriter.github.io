@@ -175,6 +175,21 @@
                     <main>
                         <h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0780---2024-10-01"><a class="header" href="#0780---2024-10-01">[0.78.0] - 2024-10-01</a></h2>
+<ul>
+<li>
+<p>Added support for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/performance/index.html#constant-memory-mode">"constant memory"</a> mode to reduce memory usage when writing
+large worksheets.</p>
+<p>The <code>constant_memory</code> mode works by flushing the current row of data to disk
+when the user writes to a new row of data. This limits the overhead to one row
+of data stored in memory. Once this happens it is no longer possible to write
+to a previous row since the data in the Excel file must be in row order. As
+such this imposes the limitation of having to structure your code to write in
+row by row order. The benefit is that the required memory usage is very low,
+and effectively constant, regardless of the amount of data written.</p>
+<img src="https://rustxlsxwriter.github.io/images/performance_memory1.png">
+</li>
+</ul>
 <h2 id="0770---2024-09-18"><a class="header" href="#0770---2024-09-18">[0.77.0] - 2024-09-18</a></h2>
 <h3 id="added"><a class="header" href="#added">Added</a></h3>
 <ul>
