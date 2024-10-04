@@ -25661,10 +25661,22 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0790---2024-10-04"><a class="header" href="#0790---2024-10-04">[0.79.0] - 2024-10-04</a></h2>
+<ul>
+<li>
+<p>Added support for files larger than 4GB.</p>
+<p>The <code>rust_xlsxwriter</code> library uses the <a href="https://crates.io/crates/zip/2.2.0">zip.rs</a> crate to provide the zip
+container for the xlsx file that it generates. The size limit for a standard
+zip file is 4GB for the overall container or for any of the uncompressed files
+within it.  Anything greater than that requires <a href="https://en.wikipedia.org/wiki/ZIP_(file_format)#ZIP64">ZIP64</a> support. In practice
+this would apply to worksheets with approximately 150 million cells, or more.</p>
+<p>See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/workbook/struct.Workbook.html#method.use_zip_large_file"><code>Workbook::use_zip_large_file()</code></a>.</p>
+</li>
+</ul>
 <h2 id="0780---2024-10-01"><a class="header" href="#0780---2024-10-01">[0.78.0] - 2024-10-01</a></h2>
 <ul>
 <li>
-<p>Added support for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/performance/index.html#constant-memory-mode">"constant memory"</a> mode to reduce memory usage when writing
+<p>Added support for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/performance/index.html#constant-memory-mode">constant memory</a> mode to reduce memory usage when writing
 large worksheets.</p>
 <p>The <code>constant_memory</code> mode works by flushing the current row of data to disk
 when the user writes to a new row of data. This limits the overhead to one row
