@@ -201,7 +201,7 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
         .set_italic()
         .set_font_color(Color::Red);
 
-    worksheet.write_string_with_format(0, 0, "Hello", &amp;format)?;
+    worksheet.write_with_format(0, 0, "Hello", &amp;format)?;
 
     workbook.save("formats.xlsx")?;
 
@@ -232,8 +232,8 @@ fn main() -&gt; Result&lt;(), XlsxError&gt; {
     // Clone a new format and set some properties.
     let format2 = format1.clone().set_font_color(Color::Blue);
 
-    worksheet.write_string_with_format(0, 0, "Hello", &amp;format1)?;
-    worksheet.write_string_with_format(1, 0, "Hello", &amp;format2)?;
+    worksheet.write_with_format(0, 0, "Hello", &amp;format1)?;
+    worksheet.write_with_format(1, 0, "Hello", &amp;format2)?;
 
     workbook.save("formats.xlsx")?;
 
