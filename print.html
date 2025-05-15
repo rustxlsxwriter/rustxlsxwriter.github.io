@@ -26256,8 +26256,16 @@ workbook.close()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-notes"><a class="header" href="#release-notes">Release Notes</a></h1>
 <p>This section show the feature additions, changes and bug fixes in rust_xlsxwriter.</p>
+<h2 id="0870---2025-05-15"><a class="header" href="#0870---2025-05-15">[0.87.0] - 2025-05-15</a></h2>
+<h1 id="fixed"><a class="header" href="#fixed">Fixed</a></h1>
+<ul>
+<li>
+<p>Fixed yanked zip.rs dependency.</p>
+<p><a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/149">Issue #149</a>.</p>
+</li>
+</ul>
 <h2 id="0861---2025-04-25"><a class="header" href="#0861---2025-04-25">[0.86.1] - 2025-04-25</a></h2>
-<h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
+<h3 id="fixed-1"><a class="header" href="#fixed-1">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue where the incorrect image was displayed when images were used in
@@ -26286,7 +26294,7 @@ of <code>constant_memory</code> mode).</p>
 </li>
 </ul>
 <h2 id="0842---2025-03-24"><a class="header" href="#0842---2025-03-24">[0.84.2] - 2025-03-24</a></h2>
-<h3 id="fixed-1"><a class="header" href="#fixed-1">Fixed</a></h3>
+<h3 id="fixed-2"><a class="header" href="#fixed-2">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue when handling Unicode escapes in strings that don't occur at
@@ -26407,7 +26415,7 @@ long strings with an upper limit for readability.</p>
 </li>
 </ul>
 <h2 id="0800---2024-12-07"><a class="header" href="#0800---2024-12-07">[0.80.0] - 2024-12-07</a></h2>
-<h3 id="fixed-2"><a class="header" href="#fixed-2">Fixed</a></h3>
+<h3 id="fixed-3"><a class="header" href="#fixed-3">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue where unnecessary heap memory was being used to zip worksheets in
@@ -26429,7 +26437,7 @@ auto-fit functionality with additional logic.</p>
 </li>
 </ul>
 <h2 id="0794---2024-11-18"><a class="header" href="#0794---2024-11-18">[0.79.4] - 2024-11-18</a></h2>
-<h3 id="fixed-3"><a class="header" href="#fixed-3">Fixed</a></h3>
+<h3 id="fixed-4"><a class="header" href="#fixed-4">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue when handling PNG images with 0 DPI but with DPI units set.</p>
@@ -26446,7 +26454,7 @@ implement the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/tr
 <p><a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/115">Request #115</a></p>
 </li>
 </ul>
-<h3 id="fixed-4"><a class="header" href="#fixed-4">Fixed</a></h3>
+<h3 id="fixed-5"><a class="header" href="#fixed-5">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed maximum cell width when autofitting columns. The maximum width is now
@@ -26466,7 +26474,7 @@ different offset values when using functions like
 </li>
 </ul>
 <h2 id="0791---2024-10-31"><a class="header" href="#0791---2024-10-31">[0.79.1] - 2024-10-31</a></h2>
-<h3 id="fixed-5"><a class="header" href="#fixed-5">Fixed</a></h3>
+<h3 id="fixed-6"><a class="header" href="#fixed-6">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue where the precedence order of conditional formats wasn't being
@@ -26637,7 +26645,7 @@ messages. It also allows you to restrict input to values in a dropdown list.</p>
 <li>Added support for adjusting the layout position of chart elements: plot
 area, legend, title, and axis labels. See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/chart/struct.ChartLayout.html"><code>ChartLayout</code></a>.</li>
 </ul>
-<h3 id="fixed-6"><a class="header" href="#fixed-6">Fixed</a></h3>
+<h3 id="fixed-7"><a class="header" href="#fixed-7">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed issue where a worksheet name required quoting when used with
@@ -26710,7 +26718,7 @@ versions of Office.</p>
 </li>
 </ul>
 <h2 id="0642---2024-04-13"><a class="header" href="#0642---2024-04-13">[0.64.2] - 2024-04-13</a></h2>
-<h3 id="fixed-7"><a class="header" href="#fixed-7">Fixed</a></h3>
+<h3 id="fixed-8"><a class="header" href="#fixed-8">Fixed</a></h3>
 <ul>
 <li>Fixed internal links in table of contents.</li>
 </ul>
@@ -26922,7 +26930,7 @@ and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/chart/struct
 <li>Added support for chart series error bars via the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/chart/struct.ChartErrorBars.html"><code>ChartErrorBars</code></a> struct
 and methods.</li>
 </ul>
-<h3 id="fixed-8"><a class="header" href="#fixed-8">Fixed</a></h3>
+<h3 id="fixed-9"><a class="header" href="#fixed-9">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed XML error in non-Pie charts.</p>
@@ -26957,7 +26965,7 @@ interface.</p>
 <p>Added support for leader lines to non-Pie charts.</p>
 </li>
 </ul>
-<h3 id="fixed-9"><a class="header" href="#fixed-9">Fixed</a></h3>
+<h3 id="fixed-10"><a class="header" href="#fixed-10">Fixed</a></h3>
 <ul>
 <li>Fixed handling of <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Formula.html#formulas-added-in-excel-2010-and-later">future functions</a> in table formulas.</li>
 </ul>
@@ -27006,7 +27014,7 @@ the <a href="https://crates.io/crates/polars_excel_writer"><code>polars_excel_wr
 </li>
 </ul>
 <h2 id="0450---2023-08-12"><a class="header" href="#0450---2023-08-12">[0.45.0] - 2023-08-12</a></h2>
-<h3 id="fixed-10"><a class="header" href="#fixed-10">Fixed</a></h3>
+<h3 id="fixed-11"><a class="header" href="#fixed-11">Fixed</a></h3>
 <ul>
 <li>
 <p>Fixed "multiply with overflow" issue when image locations in the worksheet
@@ -27168,7 +27176,7 @@ via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/chart/struct
 <li>Added performance improvement for applications that use a lot of <code>Format</code>
 objects. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/30">GitHub Issue #30</a>.</li>
 </ul>
-<h3 id="fixed-11"><a class="header" href="#fixed-11">Fixed</a></h3>
+<h3 id="fixed-12"><a class="header" href="#fixed-12">Fixed</a></h3>
 <ul>
 <li>Fixed issue introduced in v0.34.0 where <code>Rc&lt;&gt;</code> value was blocking <code>Send</code> in
 multithreaded applications. <a href="https://github.com/jmcnamara/rust_xlsxwriter/issues/29">GitHub Issue #29</a>.</li>
@@ -27431,7 +27439,7 @@ For example, strings like "This is <strong>bold</strong> and this is <em>italic<
 </li>
 </ul>
 <h2 id="0171---2022-12-18"><a class="header" href="#0171---2022-12-18">[0.17.1] - 2022-12-18</a></h2>
-<h3 id="fixed-12"><a class="header" href="#fixed-12">Fixed</a></h3>
+<h3 id="fixed-13"><a class="header" href="#fixed-13">Fixed</a></h3>
 <ul>
 <li>Fixes issue where header image files became corrupt during incremental saves.
 Also fixes similar issues in some formatting code.</li>
@@ -27670,7 +27678,7 @@ Footers</a>.</p>
 </ul>
 <p>See also the <code>rust_xlsxwriter</code> user documentation on <a href="https://rustxlsxwriter.github.io/formulas/dynamic_arrays.html">Dynamic Array support</a>.</p>
 <h2 id="031---2022-10-01"><a class="header" href="#031---2022-10-01">[0.3.1] - 2022-10-01</a></h2>
-<h3 id="fixed-13"><a class="header" href="#fixed-13">Fixed</a></h3>
+<h3 id="fixed-14"><a class="header" href="#fixed-14">Fixed</a></h3>
 <ul>
 <li>Fixed minor crate issue.</li>
 </ul>
@@ -27681,7 +27689,7 @@ Footers</a>.</p>
 values.</li>
 </ul>
 <h2 id="021---2022-09-22"><a class="header" href="#021---2022-09-22">[0.2.1] - 2022-09-22</a></h2>
-<h3 id="fixed-14"><a class="header" href="#fixed-14">Fixed</a></h3>
+<h3 id="fixed-15"><a class="header" href="#fixed-15">Fixed</a></h3>
 <ul>
 <li>Fixed some minor crate/publishing issues.</li>
 </ul>
