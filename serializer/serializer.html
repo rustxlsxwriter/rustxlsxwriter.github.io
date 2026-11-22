@@ -1,0 +1,1973 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Working with Serde - Working with the rust_xlsxwriter library</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">rust_xlsxwriter</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting_started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../tutorial/intro.html"><strong aria-hidden="true">2.</strong> Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorial/tutorial1.html"><strong aria-hidden="true">2.1.</strong> Adding data to a worksheet</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial2.html"><strong aria-hidden="true">2.2.</strong> Adding some formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial3.html"><strong aria-hidden="true">2.3.</strong> Adding dates and more formatting</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial4.html"><strong aria-hidden="true">2.4.</strong> Adding a chart</a></li><li class="chapter-item expanded "><a href="../tutorial/tutorial5.html"><strong aria-hidden="true">2.5.</strong> Making the code more programmatic</a></li></ol></li><li class="chapter-item expanded "><a href="../workbook/intro.html"><strong aria-hidden="true">3.</strong> The Workbook struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../workbook/saving.html"><strong aria-hidden="true">3.1.</strong> Creating and saving an xlsx file</a></li><li class="chapter-item expanded "><a href="../workbook/checksum.html"><strong aria-hidden="true">3.2.</strong> Checksum of a saved file</a></li></ol></li><li class="chapter-item expanded "><a href="../worksheet/intro.html"><strong aria-hidden="true">4.</strong> The Worksheet struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../worksheet/create.html"><strong aria-hidden="true">4.1.</strong> Creating worksheets</a></li><li class="chapter-item expanded "><a href="../worksheet/page_setup.html"><strong aria-hidden="true">4.2.</strong> Page Setup</a></li><li class="chapter-item expanded "><a href="../worksheet/headers.html"><strong aria-hidden="true">4.3.</strong> Adding Headers and Footers</a></li><li class="chapter-item expanded "><a href="../worksheet/autofit.html"><strong aria-hidden="true">4.4.</strong> Autofitting column widths</a></li><li class="chapter-item expanded "><a href="../worksheet/tabs.html"><strong aria-hidden="true">4.5.</strong> Working with worksheet tabs</a></li><li class="chapter-item expanded "><a href="../worksheet/protection.html"><strong aria-hidden="true">4.6.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../format/intro.html"><strong aria-hidden="true">5.</strong> The Format struct</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../format/creating.html"><strong aria-hidden="true">5.1.</strong> Creating and using a Format object</a></li><li class="chapter-item expanded "><a href="../format/defaults.html"><strong aria-hidden="true">5.2.</strong> Format defaults</a></li><li class="chapter-item expanded "><a href="../format/methods.html"><strong aria-hidden="true">5.3.</strong> Format methods</a></li><li class="chapter-item expanded "><a href="../format/categories.html"><strong aria-hidden="true">5.4.</strong> Number Format Categories</a></li><li class="chapter-item expanded "><a href="../format/locals.html"><strong aria-hidden="true">5.5.</strong> Number Formats in different Locals</a></li></ol></li><li class="chapter-item expanded "><a href="../colors/intro.html"><strong aria-hidden="true">6.</strong> Working with Colors</a></li><li class="chapter-item expanded "><a href="../formulas/intro.html"><strong aria-hidden="true">7.</strong> Working with Formulas</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formulas/results.html"><strong aria-hidden="true">7.1.</strong> Formula Results</a></li><li class="chapter-item expanded "><a href="../formulas/syntax.html"><strong aria-hidden="true">7.2.</strong> Non US Excel functions and syntax</a></li><li class="chapter-item expanded "><a href="../formulas/dynamic_arrays.html"><strong aria-hidden="true">7.3.</strong> Dynamic Array support</a></li><li class="chapter-item expanded "><a href="../formulas/future_functions.html"><strong aria-hidden="true">7.4.</strong> Formulas added in Excel 2010 and later</a></li><li class="chapter-item expanded "><a href="../formulas/errors.html"><strong aria-hidden="true">7.5.</strong> Dealing with formula errors</a></li></ol></li><li class="chapter-item expanded "><a href="../chart/chart.html"><strong aria-hidden="true">8.</strong> Working with Charts</a></li><li class="chapter-item expanded "><a href="../conditional_format/conditional_format.html"><strong aria-hidden="true">9.</strong> Working with Conditional Formats</a></li><li class="chapter-item expanded "><a href="../autofilters/autofilters.html"><strong aria-hidden="true">10.</strong> Working with Autofilters</a></li><li class="chapter-item expanded "><a href="../serializer/serializer.html" class="active"><strong aria-hidden="true">11.</strong> Working with Serde</a></li><li class="chapter-item expanded "><a href="../macros/macros.html"><strong aria-hidden="true">12.</strong> Working with Macros</a></li><li class="chapter-item expanded "><a href="../custom_ui/custom_ui.html"><strong aria-hidden="true">13.</strong> Working with Custom UI elements/Ribbons</a></li><li class="chapter-item expanded "><a href="../examples/intro.html"><strong aria-hidden="true">14.</strong> Cookbook Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/hello_world.html"><strong aria-hidden="true">14.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../examples/demo.html"><strong aria-hidden="true">14.2.</strong> Feature demo</a></li><li class="chapter-item expanded "><a href="../examples/formatting.html"><strong aria-hidden="true">14.3.</strong> Cell formatting</a></li><li class="chapter-item expanded "><a href="../examples/merge_range.html"><strong aria-hidden="true">14.4.</strong> Merging cells</a></li><li class="chapter-item expanded "><a href="../examples/autofilter.html"><strong aria-hidden="true">14.5.</strong> Adding autofilters</a></li><li class="chapter-item expanded "><a href="../examples/autofit.html"><strong aria-hidden="true">14.6.</strong> Autofitting columns</a></li><li class="chapter-item expanded "><a href="../examples/tables.html"><strong aria-hidden="true">14.7.</strong> Adding worksheet tables</a></li><li class="chapter-item expanded "><a href="../examples/pivot_tables.html"><strong aria-hidden="true">14.8.</strong> Adding pivot tables</a></li><li class="chapter-item expanded "><a href="../examples/conditional_formats.html"><strong aria-hidden="true">14.9.</strong> Adding conditional formatting</a></li><li class="chapter-item expanded "><a href="../examples/data_validation.html"><strong aria-hidden="true">14.10.</strong> Using data validation</a></li><li class="chapter-item expanded "><a href="../examples/notes.html"><strong aria-hidden="true">14.11.</strong> Adding cell notes</a></li><li class="chapter-item expanded "><a href="../examples/generic_write.html"><strong aria-hidden="true">14.12.</strong> Extending generic write()</a></li><li class="chapter-item expanded "><a href="../examples/rich_strings.html"><strong aria-hidden="true">14.13.</strong> Rich strings</a></li><li class="chapter-item expanded "><a href="../examples/colors.html"><strong aria-hidden="true">14.14.</strong> Format colors</a></li><li class="chapter-item expanded "><a href="../examples/theme_custom.html"><strong aria-hidden="true">14.15.</strong> Theme: use a custom theme</a></li><li class="chapter-item expanded "><a href="../examples/theme_2023.html"><strong aria-hidden="true">14.16.</strong> Theme: use the Excel 2023 theme</a></li><li class="chapter-item expanded "><a href="../examples/hyperlinks.html"><strong aria-hidden="true">14.17.</strong> Hyperlinks</a></li><li class="chapter-item expanded "><a href="../examples/simple_chart.html"><strong aria-hidden="true">14.18.</strong> Chart: Simple</a></li><li class="chapter-item expanded "><a href="../examples/chart_styles.html"><strong aria-hidden="true">14.19.</strong> Chart: Styles</a></li><li class="chapter-item expanded "><a href="../examples/area_chart.html"><strong aria-hidden="true">14.20.</strong> Chart: Area</a></li><li class="chapter-item expanded "><a href="../examples/bar_chart.html"><strong aria-hidden="true">14.21.</strong> Chart: Bar</a></li><li class="chapter-item expanded "><a href="../examples/column_chart.html"><strong aria-hidden="true">14.22.</strong> Chart: Column</a></li><li class="chapter-item expanded "><a href="../examples/line_chart.html"><strong aria-hidden="true">14.23.</strong> Chart: Line</a></li><li class="chapter-item expanded "><a href="../examples/scatter_chart.html"><strong aria-hidden="true">14.24.</strong> Chart: Scatter</a></li><li class="chapter-item expanded "><a href="../examples/radar_chart.html"><strong aria-hidden="true">14.25.</strong> Chart: Radar</a></li><li class="chapter-item expanded "><a href="../examples/pie_chart.html"><strong aria-hidden="true">14.26.</strong> Chart: Pie</a></li><li class="chapter-item expanded "><a href="../examples/stock_chart.html"><strong aria-hidden="true">14.27.</strong> Chart: Stock</a></li><li class="chapter-item expanded "><a href="../examples/doughnut_chart.html"><strong aria-hidden="true">14.28.</strong> Chart: Doughnut</a></li><li class="chapter-item expanded "><a href="../examples/chart_secondary_axis.html"><strong aria-hidden="true">14.29.</strong> Chart: Using a secondary axis</a></li><li class="chapter-item expanded "><a href="../examples/chart_combined.html"><strong aria-hidden="true">14.30.</strong> Chart: Create a combined chart</a></li><li class="chapter-item expanded "><a href="../examples/chart_pareto.html"><strong aria-hidden="true">14.31.</strong> Chart: Create a combined pareto chart</a></li><li class="chapter-item expanded "><a href="../examples/chart_clustered.html"><strong aria-hidden="true">14.32.</strong> Chart: Create a clustered/2D category chart</a></li><li class="chapter-item expanded "><a href="../examples/chart_pattern.html"><strong aria-hidden="true">14.33.</strong> Chart: Pattern Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_gradient.html"><strong aria-hidden="true">14.34.</strong> Chart: Gradient Fill</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_table.html"><strong aria-hidden="true">14.35.</strong> Chart: Data table</a></li><li class="chapter-item expanded "><a href="../examples/chart_data_tools.html"><strong aria-hidden="true">14.36.</strong> Chart: Data tools</a></li><li class="chapter-item expanded "><a href="../examples/chart_gauge.html"><strong aria-hidden="true">14.37.</strong> Chart: Gauge Chart</a></li><li class="chapter-item expanded "><a href="../examples/chartsheet.html"><strong aria-hidden="true">14.38.</strong> Chart: Chartsheet</a></li><li class="chapter-item expanded "><a href="../examples/macros.html"><strong aria-hidden="true">14.39.</strong> Macros: Adding macros to a workbook</a></li><li class="chapter-item expanded "><a href="../examples/custom_ui.html"><strong aria-hidden="true">14.40.</strong> Custom UI: Adding a custom ribbon tab</a></li><li class="chapter-item expanded "><a href="../examples/sparklines1.html"><strong aria-hidden="true">14.41.</strong> Sparklines: Simple example</a></li><li class="chapter-item expanded "><a href="../examples/sparklines2.html"><strong aria-hidden="true">14.42.</strong> Sparklines: Example with optional properties</a></li><li class="chapter-item expanded "><a href="../examples/images.html"><strong aria-hidden="true">14.43.</strong> Inserting images</a></li><li class="chapter-item expanded "><a href="../examples/embedded_images.html"><strong aria-hidden="true">14.44.</strong> Embedding images in cells</a></li><li class="chapter-item expanded "><a href="../examples/insert_image_to_fit.html"><strong aria-hidden="true">14.45.</strong> Inserting images to fit</a></li><li class="chapter-item expanded "><a href="../examples/checkbox.html"><strong aria-hidden="true">14.46.</strong> Inserting Checkboxes in worksheets</a></li><li class="chapter-item expanded "><a href="../examples/textbox.html"><strong aria-hidden="true">14.47.</strong> Inserting Textboxes in worksheets</a></li><li class="chapter-item expanded "><a href="../examples/ignore_errors.html"><strong aria-hidden="true">14.48.</strong> Ignoring Excel cell errors</a></li><li class="chapter-item expanded "><a href="../examples/grouped_rows.html"><strong aria-hidden="true">14.49.</strong> Create row outline groups</a></li><li class="chapter-item expanded "><a href="../examples/grouped_columns.html"><strong aria-hidden="true">14.50.</strong> Create column outline groups</a></li><li class="chapter-item expanded "><a href="../examples/right_to_left.html"><strong aria-hidden="true">14.51.</strong> Right to left display</a></li><li class="chapter-item expanded "><a href="../examples/defined_names.html"><strong aria-hidden="true">14.52.</strong> Using defined names</a></li><li class="chapter-item expanded "><a href="../examples/dynamic_arrays.html"><strong aria-hidden="true">14.53.</strong> Dynamic array formulas</a></li><li class="chapter-item expanded "><a href="../examples/lambda.html"><strong aria-hidden="true">14.54.</strong> Excel LAMBDA() function</a></li><li class="chapter-item expanded "><a href="../examples/headers.html"><strong aria-hidden="true">14.55.</strong> Headers and Footers</a></li><li class="chapter-item expanded "><a href="../examples/doc_properties.html"><strong aria-hidden="true">14.56.</strong> Setting document properties</a></li><li class="chapter-item expanded "><a href="../examples/doc_sensitivity_label.html"><strong aria-hidden="true">14.57.</strong> Setting the Sensitivity Label</a></li><li class="chapter-item expanded "><a href="../examples/app_toc.html"><strong aria-hidden="true">14.58.</strong> Creating a Table of Contents</a></li><li class="chapter-item expanded "><a href="../examples/watermark.html"><strong aria-hidden="true">14.59.</strong> Adding a watermark as a header image</a></li><li class="chapter-item expanded "><a href="../examples/background_image.html"><strong aria-hidden="true">14.60.</strong> Adding a watermark as a background image</a></li><li class="chapter-item expanded "><a href="../examples/panes.html"><strong aria-hidden="true">14.61.</strong> Freeze Panes</a></li><li class="chapter-item expanded "><a href="../examples/protection.html"><strong aria-hidden="true">14.62.</strong> Worksheet protection</a></li></ol></li><li class="chapter-item expanded "><a href="../performance.html"><strong aria-hidden="true">15.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../changelog.html"><strong aria-hidden="true">16.</strong> Release Notes</a></li><li class="chapter-item expanded "><a href="../license.html"><strong aria-hidden="true">17.</strong> License</a></li><li class="chapter-item expanded "><a href="../author.html"><strong aria-hidden="true">18.</strong> Author</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Working with the rust_xlsxwriter library</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="working-with-serde"><a class="header" href="#working-with-serde">Working with Serde</a></h1>
+<p>Serialization is the process of converting data from one format to another
+using rules shared between the data and the serializer. The
+<a href="https://serde.rs">Serde</a> crate allows you to attach these types of rules to
+data, and it also provides traits that can be implemented by serializers to
+convert that data into different formats. The <code>rust_xlsxwriter</code> crate
+implements the Serde <a href="https://docs.rs/serde/latest/serde/trait.Serializer.html"><code>serde::Serializer</code></a> trait for <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html"><code>Worksheet</code></a> structs
+which allows you to serialize data directly to a worksheet.</p>
+<p>The following sections explain how to serialize Serde-enabled data to an
+Excel worksheet using <code>rust_xlsxwriter</code>.</p>
+<p>Contents:</p>
+<ul>
+<li><a href="#how-serialization-works-in-rust_xlsxwriter">How serialization works in
+<code>rust_xlsxwriter</code></a></li>
+<li><a href="#setting-serialization-headers">Setting serialization headers</a></li>
+<li><a href="#renaming-fields-when-serializing">Renaming fields when serializing</a></li>
+<li><a href="#skipping-fields-when-serializing">Skipping fields when serializing</a></li>
+<li><a href="#setting-serialization-formatting">Setting serialization formatting</a></li>
+<li><a href="#serializing-dates-and-times">Serializing dates and times</a></li>
+<li><a href="#controlling-excel-output-via-xlsxserialize-and-struct-attributes">Controlling Excel output via <code>XlsxSerialize</code> and struct
+attributes</a>
+<ul>
+<li><a href="#container-xlsx-attributes">Container <code>xlsx</code> attributes</a></li>
+<li><a href="#field-xlsx-attributes">Field <code>xlsx</code> attributes</a></li>
+</ul>
+</li>
+<li><a href="#limitations-of-serializing-to-excel">Limitations of serializing to
+Excel</a></li>
+</ul>
+<p><strong>Note</strong>: This functionality requires the use of the <code>serde</code> feature flag
+with <code>rust_xlsxwriter</code>:</p>
+<pre><code class="language-bash">cargo add rust_xlsxwriter -F serde
+</code></pre>
+<h2 id="how-serialization-works-in-rust_xlsxwriter"><a class="header" href="#how-serialization-works-in-rust_xlsxwriter">How serialization works in <code>rust_xlsxwriter</code></a></h2>
+<p>Serialization with <code>rust_xlsxwriter</code> needs to consider that the target
+output is a 2D grid of cells into which the data can be serialized. As such,
+the focus is on serializing data types that map to this 2D grid, such as
+structs or compound collections of structs like vectors or tuples, and it
+(currently) ignores compound types like maps.</p>
+<p>The image below shows the basic scheme for mapping a struct to a worksheet:
+fields are mapped to a header and values are mapped to sequential cells
+below the header.</p>
+<p><img src="../../images/serialize_intro1.png" alt="serialize_intro1" /></p>
+<p>This scheme needs an initial (row, col) location from which to start
+serializing to allow the data to be positioned anywhere on the worksheet.
+Subsequent serializations will be in the same columns (for the target struct
+type) but will be one row lower in the worksheet.</p>
+<p>The type name and fields of the struct being serialized is also required
+information. We will look at that in more detail in the next section.</p>
+<p>Here is an example program that demonstrates the basic steps for serializing
+data to an Excel worksheet:</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_intro2.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, FormatBorder, Workbook, XlsxError};
+use serde::{Serialize, Deserialize};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Add some formats to use with the serialization data.
+    let header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6E0B4");
+
+    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    #[serde(rename_all = "PascalCase")]
+    struct Student&lt;'a&gt; {
+        name: &amp;'a str,
+        age: u8,
+        id: u32,
+    }
+
+    let students = [
+        Student {
+            name: "Aoife",
+            age: 25,
+            id: 564351,
+        },
+        Student {
+            name: "Caoimhe",
+            age: 21,
+            id: 443287,
+        },
+    ];
+
+    // Set up the start location and headers of the data to be serialized.
+    worksheet.deserialize_headers_with_format::&lt;Student&gt;(1, 3, &amp;header_format)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;students)?;
+
+    // Save the file.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/serialize_intro2.png" alt="serialize_intro2" /></p>
+<h2 id="setting-serialization-headers"><a class="header" href="#setting-serialization-headers">Setting serialization headers</a></h2>
+<p>When serializing structs <code>rust_xlsxwriter</code> needs to know the location where
+the serialization starts and also the type and field names of the struct
+being serialized. The field names are used as headers, and the type name
+allows for several distinct structs to be serialized to the same worksheet.</p>
+<p>The worksheet methods that perform this function fall into three types:</p>
+<ol>
+<li>
+<p>For structs that only derive <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> <code>rust_xlsxwriter</code> will use the
+same serialization it uses to write data to figure out the required
+fields and headers. This has the minor disadvantage that it needs an
+instance of the type (and not just the type itself) in order to work.</p>
+<p>The following methods are available for this approach:</p>
+<ul>
+<li>
+<p>[<code>Worksheet::serialize_headers()</code>]: Requires a concrete instance of the
+type of struct that you wish to serialize. The library uses this to
+infer the struct name and fields.</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.serialize_headers_with_format"><code>Worksheet::serialize_headers_with_format()</code></a>: This is similar to the
+previous method but it allows you to add a cell format for the headers.</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.serialize_headers_with_options"><code>Worksheet::serialize_headers_with_options()</code></a>: Similar to the
+previous methods but also allows configuration of the headers and
+fields via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.SerializeFieldOptions.html"><code>SerializeFieldOptions</code></a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For structs that derive <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> and <a href="https://docs.rs/serde/latest/serde/trait.Deserialize.html"><code>Deserialize</code></a>
+<code>rust_xlsxwriter</code> can use deserialization to figure out the required
+fields and headers. This has the minor advantage that it only needs the
+type and doesn't require an instance of the type.</p>
+<p>The following methods are available for this approach:</p>
+<ul>
+<li>
+<p>[<code>Worksheet::deserialize_headers()</code>]: This only requires the type of
+struct that you wish to serialize and that it derives the
+<a href="https://docs.rs/serde/latest/serde/trait.Deserialize.html"><code>Deserialize</code></a> and <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> traits. The library uses this to
+infer the struct name and fields (via deserialization).</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.deserialize_headers_with_format"><code>Worksheet::deserialize_headers_with_format()</code></a>: This is similar to
+the previous method but it allows you to add a cell format for the
+headers.</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.deserialize_headers_with_options"><code>Worksheet::deserialize_headers_with_options()</code></a>: Similar to the
+previous methods but also allows configuration of the headers and
+fields via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.SerializeFieldOptions.html"><code>SerializeFieldOptions</code></a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For structs that derive <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> (a
+<code>rust_xlsxwriter</code> provided trait) the library uses proc macros associated
+with <code>XlsxSerialize</code> to figure out the required fields and headers. This
+has the advantage of allowing the user to specify header and field
+formatting via struct attributes. See <a href="#controlling-excel-output-via-xlsxserialize-and-struct-attributes">Controlling Excel output via
+<code>XlsxSerialize</code> and struct
+attributes</a>
+for details on how this works.</p>
+<p>Since the formatting can be encoded in struct attributes this approach
+only requires one worksheet method:</p>
+<ul>
+<li>[<code>Worksheet::set_serialize_headers()</code>]: This only requires the type of
+struct that you wish to serialize and that it derives the
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> and <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> traits.</li>
+</ul>
+</li>
+</ol>
+<p>The availability of 3 different approaches (and associated methods) will
+probably cause mild anxiety in the reader as they will sense that they are
+required to make a choice without knowing which is the best approach. In
+general you can decide as follows: if your struct derives only have
+<a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> and changing it is outside your control you must use the
+serialization method (Approach 1); if you struct also supports
+<a href="https://docs.rs/serde/latest/serde/trait.Deserialize.html"><code>Deserialize</code></a> you can save yourself the step of requiring a concrete
+instance type and use the deserialization method (Approach 2); finally, if
+the definition of the struct is under your control and you can add
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> then can define the formatting along with the struct and
+also save yourself a lot of additional structural code to set up formatting
+(Approach 3). The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> approach does, however,  limit you to
+having a fixed set of formatting per struct.</p>
+<p>The two examples below should help inform your decision. If not, note that
+the author mainly uses <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a>, but you can use whichever method
+works for you without fear of judgment.</p>
+<p>The first example below shows the usage of some of the serialization and
+deserialization methods.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_headers3.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::{
+    CustomSerializeField, Format, FormatBorder, SerializeFieldOptions, Workbook, XlsxError,
+};
+use serde::{Deserialize, Serialize};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Set some column widths for clarity.
+    worksheet.set_column_width(2, 4)?;
+    worksheet.set_column_width(5, 4)?;
+    worksheet.set_column_width(8, 4)?;
+
+    // Add some formats to use with the serialization data.
+    let header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6EFCE");
+
+    let currency_format = Format::new().set_num_format("$0.00");
+
+    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+    };
+
+    // 1. Set the serialization location and headers with `deserialize_headers()`
+    //    and serialize some data.
+    worksheet.deserialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // 2. Set the serialization location and formatted headers with
+    //    `serialize_headers_with_format()` and serialize some data.
+    worksheet.serialize_headers_with_format(0, 3, &amp;item1, &amp;header_format)?;
+
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // 3. Set the serialization location and headers with custom headers. We use
+    //    the customization to set the header format and also rename the cell format
+    //    for the number values.
+    let custom_headers = [
+        CustomSerializeField::new("fruit").rename("Item"),
+        CustomSerializeField::new("cost")
+            .rename("Price")
+            .set_value_format(currency_format),
+    ];
+    let header_options = SerializeFieldOptions::new()
+        .set_header_format(header_format)
+        .set_custom_headers(&amp;custom_headers);
+
+    // Set the serialization location and custom headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(0, 6, &amp;header_options)?;
+
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // 4. Set the serialization location and headers with custom options. We use
+    //    the customization to turn off the headers.
+    let header_options = SerializeFieldOptions::new().hide_headers(true);
+
+    // Set the serialization location and custom headers.
+    worksheet.serialize_headers_with_options(0, 9, &amp;item1, &amp;header_options)?;
+
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // Save the file.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/worksheet_serialize_headers3.png" alt="worksheet_serialize_headers3" /></p>
+<p>The second example uses <code>XlsxSerialize</code> and struct attributes to define the
+output. Note that there is a lot less structural code in comparison to the
+previous examples and that the formatting definitions are inline with the
+struct. On the other hand, you should also note that the previous example
+where four different outputs are obtained for the same struct isn't possible
+with this approach since the format definition is locked to the struct.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_xlsxserialize_intro.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError, XlsxSerialize};
+use serde::Serialize;
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a serializable struct.
+    #[derive(XlsxSerialize, Serialize)]
+    #[xlsx(header_format = Format::new().set_bold())]
+    struct Produce {
+        #[xlsx(rename = "Item")]
+        #[xlsx(column_width = 12.0)]
+        fruit: &amp;'static str,
+
+        #[xlsx(rename = "Price", num_format = "$0.00")]
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+    };
+
+    // Set the serialization location and headers.
+    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // Save the file to disk.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/xlsxserialize_intro.png" alt="xlsxserialize_intro" /></p>
+<h2 id="renaming-fields-when-serializing"><a class="header" href="#renaming-fields-when-serializing">Renaming fields when serializing</a></h2>
+<p>As explained above, serialization converts the field names of structs to
+column headers at the top of serialized data. The default field names are
+generally <code>lowercase</code> and <code>snake_case</code> and may not be the way you want the
+header names displayed in Excel. In such cases, you can use one of the three
+main methods to rename the fields/headers:</p>
+<ol>
+<li>Rename the field during serialization using the Serde:
+<ul>
+<li><a href="https://serde.rs/field-attrs.html">field attribute</a>: <code>#[serde(rename = "name")</code> or</li>
+<li><a href="https://serde.rs/container-attrs.html">container attribute</a>: <code>#[serde(rename_all = "...")]</code>.</li>
+</ul>
+</li>
+<li>Rename the header (not field) when setting up custom serialization
+headers via <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.deserialize_headers_with_options"><code>Worksheet::deserialize_headers_with_options()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.serialize_headers_with_options"><code>Worksheet::serialize_headers_with_options()</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html#method.rename"><code>CustomSerializeField::rename()</code></a>.</li>
+<li>Rename the field using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> field attribute
+<code>#[xlsx(rename = "name")</code>. This is effectively the same as the Serde
+attribute but allows you to specify a different name for the Excel
+serialization. See <a href="#field-xlsx-attributes">Field <code>xlsx</code> attributes</a> for
+details.</li>
+</ol>
+<p>Examples of these methods are shown below.</p>
+<h3 id="examples-of-field-renaming"><a class="header" href="#examples-of-field-renaming">Examples of field renaming</a></h3>
+<p>The following example demonstrates renaming fields during serialization by
+using Serde field attributes.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates renaming fields during serialization by
+</span><span class="boring">//! using Serde field attributes.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Create a serializable struct. Note the serde attributes.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        #[serde(rename = "Item")]
+        fruit: &amp;'static str,
+
+        #[serde(rename = "Price")]
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let items = [
+        Produce {
+            fruit: "Peach",
+            cost: 1.05,
+        },
+        Produce {
+            fruit: "Plum",
+            cost: 0.15,
+        },
+        Produce {
+            fruit: "Pear",
+            cost: 0.75,
+        },
+    ];
+
+    // Set the serialization location and headers.
+    worksheet.deserialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;items)?;
+<span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Output file:</p>
+<p><img src="../../images/worksheet_serialize_headers_rename1.png" alt="worksheet_serialize_headers_rename1" /></p>
+<p>The following example demonstrates renaming fields during serialization by
+specifying custom headers and renaming them there. The output is the same as
+the image above.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates renaming fields during serialization by
+</span><span class="boring">//! specifying custom headers and renaming them there.
+</span><span class="boring">//!
+</span><span class="boring">use rust_xlsxwriter::{CustomSerializeField, SerializeFieldOptions, Workbook, XlsxError};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let items = [
+        Produce {
+            fruit: "Peach",
+            cost: 1.05,
+        },
+        Produce {
+            fruit: "Plum",
+            cost: 0.15,
+        },
+        Produce {
+            fruit: "Pear",
+            cost: 0.75,
+        },
+    ];
+
+    // Set up the custom headers.
+    let custom_headers = [
+        CustomSerializeField::new("fruit").rename("Item"),
+        CustomSerializeField::new("cost").rename("Price"),
+    ];
+    let header_options = SerializeFieldOptions::new().set_custom_headers(&amp;custom_headers);
+
+    // Set the serialization location and custom headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(0, 0, &amp;header_options)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;items)?;
+<span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>The following example demonstrates renaming fields during serialization by
+using <code>XlsxSerialize</code> <code>xlsx</code> field attributes. The output is the same as the
+image above.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Example of serializing Serde derived structs to an Excel worksheet using
+</span><span class="boring">//! `rust_xlsxwriter` and the `XlsxSerialize` trait.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError, XlsxSerialize};
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Create a serializable struct.
+    #[derive(XlsxSerialize, Serialize)]
+    struct Produce {
+        #[xlsx(rename = "Item")]
+        fruit: &amp;'static str,
+
+        #[xlsx(rename = "Price")]
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let items = [
+        Produce {
+            fruit: "Peach",
+            cost: 1.05,
+        },
+        Produce {
+            fruit: "Plum",
+            cost: 0.15,
+        },
+        Produce {
+            fruit: "Pear",
+            cost: 0.75,
+        },
+    ];
+
+    // Set the serialization location and headers.
+    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;items)?;
+<span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<h2 id="skipping-fields-when-serializing"><a class="header" href="#skipping-fields-when-serializing">Skipping fields when serializing</a></h2>
+<p>When serializing a struct, you may not want all of the fields to be
+serialized. For example, the struct may contain internal fields that aren't
+of interest to the end user. There are several ways to skip fields:</p>
+<ol>
+<li>Using the Serde <a href="https://serde.rs/field-attrs.html">field attributes</a> <code>#[serde(skip)]</code>. This is the simplest
+and best method.</li>
+<li>Explicitly omitting the field by setting up custom serialization headers
+This method is useful when you can't add any additional attributes on the
+struct.</li>
+<li>Marking the field as skippable via custom headers and the
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html#method.skip"><code>CustomSerializeField::skip()</code></a> method. This is only required in a few
+edge cases where other methods won't work.</li>
+<li>Skip the field using the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/derive.XlsxSerialize.html"><code>XlsxSerialize</code></a> field attribute
+<code>#[xlsx(skip)]</code>. This is effectively the same as the Serde attribute but
+allows you to specify a different behavior for the Excel serialization.
+See <a href="#field-xlsx-attributes">Field <code>xlsx</code> attributes</a> for details.</li>
+</ol>
+<p>Examples of all four methods are shown below.</p>
+<h3 id="examples-of-field-skipping"><a class="header" href="#examples-of-field-skipping">Examples of field skipping</a></h3>
+<p>The following example demonstrates skipping fields during serialization by
+using Serde field attributes. Since the field is no longer used, we also
+need to tell <code>rustc</code> not to emit a <code>dead_code</code> warning.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates skipping fields during serialization by
+</span><span class="boring">//! using Serde field attributes. Since the field is no longer used we also need
+</span><span class="boring">//! to tell rustc not emit a `dead_code` warning.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError};
+use serde::{Deserialize, Serialize};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a serializable struct. Note the serde attribute.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+
+        #[serde(skip)]
+        #[allow(dead_code)]
+        in_stock: bool,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+        in_stock: true,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+        in_stock: true,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+        in_stock: false,
+    };
+
+    // Set the serialization location and headers.
+    worksheet.deserialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // Save the file.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/worksheet_serialize_headers_skip1.png" alt="worksheet_serialize_headers_skip1" /></p>
+<p>The following example demonstrates skipping fields during serialization by
+omitting them from the serialization headers. To do this, we need to specify
+custom headers and set <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.SerializeFieldOptions.html#method.use_custom_headers_only"><code>SerializeFieldOptions::use_custom_headers_only()</code></a>.
+The output is the same as the image above.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_headers_skip2.rs
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{CustomSerializeField, SerializeFieldOptions, Workbook, XlsxError};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+        in_stock: bool,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+        in_stock: true,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+        in_stock: true,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+        in_stock: false,
+    };
+
+    // Set up only the custom headers we want and omit "in_stock".
+    let custom_headers = [
+        CustomSerializeField::new("fruit"),
+        CustomSerializeField::new("cost"),
+    ];
+
+    // Note the use of "use_custom_headers_only" to only serialize the named
+    // custom headers.
+    let header_options = SerializeFieldOptions::new()
+        .use_custom_headers_only(true)
+        .set_custom_headers(&amp;custom_headers);
+
+    // Set the serialization location and custom headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(0, 0, &amp;header_options)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+<span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>The following example is similar in setup to the previous example but
+demonstrates skipping fields by explicitly skipping them in the custom
+headers. This method should only be required in a few edge cases. The output
+is the same as the image above.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates skipping fields during serialization by
+</span><span class="boring">//! explicitly skipping them via custom headers.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{CustomSerializeField, SerializeFieldOptions, Workbook, XlsxError};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Create a serializable struct.
+</span><span class="boring">    #[derive(Deserialize, Serialize)]
+</span><span class="boring">    struct Produce {
+</span><span class="boring">        fruit: &amp;'static str,
+</span><span class="boring">        cost: f64,
+</span><span class="boring">        in_stock: bool,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Create some data instances.
+</span><span class="boring">    let item1 = Produce {
+</span><span class="boring">        fruit: "Peach",
+</span><span class="boring">        cost: 1.05,
+</span><span class="boring">        in_stock: true,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item2 = Produce {
+</span><span class="boring">        fruit: "Plum",
+</span><span class="boring">        cost: 0.15,
+</span><span class="boring">        in_stock: true,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item3 = Produce {
+</span><span class="boring">        fruit: "Pear",
+</span><span class="boring">        cost: 0.75,
+</span><span class="boring">        in_stock: false,
+</span><span class="boring">    };
+</span><span class="boring">
+</span>    // We only need to set a custom header for the field we want to skip.
+    let header_options = SerializeFieldOptions::new()
+        .set_custom_headers(&amp;[CustomSerializeField::new("in_stock").skip(true)]);
+
+    // Set the serialization location and custom headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(0, 0, &amp;header_options)?;
+<span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;item1)?;
+</span><span class="boring">    worksheet.serialize(&amp;item2)?;
+</span><span class="boring">    worksheet.serialize(&amp;item3)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>The following example demonstrates skipping fields during serialization by
+using <code>XlsxSerialize</code> field attributes. Since the field is no longer used,
+we also need to tell <code>rustc</code> not to emit a <code>dead_code</code> warning.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_xlsxserialize_skip2.rs
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Workbook, XlsxError, XlsxSerialize};
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    // Create a serializable struct.
+    #[derive(XlsxSerialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+
+        #[xlsx(skip)]
+        #[allow(dead_code)]
+        in_stock: bool,
+    }
+<span class="boring">
+</span><span class="boring">    // Create some data instances.
+</span><span class="boring">    let item1 = Produce {
+</span><span class="boring">        fruit: "Peach",
+</span><span class="boring">        cost: 1.05,
+</span><span class="boring">        in_stock: true,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item2 = Produce {
+</span><span class="boring">        fruit: "Plum",
+</span><span class="boring">        cost: 0.15,
+</span><span class="boring">        in_stock: true,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item3 = Produce {
+</span><span class="boring">        fruit: "Pear",
+</span><span class="boring">        cost: 0.75,
+</span><span class="boring">        in_stock: false,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    // Set the serialization location and headers.
+</span><span class="boring">    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+</span><span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;item1)?;
+</span><span class="boring">    worksheet.serialize(&amp;item2)?;
+</span><span class="boring">    worksheet.serialize(&amp;item3)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<h2 id="setting-serialization-formatting"><a class="header" href="#setting-serialization-formatting">Setting serialization formatting</a></h2>
+<p>Serialization will transfer your data to a worksheet, but it won't format it
+without a few additional steps.</p>
+<p>The most common requirement is to format the headers/fields at the top of
+the serialized data. The simplest way to do this is to use the
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.deserialize_headers_with_format"><code>Worksheet::deserialize_headers_with_format()</code></a> or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.serialize_headers_with_format"><code>Worksheet::serialize_headers_with_format()</code></a> methods, as shown in the
+<a href="#setting-serialization-headers">Setting serialization headers</a> section
+above. Alternatively, you can use the <code>#[xlsx(header_format = Format)]</code>
+attribute (see <a href="#container-xlsx-attributes">Container <code>xlsx</code> attributes</a>).</p>
+<p>The other common requirement is to format values that are serialized below
+the headers, such as numeric data where you need to control the number of
+decimal places or make it appear as a currency.</p>
+<p>There are a few ways of formatting the values for a field:</p>
+<ul>
+<li>Use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.set_column_format"><code>Worksheet::set_column_format()</code></a> to format the entire column.</li>
+<li>Use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html#method.set_column_format"><code>CustomSerializeField::set_column_format()</code></a> to format the entire
+column. This is the same as the worksheet method but it has the advantage
+of having the column number calculated automatically based on the field
+name.</li>
+<li>Use <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html#method.set_value_format"><code>CustomSerializeField::set_value_format()</code></a> to format just the
+serialized data (and not the entire column).</li>
+<li>Using <code>XlsxSerialize</code> attributes. This is explained in detail in the
+section below on <a href="#controlling-excel-output-via-xlsxserialize-and-struct-attributes">Controlling Excel output via <code>XlsxSerialize</code> and struct
+attributes</a>.</li>
+</ul>
+<p>Examples of the first three methods are shown below. Examples of
+<code>XlsxSerialize</code> attributes are shown in a subsequent section below.</p>
+<h3 id="examples-of-formatting"><a class="header" href="#examples-of-formatting">Examples of formatting</a></h3>
+<p>The following example demonstrates serializing instances of a Serde derived
+data structure to a worksheet with header and cell formatting.</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! The following example demonstrates serializing instances of a Serde derived
+</span><span class="boring">//! data structure to a worksheet with header and value formatting.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Format, FormatBorder, Workbook, XlsxError};
+use serde::{Deserialize, Serialize};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Add some formats to use with the serialization data.
+    let header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6EFCE");
+
+    let currency_format = Format::new().set_num_format("$0.00");
+
+    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Produce {
+        #[serde(rename = "Item")]
+        fruit: &amp;'static str,
+
+        #[serde(rename = "Price")]
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+    };
+
+    // Set a column format for the column. This is added to cell data that
+    // doesn't have any other format so it doesn't affect the headers.
+    worksheet.set_column_format(2, &amp;currency_format)?;
+
+    // Set the serialization location and headers.
+    worksheet.deserialize_headers_with_format::&lt;Produce&gt;(1, 1, &amp;header_format)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // Save the file.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/worksheet_serialize_headers_custom.png" alt="worksheet_serialize_headers_custom" /></p>
+<p>The following variation on the example demonstrates setting formatting via
+custom headers. This produces the same output as the previous example but
+doesn't require you to manually, or programmatically, calculate the column
+number.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_headers_format5.rs
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{
+</span><span class="boring">    CustomSerializeField, Format, FormatBorder, SerializeFieldOptions, Workbook, XlsxError,
+</span><span class="boring">};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Add some formats to use with the serialization data.
+</span><span class="boring">    let header_format = Format::new()
+</span><span class="boring">        .set_bold()
+</span><span class="boring">        .set_border(FormatBorder::Thin)
+</span><span class="boring">        .set_background_color("C6EFCE");
+</span><span class="boring">
+</span><span class="boring">    let currency_format = Format::new().set_num_format("$0.00");
+</span><span class="boring">
+</span><span class="boring">    // Create a serializable struct.
+</span><span class="boring">    #[derive(Deserialize, Serialize)]
+</span><span class="boring">    struct Produce {
+</span><span class="boring">        #[serde(rename = "Item")]
+</span><span class="boring">        fruit: &amp;'static str,
+</span><span class="boring">
+</span><span class="boring">        #[serde(rename = "Price")]
+</span><span class="boring">        cost: f64,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Create some data instances.
+</span><span class="boring">    let item1 = Produce {
+</span><span class="boring">        fruit: "Peach",
+</span><span class="boring">        cost: 1.05,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item2 = Produce {
+</span><span class="boring">        fruit: "Plum",
+</span><span class="boring">        cost: 0.15,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item3 = Produce {
+</span><span class="boring">        fruit: "Pear",
+</span><span class="boring">        cost: 0.75,
+</span><span class="boring">    };
+</span><span class="boring">
+</span>    // Set up the custom headers.
+    let custom_headers =
+        [CustomSerializeField::new("Price").set_column_format(currency_format)];
+
+    let header_options = SerializeFieldOptions::new()
+        .set_header_format(header_format)
+        .set_custom_headers(&amp;custom_headers);
+
+    // Set the serialization location and headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(1, 1, &amp;header_options)?;
+<span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;item1)?;
+</span><span class="boring">    worksheet.serialize(&amp;item2)?;
+</span><span class="boring">    worksheet.serialize(&amp;item3)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>The following variation on the example demonstrates setting formatting for
+the serialized values, rather than the entire column. This allows a little
+bit more precision on cell formatting.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_headers_format6.rs
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{
+</span><span class="boring">    CustomSerializeField, Format, FormatBorder, SerializeFieldOptions, Workbook, XlsxError,
+</span><span class="boring">};
+</span><span class="boring">use serde::{Deserialize, Serialize};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span><span class="boring">    // Add some formats to use with the serialization data.
+</span><span class="boring">    let header_format = Format::new()
+</span><span class="boring">        .set_bold()
+</span><span class="boring">        .set_border(FormatBorder::Thin)
+</span><span class="boring">        .set_background_color("C6EFCE");
+</span><span class="boring">
+</span><span class="boring">    let currency_format = Format::new().set_num_format("$0.00");
+</span><span class="boring">
+</span><span class="boring">    // Create a serializable struct.
+</span><span class="boring">    #[derive(Deserialize, Serialize)]
+</span><span class="boring">    struct Produce {
+</span><span class="boring">        #[serde(rename = "Item")]
+</span><span class="boring">        fruit: &amp;'static str,
+</span><span class="boring">
+</span><span class="boring">        #[serde(rename = "Price")]
+</span><span class="boring">        cost: f64,
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    // Create some data instances.
+</span><span class="boring">    let item1 = Produce {
+</span><span class="boring">        fruit: "Peach",
+</span><span class="boring">        cost: 1.05,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item2 = Produce {
+</span><span class="boring">        fruit: "Plum",
+</span><span class="boring">        cost: 0.15,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let item3 = Produce {
+</span><span class="boring">        fruit: "Pear",
+</span><span class="boring">        cost: 0.75,
+</span><span class="boring">    };
+</span><span class="boring">
+</span>    // Set up the custom headers.
+    let custom_headers =
+        [CustomSerializeField::new("Price").set_value_format(currency_format)];
+
+    let header_options = SerializeFieldOptions::new()
+        .set_header_format(header_format)
+        .set_custom_headers(&amp;custom_headers);
+
+    // Set the serialization location and headers.
+    worksheet.deserialize_headers_with_options::&lt;Produce&gt;(1, 1, &amp;header_options)?;
+<span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;item1)?;
+</span><span class="boring">    worksheet.serialize(&amp;item2)?;
+</span><span class="boring">    worksheet.serialize(&amp;item3)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<h2 id="serializing-dates-and-times"><a class="header" href="#serializing-dates-and-times">Serializing dates and times</a></h2>
+<p>Dates and times can be serialized to Excel from one of the following types:</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ExcelDateTime.html"><code>ExcelDateTime</code></a>: The inbuilt <code>rust_xlsxwriter</code> datetime type.</li>
+<li><a href="https://docs.rs/chrono/latest/chrono"><code>Chrono</code></a> naive (i.e., timezone unaware) types:
+<ul>
+<li><a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDateTime.html"><code>chrono::NaiveDateTime</code></a></li>
+<li><a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDate.html"><code>chrono::NaiveDate</code></a></li>
+<li><a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveTime.html"><code>chrono::NaiveTime</code></a></li>
+</ul>
+</li>
+<li><a href="https://docs.rs/jiff/latest/jiff"><code>Jiff</code></a> civil (i.e., timezone unaware) types:
+<ul>
+<li><a href="https://docs.rs/jiff/latest/jiff/civil/struct.DateTime.html"><code>jiff::civil::Datetime</code></a></li>
+<li><a href="https://docs.rs/jiff/latest/jiff/civil/struct.Date.html"><code>jiff::civil::Date</code></a></li>
+<li><a href="https://docs.rs/jiff/latest/jiff/civil/struct.Time.html"><code>jiff::civil::Time</code></a></li>
+</ul>
+</li>
+</ul>
+<p>The <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ExcelDateTime.html"><code>ExcelDateTime</code></a> type is serialized automatically since it implements
+the <a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> trait. The <a href="https://docs.rs/chrono/latest/chrono"><code>Chrono</code></a> and <a href="https://docs.rs/jiff/latest/jiff"><code>Jiff</code></a> types also implement
+<a href="https://docs.rs/serde/latest/serde/trait.Serialize.html"><code>Serialize</code></a> but they will serialize to a string. To serialize them to an
+Excel number/datetime format requires a serializing function like
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/utility/fn.serialize_datetime_to_excel.html"><code>Utility::serialize_datetime_to_excel()</code></a>
+(as shown in the example below) or
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/utility/fn.serialize_option_datetime_to_excel.html"><code>Utility::serialize_option_datetime_to_excel()</code></a>.</p>
+<p>Excel datetimes also need a number format to display them as a date/time
+since they are stored as <code>f64</code> values. See <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ExcelDateTime.html#datetimes-in-excel">Datetimes in
+Excel</a> and the previous section on
+adding formatting.</p>
+<p>Note, Excel doesn't use time zones or try to convert or encode time zone
+information in any way, so they aren't supported by <code>rust_xlsxwriter</code>.</p>
+<h3 id="examples-of-serializing-dates"><a class="header" href="#examples-of-serializing-dates">Examples of serializing dates</a></h3>
+<p>The following example demonstrates serializing instances of a Serde derived
+data structure with <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.ExcelDateTime.html"><code>ExcelDateTime</code></a> fields.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_datetime1.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::{
+    CustomSerializeField, ExcelDateTime, Format, FormatBorder,
+    SerializeFieldOptions, Workbook, XlsxError,
+};
+use serde::{Deserialize, Serialize};
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Widen the date column for clarity.
+    worksheet.set_column_width(1, 12)?;
+
+    // Add some formats to use with the serialization data.
+    let header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6E0B4");
+
+    let date_format = Format::new().set_num_format("yyyy/mm/dd");
+
+    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Student&lt;'a&gt; {
+        name: &amp;'a str,
+        dob: ExcelDateTime,
+        id: u32,
+    }
+
+    let students = [
+        Student {
+            name: "Aoife",
+            dob: ExcelDateTime::from_ymd(1998, 1, 12)?,
+            id: 564351,
+        },
+        Student {
+            name: "Caoimhe",
+            dob: ExcelDateTime::from_ymd(2000, 5, 1)?,
+            id: 443287,
+        },
+    ];
+
+    // Set up the start location and headers of the data to be serialized. Note,
+    // we need to add a cell format for the datetime data.
+    let custom_headers = [
+        CustomSerializeField::new("name").rename("Student"),
+        CustomSerializeField::new("dob")
+            .rename("Birthday")
+            .set_value_format(date_format),
+        CustomSerializeField::new("id").rename("ID"),
+    ];
+    let header_options = SerializeFieldOptions::new()
+        .set_header_format(header_format)
+        .set_custom_headers(&amp;custom_headers);
+
+    worksheet.deserialize_headers_with_options::&lt;Student&gt;(0, 0, &amp;header_options)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;students)?;
+
+    // Save the file.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Output file:</p>
+<p><img src="../../images/worksheet_serialize_datetime1.png" alt="worksheet_serialize_datetime1" /></p>
+<p>Here is an example which serializes a struct with a <a href="https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDate.html"><code>chrono::NaiveDate</code></a>
+field. The output is the same as the previous example.</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_worksheet_serialize_datetime2.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::utility::serialize_datetime_to_excel;
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Widen the date column for clarity.
+    worksheet.set_column_width(1, 12)?;
+
+    // Add some formats to use with the serialization data.
+    let header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6E0B4");
+
+    let date_format = Format::new().set_num_format("yyyy/mm/dd");
+
+    // Create a serializable struct.
+    #[derive(Deserialize, Serialize)]
+    struct Student&lt;'a&gt; {
+        name: &amp;'a str,
+
+        // Note, we add a `rust_xlsxwriter` function to serialize the date.
+        #[serde(serialize_with = "serialize_datetime_to_excel")]
+        dob: NaiveDate,
+
+        id: u32,
+    }
+<span class="boring">
+</span><span class="boring">    let students = [
+</span><span class="boring">        Student {
+</span><span class="boring">            name: "Aoife",
+</span><span class="boring">            dob: NaiveDate::from_ymd_opt(1998, 1, 12).unwrap(),
+</span><span class="boring">            id: 564351,
+</span><span class="boring">        },
+</span><span class="boring">        Student {
+</span><span class="boring">            name: "Caoimhe",
+</span><span class="boring">            dob: NaiveDate::from_ymd_opt(2000, 5, 1).unwrap(),
+</span><span class="boring">            id: 443287,
+</span><span class="boring">        },
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Set up the start location and headers of the data to be serialized. Note,
+</span><span class="boring">    // we need to add a cell format for the datetime data.
+</span><span class="boring">    let custom_headers = [
+</span><span class="boring">        CustomSerializeField::new("name").rename("Student"),
+</span><span class="boring">        CustomSerializeField::new("dob")
+</span><span class="boring">            .rename("Birthday")
+</span><span class="boring">            .set_value_format(&amp;date_format),
+</span><span class="boring">        CustomSerializeField::new("id").rename("ID"),
+</span><span class="boring">    ];
+</span><span class="boring">    let header_options = SerializeFieldOptions::new()
+</span><span class="boring">        .set_header_format(&amp;header_format)
+</span><span class="boring">        .set_custom_headers(&amp;custom_headers);
+</span><span class="boring">
+</span><span class="boring">    worksheet.deserialize_headers_with_options::&lt;Student&gt;(0, 0, &amp;header_options)?;
+</span><span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;students)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span>
+    // ...
+
+    Ok(())
+}</code></pre>
+<h2 id="controlling-excel-output-via-xlsxserialize-and-struct-attributes"><a class="header" href="#controlling-excel-output-via-xlsxserialize-and-struct-attributes">Controlling Excel output via <code>XlsxSerialize</code> and struct attributes</a></h2>
+<p>In the sections above, we saw how to use <a href="https://serde.rs/attributes.html">Serde
+Attributes</a> to control some aspects for
+the serialization output.</p>
+<p>It is also possible to use the <code>XlsxSerialize</code> derive trait and associate
+attributes to set <code>rust_xlsxwriter</code> specific formatting and options. For
+example:</p>
+<pre><code class="language-rust"><span class="boring">// This code is available in examples/doc_xlsxserialize_intro.rs
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError, XlsxSerialize};
+use serde::Serialize;
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a serializable struct.
+    #[derive(XlsxSerialize, Serialize)]
+    #[xlsx(header_format = Format::new().set_bold())]
+    struct Produce {
+        #[xlsx(rename = "Item")]
+        #[xlsx(column_width = 12.0)]
+        fruit: &amp;'static str,
+
+        #[xlsx(rename = "Price", num_format = "$0.00")]
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let item1 = Produce {
+        fruit: "Peach",
+        cost: 1.05,
+    };
+
+    let item2 = Produce {
+        fruit: "Plum",
+        cost: 0.15,
+    };
+
+    let item3 = Produce {
+        fruit: "Pear",
+        cost: 0.75,
+    };
+
+    // Set the serialization location and headers.
+    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;item1)?;
+    worksheet.serialize(&amp;item2)?;
+    worksheet.serialize(&amp;item3)?;
+
+    // Save the file to disk.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<p>Note the change of column width in Column A, the renamed headers and the
+currency format in Column B numbers.</p>
+<p><img src="../../images/xlsxserialize_intro.png" alt="xlsxserialize_intro" /></p>
+<p><code>XlsxSerializer</code> provides the same formatting functionality as
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.SerializeFieldOptions.html"><code>SerializeFieldOptions</code></a> and <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html"><code>CustomSerializeField</code></a> (in fact it used them
+in the background). The advantage of using <code>XlsxSerializer</code> is that the
+formatting output can be kept with the data format and seen in the same
+context. Some users may find this to be a cleaner abstraction.</p>
+<h2 id="the-xlsxserializer-attributes"><a class="header" href="#the-xlsxserializer-attributes">The <code>XlsxSerializer</code> attributes</a></h2>
+<p>The <code>XlsxSerializer</code> derived trait adds a wrapper around a Serde
+serializable struct to add <code>rust_xlsxwriter</code> specific formatting options. It
+achieves this via the <code>rust_xlsxwriter</code> <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.SerializeFieldOptions.html"><code>SerializeFieldOptions</code></a> and
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/serializer/struct.CustomSerializeField.html"><code>CustomSerializeField</code></a> serialization configuration structs. It is
+available when you enable the <code>serde</code> feature.</p>
+<p>As in Serde, the <a href="https://serde.rs/attributes.html">attributes</a> are divided
+into "Container Attributes" which apply to the entire struct and "Field
+Attributes" which apply to individual fields. In an Excel context, the
+container attributes apply to all headers and field attributes apply to the
+individual headers and the data below them.</p>
+<p>In order to demonstrate each attribute and its effect, we will use
+variations of the following example with the relevant attribute applied in
+the next sections.</p>
+<h3 id="base-example-without-attributes-applied"><a class="header" href="#base-example-without-attributes-applied">Base example (without attributes applied)</a></h3>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Example of serializing Serde derived structs to an Excel worksheet using
+</span><span class="boring">//! `rust_xlsxwriter` and the `XlsxSerialize` trait. This is the base example,
+</span><span class="boring">//! without `xlsx` attributes, used in the `XlsxSerialize` attribute docs.
+</span><span class="boring">
+</span>use rust_xlsxwriter::{Workbook, XlsxError, XlsxSerialize};
+use serde::Serialize;
+
+fn main() -&gt; Result&lt;(), XlsxError&gt; {
+    let mut workbook = Workbook::new();
+
+    // Add a worksheet to the workbook.
+    let worksheet = workbook.add_worksheet();
+
+    // Create a serializable struct.
+    #[derive(XlsxSerialize, Serialize)]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+    }
+
+    // Create some data instances.
+    let items = [
+        Produce {
+            fruit: "Peach",
+            cost: 1.05,
+        },
+        Produce {
+            fruit: "Plum",
+            cost: 0.15,
+        },
+        Produce {
+            fruit: "Pear",
+            cost: 0.75,
+        },
+    ];
+
+    // Set the serialization location and headers.
+    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+
+    // Serialize the data.
+    worksheet.serialize(&amp;items)?;
+
+    // Save the file to disk.
+    workbook.save("serialize.xlsx")?;
+
+    Ok(())
+}</code></pre>
+<h3 id="container-xlsx-attributes"><a class="header" href="#container-xlsx-attributes">Container <code>xlsx</code> attributes</a></h3>
+<p>The following are the "Container" attributes supported by <code>XlsxSerializer</code>:</p>
+<ul>
+<li>
+<p><code>#[xlsx(header_format = Format)</code></p>
+<p>The <code>header_format</code> container attribute sets the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> property for
+headers. See the <a href="#working-with-attribute-formats">Working with attribute
+Formats</a> section below for information on
+handling formats.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(header_format = Format::new()
+             .set_bold()
+             .set_border(FormatBorder::Thin)
+             .set_background_color("C6EFCE"))]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+</li>
+</ul>
+<p><img src="../../images/xlsxserialize_header_format.png" alt="xlsxserialize_header_format" /></p>
+<ul>
+<li>
+<p><code>#[xlsx(hide_headers)</code></p>
+<p>The <code>hide_headers</code> container attribute hides the serialization headers:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(hide_headers)]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_hide_headers.png" alt="xlsxserialize_hide_headers" /></p>
+</li>
+<li>
+<p><code>#[xlsx(table_default)</code></p>
+<p>The <code>table_default</code> container attribute adds a worksheet <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Table.html"><code>Table</code></a>
+structure with default formatting to the serialized area:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(table_default)]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_table_default.png" alt="xlsxserialize_table_default" /></p>
+</li>
+<li>
+<p><code>#[xlsx(table_style)</code></p>
+<p>The <code>table_style</code> container attribute adds a worksheet <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Table.html"><code>Table</code></a> structure
+with a user specified <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/enum.TableStyle.html"><code>TableStyle</code></a> to the serialized area:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(table_style = TableStyle::Medium10)]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_table_style.png" alt="xlsxserialize_table_style" /></p>
+</li>
+<li>
+<p><code>#[xlsx(table = Table)</code></p>
+<p>The <code>table</code> container attribute adds a user defined worksheet <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Table.html"><code>Table</code></a>
+structure to the serialized area:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(table = Table::new())]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_table_default.png" alt="xlsxserialize_table_default" /></p>
+<p>See the <a href="#working-with-attribute-formats">Working with attribute Formats</a>
+section below for information on how to wrap complex objects like
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> or <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Table.html"><code>Table</code></a> in a function so it can be used as an attribute
+parameter.</p>
+</li>
+</ul>
+<h3 id="field-xlsx-attributes"><a class="header" href="#field-xlsx-attributes">Field <code>xlsx</code> attributes</a></h3>
+<p>The following are the "Field" attributes supported by <code>XlsxSerializer</code>:</p>
+<ul>
+<li>
+<p><code>#[xlsx(rename = "")</code></p>
+<p>The <code>rename</code> field attribute renames the Excel header. This is similar to
+the <code>#[serde(rename = "")</code> field attribute except that it doesn't rename
+the field for other types of serialization.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          #[xlsx(rename = "Item")]
+          fruit: &amp;'static str,
+
+          #[xlsx(rename = "Price")]
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_rename.png" alt="xlsxserialize_rename" /></p>
+</li>
+<li>
+<p><code>#[xlsx(num_format = "")</code></p>
+<p>The <code>num_format</code> field attribute sets the property to change the number
+formatting of the output. It is a syntactic shortcut for
+<a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html#method.set_num_format"><code>Format::set_num_format()</code></a>.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          fruit: &amp;'static str,
+
+          #[xlsx(num_format = "$0.00")]
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_num_format.png" alt="xlsxserialize_num_format" /></p>
+</li>
+<li>
+<p><code>#[xlsx(value_format = Format)</code></p>
+<p>The <code>value_format</code> field attribute sets the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> property for the
+fields below the header.</p>
+<p>See the <a href="#working-with-attribute-formats">Working with attribute Formats</a>
+section below for information on handling formats.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          #[xlsx(value_format = Format::new().set_font_color("#FF0000"))]
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_value_format.png" alt="xlsxserialize_value_format" /></p>
+</li>
+<li>
+<p><code>#[xlsx(column_format = Format)</code></p>
+<p>The <code>column_format</code> field attribute is similar to the previous
+<code>value_format</code> attribute except that it sets the format for the entire
+column, including any data added manually below the serialized data.</p>
+<br>
+</li>
+<li>
+<p><code>#[xlsx(header_format = Format)</code></p>
+<p>The <code>header_format</code> field attribute sets the <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a> property for the
+the header. It is similar to the container method of the same name except
+it only sets the format or one header:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          fruit: &amp;'static str,
+
+          #[xlsx(header_format = Format::new().set_bold().set_font_color("#FF0000"))]
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_field_header_format.png" alt="xlsxserialize_field_header_format" /></p>
+</li>
+<li>
+<p><code>#[xlsx(column_width = float)</code></p>
+<p>The <code>column_width</code> field attribute sets the column width in character
+units.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          fruit: &amp;'static str,
+          #[xlsx(column_width = 20.0)]
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_column_width.png" alt="xlsxserialize_column_width" /></p>
+</li>
+<li>
+<p><code>#[xlsx(column_width_pixels = int)</code></p>
+<p>The <code>column_width_pixels</code> field attribute field attribute is similar to
+the previous <code>column_width</code> attribute except that the width is specified
+in integer pixel units.</p>
+<br>
+</li>
+<li>
+<p><code>#[xlsx(skip)</code></p>
+<p>The <code>skip</code> field attribute skips writing the field to the target Excel
+file.  This is similar to the <code>#[serde(skip)</code> field attribute except that
+it doesn't skip the field for other types of serialization.</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      struct Produce {
+          fruit: &amp;'static str,
+
+          #[xlsx(skip)]
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<p><img src="../../images/xlsxserialize_skip.png" alt="xlsxserialize_skip" /></p>
+</li>
+</ul>
+<p>Note, if required you can group more than one attribute</p>
+<pre><code class="language-text">#[xlsx(rename = "Item", column_width = 20.0)]
+</code></pre>
+<h3 id="working-with-attribute-formats"><a class="header" href="#working-with-attribute-formats">Working with attribute Formats</a></h3>
+<p>When working with <code>XlsxSerialize</code> attributes that deal with <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/struct.Format.html"><code>Format</code></a>
+objects the definition can become quite long for an attribute value:</p>
+<pre><code class="language-rust"><span class="boring">use rust_xlsxwriter::XlsxSerialize;
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>      #[derive(XlsxSerialize, Serialize)]
+      #[xlsx(header_format = Format::new()
+             .set_bold()
+             .set_border(FormatBorder::Thin)
+             .set_background_color("C6EFCE"))]
+      struct Produce {
+          fruit: &amp;'static str,
+          cost: f64,
+      }
+<span class="boring">}</span></code></pre>
+<br>
+<p>You might, in this case, be tempted to define the format in another part of
+your code and use a variable to define the format:</p>
+<pre><code class="language-rust compile_fail"><span class="boring">use rust_xlsxwriter::{Format, FormatBorder, XlsxSerialize};
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>    let my_header_format = Format::new()
+        .set_bold()
+        .set_border(FormatBorder::Thin)
+        .set_background_color("C6EFCE");
+
+    #[derive(XlsxSerialize, Serialize)]
+    #[xlsx(header_format = &amp;my_header_format)] // Won't work.
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+    }
+<span class="boring">}</span></code></pre>
+<br>
+<p>However, this won't work because Rust derive/proc macros are compiled
+statically, and <code>&amp;header_format</code> is a dynamic variable.</p>
+<p>A workaround for this is to define any formats you wish to use in functions:</p>
+<pre><code class="language-rust"><span class="boring">// SPDX-License-Identifier: MIT OR Apache-2.0
+</span><span class="boring">//
+</span><span class="boring">// Copyright 2022-2026, John McNamara, jmcnamara@cpan.org
+</span><span class="boring">
+</span><span class="boring">//! Example of serializing Serde derived structs to an Excel worksheet using
+</span><span class="boring">//! `rust_xlsxwriter` and the `XlsxSerialize` trait.
+</span><span class="boring">
+</span><span class="boring">use rust_xlsxwriter::{Format, FormatBorder, Workbook, XlsxError, XlsxSerialize};
+</span><span class="boring">use serde::Serialize;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), XlsxError&gt; {
+</span><span class="boring">    let mut workbook = Workbook::new();
+</span><span class="boring">
+</span><span class="boring">    // Add a worksheet to the workbook.
+</span><span class="boring">    let worksheet = workbook.add_worksheet();
+</span><span class="boring">
+</span>    fn my_header_format() -&gt; Format {
+        Format::new()
+            .set_bold()
+            .set_border(FormatBorder::Thin)
+            .set_background_color("C6EFCE")
+    }
+
+    #[derive(XlsxSerialize, Serialize)]
+    #[xlsx(header_format = my_header_format())]
+    struct Produce {
+        fruit: &amp;'static str,
+        cost: f64,
+    }
+<span class="boring">
+</span><span class="boring">    // Create some data instances.
+</span><span class="boring">    let items = [
+</span><span class="boring">        Produce {
+</span><span class="boring">            fruit: "Peach",
+</span><span class="boring">            cost: 1.05,
+</span><span class="boring">        },
+</span><span class="boring">        Produce {
+</span><span class="boring">            fruit: "Plum",
+</span><span class="boring">            cost: 0.15,
+</span><span class="boring">        },
+</span><span class="boring">        Produce {
+</span><span class="boring">            fruit: "Pear",
+</span><span class="boring">            cost: 0.75,
+</span><span class="boring">        },
+</span><span class="boring">    ];
+</span><span class="boring">
+</span><span class="boring">    // Set the serialization location and headers.
+</span><span class="boring">    worksheet.set_serialize_headers::&lt;Produce&gt;(0, 0)?;
+</span><span class="boring">
+</span><span class="boring">    // Serialize the data.
+</span><span class="boring">    worksheet.serialize(&amp;items)?;
+</span><span class="boring">
+</span><span class="boring">    // Save the file to disk.
+</span><span class="boring">    workbook.save("serialize.xlsx")?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Output file:</p>
+<p><img src="../../images/xlsxserialize_header_format_reuse.png" alt="xlsxserialize_header_format_reuse" /></p>
+<h2 id="limitations-of-serializing-to-excel"><a class="header" href="#limitations-of-serializing-to-excel">Limitations of serializing to Excel</a></h2>
+<p>The cell/grid format of Excel sets a physical limitation on what can be
+serialized to a worksheet. Unlike other formats such as JSON or XML, you
+cannot serialize arbitrary nested data to Excel without making some
+concessions to either the format or the contents of the data. When
+serializing data to Excel via <code>rust_xlsxwriter</code>, it is best to consider what
+that data will look like while designing your serialization.</p>
+<p>It is only possible to serialize structs or a vector of struct values.
+Within a struct most native Rust types are supported (where there is some
+mapping to an Excel cell type), as well as the Date/Time types listed above.</p>
+<p>Maps are not supported because they don't have a fixed schema that can be
+mapped to a 2D grid of cells and the order of the fields is not guaranteed.
+As a side effect of this it also not possible to serialize structs that use
+the Serde <a href="https://serde.rs/field-attrs.html#flatten"><code>flatten</code></a> attribute, since Serde converts the fixed set of named
+fields into a dynamically sized map. However, a struct that contains a map
+field can be serialized if the field is omitted via one of the <a href="#skipping-fields-when-serializing">field
+skipping</a> methods such as the
+<code>#[serde(skip)]</code>,<code>#[xlsx(skip)] or [</code>CustomSerializeField::skip()<code>]; or by excluding it via [</code>SerializeFieldOptions::use_custom_headers_only()`].</p>
+<p>Finally, if you hit some serialization limitation using <code>rust_xlsxwriter</code>,
+remember that there are other non-serialization options available to use in
+the standard <a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html"><code>Worksheet</code></a> API to write scalar, vector, and matrix data
+types:</p>
+<ul>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write"><code>Worksheet::write()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write_row"><code>Worksheet::write_row()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write_column"><code>Worksheet::write_column()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write_row_matrix"><code>Worksheet::write_row_matrix()</code></a></li>
+<li><a href="https://docs.rs/rust_xlsxwriter/latest/rust_xlsxwriter/worksheet/struct.Worksheet.html#method.write_column_matrix"><code>Worksheet::write_column_matrix()</code></a></li>
+</ul>
+<p>Magic is great, but the direct approach will also work. Remember Terry
+Pratchett's witches.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../autofilters/autofilters.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../macros/macros.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../autofilters/autofilters.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../macros/macros.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
